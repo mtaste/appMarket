@@ -9,6 +9,10 @@ import {
 	AppComponent
 } from './app.component';
 import appRoutes from './app.routes';
+import {
+	API_URL,
+	STARWARS_BASE_URL
+} from "./shared/constance.service";
 
 @NgModule({
 	declarations: [
@@ -21,7 +25,13 @@ import appRoutes from './app.routes';
 		HttpModule,
 		JsonpModule
 	],
-	providers: [],
+	providers: [{
+		provide: API_URL,
+		useValue: `https://en.wikipedia.org/w/api.php?callback=JSONP_CALLBACK`
+	}, {
+		provide: STARWARS_BASE_URL,
+		useValue: `app/json`
+	}],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}

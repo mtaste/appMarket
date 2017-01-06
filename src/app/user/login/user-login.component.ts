@@ -9,7 +9,7 @@ import {
 	styleUrls: ['./user-login.component.css']
 })
 export class UserLoginComponent implements OnInit {
-
+	val: any;
 	constructor() {}
 
 	ngOnInit() {}

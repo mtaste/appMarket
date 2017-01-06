@@ -1,9 +1,14 @@
 import {
-	NgModule
-} from "@angular/core";
+	CommonModule,
+	BrowserModule,
+	NgModule,
+	FormsModule,
+	HttpModule,
+	JsonpModule
+} from '../shared/index';
 import {
-	CommonModule
-} from "@angular/common";
+	UserService
+} from "./user.service";
 import {
 	UserComponent
 } from "./user.component";
@@ -11,10 +16,21 @@ import {
 import {
 	UserLoginComponent
 } from "./login/user-login.component";
-
+import {
+	InputMaskModule
+} from 'primeng/primeng';
 import userRoutes from './user.routes';
+
 @NgModule({
-	imports: [CommonModule, userRoutes],
-	declarations: [UserComponent, UserLoginComponent]
+	imports: [
+		FormsModule,
+		HttpModule,
+		JsonpModule,
+		CommonModule,
+		InputMaskModule,
+		userRoutes
+	],
+	declarations: [UserComponent, UserLoginComponent],
+	providers: [UserService]
 })
 export default class UserModule {}

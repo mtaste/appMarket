@@ -17,7 +17,7 @@ import {
 	UserLoginComponent
 } from "./login/user-login.component";
 import {
-	InputMaskModule
+	PanelModule
 } from 'primeng/primeng';
 import userRoutes from './user.routes';
 
@@ -27,7 +27,7 @@ import userRoutes from './user.routes';
 		HttpModule,
 		JsonpModule,
 		CommonModule,
-		InputMaskModule,
+		PanelModule,
 		userRoutes
 	],
 	declarations: [UserComponent, UserLoginComponent],

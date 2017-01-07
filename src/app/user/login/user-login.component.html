@@ -1,2 +1,7 @@
-
-<p-inputMask [(ngModel)]="val" mask="99-9999"></p-inputMask>
+<p-panel header="Login">
+	<form [formGroup]="userform">
+		<button>Submit</button>
+	</form>
+	<p>Value: {{ userform.value | json }}</p>
+	<p>Validation status: {{ userform.status }}</p>
+</p-panel>

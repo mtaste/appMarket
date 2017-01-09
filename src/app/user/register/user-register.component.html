@@ -1,4 +1,4 @@
-<p-panel header="{{'login'| i18n}}">
+<p-panel header="Register">
 	<form [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)">
 		<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
 			<div class="ui-grid-row">
@@ -30,9 +30,24 @@
 				</div>
 			</div>
 			<div class="ui-grid-row">
+				<div class="ui-grid-col-2">
+					Confirm PassWord *:
+				</div>
+				<div class="ui-grid-col-6">
+					<input pInputText type="password" formControlName="confirmPassWord" placeholder="Required - Min(6)" />
+				</div>
+				<div class="ui-grid-col-4">
+					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['confirmPassWord'].valid&&userform.controls['confirmPassWord'].dirty">
+						<i class="fa fa-close"></i>
+						<span *ngIf="userform.controls['confirmPassWord'].errors['required']">Password is required</span>
+						<span *ngIf="userform.controls['confirmPassWord'].errors['minlength']">Must be longer than 6 characters</span>
+					</div>
+				</div>
+			</div>
+			<div class="ui-grid-row">
 				<div class="ui-grid-col-2"></div>
 				<div class="ui-grid-col-6">
-					<button pButton type="submit" label="Login" [disabled]="!userform.valid"></button>
+					<button pButton type="submit" label="Register" [disabled]="!userform.valid"></button>
 				</div>
 				<div class="ui-grid-col-4"></div>
 			</div>

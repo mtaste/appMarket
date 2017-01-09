@@ -8,16 +8,17 @@ import {
 	FormControl
 } from '../../shared/index';
 import {
+	Message,
 	SelectItem
 } from 'primeng/primeng';
 
 @Component({
-	selector: 'app-user-login',
-	templateUrl: './user-login.component.html',
-	styleUrls: ['./user-login.component.css'],
+	selector: 'app-user-register',
+	templateUrl: './user-register.component.html',
+	styleUrls: ['./user-register.component.css'],
 	providers: [FormBuilder]
 })
-export class UserLoginComponent implements OnInit {
+export class UserRegisterComponent implements OnInit {
 	userform: FormGroup;
 	submitted: boolean;
 	description: string;
@@ -25,7 +26,8 @@ export class UserLoginComponent implements OnInit {
 	ngOnInit() {
 		this.userform = this.fb.group({
 			'userName': new FormControl('', Validators.required),
-			'passWord': new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)]))
+			'passWord': new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
+			'confirmPassWord': new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)]))
 		});
 	}
 
@@ -36,5 +38,4 @@ export class UserLoginComponent implements OnInit {
 	get diagnostic() {
 		return JSON.stringify(this.userform.value);
 	}
-
 }

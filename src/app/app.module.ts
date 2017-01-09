@@ -1,10 +1,12 @@
 import {
-	BrowserModule,
-	NgModule,
-	FormsModule,
-	HttpModule,
-	JsonpModule
+	NgModule
 } from './shared/index';
+import {
+	SharedModule
+} from './shared/shared.module';
+import {
+	OtherModule
+} from './shared/other.module';
 import {
 	AppComponent
 } from './app.component';
@@ -20,10 +22,8 @@ import {
 	],
 	imports: [
 		appRoutes,
-		BrowserModule,
-		FormsModule,
-		HttpModule,
-		JsonpModule
+		SharedModule.forRoot(),
+		OtherModule.forRoot()
 	],
 	providers: [{
 		provide: API_URL,

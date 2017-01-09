@@ -5,6 +5,9 @@ import {
 	UserLoginComponent
 } from "./login/user-login.component";
 import {
+	UserRegisterComponent
+} from "./register/user-register.component";
+import {
 	RouterModule
 } from "@angular/router";
 const routes = [{
@@ -15,6 +18,9 @@ const routes = [{
 	}, {
 		path: "login",
 		component: UserLoginComponent
+	}, {
+		path: "register",
+		component: UserRegisterComponent
 	}]
 }];
 export default RouterModule.forChild(routes);

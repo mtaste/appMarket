@@ -12,6 +12,13 @@ const routes = [{
 	path: 'user',
 	loadChildren: 'app/user/user.module',
 	name: 'User'
+}, {
+	path: 'apps',
+	loadChildren: 'app/apps/apps.module',
+	name: 'Apps'
 }];
 
-export default RouterModule.forRoot(routes);
+function GetRoters() {
+	return routes;
+}
+export default RouterModule.forRoot(GetRoters());

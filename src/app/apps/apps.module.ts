@@ -4,10 +4,12 @@ import {
 import {
 	AppsComponent
 } from "./apps.component";
-import appsRoutes from './apps.routes';
+import {
+	AppsRoutes
+} from './apps.routes';
 @NgModule({
 	imports: [
-		appsRoutes
+		AppsRoutes
 	],
 	declarations: [
 		AppsComponent

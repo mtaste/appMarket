@@ -1,0 +1,7 @@
+[
+	{
+		"path": "community",
+		"loadChildren": "app/apps/community/app.module",
+		"name": "Community"
+	}
+]

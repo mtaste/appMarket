@@ -1,18 +1,40 @@
 import {
-	NgModule
+	Router,
+	Inject
+} from '../shared/index';
+import {
+	NgModule,
+	CommonModule
 } from '../shared/index';
 import {
 	AppsComponent
 } from "./apps.component";
 import {
-	AppsRoutes
-} from './apps.routes';
+	AppsMainComponent
+} from "./apps.main.component";
+import {
+	AppsRouterActivate,
+	AppsRouterService
+} from "./apps.routers.service";
+
+import appRoutes from './apps.routes';
+
 @NgModule({
 	imports: [
-		AppsRoutes
+		appRoutes,
+		CommonModule
 	],
 	declarations: [
-		AppsComponent
-	]
+		AppsComponent,
+		AppsMainComponent
+	],
+	providers: [AppsRouterService, AppsRouterActivate]
 })
-export default class AppsModule {}
+export default class AppsModule {
+	constructor(
+		private router: Router,
+		private appsRouterService: AppsRouterService
+	) {
+		this.appsRouterService.GetAppsList();
+	}
+}

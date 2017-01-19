@@ -11,14 +11,15 @@ import {
 	styleUrls: ['./apps.component.css']
 })
 export class AppsComponent implements OnInit {
-	routes: string[];
+	list: Object[] = [];
 	constructor(private router: Router) {
 		var r = {
-			path: "community",
+			path: "apps/run/community",
+			url: "main/community",
 			loadChildren: 'app/apps/community/app.module',
 			name: 'Community'
 		};
-		console.log(this.router);
+		this.list.push(r);
 	}
 	ngOnInit() {}
 

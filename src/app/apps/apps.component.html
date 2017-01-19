@@ -1,2 +1,7 @@
-<a [routerLink]="'community'">Community</a>
+<ul>
+	<li *ngFor="let el of list">
+		<a [routerLink]="el.url" routerLinkActive="active">{{el.name}}</a>
+	</li>
+</ul>
+<a [routerLink]="'main'" routerLinkActive="active">Main</a>
 <router-outlet></router-outlet>

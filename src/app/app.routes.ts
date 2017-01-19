@@ -13,7 +13,7 @@ const routes = [{
 	loadChildren: 'app/user/user.module',
 	name: 'User'
 }, {
-	path: 'apps/:id',
+	path: 'apps',
 	loadChildren: 'app/apps/apps.module',
 	name: 'Apps'
 }];

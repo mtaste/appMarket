@@ -2,6 +2,10 @@
 	{
 		"id": "/apps/main/community",
 		"loadChildren": "app/apps/community/app.module",
-		"name": "Community"
+		"name": "交流APP"
+	}, {
+		"id": "/apps/main/circle",
+		"loadChildren": "app/apps/circle/app.module",
+		"name": "圈子APP"
 	}
 ]

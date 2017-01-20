@@ -3,8 +3,8 @@ import {
 	OnInit
 } from '@angular/core';
 import {
-	Router
-} from '../shared/index';
+	AppsRouterService
+} from "./apps.routers.service";
 @Component({
 	selector: 'app-apps',
 	templateUrl: './apps.component.html',
@@ -12,14 +12,12 @@ import {
 })
 export class AppsComponent implements OnInit {
 	list: Object[] = [];
-	constructor(private router: Router) {
-		var r = {
-			path: "apps/run/community",
-			url: "main/community",
-			loadChildren: 'app/apps/community/app.module',
-			name: 'Community'
-		};
-		this.list.push(r);
+	constructor(
+		private appsRouterService: AppsRouterService
+	) {
+		this.appsRouterService.GetAppsList().subscribe((data) => {
+			this.list = data;
+		});
 	}
 	ngOnInit() {}
 

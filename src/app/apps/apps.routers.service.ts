@@ -18,6 +18,11 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/switchMap";
 @Injectable()
 export class AppsRouterService {
+	// get apps list 
+	GetAppsList() {
+		return this.http.get(`${this.starwarUrl}/apps/routers.json`)
+			.map(res => res.json());
+	}
 	constructor(
 			private router: Router,
 			private http: Http,
@@ -77,21 +82,15 @@ export class AppsRouterService {
 			});
 			return ret;
 		}
-		// get apps list 
-	GetAppsList() {
-			this.http.get(`${this.starwarUrl}/apps/routers.json`)
-				.map(res => res.json())
-				.subscribe((data) => {
-					//this.RegisterRouter(data);
-				});
-		}
 		// runing app
 	RunApp(state) {
 		var url = this.getTransUrl(state.url);
 		if(url) {
-			this.router.navigateByUrl(url, {
-				skipLocationChange: true
-			});
+			setTimeout(() => {
+				this.router.navigateByUrl(url, {
+					skipLocationChange: true
+				});
+			}, 50);
 			return new Promise < Boolean > ((resolve, reject) => {
 				resolve(true);
 			});;

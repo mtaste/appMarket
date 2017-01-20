@@ -1,6 +1,6 @@
 <ul>
 	<li *ngFor="let el of list">
-		<a [routerLink]="el.url" routerLinkActive="active">{{el.name}}</a>
+		<a [routerLink]="el.id" routerLinkActive="active">{{el.name}}</a>
 	</li>
 </ul>
 <a [routerLink]="'main'" routerLinkActive="active">Main</a>

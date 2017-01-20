@@ -35,6 +35,8 @@ export default class AppsModule {
 		private router: Router,
 		private appsRouterService: AppsRouterService
 	) {
-		this.appsRouterService.GetAppsList();
+		this.appsRouterService.GetAppsList().subscribe((data) => {
+			this.appsRouterService.RegisterRouter(data);
+		});;
 	}
 }

@@ -1,5 +1,5 @@
 {
 	"id": "/apps/main/community",
 	"loadChildren": "app/apps/community/app.module",
-	"name": "Community"
+	"name": "交流APP"
 }

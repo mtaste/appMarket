@@ -19,11 +19,11 @@ const routes = [{
 }, {
 	path: 'community',
 	loadChildren: 'app/apps/community/app.module',
-	name: 'Apps'
+	name: 'Community'
 }, {
-	path: 'circle',
-	loadChildren: 'app/apps/circle/app.module',
-	name: 'Apps'
+	path: 'admin',
+	loadChildren: 'app/admin/app.module',
+	name: 'Admin'
 }];
 
 function GetRoters() {

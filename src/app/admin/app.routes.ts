@@ -8,8 +8,8 @@ const routes = [{
 	path: '',
 	component: AppComponent,
 }, {
-	path: 'contact',
-	loadChildren: 'app/apps/community/contact/contact.module',
-	name: 'Contact'
+	path: 'home',
+	loadChildren: 'app/admin/home/home.module',
+	name: 'Home'
 }];
 export default RouterModule.forChild(routes);

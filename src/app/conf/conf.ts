@@ -6,14 +6,19 @@ var lang = {
 	lang: {
 		"welcome": {
 			en: "Welcome User",
-			es: "Verdadero"
+			cn: "欢迎您"
 		},
 		"false": {
 			en: "False",
-			es: "Falso"
+			cn: "假"
 		},
 		"login": {
-			en: "Login"
+			en: "Login",
+			cn: "登录"
+		},
+		"UserName": {
+			en: "UserName",
+			cn: "用户名"
 		}
 	}
 };

@@ -2,8 +2,13 @@
 <div class="l-offset-nav l-offset-side-nav ng-scope">
 
 	<nav class="main-nav l-pinned-top l-layer-5">
-		<h1><a class="md-button md-ink-ripple">Angular <sup class="ng-scope">by Google</sup></a></h1><button class="main-nav-button main-nav-mobile-trigger l-right md-button md-ink-ripple" type="button">Site Menu <span class="icon icon-arrow-drop-down ng-scope"></span></button>
-		<ul class="is-visible">
+		<h1>
+			<a class="md-button md-ink-ripple">Angular <sup class="ng-scope">by Google</sup></a>
+		</h1>
+		<button (click)="ToggleMenu($event,'showTopNav')" class="main-nav-button main-nav-mobile-trigger l-right md-button md-ink-ripple" type="button">
+			Site Menu <span class="icon icon-arrow-drop-down ng-scope"></span>
+		</button>
+		<ul [ngClass]="{ 'is-visible' : appCtrl.showTopNav}">
 			<li class="l-left">
 				<a class="main-nav-button md-button md-ink-ripple">Features
 					<div class="md-ripple-container"></div>
@@ -24,53 +29,76 @@
 		</ul>
 	</nav>
 	<!--Menus-->
-	<nav class="sidenav l-pinned-left l-layer-4 l-offset-nav is-visible">
+	<nav [ngClass]="{'is-visible' : appCtrl.showMenuNav}" class="sidenav l-pinned-left l-layer-4 l-offset-nav">
 		<!-- SEARCH BAR-->
 		<header class="sidenav-search st-input-wrapper">
-			<div class="st-input-inner"><label for="search-io" class="is-hidden">Search Docs</label><input type="text" placeholder="SEARCH DOCS..." class="st-default-search-input" autocomplete="off" autocorrect="off" autocapitalize="off"></div><button class="mobile-trigger button md-button md-ink-ripple" type="button" ng-transclude="" aria-label="View Docs Menu" ng-click="appCtrl.toggleDocsMenu($event)" md-button="md-button">Docs <span class="icon icon-arrow-drop-down ng-scope"></span></button></header>
+			<button (click)="ToggleMenu($event,'showMenuNav')" class="mobile-trigger button md-button md-ink-ripple" type="button">
+				Docs <span class="icon icon-arrow-drop-down ng-scope"></span>
+			</button>
+		</header>
 		<ul class="sidenav-links">
-			<li class="sidenav-section no-border">
-				<a href="/docs/ts/latest/" class="nav-title">Docs Home</a>
-			</li>
-			<!-- CORE DOCUMENTATION-->
-			<li class="sidenav-section-divider">
-				<h3>Core Documentation</h3></li>
 			<li class="sidenav-section">
-				<a href="/docs/ts/latest/quickstart.html" title="Quickstart" class="nav-title ">Quickstart</a>
+				<a href="/docs/ts/latest/quickstart.html" class="nav-title is-parent">
+					平台管理<img src="/resources/images/icons/ic_keyboard_arrow_down_black_24px.svg " class="inline-arrow-down-svg ">
+				</a>
+				<div class="nav-ordered-lists">
+					<ul>
+						<li class="nav-list-item">
+							<a href="/docs/ts/latest/tutorial/">权限定义</a>
+						</li>
+						<li class="sidenav-section">
+							<a href="/docs/ts/latest/tutorial/" class="nav-title is-parent">
+								授权组织<img src="/resources/images/icons/ic_keyboard_arrow_down_black_24px.svg " class="inline-arrow-down-svg ">
+							</a>
+							<div class="nav-ordered-lists">
+								<ul>
+									<li class="nav-list-item is-selected">
+										<a href="/docs/ts/latest/tutorial/">XX</a>
+									</li>
+									<li class="nav-list-item">
+										<a href="/docs/ts/latest/tutorial/">AA</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</div>
 			</li>
-			<li class="sidenav-section">
-				<a href="/docs/ts/latest/cli-quickstart.html" title="CLI Quickstart" class="nav-title ">CLI Quickstart</a>
+
+			<!--
+			<li class=" sidenav-section ">
+				<a href="/docs/ts/latest/cli-quickstart.html " title="CLI Quickstart " class="nav-title ">CLI Quickstart</a>
 			</li>
-			<li class="sidenav-section">
-				<a href="/docs/ts/latest/guide/" title="How to read and use this documentation" class="nav-title is-parent ">Guide<img src="/resources/images/icons/ic_keyboard_arrow_down_black_24px.svg" class="inline-arrow-down-svg"></a>
-				<div class="nav-ordered-lists is-hidden">
+			<li class="sidenav-section ">
+				<a href="/docs/ts/latest/guide/ " title="How to read and use this documentation " class="nav-title is-parent ">Guide<img src="/resources/images/icons/ic_keyboard_arrow_down_black_24px.svg " class="inline-arrow-down-svg "></a>
+				<div class="nav-ordered-lists is-hidden ">
 					<ul>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/" title="How to read and use this documentation">1. Overview</a>
+							<a href="/docs/ts/latest/guide/ " title="How to read and use this documentation ">1. Overview</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/setup.html" title="Install the Angular QuickStart seed for faster, more efficient development on your machine">2. Setup</a>
+							<a href="/docs/ts/latest/guide/setup.html " title="Install the Angular QuickStart seed for faster, more efficient development on your machine ">2. Setup</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/learning-angular.html" title="A suggested path through the documentation for Angular newcomers">3. Learning Angular</a>
+							<a href="/docs/ts/latest/guide/learning-angular.html " title="A suggested path through the documentation for Angular newcomers ">3. Learning Angular</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/architecture.html" title="The basic building blocks of Angular applications">4. Architecture</a>
+							<a href="/docs/ts/latest/guide/architecture.html " title="The basic building blocks of Angular applications ">4. Architecture</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/appmodule.html" title="Tell Angular how to construct and bootstrap the app in the root &quot;AppModule&quot;.">5. The Root Module</a>
+							<a href="/docs/ts/latest/guide/appmodule.html " title="Tell Angular how to construct and bootstrap the app in the root &quot;AppModule&quot;. ">5. The Root Module</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/displaying-data.html" title="Property binding helps show app data in the UI.">6. Displaying Data</a>
+							<a href="/docs/ts/latest/guide/displaying-data.html " title="Property binding helps show app data in the UI. ">6. Displaying Data</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/user-input.html" title="User input triggers DOM events. We listen to those events with event bindings that funnel updated values back into our components and models.">7. User Input</a>
+							<a href="/docs/ts/latest/guide/user-input.html " title="User input triggers DOM events. We listen to those events with event bindings that funnel updated values back into our components and models. ">7. User Input</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/forms.html" title="A form creates a cohesive, effective, and compelling data entry experience. An Angular form coordinates a set of data-bound user controls, tracks changes, validates input, and presents errors.">8. Forms</a>
+							<a href="/docs/ts/latest/guide/forms.html " title="A form creates a cohesive, effective, and compelling data entry experience. An Angular form coordinates a set of data-bound user controls, tracks changes, validates input, and presents errors. ">8. Forms</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/dependency-injection.html" title="Angular's dependency injection system creates and delivers dependent services &quot;just-in-time&quot;.">9. Dependency Injection</a>
+							<a href="/docs/ts/latest/guide/dependency-injection.html " title="Angular 's dependency injection system creates and delivers dependent services &quot;just-in-time&quot;.">9. Dependency Injection</a>
 						</li>
 						<li class="nav-list-item ">
 							<a href="/docs/ts/latest/guide/template-syntax.html" title="Learn how to write templates that display data and consume user events with the help of data binding.">10. Template Syntax</a>
@@ -93,9 +121,6 @@
 			<li class="sidenav-section no-border">
 				<a href="/docs/ts/latest/api/" title="API Reference" class="nav-title ">API Reference</a>
 			</li>
-			<!-- ADVANCED DOCUMENATION-->
-			<li class="sidenav-section-divider">
-				<h3>Additional Documentation</h3></li>
 			<li class="sidenav-section">
 				<a href="/docs/ts/latest/tutorial/" title="The Tour of Heroes tutorial takes you through the steps of creating an Angular application in TypeScript." class="nav-title is-parent is-selected">Tutorial<img src="/resources/images/icons/ic_keyboard_arrow_down_black_24px.svg" class="inline-arrow-down-svg"></a>
 				<div class="nav-ordered-lists">
@@ -119,136 +144,70 @@
 							<a href="/docs/ts/latest/tutorial/toh-pt5.html" title="We add the Angular Router and learn to navigate among the views">6. Routing</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/tutorial/toh-pt6.html" title="We convert our service and components to use Angular's HTTP service">7. HTTP</a>
+							<a href="/docs/ts/latest/tutorial/toh-pt6.html" title="We convert our service and components to use Angular's HTTP service ">7. HTTP</a>
 						</li>
 					</ul>
 				</div>
 			</li>
-			<li class="sidenav-section">
-				<a href="/docs/ts/latest/guide/ngmodule.html" title="Define application modules with @NgModule" class="nav-title is-parent ">Advanced<img src="/resources/images/icons/ic_keyboard_arrow_down_black_24px.svg" class="inline-arrow-down-svg"></a>
-				<div class="nav-unordered-lists is-hidden">
+			<li class="sidenav-section ">
+				<a href="/docs/ts/latest/cookbook/ " title="A collection of recipes for common Angular application scenarios " class="nav-title is-parent ">Cookbook<img src="/resources/images/icons/ic_keyboard_arrow_down_black_24px.svg " class="inline-arrow-down-svg "></a>
+				<div class="nav-unordered-lists is-hidden ">
 					<ul>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/ngmodule.html" title="Define application modules with @NgModule">Angular Modules (NgModule)</a>
+							<a href="/docs/ts/latest/cookbook/ " title="A collection of recipes for common Angular application scenarios ">Overview</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/animations.html" title="A guide to Angular's animation system.">Animations</a>
+							<a href="/docs/ts/latest/cookbook/aot-compiler.html " title="Learn how to use Ahead-of-time compilation ">Ahead-of-Time Compilation</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/attribute-directives.html" title="Attribute directives attach behavior to elements.">Attribute Directives</a>
+							<a href="/docs/ts/latest/cookbook/ajs-quick-reference.html " title="Learn how AngularJS concepts and techniques map to Angular ">AngularJS to Angular</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/browser-support.html" title="Browser support and polyfills guide.">Browser support</a>
+							<a href="/docs/ts/latest/cookbook/ngmodule-faq.html " title="Answers to frequently asked questions about @NgModule ">Angular Module FAQs</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/component-styles.html" title="Learn how to apply CSS styles to components.">Component Styles</a>
+							<a href="/docs/ts/latest/cookbook/component-communication.html " title="Share information between different directives and components ">Component Interaction</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/deployment.html" title="Learn how to deploy your Angular app.">Deployment</a>
+							<a href="/docs/ts/latest/cookbook/component-relative-paths.html " title="Use relative URLs for component templates and styles. ">Component-relative Paths</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/hierarchical-dependency-injection.html" title="Angular's hierarchical dependency injection system supports nested injectors in parallel with the component tree.">Hierarchical Injectors</a>
+							<a href="/docs/ts/latest/cookbook/dependency-injection.html " title="Techniques for Dependency Injection ">Dependency Injection</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/reactive-forms.html" title="Create a reactive form using FormBuilder, groups, and arrays.">Reactive Forms</a>
+							<a href="/docs/ts/latest/cookbook/dynamic-component-loader.html " title="Load components dynamically ">Dynamic Component Loader</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/server-communication.html" title="Use an HTTP Client to talk to a remote server.">HTTP Client</a>
+							<a href="/docs/ts/latest/cookbook/dynamic-form.html " title="Render dynamic forms with FormGroup ">Dynamic Forms</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/lifecycle-hooks.html" title="Angular calls lifecycle hook methods on directives and components as it creates, changes, and destroys them.">Lifecycle Hooks</a>
+							<a href="/docs/ts/latest/cookbook/form-validation.html " title="Validate user 's form entries">Form Validation</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/npm-packages.html" title="Recommended npm packages, and how to specify package dependencies">Npm Packages</a>
+							<a href="/docs/ts/latest/cookbook/i18n.html" title="Translate the app's template text into multiple languages. ">Internationalization (i18n)</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/pipes.html" title="Pipes transform displayed values within a template.">Pipes</a>
+							<a href="/docs/ts/latest/cookbook/set-document-title.html " title="Setting the document or window title using the Title service. ">Set the Document Title</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/router.html" title="Discover the basics of screen navigation with the Angular Router.">Routing &amp; Navigation</a>
+							<a href="/docs/ts/latest/cookbook/ts-to-js.html " title="Convert Angular TypeScript examples into ES6 and ES5 JavaScript ">TypeScript to JavaScript</a>
 						</li>
 						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/security.html" title="Developing for content security in Angular applications">Security</a>
-						</li>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/setup-systemjs-anatomy.html" title="Inside the local development environment for SystemJS">Setup Anatomy</a>
-						</li>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/structural-directives.html" title="Angular has a powerful template engine that lets us easily manipulate the DOM structure of our elements.">Structural Directives</a>
-						</li>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/testing.html" title="Techniques and practices for testing an Angular app">Testing</a>
-						</li>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/typescript-configuration.html" title="TypeScript configuration for Angular developers">TypeScript Configuration</a>
-						</li>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/upgrade.html" title="Incrementally upgrade an AngularJS application to Angular.">Upgrading from AngularJS</a>
-						</li>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/guide/webpack.html" title="Create Angular applications with a Webpack based tooling">Webpack: an introduction</a>
+							<a href="/docs/ts/latest/cookbook/visual-studio-2015.html " title="Use Visual Studio 2015 with the QuickStart files ">Visual Studio 2015 QuickStart</a>
 						</li>
 					</ul>
 				</div>
 			</li>
-			<li class="sidenav-section">
-				<a href="/docs/ts/latest/cookbook/" title="A collection of recipes for common Angular application scenarios" class="nav-title is-parent ">Cookbook<img src="/resources/images/icons/ic_keyboard_arrow_down_black_24px.svg" class="inline-arrow-down-svg"></a>
-				<div class="nav-unordered-lists is-hidden">
-					<ul>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/cookbook/" title="A collection of recipes for common Angular application scenarios">Overview</a>
-						</li>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/cookbook/aot-compiler.html" title="Learn how to use Ahead-of-time compilation">Ahead-of-Time Compilation</a>
-						</li>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/cookbook/ajs-quick-reference.html" title="Learn how AngularJS concepts and techniques map to Angular">AngularJS to Angular</a>
-						</li>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/cookbook/ngmodule-faq.html" title="Answers to frequently asked questions about @NgModule">Angular Module FAQs</a>
-						</li>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/cookbook/component-communication.html" title="Share information between different directives and components">Component Interaction</a>
-						</li>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/cookbook/component-relative-paths.html" title="Use relative URLs for component templates and styles.">Component-relative Paths</a>
-						</li>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/cookbook/dependency-injection.html" title="Techniques for Dependency Injection">Dependency Injection</a>
-						</li>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/cookbook/dynamic-component-loader.html" title="Load components dynamically">Dynamic Component Loader</a>
-						</li>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/cookbook/dynamic-form.html" title="Render dynamic forms with FormGroup">Dynamic Forms</a>
-						</li>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/cookbook/form-validation.html" title="Validate user's form entries">Form Validation</a>
-						</li>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/cookbook/i18n.html" title="Translate the app's template text into multiple languages.">Internationalization (i18n)</a>
-						</li>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/cookbook/set-document-title.html" title="Setting the document or window title using the Title service.">Set the Document Title</a>
-						</li>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/cookbook/ts-to-js.html" title="Convert Angular TypeScript examples into ES6 and ES5 JavaScript">TypeScript to JavaScript</a>
-						</li>
-						<li class="nav-list-item ">
-							<a href="/docs/ts/latest/cookbook/visual-studio-2015.html" title="Use Visual Studio 2015 with the QuickStart files">Visual Studio 2015 QuickStart</a>
-						</li>
-					</ul>
-				</div>
-			</li>
+-->
 		</ul>
 	</nav>
 	<!--content -->
-	<header class="hero background-sky">
+	<header class="hero background-sky ">
 		<h1 class="hero-title ">Tutorial: Tour of Heroes </h1>
-		<div class="clear"></div>
+		<div class="clear "></div>
 	</header>
-	<div class="banner">
-		<p class="text-body">The Tour of Heroes tutorial takes you through the steps of creating an Angular application in TypeScript.</p>
+	<div class="banner ">
+		<p class="text-body ">The Tour of Heroes tutorial takes you through the steps of creating an Angular application in TypeScript.</p>
 	</div>
 
 </div>

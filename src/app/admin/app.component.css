@@ -2667,7 +2667,7 @@ screen and (max-width:800px) {
 	box-sizing: border-box;
 	box-shadow: none;
 	padding: 8px;
-	height: 48px;
+	height: 36px;
 	position: relative
 }
 
@@ -5525,4 +5525,8 @@ live-example iframe {
 		background: #E0343D;
 		border-color: #E0343D
 	}
+}
+
+.nav-ordered-lists {
+	margin-left: 12px;
 }

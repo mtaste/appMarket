@@ -22,4 +22,8 @@ export class UserService {
 		return this.http.get(`${this.starwarUrl}/user/userList.json`)
 			.map(res => res.json())
 	}
+	GetUserMenu() {
+		return this.http.get(`${this.starwarUrl}/user/userMenu.json`)
+			.map(res => res.json())
+	}
 }

@@ -8,6 +8,15 @@ import {
 import {
 	AppComponent
 } from "./app.component";
+import {
+	UserService
+} from "../user/user.service";
+import {
+	ComponentsModule
+} from "../components/components.module";
+import {
+	TabMenuModule
+} from 'primeng/primeng';
 import appsRoutes from './app.routes';
 
 @NgModule({
@@ -16,10 +25,13 @@ import appsRoutes from './app.routes';
 		ReactiveFormsModule,
 		HttpModule,
 		CommonModule,
+		ComponentsModule,
+		TabMenuModule,
 		appsRoutes
 	],
 	declarations: [
 		AppComponent
-	]
+	],
+	providers: [UserService]
 })
 export default class AppModule {}

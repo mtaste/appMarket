@@ -15,7 +15,9 @@ import {
 	API_URL,
 	STARWARS_BASE_URL
 } from "./shared/constance.service";
-
+import {
+	UtilService
+} from "./shared/util.service";
 @NgModule({
 	declarations: [
 		AppComponent
@@ -31,7 +33,7 @@ import {
 	}, {
 		provide: STARWARS_BASE_URL,
 		useValue: `app/json`
-	}],
+	}, UtilService],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -68,10 +68,10 @@ export class AppComponent {
 				m.command = (ret) => {
 					//点击关闭按钮
 					var t = ret.originalEvent;
-					if(t.offsetX <= 10) {
+					if(t.offsetX <= 6) {
 						this.RemoveTab(ret.item);
 					} else {
-						ret && ret.item && (this.menuId = ret.item.id);
+						ret && ret.item && this.MenusClick(ret.item);
 					}
 				}
 				this.items.push(m);
@@ -81,7 +81,7 @@ export class AppComponent {
 				var index = this.utilService.GetArrayIndex(this.items, "id", m.id);
 				var tm = this.items[index];
 				this.activeItem = tm;
-				//打开模块,没有定义则不能打开
+				//打开模块
 				this.GoRouter(tm);
 			}
 		}
@@ -101,18 +101,6 @@ export class AppComponent {
 	};
 	//调转到对应的路由
 	GoRouter(m) {
-		var rs = this.getAllRouters();
-		console.log(this.router);
 		this.router.navigateByUrl(m.authUrl);
-	};
-	//get all routers 
-	private getAllRouters() {
-		var ret = {};
-		var c = this.router.config;
-		for(var i in c) {
-			var t = c[i];
-			ret[t.path] = "Y";
-		}
-		return ret;
 	};
 }

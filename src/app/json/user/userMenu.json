@@ -189,7 +189,7 @@
 		"id": "2",
 		"parentId": "1",
 		"name": "权限定义",
-		"authUrl": "/admin/module/authDefine/index.html",
+		"authUrl": "/admin/mg/authDefine",
 		"authIcon": "icon-lock"
 	}, {
 		"id": "39b352a998a3499183295152e7e7e541",

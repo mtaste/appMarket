@@ -7,9 +7,12 @@ import {
 const routes = [{
 	path: '',
 	component: AppComponent,
-}, {
-	path: 'home',
-	loadChildren: 'app/admin/home/home.module',
-	name: 'Home'
+	children: [{
+		path: ""
+	}, {
+		path: 'mg/authDefine',
+		loadChildren: 'app/admin/mg/auth-define/auth-define.module',
+		name: 'AuthDefine'
+	}]
 }];
 export default RouterModule.forChild(routes);

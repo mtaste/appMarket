@@ -37,7 +37,7 @@
 			</button>
 		</header>
 		<!--menus-->
-		<app-menu-component [menus]="menus" (onSelected)="MenusClick($event)"></app-menu-component>
+		<app-menu-component [menus]="menus" (onSelected)="MenusClick($event)" [menuId]="menuId"></app-menu-component>
 	</nav>
 	<!--content -->
 	<p-tabMenu [model]="items" [activeItem]="activeItem"></p-tabMenu>

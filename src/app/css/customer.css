@@ -5530,3 +5530,7 @@ live-example iframe {
 .nav-ordered-lists {
 	margin-left: 12px;
 }
+
+.ui-tree {
+	width: 100%;
+}

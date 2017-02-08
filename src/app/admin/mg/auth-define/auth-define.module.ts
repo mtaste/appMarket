@@ -2,14 +2,31 @@ import {
 	NgModule
 } from "@angular/core";
 import {
+	PNGModule
+} from '../index';
+import {
 	CommonModule
 } from "@angular/common";
 import {
 	AuthDefineComponent
 } from "./auth-define.component";
 import routes from './auth-define.routes';
+import {
+	FieldsetModule,
+	TreeModule,
+	InputTextModule,
+	ButtonModule
+} from 'primeng/primeng';
 @NgModule({
-	imports: [CommonModule, routes],
+	imports: [
+		PNGModule.forRoot(),
+		CommonModule,
+		routes,
+		FieldsetModule,
+		TreeModule,
+		InputTextModule,
+		ButtonModule
+	],
 	declarations: [AuthDefineComponent]
 })
 export default class AuthDefineModule {}

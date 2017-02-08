@@ -19,6 +19,10 @@ import {
 } from 'primeng/primeng';
 import appsRoutes from './app.routes';
 
+import {
+	AuthDefineService
+} from "./services/index";
+
 @NgModule({
 	imports: [
 		FormsModule,
@@ -26,12 +30,15 @@ import appsRoutes from './app.routes';
 		HttpModule,
 		CommonModule,
 		ComponentsModule,
-		TabMenuModule,
-		appsRoutes
+		appsRoutes,
+		TabMenuModule
 	],
 	declarations: [
 		AppComponent
 	],
-	providers: [UserService]
+	providers: [
+		UserService,
+		AuthDefineService
+	]
 })
 export default class AppModule {}

@@ -43,7 +43,6 @@ export class AppComponent {
 		this.i18n.init(lang);
 		this.userService.GetUserMenu().subscribe((ret) => {
 			var data = utilService.TransData(ret, "id", "parentId", "subtree");
-			console.log(data);
 			this.menus = data;
 		});
 		this.items = [];
@@ -68,7 +67,7 @@ export class AppComponent {
 				m.command = (ret) => {
 					//点击关闭按钮
 					var t = ret.originalEvent;
-					if(t.offsetX <= 6) {
+					if(t.offsetX <= 7) {
 						this.RemoveTab(ret.item);
 					} else {
 						ret && ret.item && this.MenusClick(ret.item);

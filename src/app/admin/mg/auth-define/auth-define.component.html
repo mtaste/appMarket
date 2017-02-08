@@ -1,3 +1,39 @@
-<p>
-  auth-define works!
-</p>
+<div class="ui-g">
+	<div class="ui-g-12 ui-md-6 ui-lg-6">
+		<p-fieldset legend="权限列表">
+			<p-tree [value]="trees" selectionMode="single" [(selection)]="selectedTree" (onNodeSelect)="NodeSelect($event)">
+				<template let-node pTemplate="default">
+					<span>{{node.name}}</span>
+				</template>
+			</p-tree>
+		</p-fieldset>
+	</div>
+	<div class="ui-g-12 ui-md-6 ui-lg-6">
+		<p-fieldset legend="权限信息">
+			<form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">
+				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-2">
+							名称 *:
+						</div>
+						<div class="ui-grid-col-6">
+							<input pInputText type="text" formControlName="name" placeholder="Required" />
+						</div>
+						<div class="ui-grid-col-4">
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!authForm.controls['name'].valid&&authForm.controls['name'].dirty">
+								<i class="fa fa-close"></i> Name is required
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-2"></div>
+						<div class="ui-grid-col-6">
+							<button pButton type="submit" label="提交" [disabled]="!authForm.valid"></button>
+						</div>
+						<div class="ui-grid-col-4"></div>
+					</div>
+				</div>
+			</form>
+		</p-fieldset>
+	</div>
+</div>

@@ -41,4 +41,12 @@ export class UtilService {
 		}
 		return -1;
 	};
+	//复制值
+	CopyObj(source, targer) {
+		var m = {};
+		for(var k in source) {
+			m[k] = targer[k] || "";
+		}
+		return m;
+	};
 }

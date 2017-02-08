@@ -195,7 +195,7 @@
 		"id": "39b352a998a3499183295152e7e7e541",
 		"parentId": "1",
 		"name": "授权组织",
-		"authUrl": "/admin/module/authOrgDefine/index.html",
+		"authUrl": "/admin/mg/authOrg",
 		"authIcon": "icon-sitemap"
 	}, {
 		"id": "fcdfd06d3dbf4b73a2520808fddc39e2",

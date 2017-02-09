@@ -40,7 +40,8 @@
 		<app-menu-component [menus]="menus" (onSelected)="MenusClick($event)" [menuId]="menuId"></app-menu-component>
 	</nav>
 	<!--content -->
-	<p-tabMenu [model]="items" [activeItem]="activeItem"></p-tabMenu>
+	<p-tabMenu [model]="items" [activeItem]="activeItem">
+	</p-tabMenu>
 	<router-outlet></router-outlet>
 
 </div>

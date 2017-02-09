@@ -67,7 +67,7 @@ export class AppComponent {
 				m.command = (ret) => {
 					//点击关闭按钮
 					var t = ret.originalEvent;
-					if(t.offsetX <= 7) {
+					if(t.srcElement.className.indexOf("ui-menuitem-icon") >= 0) {
 						this.RemoveTab(ret.item);
 					} else {
 						ret && ret.item && this.MenusClick(ret.item);

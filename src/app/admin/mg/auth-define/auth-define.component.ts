@@ -30,6 +30,10 @@ export class AuthDefineComponent implements OnInit {
 	ngOnInit() {
 		//初始化权限表单
 		this.authForm = this.fb.group({
+			'parentName': new FormControl({
+				disabled: true
+			}),
+			'parentId': new FormControl(),
 			'name': new FormControl('', Validators.required)
 		});
 		//获取定义的数据
@@ -37,11 +41,12 @@ export class AuthDefineComponent implements OnInit {
 			var data = this.utilService.TransData(ret, "id", "parentId", "children");
 			this.trees = < TreeNode[] > data;
 		});
-		console.log(this.authForm);
 	};
 	//select tree
 	NodeSelect(e) {
 		var m = this.utilService.CopyObj(this.authForm.value, e.node);
+		e.node.parent && (m["parentName"] = e.node.parent.name);
+		!e.node.parent && (m["parentName"] = "0");
 		this.authForm.setValue(m);
 	};
 	//Form
@@ -49,5 +54,8 @@ export class AuthDefineComponent implements OnInit {
 	submitted: boolean;
 	onSubmit(value: string) {
 		this.submitted = true;
+	}
+	get display() {
+		return JSON.stringify(this.authForm.value);
 	}
 }

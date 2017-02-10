@@ -15,7 +15,10 @@ import {
 	FieldsetModule,
 	TreeModule,
 	InputTextModule,
-	ButtonModule
+	ButtonModule,
+	MenubarModule,
+	ConfirmDialogModule,
+	GrowlModule
 } from 'primeng/primeng';
 @NgModule({
 	imports: [
@@ -25,7 +28,10 @@ import {
 		FieldsetModule,
 		TreeModule,
 		InputTextModule,
-		ButtonModule
+		ButtonModule,
+		MenubarModule,
+		ConfirmDialogModule,
+		GrowlModule
 	],
 	declarations: [AuthDefineComponent]
 })

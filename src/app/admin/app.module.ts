@@ -15,7 +15,8 @@ import {
 	ComponentsModule
 } from "../components/components.module";
 import {
-	TabMenuModule
+	TabMenuModule,
+	ConfirmationService
 } from 'primeng/primeng';
 import appsRoutes from './app.routes';
 
@@ -38,7 +39,8 @@ import {
 	],
 	providers: [
 		UserService,
-		AuthDefineService
+		AuthDefineService,
+		ConfirmationService
 	]
 })
 export default class AppModule {}

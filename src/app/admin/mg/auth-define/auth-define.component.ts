@@ -3,7 +3,10 @@ import {
 	OnInit
 } from '@angular/core';
 import {
-	TreeNode
+	TreeNode,
+	MenuItem,
+	ConfirmationService,
+	Message
 } from 'primeng/primeng';
 import {
 	AuthDefineService,
@@ -20,27 +23,58 @@ import {
 	styleUrls: ['./auth-define.component.css']
 })
 export class AuthDefineComponent implements OnInit {
-	trees: TreeNode[];
-	selectedFile: TreeNode;
+	private trees: TreeNode[];
+	private selectedNode: TreeNode;
+	private items: MenuItem[];
+	private msgs: Message[] = [];
 	constructor(
 		private authDefineService: AuthDefineService,
 		private utilService: UtilService,
-		private fb: FormBuilder
+		private fb: FormBuilder,
+		private confirmationService: ConfirmationService
 	) {};
 	ngOnInit() {
 		//初始化权限表单
 		this.authForm = this.fb.group({
+			'id': new FormControl(''),
+			'name': new FormControl('', Validators.required),
+			'parentId': new FormControl(''),
 			'parentName': new FormControl({
+				value: "",
 				disabled: true
-			}),
-			'parentId': new FormControl(),
-			'name': new FormControl('', Validators.required)
+			})
 		});
 		//获取定义的数据
 		this.authDefineService.GetAuthDefineList().subscribe((ret) => {
 			var data = this.utilService.TransData(ret, "id", "parentId", "children");
 			this.trees = < TreeNode[] > data;
 		});
+		//定义菜单栏
+		this.items = [{
+			label: '新增',
+			icon: 'fa-plus',
+			command: () => {
+				var m = this.selectedNode;
+				this.authForm.setValue({
+					id: "",
+					name: "",
+					parentId: m["id"],
+					parentName: m["name"]
+				});
+			}
+		}, {
+			label: '删除',
+			icon: 'fa-remove',
+			command: () => {
+				this.confirmationService.confirm({
+					header: '删除提示',
+					message: '您确定需要删除此记录?',
+					accept: () => {
+						console.log("Yes");
+					}
+				});
+			}
+		}];
 	};
 	//select tree
 	NodeSelect(e) {
@@ -54,6 +88,15 @@ export class AuthDefineComponent implements OnInit {
 	submitted: boolean;
 	onSubmit(value: string) {
 		this.submitted = true;
+		//成功增加后,提示信息,以及动态增加
+		this.msgs.push({
+			severity: 'success',
+			summary: '提示',
+			detail: '操作成功!'
+		});
+		var m = this.utilService.CopyObj(value, value);
+		!this.selectedNode.children && (this.selectedNode.children = []);
+		this.selectedNode.children.push(m);
 	}
 	get display() {
 		return JSON.stringify(this.authForm.value);

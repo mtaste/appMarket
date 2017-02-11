@@ -21,7 +21,8 @@ import {
 import appsRoutes from './app.routes';
 
 import {
-	AuthDefineService
+	AuthDefineService,
+	AuthOrgService
 } from "./services/index";
 
 @NgModule({
@@ -40,7 +41,8 @@ import {
 	providers: [
 		UserService,
 		AuthDefineService,
-		ConfirmationService
+		ConfirmationService,
+		AuthOrgService
 	]
 })
 export default class AppModule {}

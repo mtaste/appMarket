@@ -6,7 +6,29 @@ import {
 @Injectable()
 export class UtilService {
 	constructor() {}
-		//json格式转树状结构
+
+	//获取树节点数组
+	GetArray(data, chindrenStr, name, values) {
+		var ret = [];
+		var value = {};
+		for(var k in values) {
+			value[values[k][name]] = "Y";
+		}
+		this.getArrayList(data, chindrenStr, name, value, ret);
+		return ret;
+	};
+	private getArrayList(data, chindrenStr, name, value, ret) {
+		for(var i in data) {
+			var children = data[i][chindrenStr];
+			if(value[data[i][name]] == "Y") {
+				ret.push(data[i]);
+			}
+			if(children) {
+				this.getArrayList(children, chindrenStr, name, value, ret);
+			};
+		}
+	};
+	//json格式转树状结构
 	TransData(a, idStr, pidStr, chindrenStr) {
 		var r = [],
 			hash = {},

@@ -20,6 +20,14 @@ export class AuthOrgService {
 	) {}
 	GetAuthOrgList() {
 		return this.http.get(`${this.starwarUrl}/auth/define.json`)
-			.map(res => res.json())
+			.map(res => res.json());
+	};
+	GetOrgList() {
+		return this.http.get(`${this.starwarUrl}/org/list.json`)
+			.map(res => res.json());
+	};
+	GetOrgAuth() {
+		return this.http.get(`${this.starwarUrl}/org/auth.json`)
+			.map(res => res.json());
 	}
 }

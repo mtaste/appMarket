@@ -7,42 +7,13 @@
 			<!--function-->
 			<p-menubar [model]="orgItems"></p-menubar>
 			<!--end-->
-
-			<form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">
-				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
-					<input pInputText type="hidden" formControlName="id" />
-					<input pInputText type="hidden" formControlName="parentId" />
-					<div class="ui-grid-row">
-						<div class="ui-grid-col-2">
-							上级:
-						</div>
-						<div class="ui-grid-col-6">
-							<input pInputText type="text" formControlName="parentName" />
-						</div>
+			<p-dataList [value]="orgList" [paginator]="true" [rows]="9" [lazy]="true" (onLazyLoad)="LoadOrgListData($event)" [totalRecords]="totalRecords">
+				<template let-e pTemplate="item">
+					<div class="ui-grid ui-grid-responsive ui-fluid orgList" (click)="OrgClick(e)" [ngClass]="{'selected':e.id==selectedOrg.id}">
+						{{e.name}}
 					</div>
-					<div class="ui-grid-row">
-						<div class="ui-grid-col-2">
-							名称 *:
-						</div>
-						<div class="ui-grid-col-6">
-							<input pInputText type="text" formControlName="name" placeholder="Required" />
-						</div>
-						<div class="ui-grid-col-4">
-							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!authForm.controls['name'].valid&&authForm.controls['name'].dirty">
-								<i class="fa fa-close"></i> Name is required
-							</div>
-						</div>
-					</div>
-					<div class="ui-grid-row">
-						<div class="ui-grid-col-2"></div>
-						<div class="ui-grid-col-6">
-							<button pButton type="submit" label="提交" [disabled]="!authForm.valid"></button>
-						</div>
-						<div class="ui-grid-col-4"></div>
-					</div>
-					<div style="text-align: center;font-weight:inherit;">{{display}}</div>
-				</div>
-			</form>
+				</template>
+			</p-dataList>
 		</p-fieldset>
 	</div>
 
@@ -51,7 +22,7 @@
 			<!--function-->
 			<p-menubar [model]="authItems"></p-menubar>
 			<!--end-->
-			<p-tree [value]="trees" selectionMode="single" [(selection)]="selectedNode" (onNodeSelect)="NodeSelect($event)">
+			<p-tree [value]="trees" selectionMode="checkbox" [(selection)]="selectedNodes" (onNodeSelect)="NodeSelect($event)">
 				<template let-node pTemplate="default">
 					<span>{{node.name}}</span>
 				</template>

@@ -86,7 +86,7 @@ export class AuthDefineComponent implements OnInit {
 	//Form
 	authForm: FormGroup;
 	submitted: boolean;
-	onSubmit(value: string) {
+	onSubmit(value) {
 		this.submitted = true;
 		//成功增加后,提示信息,以及动态增加
 		this.msgs.push({
@@ -94,6 +94,7 @@ export class AuthDefineComponent implements OnInit {
 			summary: '提示',
 			detail: '操作成功!'
 		});
+		if(value["id"]) return;
 		var m = this.utilService.CopyObj(value, value);
 		!this.selectedNode.children && (this.selectedNode.children = []);
 		this.selectedNode.children.push(m);

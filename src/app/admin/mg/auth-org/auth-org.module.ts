@@ -18,7 +18,8 @@ import {
 	ButtonModule,
 	MenubarModule,
 	ConfirmDialogModule,
-	GrowlModule
+	GrowlModule,
+	DataListModule
 } from 'primeng/primeng';
 @NgModule({
 	imports: [
@@ -31,7 +32,8 @@ import {
 		ButtonModule,
 		MenubarModule,
 		ConfirmDialogModule,
-		GrowlModule
+		GrowlModule,
+		DataListModule
 	],
 	declarations: [AuthOrgComponent]
 })

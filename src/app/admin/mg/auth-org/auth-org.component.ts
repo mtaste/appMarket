@@ -48,6 +48,7 @@ export class AuthOrgComponent implements OnInit {
 		this.authOrgService.GetAuthOrgList().subscribe((ret) => {
 			var data = this.utilService.TransData(ret, "id", "parentId", "children");
 			this.trees = < TreeNode[] > data;
+
 		});
 		//定义菜单栏
 		this.orgItems = [{
@@ -94,6 +95,7 @@ export class AuthOrgComponent implements OnInit {
 	};
 	//获取机构的权限信息
 	OrgClick(m) {
+		this.selectedNodes = [];
 		this.selectedOrg = m;
 		this.authOrgService.GetOrgAuth().subscribe((ret) => {
 			var t = this.utilService.GetArray(this.trees, "children", "id", ret);

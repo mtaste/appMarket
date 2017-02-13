@@ -21,7 +21,10 @@ export class UtilService {
 		for(var i in data) {
 			var children = data[i][chindrenStr];
 			if(value[data[i][name]] == "Y") {
+				data[i].expanded = true;
 				ret.push(data[i]);
+			} else {
+				data[i].expanded = false;
 			}
 			if(children) {
 				this.getArrayList(children, chindrenStr, name, value, ret);

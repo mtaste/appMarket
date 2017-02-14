@@ -36,6 +36,8 @@ export class AuthOrgComponent implements OnInit {
 	private totalRecords = 10;
 	private orgList = [];
 	private selectedOrg = {};
+	//机构信息
+	private orgForm: FormGroup;
 
 	constructor(
 		private authOrgService: AuthOrgService,
@@ -44,6 +46,12 @@ export class AuthOrgComponent implements OnInit {
 		private confirmationService: ConfirmationService
 	) {};
 	ngOnInit() {
+		//定义提交表单
+		this.orgForm = this.fb.group({
+			'id': new FormControl(''),
+			'name': new FormControl('', Validators.required),
+			'flag': new FormControl('', Validators.required)
+		});
 		//获取定义的数据
 		this.authOrgService.GetAuthOrgList().subscribe((ret) => {
 			var data = this.utilService.TransData(ret, "id", "parentId", "children");
@@ -55,7 +63,12 @@ export class AuthOrgComponent implements OnInit {
 			label: '新增',
 			icon: 'fa-plus',
 			command: () => {
-
+				this.display = true;
+				this.orgForm.setValue({
+					id: "",
+					name: "",
+					flag: ""
+				});
 			}
 		}, {
 			label: '删除',
@@ -65,7 +78,14 @@ export class AuthOrgComponent implements OnInit {
 					header: '删除提示',
 					message: '您确定需要删除此记录?',
 					accept: () => {
+						//TODO
+						console.log(this.selectedOrg);
 						console.log("Yes");
+						this.msgs.push({
+							severity: 'success',
+							summary: '提示',
+							detail: "del"
+						});
 					}
 				});
 			}
@@ -77,6 +97,11 @@ export class AuthOrgComponent implements OnInit {
 			command: () => {
 				// TODO
 				console.log("save");
+				this.msgs.push({
+					severity: 'success',
+					summary: '提示',
+					detail: "save"
+				});
 			}
 		}];
 		//机构列表信息
@@ -101,5 +126,25 @@ export class AuthOrgComponent implements OnInit {
 			var t = this.utilService.GetArray(this.trees, "children", "id", ret);
 			this.selectedNodes = t;
 		});
+	};
+	//搜索
+	private keyword = "";
+	SearchOrg() {
+		this.msgs.push({
+			severity: 'success',
+			summary: '提示',
+			detail: this.keyword
+		});
+	};
+	//新增
+	private display = false;
+	onSubmit(value) {
+		this.display = false;
+		this.msgs.push({
+			severity: 'success',
+			summary: '提示',
+			detail: JSON.stringify(value)
+		});
+		this.orgList.unshift(value);
 	};
 }

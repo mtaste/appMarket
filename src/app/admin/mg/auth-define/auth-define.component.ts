@@ -71,13 +71,14 @@ export class AuthDefineComponent implements OnInit {
 					message: '您确定需要删除此记录?',
 					accept: () => {
 						console.log("Yes");
+						this.utilService.DeleteTree(this.trees, "children", "id", [this.selectedNode]);
 					}
 				});
 			}
 		}];
 	};
 	//select tree
-	NodeSelect(e) {
+	NodeSelect(e, a) {
 		var m = this.utilService.CopyObj(this.authForm.value, e.node);
 		e.node.parent && (m["parentName"] = e.node.parent.name);
 		!e.node.parent && (m["parentName"] = "0");

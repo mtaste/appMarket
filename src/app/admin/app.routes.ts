@@ -17,6 +17,10 @@ const routes = [{
 		path: 'mg/authOrg',
 		loadChildren: 'app/admin/mg/auth-org/auth-org.module',
 		name: 'AuthOrg'
+	}, {
+		path: 'sys/orgDefine',
+		loadChildren: 'app/admin/sys/org-define/org-define.module',
+		name: 'OrgDefine'
 	}]
 }];
 export default RouterModule.forChild(routes);

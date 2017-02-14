@@ -3563,7 +3563,7 @@ table tbody th {
 }
 
 table tbody tr:last-child td {
-	border: none
+	/*border: none*/
 }
 
 .copy-container-template {
@@ -5533,4 +5533,8 @@ live-example iframe {
 
 .ui-tree {
 	width: 100%;
+}
+
+body .ui-widget-header {
+	border: 0px solid;
 }

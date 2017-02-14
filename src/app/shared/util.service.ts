@@ -5,8 +5,26 @@ import {
 
 @Injectable()
 export class UtilService {
-	constructor() {}
-
+	constructor() {};
+	//删除节点
+	DeleteTree(data, chindrenStr, name, values) {
+		var ret = [];
+		var value = {};
+		for(var k in values) {
+			value[values[k][name]] = "Y";
+		}
+		this.delTreeList(data, chindrenStr, name, value);
+	};
+	private delTreeList(data, chindrenStr, name, value) {
+		for(var i in data) {
+			var children = data[i][chindrenStr];
+			if(value[data[i][name]] == "Y") {
+				data.splice(i, 1);
+			} else {
+				this.delTreeList(children, chindrenStr, name, value);
+			};
+		}
+	};
 	//获取树节点数组
 	GetArray(data, chindrenStr, name, values) {
 		var ret = [];
@@ -71,6 +89,14 @@ export class UtilService {
 		var m = {};
 		for(var k in source) {
 			m[k] = targer[k] || "";
+		}
+		return m;
+	};
+	//请除对像
+	ClearObj(source) {
+		var m = {};
+		for(var k in source) {
+			m[k] = "";
 		}
 		return m;
 	};

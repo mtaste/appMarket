@@ -93,7 +93,7 @@
 		"id": "479852e16c834956b8b6c3b801ffd11c",
 		"parentId": "f70012acb9f940bbb583fcd63e9af5ab",
 		"name": "组织管理",
-		"authUrl": "/admin/module/sys/orgDefine/index.html",
+		"authUrl": "/admin/sys/orgDefine",
 		"authIcon": "icon-dribble"
 	}, {
 		"id": "8f127fb141904a3fa7c8f9b9ae178078",

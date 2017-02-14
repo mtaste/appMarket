@@ -71,6 +71,14 @@ export class AuthOrgComponent implements OnInit {
 				});
 			}
 		}, {
+			label: '修改',
+			icon: 'fa-plus',
+			command: () => {
+				this.display = true;
+				var m = this.utilService.CopyObj(this.orgForm.value, this.selectedOrg);
+				this.orgForm.setValue(m);
+			}
+		}, {
 			label: '删除',
 			icon: 'fa-remove',
 			command: () => {

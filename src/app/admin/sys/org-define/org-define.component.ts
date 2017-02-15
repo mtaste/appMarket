@@ -20,7 +20,7 @@ import {
 } from '../index';
 
 @Component({
-	selector: 'app-org-define',
+	selector: 'admin-app-org-define',
 	templateUrl: './org-define.component.html',
 	styleUrls: ['./org-define.component.css']
 })

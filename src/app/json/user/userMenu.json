@@ -267,7 +267,7 @@
 		"id": "67340c3f1b634546950bdb255e5982ac",
 		"parentId": "a15ae14869f04822849571fb6ada622b",
 		"name": "用户管理",
-		"authUrl": "/admin/module/sys/uesrManage/index.html",
+		"authUrl": "admin/personnel/mgUser",
 		"authIcon": "icon-user-md"
 	}, {
 		"id": "caf66d2ecda443c8b6d48fa6780ddad1",

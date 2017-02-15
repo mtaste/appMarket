@@ -21,6 +21,10 @@ const routes = [{
 		path: 'sys/orgDefine',
 		loadChildren: 'app/admin/sys/org-define/org-define.module',
 		name: 'OrgDefine'
+	}, {
+		path: 'personnel/mgUser',
+		loadChildren: 'app/admin/personnel/mg-user/mg-user.module',
+		name: 'MgUser'
 	}]
 }];
 export default RouterModule.forChild(routes);

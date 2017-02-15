@@ -5538,3 +5538,7 @@ live-example iframe {
 body .ui-widget-header {
 	border: 0px solid;
 }
+
+.is-hidden {
+	display: none!important
+}

@@ -91,16 +91,6 @@ export class MgUserComponent implements OnInit {
 			command: () => {
 				this.step = 1;
 			}
-		}, {
-			label: '保存',
-			icon: 'fa-save',
-			command: () => {
-				this.msgs.push({
-					severity: 'success',
-					summary: '提示',
-					detail: "save"
-				});
-			}
 		}];
 	};
 	//搜索用户
@@ -127,6 +117,9 @@ export class MgUserComponent implements OnInit {
 			summary: '提示',
 			detail: JSON.stringify(value)
 		});
+		this.step = 1;
+		var m = this.utilService.CopyObj(value, value);
+		this.userList.push(m);
 	};
 
 }

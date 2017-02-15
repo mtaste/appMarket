@@ -84,6 +84,22 @@
 			</p-dataTable>
 		</p-fieldset>
 	</div>
+	<!--选择用户-->
+	<p-dialog header="选择用户" [(visible)]="userDisplay" modal="modal" width="425" responsive="true">
+		<div class="ui-listbox-filter-container">
+			<input pInputText type="text" [(ngModel)]="userKeyword" placeholder="关键字" />
+			<button pButton type="button" (click)="SearchChooseUser()" icon="fa-search"></button>
+		</div>
+		<p-dataTable [value]="chooseUserList" [(selection)]="chooseUsers" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="chooseUserTotal" (onLazyLoad)="LoadChooseUserData($event)">
+			<p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+			<p-column field="userName" header="用户名"></p-column>
+			<p-column field="name" header="姓名"></p-column>
+		</p-dataTable>
+		<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+			<button (click)="userDisplay=false" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left"><span class="ui-button-icon-left ui-c fa fa-fw fa-close"></span><span class="ui-button-text ui-c">No</span></button>
+			<button (click)="ChooseUser()" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left"><span class="ui-button-icon-left ui-c fa fa-fw fa-check"></span><span class="ui-button-text ui-c">Yes</span></button>
+		</div>
+	</p-dialog>
 </div>
 <!--职务信息-->
 <div class="ui-g" [ngClass]="{'is-hidden':step!=2}">

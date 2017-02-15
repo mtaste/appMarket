@@ -47,6 +47,11 @@ export class OrgDefineComponent implements OnInit {
 	//用户信息
 	private userFuns: MenuItem[];
 	private selectedUsers = [];
+	private userDisplay = false;
+	//可选择用户信息
+	private chooseUsers = [];
+	private chooseUserList = [];
+	private chooseUserTotal = 10;
 	//=================================
 	constructor(
 		private authOrgService: AuthOrgService,
@@ -198,20 +203,32 @@ export class OrgDefineComponent implements OnInit {
 			label: '新增',
 			icon: 'fa-plus',
 			command: () => {
-				console.log("Save");
+				this.userDisplay = true;
 			}
 		}, {
 			label: '删除',
 			icon: 'fa-remove',
 			command: () => {
-				console.log("remove");
-				console.log(this.selectedUsers);
+				var d = {};
+				for(var i in this.selectedUsers) {
+					var m = this.selectedUsers[i];
+					d[m["id"]] = "Y";
+				};
+				var temp = [];
+				for(var k in this.userList) {
+					var m = this.userList[k];
+					if(d[m["id"]] == "Y") {
+						continue;
+					};
+					temp.push(m);
+				};
+				this.userList = temp;
+				this.selectedUsers = [];
 			}
 		}];
 	};
 	//选择部门======================
 	NodeSelect(e) {
-		//TODO
 		//获取职务列表
 		this.LoadJobListData({});
 		//获取用户列表
@@ -236,6 +253,7 @@ export class OrgDefineComponent implements OnInit {
 	//获取机构信息
 	LoadJobListData(e) {
 		this.orgDefineService.GetJobList().subscribe((ret) => {
+			this.selectedJob = {};
 			ret = ret.data;
 			this.jobTotal = ret.total;
 			this.jobList = ret.rows;
@@ -253,6 +271,7 @@ export class OrgDefineComponent implements OnInit {
 	//搜索
 	private jobKeyword = "";
 	SearchJob() {
+		//TODO
 		this.msgs.push({
 			severity: 'success',
 			summary: '提示',
@@ -271,5 +290,37 @@ export class OrgDefineComponent implements OnInit {
 			this.userTotals = ret.total;
 		});
 
+	};
+	//获取可选择用户列表信息
+	LoadChooseUserData(e) {
+		this.orgDefineService.GetUserList().subscribe((ret) => {
+			ret = ret.data;
+			this.chooseUserList = ret.rows;
+			this.chooseUserTotal = ret.total;
+		});
+	};
+	//搜索可选择用户信息
+	private userKeyword = "";
+	SearchChooseUser() {
+		//TODO
+		this.msgs.push({
+			severity: 'success',
+			summary: '提示',
+			detail: this.userKeyword
+		});
+	};
+	//选择用户后确定按钮 
+	ChooseUser() {
+		//TODO
+		this.userDisplay = false;
+		this.msgs.push({
+			severity: 'success',
+			summary: '提示',
+			detail: "ChooseUser"
+		});
+		for(var k in this.chooseUsers) {
+			var m = this.chooseUsers[k];
+			this.userList.unshift(m);
+		};
 	};
 }

@@ -40,6 +40,11 @@ export class OrgDefineService {
 	};
 	//获取用户列表信息
 	GetDepUserList() {
+		return this.http.get(`${this.starwarUrl}/org/orgUser.json`)
+			.map(res => res.json());
+	};
+	//获取可以选择用户列表信息
+	GetUserList() {
 		return this.http.get(`${this.starwarUrl}/org/userList.json`)
 			.map(res => res.json());
 	};

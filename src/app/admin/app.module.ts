@@ -24,7 +24,8 @@ import {
 	AuthDefineService,
 	AuthOrgService,
 	OrgDefineService,
-	MgUserService
+	MgUserService,
+	OrgRegisterService
 } from "./services/index";
 
 @NgModule({
@@ -46,7 +47,8 @@ import {
 		ConfirmationService,
 		AuthOrgService,
 		OrgDefineService,
-		MgUserService
+		MgUserService,
+		OrgRegisterService
 	]
 })
 export default class AppModule {}

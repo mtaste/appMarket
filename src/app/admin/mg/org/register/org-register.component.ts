@@ -16,60 +16,63 @@ import {
 	FormGroup,
 	Validators,
 	FormControl,
-	MgUserService
-} from '../index';
+	OrgRegisterService
+} from '../../index';
 @Component({
-	selector: 'admin-app-mg-user',
-	templateUrl: './mg-user.component.html',
-	styleUrls: ['./mg-user.component.css']
+	selector: 'app-org-register',
+	templateUrl: './org-register.component.html',
+	styleUrls: ['./org-register.component.css']
 })
-export class MgUserComponent implements OnInit {
+export class OrgRegisterComponent implements OnInit {
+
 	//提示信息
 	private msgs: Message[] = [];
 	private step = 1;
-	//用户菜单
-	private userFuncs: MenuItem[];
+	//列表菜单
+	private orgFuncs: MenuItem[];
 	private keyword = "";
-	//用户详情
+	//详情
 	private infoFuncs: MenuItem[];
-	private userForm: FormGroup;
-	//用户列表
-	private userList = [];
-	private selectedUser = {};
-	private userTotals = 10;
+	private billForm: FormGroup;
+	//列表
+	private orgBillList = [];
+	private selectedBill = {};
+	private billTotals = 10;
 
 	constructor(
 		private confirmationService: ConfirmationService,
-		private mgUserService: MgUserService,
+		private orgRegisterService: OrgRegisterService,
 		private utilService: UtilService,
 		private fb: FormBuilder
 	) {};
 
 	ngOnInit() {
-		//定义用户表单
-		this.userForm = this.fb.group({
+		//定义表单
+		this.billForm = this.fb.group({
 			'id': new FormControl(''),
 			'name': new FormControl('', Validators.required),
-			'userName': new FormControl('', Validators.required),
-			'passWord': new FormControl('', Validators.required)
+			'address': new FormControl('', Validators.required),
+			'contacts': new FormControl('', Validators.required),
+			'mobile': new FormControl('', Validators.required),
+			'orgFlag': new FormControl('', Validators.required)
 		});
-		//定义用户操作菜单
-		this.userFuncs = [{
+		//定义操作菜单
+		this.orgFuncs = [{
 			label: '新增',
 			icon: 'fa-plus',
 			command: () => {
 				this.step = 2;
-				var m = this.utilService.ClearObj(this.userForm.value);
-				this.userForm.setValue(m);
+				var m = this.utilService.ClearObj(this.billForm.value);
+				this.billForm.setValue(m);
 			}
 		}, {
 			label: '修改',
 			icon: 'fa-plus',
 			command: () => {
 				this.step = 2;
-				var t = this.utilService.ClearObj(this.userForm.value);
-				var m = this.utilService.CopyObj(t, this.selectedUser);
-				this.userForm.setValue(m);
+				var t = this.utilService.ClearObj(this.billForm.value);
+				var m = this.utilService.CopyObj(t, this.selectedBill);
+				this.billForm.setValue(m);
 			}
 		}, {
 			label: '删除',
@@ -79,15 +82,14 @@ export class MgUserComponent implements OnInit {
 					header: '删除提示',
 					message: '您确定需要删除此记录?',
 					accept: () => {
-						console.log("Yes");
-						var m = this.selectedUser;
-						var index = this.utilService.GetArrayIndex(this.userList, "id", m["id"]);
-						this.userList.splice(index, 1);
+						var m = this.selectedBill;
+						var index = this.utilService.GetArrayIndex(this.orgBillList, "id", m["id"]);
+						this.orgBillList.splice(index, 1);
 					}
 				});
 			}
 		}];
-		//定义用户信息操作菜单
+		//定义信息操作菜单
 		this.infoFuncs = [{
 			label: '返回',
 			icon: 'fa-backward',
@@ -96,8 +98,8 @@ export class MgUserComponent implements OnInit {
 			}
 		}];
 	};
-	//搜索用户
-	SearchUser() {
+	//搜索表单
+	SearchBill() {
 		//TODO
 		this.msgs.push({
 			severity: 'success',
@@ -105,15 +107,15 @@ export class MgUserComponent implements OnInit {
 			detail: "search"
 		});
 	};
-	//获取用户列表
-	LoadUserData(e) {
-		this.mgUserService.GetUserList().subscribe((ret) => {
+	//获取列表
+	LoadBillData(e) {
+		this.orgRegisterService.GetBillList().subscribe((ret) => {
 			ret = ret.data;
-			this.userList = ret.rows;
-			this.userTotals = ret.total;
+			this.orgBillList = ret.rows;
+			this.billTotals = ret.total;
 		});
 	};
-	//保存用户信息
+	//保存信息
 	onSubmit(value) {
 		this.msgs.push({
 			severity: 'success',
@@ -122,7 +124,6 @@ export class MgUserComponent implements OnInit {
 		});
 		this.step = 1;
 		var m = this.utilService.CopyObj(value, value);
-		this.userList.push(m);
+		this.orgBillList.push(m);
 	};
-
 }

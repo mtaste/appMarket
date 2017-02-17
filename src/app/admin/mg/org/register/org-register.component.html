@@ -1,0 +1,124 @@
+<p-growl [value]="msgs" [life]="1000"></p-growl>
+<p-confirmDialog icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<!--机构列表-->
+<div class="ui-g" [ngClass]="{'is-hidden':step!=1}">
+	<!--机构列表-->
+	<div class="ui-g-12 ui-md-12 ui-lg-12">
+		<p-fieldset legend="机构列表">
+			<!-- 功能-->
+			<p-menubar [model]="orgFuncs"></p-menubar>
+			<div class="ui-listbox-filter-container">
+				<input pInputText type="text" [(ngModel)]="keyword" placeholder="关键字" />
+				<button pButton type="button" (click)="SearchBill()" icon="fa-search"></button>
+			</div>
+			<!--列表-->
+			<p-dataTable [value]="orgBillList" [(selection)]="selectedBill" selectionMode="single" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="billTotals" (onLazyLoad)="LoadBillData($event)">
+				<p-column field="name" header="机构名称"></p-column>
+				<p-column field="address" header="机构地址"></p-column>
+				<p-column field="contacts" header="联系人"></p-column>
+				<p-column field="mobile" header="电话"></p-column>
+				<p-column field="orgFlag" header="标示"></p-column>
+				<p-column field="createUser" header="申请人"></p-column>
+				<p-column field="authUser" header="审核人"></p-column>
+			</p-dataTable>
+		</p-fieldset>
+	</div>
+</div>
+<!--单据信息-->
+<div class="ui-g" [ngClass]="{'is-hidden':step!=2}">
+	<div class="ui-g-12 ui-md-12 ui-lg-12">
+		<p-fieldset legend="单据信息">
+			<!-- 功能-->
+			<p-menubar [model]="infoFuncs"></p-menubar>
+			<!--单据信息-->
+			<form [formGroup]="billForm" (ngSubmit)="onSubmit(billForm.value)">
+				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+
+					<!--名称-->
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-2">
+							机构名称*:
+						</div>
+						<div class="ui-grid-col-6">
+							<input pInputText type="text" formControlName="name" placeholder="Required" />
+						</div>
+						<div class="ui-grid-col-4">
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!billForm.controls['name'].valid&&billForm.controls['name'].dirty">
+								<i class="fa fa-close"></i> Name is required
+							</div>
+						</div>
+					</div>
+
+					<!--地址-->
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-2">
+							机构地址*:
+						</div>
+						<div class="ui-grid-col-6">
+							<input pInputText type="text" formControlName="address" placeholder="Required" />
+						</div>
+						<div class="ui-grid-col-4">
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!billForm.controls['address'].valid&&billForm.controls['address'].dirty">
+								<i class="fa fa-close"></i> Address is required
+							</div>
+						</div>
+					</div>
+
+					<!--联系人-->
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-2">
+							联系人*:
+						</div>
+						<div class="ui-grid-col-6">
+							<input pInputText type="text" formControlName="contacts" placeholder="Required" />
+						</div>
+						<div class="ui-grid-col-4">
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!billForm.controls['contacts'].valid&&billForm.controls['contacts'].dirty">
+								<i class="fa fa-close"></i> Contacts is required
+							</div>
+						</div>
+					</div>
+
+					<!--电话-->
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-2">
+							电话*:
+						</div>
+						<div class="ui-grid-col-6">
+							<input pInputText type="text" formControlName="mobile" placeholder="Required" />
+						</div>
+						<div class="ui-grid-col-4">
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!billForm.controls['mobile'].valid&&billForm.controls['mobile'].dirty">
+								<i class="fa fa-close"></i> Mobile is required
+							</div>
+						</div>
+					</div>
+
+					<!--机构标示-->
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-2">
+							标示*:
+						</div>
+						<div class="ui-grid-col-6">
+							<input pInputText type="text" formControlName="orgFlag" placeholder="Required" />
+						</div>
+						<div class="ui-grid-col-4">
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!billForm.controls['orgFlag'].valid&&billForm.controls['orgFlag'].dirty">
+								<i class="fa fa-close"></i> OrgFlag is required
+							</div>
+						</div>
+					</div>
+
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-2"></div>
+						<div class="ui-grid-col-6">
+							<button pButton type="submit" label="提交" [disabled]="!billForm.valid"></button>
+						</div>
+						<div class="ui-grid-col-4"></div>
+					</div>
+				</div>
+				<input pInputText type="hidden" formControlName="id" />
+			</form>
+		</p-fieldset>
+	</div>
+</div>

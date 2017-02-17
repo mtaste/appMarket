@@ -25,6 +25,10 @@ const routes = [{
 		path: 'personnel/mgUser',
 		loadChildren: 'app/admin/personnel/mg-user/mg-user.module',
 		name: 'MgUser'
+	}, {
+		path: 'mg/org',
+		loadChildren: 'app/admin/mg/org/org.module',
+		name: 'OrgRegister'
 	}]
 }];
 export default RouterModule.forChild(routes);

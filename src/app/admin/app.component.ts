@@ -81,6 +81,7 @@ export class AppComponent {
 				var tm = this.items[index];
 				this.activeItem = tm;
 				//打开模块
+				this.appCtrl.showMenuNav = false;
 				this.GoRouter(tm);
 			}
 		}

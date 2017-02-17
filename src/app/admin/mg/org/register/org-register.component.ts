@@ -16,7 +16,7 @@ import {
 	FormGroup,
 	Validators,
 	FormControl,
-	OrgRegisterService
+	MgOrgService
 } from '../../index';
 @Component({
 	selector: 'app-org-register',
@@ -41,7 +41,7 @@ export class OrgRegisterComponent implements OnInit {
 
 	constructor(
 		private confirmationService: ConfirmationService,
-		private orgRegisterService: OrgRegisterService,
+		private mgOrgService: MgOrgService,
 		private utilService: UtilService,
 		private fb: FormBuilder
 	) {};
@@ -109,7 +109,7 @@ export class OrgRegisterComponent implements OnInit {
 	};
 	//获取列表
 	LoadBillData(e) {
-		this.orgRegisterService.GetBillList().subscribe((ret) => {
+		this.mgOrgService.GetBillList().subscribe((ret) => {
 			ret = ret.data;
 			this.orgBillList = ret.rows;
 			this.billTotals = ret.total;

@@ -10,6 +10,9 @@ import {
 import {
 	OrgRegisterComponent
 } from "./register/org-register.component";
+import {
+	OrgAuthComponent
+} from "./auth/org-auth.component";
 import routes from './org.routes';
 import {
 	FieldsetModule,
@@ -41,6 +44,9 @@ import {
 		DataTableModule,
 		SharedModule
 	],
-	declarations: [OrgRegisterComponent]
+	declarations: [
+		OrgRegisterComponent,
+		OrgAuthComponent
+	]
 })
 export default class OrgRegisterModule {}

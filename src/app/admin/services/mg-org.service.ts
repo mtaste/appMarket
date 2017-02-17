@@ -13,7 +13,7 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/switchMap";
 
 @Injectable()
-export class OrgRegisterService {
+export class MgOrgService {
 
 	constructor(@Inject(STARWARS_BASE_URL) private starwarUrl,
 		private http: Http

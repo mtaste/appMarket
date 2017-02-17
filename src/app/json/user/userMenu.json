@@ -51,7 +51,7 @@
 		"id": "d3ecb27d914d427d95d4d8194b00d4ad",
 		"parentId": "e666e48e9d8b44a0a34ff136bcf2ad14",
 		"name": "模组授权",
-		"authUrl": "/admin/module/mg/customerAuth/index.html",
+		"authUrl": "/admin/mg/org/auth",
 		"authIcon": "icon-youtube-sign"
 	}, {
 		"id": "50c1cb37d53e4ea39da31b039b656364",

@@ -18,6 +18,9 @@ import {
 import {
 	UtilService
 } from "./shared/util.service";
+import {
+	RequestService
+} from "./shared/request.service";
 @NgModule({
 	declarations: [
 		AppComponent
@@ -28,12 +31,15 @@ import {
 		OtherModule.forRoot()
 	],
 	providers: [{
-		provide: API_URL,
-		useValue: `https://en.wikipedia.org/w/api.php?callback=JSONP_CALLBACK`
-	}, {
-		provide: STARWARS_BASE_URL,
-		useValue: `app/json`
-	}, UtilService],
+			provide: API_URL,
+			useValue: `https://en.wikipedia.org/w/api.php?callback=JSONP_CALLBACK`
+		}, {
+			provide: STARWARS_BASE_URL,
+			useValue: `app/json`
+		},
+		UtilService,
+		RequestService
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}

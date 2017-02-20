@@ -19,6 +19,10 @@ import {
 	ConfirmationService
 } from 'primeng/primeng';
 import appsRoutes from './app.routes';
+import {
+	AppRouterActivate,
+	AppRouterService
+} from "./app.routers.service";
 
 import {
 	AuthDefineService,
@@ -48,7 +52,9 @@ import {
 		AuthOrgService,
 		OrgDefineService,
 		MgUserService,
-		MgOrgService
+		MgOrgService,
+		AppRouterService,
+		AppRouterActivate
 	]
 })
 export default class AppModule {}

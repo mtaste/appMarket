@@ -4,9 +4,13 @@ import {
 import {
 	AppComponent
 } from './app.component';
+import {
+	AppRouterActivate
+} from "./app.routers.service";
 const routes = [{
 	path: '',
 	component: AppComponent,
+	canActivate: [AppRouterActivate],
 	children: [{
 		path: ""
 	}, {

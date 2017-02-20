@@ -15,7 +15,8 @@ import "rxjs/add/operator/switchMap";
 @Injectable()
 export class AuthDefineService {
 
-	constructor(@Inject(STARWARS_BASE_URL) private starwarUrl,
+	constructor(
+		@Inject(STARWARS_BASE_URL) private starwarUrl,
 		private http: Http
 	) {}
 	GetAuthDefineList() {

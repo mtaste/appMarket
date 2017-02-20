@@ -10,20 +10,26 @@ import {
 } from "@angular/http";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/switchMap";
+import {
+	RequestService
+} from "../shared/request.service";
 
 @Injectable()
 export class UserService {
 
 	constructor(@Inject(STARWARS_BASE_URL) private starwarUrl,
-		private http: Http
+		private http: Http,
+		private requestService: RequestService
 	) {}
 
 	getPeople() {
 		return this.http.get(`${this.starwarUrl}/user/userList.json`)
-			.map(res => res.json())
+			.map(res => res.json());
 	}
-	GetUserMenu() {
-		return this.http.get(`${this.starwarUrl}/user/userMenu.json`)
-			.map(res => res.json())
+	GetUserMenu(bk) {
+		this.requestService.Get('user/userMenu.json', bk);
+	}
+	LoginUser(data, bk) {
+		this.requestService.Post('user/login.json', data, bk);
 	}
 }

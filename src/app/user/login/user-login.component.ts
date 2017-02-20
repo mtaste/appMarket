@@ -10,7 +10,12 @@ import {
 import {
 	SelectItem
 } from 'primeng/primeng';
-
+import {
+	Router
+} from '@angular/router';
+import {
+	UserService
+} from "../user.service";
 @Component({
 	selector: 'app-user-login',
 	templateUrl: './user-login.component.html',
@@ -21,7 +26,11 @@ export class UserLoginComponent implements OnInit {
 	userform: FormGroup;
 	submitted: boolean;
 	description: string;
-	constructor(private fb: FormBuilder) {}
+	constructor(
+		private fb: FormBuilder,
+		private router: Router,
+		private userService: UserService
+	) {}
 	ngOnInit() {
 		this.userform = this.fb.group({
 			'userName': new FormControl('', Validators.required),
@@ -31,6 +40,10 @@ export class UserLoginComponent implements OnInit {
 
 	onSubmit(value: string) {
 		this.submitted = true;
+		this.userService.LoginUser(value, ret => {
+			window.localStorage["token"] = ret.data;
+			this.router.navigateByUrl('/admin');
+		});
 	}
 
 	get diagnostic() {

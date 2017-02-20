@@ -41,7 +41,7 @@ export class AppComponent {
 		private userService: UserService,
 		private utilService: UtilService) {
 		this.i18n.init(lang);
-		this.userService.GetUserMenu().subscribe((ret) => {
+		this.userService.GetUserMenu((ret) => {
 			var data = utilService.TransData(ret, "id", "parentId", "subtree");
 			this.menus = data;
 		});

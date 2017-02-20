@@ -29,7 +29,6 @@ export class AuthOrgComponent implements OnInit {
 	private selectedNodes: TreeNode[];
 	//菜单
 	private orgItems: MenuItem[];
-	private authItems: MenuItem[];
 	//提示信息
 	private msgs: Message[] = [];
 	//机构列表
@@ -98,20 +97,6 @@ export class AuthOrgComponent implements OnInit {
 				});
 			}
 		}];
-		//定义权限菜单栏
-		this.authItems = [{
-			label: '保存',
-			icon: 'fa-save',
-			command: () => {
-				// TODO
-				console.log("save");
-				this.msgs.push({
-					severity: 'success',
-					summary: '提示',
-					detail: "save"
-				});
-			}
-		}];
 		//机构列表信息
 
 	};
@@ -154,5 +139,14 @@ export class AuthOrgComponent implements OnInit {
 			detail: JSON.stringify(value)
 		});
 		this.orgList.unshift(value);
+	};
+	//保存机构权限
+	SaveAuth() {
+		console.log("save");
+		this.msgs.push({
+			severity: 'success',
+			summary: '提示',
+			detail: "save"
+		});
 	};
 }

@@ -13,6 +13,9 @@ import {
 import {
 	OrgAuthComponent
 } from "./auth/org-auth.component";
+import {
+	OrgListComponent
+} from "./list/org-list.component";
 import routes from './org.routes';
 import {
 	FieldsetModule,
@@ -46,7 +49,8 @@ import {
 	],
 	declarations: [
 		OrgRegisterComponent,
-		OrgAuthComponent
+		OrgAuthComponent,
+		OrgListComponent
 	]
 })
 export default class OrgRegisterModule {}

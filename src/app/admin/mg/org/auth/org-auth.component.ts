@@ -37,6 +37,9 @@ export class OrgAuthComponent implements OnInit {
 	//详情
 	private infoFuncs: MenuItem[];
 	private billForm: FormGroup;
+	//权限信息
+	private orgAuthTrees: TreeNode[];
+	private selectedOrgAuthNodes: TreeNode[];
 	constructor(
 		private confirmationService: ConfirmationService,
 		private mgOrgService: MgOrgService,
@@ -58,6 +61,7 @@ export class OrgAuthComponent implements OnInit {
 				this.step = 2;
 				var m = this.utilService.ClearObj(this.billForm.value);
 				this.billForm.setValue(m);
+				this.selectedOrgAuthNodes = [];
 			}
 		}, {
 			label: '修改',
@@ -67,6 +71,11 @@ export class OrgAuthComponent implements OnInit {
 				var t = this.utilService.ClearObj(this.billForm.value);
 				var m = this.utilService.CopyObj(t, this.selectedBill);
 				this.billForm.setValue(m);
+				//获取表单权限信息
+				this.mgOrgService.GetBillOrgAuth().subscribe((ret) => {
+					var t = this.utilService.GetArray(this.orgAuthTrees, "children", "id", ret);
+					this.selectedOrgAuthNodes = t;
+				});
 			}
 		}, {
 			label: '删除',
@@ -91,6 +100,11 @@ export class OrgAuthComponent implements OnInit {
 				this.step = 1;
 			}
 		}];
+		//获取机构可授权权限列表
+		this.mgOrgService.GetAuthList().subscribe((ret) => {
+			var data = this.utilService.TransData(ret, "id", "parentId", "children");
+			this.orgAuthTrees = < TreeNode[] > data;
+		});
 	}
 
 	//搜索表单
@@ -109,5 +123,9 @@ export class OrgAuthComponent implements OnInit {
 			this.billList = ret.rows;
 			this.billTotals = ret.total;
 		});
+	};
+	//保存单据数据
+	SaveOrgAuth() {
+
 	};
 }

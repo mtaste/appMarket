@@ -57,7 +57,7 @@
 		"id": "50c1cb37d53e4ea39da31b039b656364",
 		"parentId": "e666e48e9d8b44a0a34ff136bcf2ad14",
 		"name": "客户模组",
-		"authUrl": "/admin/module/mg/cusAuths/index.html",
+		"authUrl": "/admin/mg/org/list",
 		"authIcon": "icon-user-md"
 	}, {
 		"id": "67340c3f1b634546950bdb255e5982ac",

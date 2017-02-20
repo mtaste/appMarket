@@ -136,7 +136,7 @@ export class OrgDefineComponent implements OnInit {
 				this.jobForm.setValue(tm);
 			}
 		}, {
-			label: '修改',
+			label: '权限配置',
 			icon: 'fa-plus',
 			command: () => {
 				var m = this.selectedJob;
@@ -170,17 +170,6 @@ export class OrgDefineComponent implements OnInit {
 			icon: 'fa-backward',
 			command: () => {
 				this.step = 1;
-			}
-		}, {
-			label: '保存',
-			icon: 'fa-save',
-			command: () => {
-				this.msgs.push({
-					severity: 'success',
-					summary: '提示',
-					detail: "save"
-				});
-				console.log(this.jobForm.value);
 			}
 		}];
 		//定义职务表单
@@ -322,5 +311,14 @@ export class OrgDefineComponent implements OnInit {
 			var m = this.chooseUsers[k];
 			this.userList.unshift(m);
 		};
+	};
+	//保存机构权限信息
+	SaveOrgAuth() {
+		this.msgs.push({
+			severity: 'success',
+			summary: '提示',
+			detail: "save"
+		});
+		console.log(this.jobForm.value);
 	};
 }

@@ -28,7 +28,7 @@ const routes = [{
 	}, {
 		path: 'mg/org',
 		loadChildren: 'app/admin/mg/org/org.module',
-		name: 'OrgRegister'
+		name: 'MgOrg'
 	}]
 }];
 export default RouterModule.forChild(routes);

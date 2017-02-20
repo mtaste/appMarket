@@ -28,50 +28,57 @@
 		<p-fieldset legend="单据信息">
 			<!-- 功能-->
 			<p-menubar [model]="infoFuncs"></p-menubar>
-			<!--单据信息-->
-			<form [formGroup]="billForm" (ngSubmit)="onSubmit(billForm.value)">
-				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+			<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+				<!--单据信息-->
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
+					<form [formGroup]="billForm" (ngSubmit)="onSubmit(billForm.value)">
+						<input pInputText type="hidden" formControlName="id" />
+						<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+							<!--名称-->
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-2">
+									机构名称*:
+								</div>
+								<div class="ui-grid-col-6">
+									<input pInputText type="text" formControlName="name" placeholder="Required" />
+								</div>
+								<div class="ui-grid-col-4">
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!billForm.controls['name'].valid&&billForm.controls['name'].dirty">
+										<i class="fa fa-close"></i> Name is required
+									</div>
+								</div>
+							</div>
 
-					<!--名称-->
-					<div class="ui-grid-row">
-						<div class="ui-grid-col-2">
-							机构名称*:
-						</div>
-						<div class="ui-grid-col-6">
-							<input pInputText type="text" formControlName="name" placeholder="Required" />
-						</div>
-						<div class="ui-grid-col-4">
-							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!billForm.controls['name'].valid&&billForm.controls['name'].dirty">
-								<i class="fa fa-close"></i> Name is required
+							<!--机构标示-->
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-2">
+									标示*:
+								</div>
+								<div class="ui-grid-col-6">
+									<input pInputText type="text" formControlName="orgFlag" placeholder="Required" />
+								</div>
+								<div class="ui-grid-col-4">
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!billForm.controls['orgFlag'].valid&&billForm.controls['orgFlag'].dirty">
+										<i class="fa fa-close"></i> OrgFlag is required
+									</div>
+								</div>
 							</div>
 						</div>
-					</div>
-
-					<!--机构标示-->
-					<div class="ui-grid-row">
-						<div class="ui-grid-col-2">
-							标示*:
-						</div>
-						<div class="ui-grid-col-6">
-							<input pInputText type="text" formControlName="orgFlag" placeholder="Required" />
-						</div>
-						<div class="ui-grid-col-4">
-							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!billForm.controls['orgFlag'].valid&&billForm.controls['orgFlag'].dirty">
-								<i class="fa fa-close"></i> OrgFlag is required
-							</div>
-						</div>
-					</div>
-
-					<div class="ui-grid-row">
-						<div class="ui-grid-col-2"></div>
-						<div class="ui-grid-col-6">
-							<button pButton type="submit" label="提交" [disabled]="!billForm.valid"></button>
-						</div>
-						<div class="ui-grid-col-4"></div>
-					</div>
+					</form>
 				</div>
-				<input pInputText type="hidden" formControlName="id" />
-			</form>
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
+					<p-fieldset legend="权限信息">
+						<p-tree [value]="orgAuthTrees" selectionMode="checkbox" [(selection)]="selectedOrgAuthNodes">
+							<template let-node pTemplate="default">
+								<span>{{node.name}}</span>
+							</template>
+						</p-tree>
+					</p-fieldset>
+				</div>
+				<div class="ui-grid-row">
+					<button pButton type="button" label="保存" (click)="SaveOrgAuth()"></button>
+				</div>
+			</div>
 		</p-fieldset>
 	</div>
 </div>

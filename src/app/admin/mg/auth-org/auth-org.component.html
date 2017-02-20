@@ -23,14 +23,18 @@
 	<!--权限信息-->
 	<div class="ui-g-12 ui-md-6 ui-lg-6">
 		<p-fieldset legend="权限列表">
-			<!--function-->
-			<p-menubar [model]="authItems"></p-menubar>
-			<!--end-->
-			<p-tree [value]="trees" selectionMode="checkbox" [(selection)]="selectedNodes" (onNodeSelect)="NodeSelect($event)">
-				<template let-node pTemplate="default">
-					<span>{{node.name}}</span>
-				</template>
-			</p-tree>
+			<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+				<!--function-->
+				<!--end-->
+				<p-tree [value]="trees" selectionMode="checkbox" [(selection)]="selectedNodes" (onNodeSelect)="NodeSelect($event)">
+					<template let-node pTemplate="default">
+						<span>{{node.name}}</span>
+					</template>
+				</p-tree>
+				<div class="ui-grid-row">
+					<button pButton type="button" label="保存" (click)="SaveAuth()"></button>
+				</div>
+			</div>
 		</p-fieldset>
 	</div>
 	<!--  新增加机构  -->

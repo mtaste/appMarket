@@ -27,6 +27,7 @@ export class AuthDefineComponent implements OnInit {
 	private selectedNode: TreeNode;
 	private items: MenuItem[];
 	private msgs: Message[] = [];
+	private authTypes = [];
 	constructor(
 		private authDefineService: AuthDefineService,
 		private utilService: UtilService,
@@ -37,15 +38,18 @@ export class AuthDefineComponent implements OnInit {
 		//初始化权限表单
 		this.authForm = this.fb.group({
 			'id': new FormControl(''),
-			'name': new FormControl('', Validators.required),
 			'parentId': new FormControl(''),
 			'parentName': new FormControl({
 				value: "",
 				disabled: true
-			})
+			}),
+			'name': new FormControl('', Validators.required),
+			'authType': new FormControl('', Validators.required),
+			'authUrl': new FormControl('')
 		});
 		//获取定义的数据
-		this.authDefineService.GetAuthDefineList().subscribe((ret) => {
+		this.authDefineService.GetAuthDefineList((ret) => {
+			ret = ret.data;
 			var data = this.utilService.TransData(ret, "id", "parentId", "children");
 			this.trees = < TreeNode[] > data;
 		});
@@ -55,12 +59,10 @@ export class AuthDefineComponent implements OnInit {
 			icon: 'fa-plus',
 			command: () => {
 				var m = this.selectedNode;
-				this.authForm.setValue({
-					id: "",
-					name: "",
-					parentId: m["id"],
-					parentName: m["name"]
-				});
+				var tm = this.utilService.ClearObj(this.authForm.value);
+				tm["parentId"] = m["id"];
+				tm["parentName"] = m["name"];
+				this.authForm.setValue(tm);
 			}
 		}, {
 			label: '删除',
@@ -70,12 +72,26 @@ export class AuthDefineComponent implements OnInit {
 					header: '删除提示',
 					message: '您确定需要删除此记录?',
 					accept: () => {
-						console.log("Yes");
-						this.utilService.DeleteTree(this.trees, "children", "id", [this.selectedNode]);
+						this.authDefineService.DeleteData(this.selectedNode["id"], ret => {
+							this.utilService.DeleteTree(this.trees, "children", "id", [this.selectedNode]);
+						});
 					}
 				});
 			}
 		}];
+		//下拉数据
+		this.authTypes.push({
+			label: '请选择',
+			value: ''
+		});
+		this.authTypes.push({
+			label: '菜单',
+			value: '1'
+		});
+		this.authTypes.push({
+			label: '功能',
+			value: '2'
+		});
 	};
 	//select tree
 	NodeSelect(e, a) {
@@ -89,18 +105,27 @@ export class AuthDefineComponent implements OnInit {
 	submitted: boolean;
 	onSubmit(value) {
 		this.submitted = true;
-		//成功增加后,提示信息,以及动态增加
-		this.msgs.push({
-			severity: 'success',
-			summary: '提示',
-			detail: '操作成功!'
+		this.authDefineService.SaveData(value, (ret) => {
+			//成功增加后,提示信息,以及动态增加
+			this.msgs.push({
+				severity: 'success',
+				summary: '提示',
+				detail: '操作成功!'
+			});
+			if(!value["id"]) {
+				value["id"] = ret.data;
+				var m = this.utilService.CopyObj(value, value);
+				!this.selectedNode.children && (this.selectedNode.children = []);
+				this.selectedNode.children.push(m);
+			} else {
+				for(var k in value) {
+					this.selectedNode[k] = value[k];
+				}
+			};
 		});
-		if(value["id"]) return;
-		var m = this.utilService.CopyObj(value, value);
-		!this.selectedNode.children && (this.selectedNode.children = []);
-		this.selectedNode.children.push(m);
+
 	}
 	get display() {
-		return JSON.stringify(this.authForm.value);
+		return ""; //JSON.stringify(this.authForm.value);
 	}
 }

@@ -45,15 +45,25 @@ export class RequestService {
 		let param = new URLSearchParams();
 		param.append('param', JSON.stringify(data));
 		let t_url = `${this.starwarUrl}/` + url;
+		let headers = new Headers();
+		var token = window.localStorage["token"];
+		token && (headers.append('token', token));
 		this.http
-			.post(t_url, param)
+			.post(t_url, param, {
+				headers: headers
+			})
 			.map(res => res.json())
 			.subscribe(
 				ret => {
-					if(ret && ret.code && ret.code <= -401) {
-						this.router.navigateByUrl('/user/login');
-					};
-					bk && bk(ret);
+					if(ret) {
+						if(ret.code && ret.code <= -401) {
+							this.router.navigateByUrl('/user/login');
+						} else if(ret.code < 0) {
+							alert(ret.msg);
+						} else {
+							bk && bk(ret);
+						}
+					}
 				}
 			);
 	}

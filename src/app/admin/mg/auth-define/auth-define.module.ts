@@ -18,7 +18,8 @@ import {
 	ButtonModule,
 	MenubarModule,
 	ConfirmDialogModule,
-	GrowlModule
+	GrowlModule,
+	DropdownModule
 } from 'primeng/primeng';
 @NgModule({
 	imports: [
@@ -31,7 +32,8 @@ import {
 		ButtonModule,
 		MenubarModule,
 		ConfirmDialogModule,
-		GrowlModule
+		GrowlModule,
+		DropdownModule
 	],
 	declarations: [AuthDefineComponent]
 })

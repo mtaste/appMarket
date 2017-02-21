@@ -8,6 +8,9 @@ import {
 	FormControl
 } from '../../shared/index';
 import {
+	Md5
+} from "ts-md5/dist/md5";
+import {
 	SelectItem
 } from 'primeng/primeng';
 import {
@@ -38,9 +41,15 @@ export class UserLoginComponent implements OnInit {
 		});
 	}
 
-	onSubmit(value: string) {
+	onSubmit(obj) {
 		this.submitted = true;
-		this.userService.LoginUser(value, ret => {
+		var pw = obj["passWord"];
+		var p = Md5.hashStr(pw).toString();
+		var param = {
+			userName: obj.userName.toString(),
+			passWord: p
+		};
+		this.userService.LoginUser(param, ret => {
 			window.localStorage["token"] = ret.data;
 			this.router.navigateByUrl('/admin');
 		});

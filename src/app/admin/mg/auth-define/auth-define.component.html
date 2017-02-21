@@ -56,22 +56,56 @@
 
 					<div class="ui-grid-row">
 						<div class="ui-grid-col-2">
+							标示:
+						</div>
+						<div class="ui-grid-col-6">
+							<input pInputText type="text" formControlName="authValue" placeholder="Required" />
+						</div>
+						<div class="ui-grid-col-4">
+
+						</div>
+					</div>
+
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-2">
+							图标:
+						</div>
+						<div class="ui-grid-col-6">
+							<input pInputText type="text" formControlName="authIcon" placeholder="Required" />
+						</div>
+						<div class="ui-grid-col-4">
+
+						</div>
+					</div>
+
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-2">
 							访问地址:
 						</div>
 						<div class="ui-grid-col-6">
 							<input pInputText type="text" formControlName="authUrl" placeholder="Required" />
 						</div>
 						<div class="ui-grid-col-4">
-							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!authForm.controls['authUrl'].valid&&authForm.controls['authUrl'].dirty">
-								<i class="fa fa-close"></i>
-							</div>
+
+						</div>
+					</div>
+
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-2">
+							序号:
+						</div>
+						<div class="ui-grid-col-6">
+							<input pInputText type="text" formControlName="seq" placeholder="Required" />
+						</div>
+						<div class="ui-grid-col-4">
+
 						</div>
 					</div>
 
 					<div class="ui-grid-row">
 						<div class="ui-grid-col-2"></div>
 						<div class="ui-grid-col-6">
-							<button pButton type="submit" label="提交" [disabled]="!authForm.valid"></button>
+							<button pButton type="submit" label="{{saveFunc.name}}" [disabled]="!authForm.valid"></button>
 						</div>
 						<div class="ui-grid-col-4"></div>
 					</div>

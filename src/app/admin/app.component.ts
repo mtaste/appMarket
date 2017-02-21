@@ -68,7 +68,8 @@ export class AppComponent {
 				m.command = (ret) => {
 					//点击关闭按钮
 					var t = ret.originalEvent;
-					if(t.srcElement.className.indexOf("ui-menuitem-icon") >= 0) {
+					var oj = t.target || t.srcElement;
+					if(oj.className.indexOf("ui-menuitem-icon") >= 0) {
 						this.RemoveTab(ret.item);
 					} else {
 						ret && ret.item && this.MenusClick(ret.item);
@@ -102,6 +103,7 @@ export class AppComponent {
 	};
 	//调转到对应的路由
 	GoRouter(m) {
-		this.router.navigateByUrl(m.authUrl);
+		var u = m.authUrl + "?id=" + m.id;
+		this.router.navigateByUrl(u);
 	};
 }

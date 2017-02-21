@@ -3,6 +3,9 @@ import {
 	OnInit
 } from '@angular/core';
 import {
+	ActivatedRoute
+} from '@angular/router';
+import {
 	TreeNode,
 	MenuItem,
 	ConfirmationService,
@@ -14,7 +17,8 @@ import {
 	FormBuilder,
 	FormGroup,
 	Validators,
-	FormControl
+	FormControl,
+	AuthService
 } from '../index';
 
 @Component({
@@ -23,17 +27,58 @@ import {
 	styleUrls: ['./auth-define.component.css']
 })
 export class AuthDefineComponent implements OnInit {
+	private saveFunc = {};
 	private trees: TreeNode[];
 	private selectedNode: TreeNode;
-	private items: MenuItem[];
+	private items: MenuItem[] = [];
 	private msgs: Message[] = [];
 	private authTypes = [];
 	constructor(
 		private authDefineService: AuthDefineService,
 		private utilService: UtilService,
 		private fb: FormBuilder,
-		private confirmationService: ConfirmationService
-	) {};
+		private confirmationService: ConfirmationService,
+		private router: ActivatedRoute,
+		private authService: AuthService
+	) {
+		var menus = {
+			add: (auth) => {
+				var m = this.selectedNode;
+				var tm = this.utilService.ClearObj(this.authForm.value);
+				tm["parentId"] = m["id"];
+				tm["parentName"] = m["name"];
+				this.authForm.setValue(tm);
+			},
+			remove: (auth) => {
+				this.confirmationService.confirm({
+					header: '删除提示',
+					message: '您确定需要删除此记录?',
+					accept: () => {
+						this.authDefineService.DeleteData(
+							auth.item.authUrl,
+							this.selectedNode["id"],
+							ret => {
+								this.utilService.DeleteTree(this.trees, "children", "id", [this.selectedNode]);
+							});
+					}
+				});
+			}
+		};
+		//菜单数据
+		this.router.queryParams.subscribe((params) => {
+			var id = params["id"];
+			this.authService.GetAuthFunc(id, (ret) => {
+				this.saveFunc = ret["mod"];
+				for(var k in ret) {
+					if(menus[k]) {
+						var m = ret[k];
+						m.command = menus[k];
+						this.items.push(m);
+					}
+				}
+			});
+		});
+	};
 	ngOnInit() {
 		//初始化权限表单
 		this.authForm = this.fb.group({
@@ -45,7 +90,10 @@ export class AuthDefineComponent implements OnInit {
 			}),
 			'name': new FormControl('', Validators.required),
 			'authType': new FormControl('', Validators.required),
-			'authUrl': new FormControl('')
+			'authUrl': new FormControl(''),
+			'authValue': new FormControl(''),
+			'authIcon': new FormControl(''),
+			'seq': new FormControl('')
 		});
 		//获取定义的数据
 		this.authDefineService.GetAuthDefineList((ret) => {
@@ -53,32 +101,6 @@ export class AuthDefineComponent implements OnInit {
 			var data = this.utilService.TransData(ret, "id", "parentId", "children");
 			this.trees = < TreeNode[] > data;
 		});
-		//定义菜单栏
-		this.items = [{
-			label: '新增',
-			icon: 'fa-plus',
-			command: () => {
-				var m = this.selectedNode;
-				var tm = this.utilService.ClearObj(this.authForm.value);
-				tm["parentId"] = m["id"];
-				tm["parentName"] = m["name"];
-				this.authForm.setValue(tm);
-			}
-		}, {
-			label: '删除',
-			icon: 'fa-remove',
-			command: () => {
-				this.confirmationService.confirm({
-					header: '删除提示',
-					message: '您确定需要删除此记录?',
-					accept: () => {
-						this.authDefineService.DeleteData(this.selectedNode["id"], ret => {
-							this.utilService.DeleteTree(this.trees, "children", "id", [this.selectedNode]);
-						});
-					}
-				});
-			}
-		}];
 		//下拉数据
 		this.authTypes.push({
 			label: '请选择',
@@ -102,10 +124,8 @@ export class AuthDefineComponent implements OnInit {
 	};
 	//Form
 	authForm: FormGroup;
-	submitted: boolean;
 	onSubmit(value) {
-		this.submitted = true;
-		this.authDefineService.SaveData(value, (ret) => {
+		this.authDefineService.SaveData(this.saveFunc["authUrl"], value, (ret) => {
 			//成功增加后,提示信息,以及动态增加
 			this.msgs.push({
 				severity: 'success',

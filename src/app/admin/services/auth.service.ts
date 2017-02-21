@@ -15,24 +15,25 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/switchMap";
 
 @Injectable()
-export class AuthDefineService {
+export class AuthService {
 
 	constructor(
 		@Inject(STARWARS_BASE_URL) private starwarUrl,
 		private http: Http,
 		private requestService: RequestService
 	) {};
-	GetAuthDefineList(bk) {
-		this.requestService.Get('auth/define/list.json', bk);
-	};
-	//保存数据
-	SaveData(url, param, bk) {
-		this.requestService.Post(url, param, bk);
-	};
-	//删除数据
-	DeleteData(ul, id, bk) {
-		this.requestService.Post(ul, {
+	GetAuthFunc(id, bk) {
+		this.requestService.Post('user/auth/funcs.json', {
 			id: id
-		}, bk);
+		}, (ret) => {
+			var data = ret.data;
+			var r = {};
+			for(var k in data) {
+				data[k].label = data[k].name;
+				data[k].icon = data[k].authIcon;
+				r[data[k].authValue] = data[k];
+			}
+			bk && bk(r);
+		});
 	};
 }

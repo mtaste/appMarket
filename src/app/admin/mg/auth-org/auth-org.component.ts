@@ -3,6 +3,9 @@ import {
 	OnInit
 } from '@angular/core';
 import {
+	ActivatedRoute
+} from '@angular/router';
+import {
 	TreeNode,
 	MenuItem,
 	ConfirmationService,
@@ -15,7 +18,9 @@ import {
 	FormBuilder,
 	FormGroup,
 	Validators,
-	FormControl
+	FormControl,
+	AuthService,
+	CrudService
 } from '../index';
 
 @Component({
@@ -28,7 +33,7 @@ export class AuthOrgComponent implements OnInit {
 	private trees: TreeNode[];
 	private selectedNodes: TreeNode[];
 	//菜单
-	private orgItems: MenuItem[];
+	private orgItems: MenuItem[] = [];
 	//提示信息
 	private msgs: Message[] = [];
 	//机构列表
@@ -37,13 +42,70 @@ export class AuthOrgComponent implements OnInit {
 	private selectedOrg = {};
 	//机构信息
 	private orgForm: FormGroup;
+	//菜单功能临时变量
+	private t_menu = {};
 
 	constructor(
 		private authOrgService: AuthOrgService,
 		private utilService: UtilService,
 		private fb: FormBuilder,
-		private confirmationService: ConfirmationService
-	) {};
+		private confirmationService: ConfirmationService,
+		private router: ActivatedRoute,
+		private authService: AuthService,
+		private crudService: CrudService
+	) {
+		var menus = {
+			add: (auth) => {
+				this.t_menu = auth.item;
+				this.display = true;
+				this.orgForm.setValue({
+					id: "",
+					name: "",
+					flag: ""
+				});
+			},
+			mod: (auth) => {
+				this.t_menu = auth.item;
+				this.display = true;
+				var m = this.utilService.CopyObj(this.orgForm.value, this.selectedOrg);
+				this.orgForm.setValue(m);
+			},
+			remove: (auth) => {
+				this.t_menu = auth.item;
+				this.confirmationService.confirm({
+					header: '删除提示',
+					message: '您确定需要删除此记录?',
+					accept: () => {
+						var id = this.selectedOrg["id"];
+						this.crudService.DeleteData(
+							auth.item.authUrl, id,
+							ret => {
+								this.msgs.push({
+									severity: 'success',
+									summary: '提示',
+									detail: "del"
+								});
+								var index = this.utilService.GetArrayIndex(this.orgList, "id", id);
+								this.orgList.splice(index, 1);
+							});
+					}
+				});
+			}
+		};
+		//菜单数据
+		this.router.queryParams.subscribe((params) => {
+			var id = params["id"];
+			this.authService.GetAuthFunc(id, (ret) => {
+				for(var k in ret) {
+					if(menus[k]) {
+						var m = ret[k];
+						m.command = menus[k];
+						this.orgItems.push(m);
+					}
+				}
+			});
+		});
+	};
 	ngOnInit() {
 		//定义提交表单
 		this.orgForm = this.fb.group({
@@ -52,53 +114,11 @@ export class AuthOrgComponent implements OnInit {
 			'flag': new FormControl('', Validators.required)
 		});
 		//获取定义的数据
-		this.authOrgService.GetAuthOrgList().subscribe((ret) => {
+		this.authOrgService.GetAuthOrgList((ret) => {
+			ret = ret.data;
 			var data = this.utilService.TransData(ret, "id", "parentId", "children");
 			this.trees = < TreeNode[] > data;
-
 		});
-		//定义菜单栏
-		this.orgItems = [{
-			label: '新增',
-			icon: 'fa-plus',
-			command: () => {
-				this.display = true;
-				this.orgForm.setValue({
-					id: "",
-					name: "",
-					flag: ""
-				});
-			}
-		}, {
-			label: '修改',
-			icon: 'fa-plus',
-			command: () => {
-				this.display = true;
-				var m = this.utilService.CopyObj(this.orgForm.value, this.selectedOrg);
-				this.orgForm.setValue(m);
-			}
-		}, {
-			label: '删除',
-			icon: 'fa-remove',
-			command: () => {
-				this.confirmationService.confirm({
-					header: '删除提示',
-					message: '您确定需要删除此记录?',
-					accept: () => {
-						//TODO
-						console.log(this.selectedOrg);
-						console.log("Yes");
-						this.msgs.push({
-							severity: 'success',
-							summary: '提示',
-							detail: "del"
-						});
-					}
-				});
-			}
-		}];
-		//机构列表信息
-
 	};
 	//select tree
 	NodeSelect(e) {
@@ -106,7 +126,12 @@ export class AuthOrgComponent implements OnInit {
 	};
 	//获取机构信息
 	LoadOrgListData(e) {
-		this.authOrgService.GetOrgList().subscribe((ret) => {
+		var page = {
+			page: e.first / e.rows + 1,
+			rows: e.rows
+		};
+		this.authOrgService.GetOrgList(page, (ret) => {
+			ret = ret.data;
 			this.totalRecords = ret.total;
 			this.orgList = ret.rows;
 		});
@@ -132,13 +157,23 @@ export class AuthOrgComponent implements OnInit {
 	//新增
 	private display = false;
 	onSubmit(value) {
-		this.display = false;
-		this.msgs.push({
-			severity: 'success',
-			summary: '提示',
-			detail: JSON.stringify(value)
+		//保存数据
+		this.crudService.SaveData(this.t_menu["authUrl"], value, (ret) => {
+			this.display = false;
+			this.msgs.push({
+				severity: 'success',
+				summary: '提示',
+				detail: JSON.stringify(value)
+			});
+			if(!value["id"]) {
+				value["id"] = ret.data;
+				this.orgList.unshift(value);
+			} else {
+				for(var k in value) {
+					this.selectedOrg[k] = value[k];
+				}
+			}
 		});
-		this.orgList.unshift(value);
 	};
 	//保存机构权限
 	SaveAuth() {

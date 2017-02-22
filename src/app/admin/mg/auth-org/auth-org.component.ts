@@ -44,6 +44,8 @@ export class AuthOrgComponent implements OnInit {
 	private orgForm: FormGroup;
 	//菜单功能临时变量
 	private t_menu = {};
+	//权限保存
+	private saveFunc = {};
 
 	constructor(
 		private authOrgService: AuthOrgService,
@@ -83,10 +85,12 @@ export class AuthOrgComponent implements OnInit {
 								this.msgs.push({
 									severity: 'success',
 									summary: '提示',
-									detail: "del"
+									detail: "删除成功"
 								});
 								var index = this.utilService.GetArrayIndex(this.orgList, "id", id);
 								this.orgList.splice(index, 1);
+								this.selectedNodes = [];
+								this.selectedOrg = {};
 							});
 					}
 				});
@@ -96,6 +100,7 @@ export class AuthOrgComponent implements OnInit {
 		this.router.queryParams.subscribe((params) => {
 			var id = params["id"];
 			this.authService.GetAuthFunc(id, (ret) => {
+				this.saveFunc = ret.save;
 				for(var k in ret) {
 					if(menus[k]) {
 						var m = ret[k];
@@ -122,7 +127,7 @@ export class AuthOrgComponent implements OnInit {
 	};
 	//select tree
 	NodeSelect(e) {
-		console.log(this.selectedNodes);
+
 	};
 	//获取机构信息
 	LoadOrgListData(e) {
@@ -140,7 +145,7 @@ export class AuthOrgComponent implements OnInit {
 	OrgClick(m) {
 		this.selectedNodes = [];
 		this.selectedOrg = m;
-		this.authOrgService.GetOrgAuth().subscribe((ret) => {
+		this.authOrgService.GetOrgAuth(m['id'], (ret) => {
 			var t = this.utilService.GetArray(this.trees, "children", "id", ret);
 			this.selectedNodes = t;
 		});
@@ -163,7 +168,7 @@ export class AuthOrgComponent implements OnInit {
 			this.msgs.push({
 				severity: 'success',
 				summary: '提示',
-				detail: JSON.stringify(value)
+				detail: "新增机构成功"
 			});
 			if(!value["id"]) {
 				value["id"] = ret.data;
@@ -177,11 +182,19 @@ export class AuthOrgComponent implements OnInit {
 	};
 	//保存机构权限
 	SaveAuth() {
-		console.log("save");
-		this.msgs.push({
-			severity: 'success',
-			summary: '提示',
-			detail: "save"
+		if(!this.selectedOrg['id']) return;
+		var ids = this.utilService.GetIds(this.selectedNodes, "id");
+		var param = {
+			orgId: this.selectedOrg['id'],
+			authIds: ids
+		};
+		var ul = this.saveFunc["authUrl"];
+		this.crudService.SaveData(ul, param, (ret) => {
+			this.msgs.push({
+				severity: 'success',
+				summary: '提示',
+				detail: "权限保存成功"
+			});
 		});
 	};
 }

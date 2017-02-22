@@ -27,8 +27,21 @@ export class AuthOrgService {
 	GetOrgList(param, bk) {
 		this.requestService.Post('org/list.json', param, bk);
 	};
-	GetOrgAuth() {
-		return this.http.get(`${this.starwarUrl}/org/auth.json`)
-			.map(res => res.json());
+	GetOrgAuth(id, bk) {
+		this.requestService.Post('org/auth.json', {
+			orgId: id
+		}, (ret) => {
+			var data = ret.data;
+			var b = [];
+			for(var k in data) {
+				b.push({
+					id: data[k]['authId']
+				});
+			};
+			bk && bk(b);
+		});
+	};
+	SaveOrgAuth(ul, param, bk) {
+		this.requestService.Post('org/list.json', param, bk);
 	};
 }

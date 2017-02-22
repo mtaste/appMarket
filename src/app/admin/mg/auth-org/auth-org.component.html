@@ -31,8 +31,9 @@
 						<span>{{node.name}}</span>
 					</template>
 				</p-tree>
-				<div class="ui-grid-row">
-					<button pButton type="button" label="保存" (click)="SaveAuth()"></button>
+				<div class="ui-grid-row"></div>
+				<div class="ui-grid-row" *ngIf="saveFunc.name">
+					<button pButton type="button" label="{{saveFunc.name}}" (click)="SaveAuth()"></button>
 				</div>
 			</div>
 		</p-fieldset>

@@ -42,7 +42,10 @@ export class UtilService {
 				data[i].expanded = true;
 				ret.push(data[i]);
 			} else {
-				data[i].expanded = false;
+				data[i].expanded = true;
+			}
+			if(data[i].id == "0") {
+				data[i].expanded = true;
 			}
 			if(children) {
 				this.getArrayList(children, chindrenStr, name, value, ret);
@@ -58,8 +61,12 @@ export class UtilService {
 			children = chindrenStr,
 			i = 0,
 			j = 0,
-			len = a.length;
+			len = 0;
+		a && a.length && (len = a.length);
 		for(; i < len; i++) {
+			if(a[i].id == "0") {
+				a[i].expanded = true;
+			}
 			hash[a[i][id]] = a[i];
 		}
 		for(; j < len; j++) {
@@ -99,5 +106,13 @@ export class UtilService {
 			m[k] = "";
 		}
 		return m;
+	};
+	//获取IDS 
+	GetIds(rows, field) {
+		var rets = [];
+		for(var k in rows) {
+			rets.push(rows[k][field]);
+		}
+		return rets.join(",");
 	};
 }

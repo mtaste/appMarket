@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-02-21 17:51:01
+Date: 2017-02-22 11:52:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,6 +46,7 @@ INSERT INTO `sys_auth` VALUES ('3c856ca262be4c09afd1aa66f372039d', '39b352a998a3
 INSERT INTO `sys_auth` VALUES ('479852e16c834956b8b6c3b801ffd11c', 'f70012acb9f940bbb583fcd63e9af5ab', '组织管理', '1', '/admin/sys/orgDefine', null, null, null, null, null, null, null);
 INSERT INTO `sys_auth` VALUES ('50c1cb37d53e4ea39da31b039b656364', 'e666e48e9d8b44a0a34ff136bcf2ad14', '客户模组', '1', '/admin/mg/org/list', null, null, null, null, null, null, null);
 INSERT INTO `sys_auth` VALUES ('67340c3f1b634546950bdb255e5982ac', 'a15ae14869f04822849571fb6ada622b', '用户管理', '1', '/admin/personnel/mgUser', null, null, null, null, null, null, null);
+INSERT INTO `sys_auth` VALUES ('67d5e55ab8cb4d5b93220645e6e85c99', '39b352a998a3499183295152e7e7e541', '权限保存', '2', 'org/auth/save', 'fa-save', 'save', null, null, null, null, '4');
 INSERT INTO `sys_auth` VALUES ('6db97da52d0d494fa8cc81c59329b179', '2', '删除', '2', 'auth/define/remove.do', 'fa-remove', 'remove', null, null, null, null, '3');
 INSERT INTO `sys_auth` VALUES ('76737c29c36a4d449b50a58137504355', 'e666e48e9d8b44a0a34ff136bcf2ad14', '机构登记', '1', '/admin/mg/org/register', null, null, null, null, null, null, null);
 INSERT INTO `sys_auth` VALUES ('a15ae14869f04822849571fb6ada622b', '0', '人事管理', '1', null, null, null, null, null, null, null, null);
@@ -90,16 +91,26 @@ CREATE TABLE `sys_org` (
 -- ----------------------------
 -- Records of sys_org
 -- ----------------------------
-INSERT INTO `sys_org` VALUES ('1fdf8a61e0d2493daf0267a717b83ffe', '321312', '321');
-INSERT INTO `sys_org` VALUES ('32344119efd748769309de4fe298bdfe', '32132', '312');
-INSERT INTO `sys_org` VALUES ('86db7cc9f32541a5b51022fb67b44ae1', 'test', 'te');
-INSERT INTO `sys_org` VALUES ('889b91c3035e497883cfdc2348d61aad', 'test', 'tes');
-INSERT INTO `sys_org` VALUES ('8a0b95b92db84ef79ff09faa09f980f9', '3213', '231');
-INSERT INTO `sys_org` VALUES ('b94c25c036c2421d9ef381eaf5464877', '32132', '312');
-INSERT INTO `sys_org` VALUES ('be74b7c94e154c95829b470812c3bf15', 'testfdsa', 'tesa');
-INSERT INTO `sys_org` VALUES ('c5494ddd9d194a34b39086977b623582', '321', '32');
-INSERT INTO `sys_org` VALUES ('d4c1e104993d4f70ba2963ca8b434d88', 'Test', 'Test');
-INSERT INTO `sys_org` VALUES ('daa190447f864e819d5f9d706f5902c4', '44312', '321');
+INSERT INTO `sys_org` VALUES ('e2ff5e22cfe94054932ffca05e145934', '开发公司', 'dev');
+
+-- ----------------------------
+-- Table structure for `sys_org_auth`
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_org_auth`;
+CREATE TABLE `sys_org_auth` (
+  `id` varchar(36) NOT NULL,
+  `org_id` varchar(36) DEFAULT NULL,
+  `auth_id` varchar(36) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of sys_org_auth
+-- ----------------------------
+INSERT INTO `sys_org_auth` VALUES ('bd042495-f8b1-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '02a18777e6774e5482488297fcf26653');
+INSERT INTO `sys_org_auth` VALUES ('bd042814-f8b1-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '2');
+INSERT INTO `sys_org_auth` VALUES ('bd042a6b-f8b1-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '6db97da52d0d494fa8cc81c59329b179');
+INSERT INTO `sys_org_auth` VALUES ('bd042baf-f8b1-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'ad9d8b44b586456180a751fb87db8db2');
 
 -- ----------------------------
 -- Table structure for `sys_user`

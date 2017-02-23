@@ -15,7 +15,7 @@
 		</p-fieldset>
 	</div>
 	<!--  新增加部门 -->
-	<p-dialog header="部门信息" [(visible)]="display" modal="modal" width="425" responsive="true">
+	<p-dialog header="部门信息" [(visible)]="display" modal="modal" width="360" responsive="true">
 		<form [formGroup]="orgForm" (ngSubmit)="onSubmit(orgForm.value)">
 			<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
 				<input pInputText type="hidden" formControlName="id" />
@@ -57,7 +57,7 @@
 					<input pInputText type="text" [(ngModel)]="jobKeyword" placeholder="关键字" />
 					<button pButton type="button" (click)="SearchJob()" icon="fa-search"></button>
 				</div>
-				<p-dataList [value]="jobList" [paginator]="true" [rows]="9" [lazy]="true" (onLazyLoad)="LoadJobListData($event)" [totalRecords]="JobTotal">
+				<p-dataList [value]="jobList" [paginator]="true" [rows]="5" [lazy]="true" (onLazyLoad)="LoadJobListData($event)" [totalRecords]="jobTotal">
 					<template let-e pTemplate="item">
 						<div class="ui-grid ui-grid-responsive ui-fluid jobList" (click)="JobClick(e)" [ngClass]="{'selected':e.id==selectedJob.id}">
 							{{e.name}}
@@ -85,7 +85,7 @@
 		</p-fieldset>
 	</div>
 	<!--选择用户-->
-	<p-dialog header="选择用户" [(visible)]="userDisplay" modal="modal" width="380" responsive="true">
+	<p-dialog header="选择用户" [(visible)]="userDisplay" modal="modal" width="360" responsive="true">
 		<div class="ui-listbox-filter-container">
 			<input pInputText type="text" [(ngModel)]="userKeyword" placeholder="关键字" />
 			<button pButton type="button" (click)="SearchChooseUser()" icon="fa-search"></button>
@@ -113,13 +113,13 @@
 					<form [formGroup]="jobForm">
 						<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
 							<input pInputText type="hidden" formControlName="id" />
-							<input pInputText type="hidden" formControlName="orgId" />
+							<input pInputText type="hidden" formControlName="deptId" />
 							<div class="ui-grid-row">
 								<div class="ui-grid-col-4">
 									上级部门 *:
 								</div>
 								<div class="ui-grid-col-8">
-									<input pInputText type="text" formControlName="orgName" />
+									<input pInputText type="text" formControlName="deptName" />
 								</div>
 							</div>
 							<div class="ui-grid-row">

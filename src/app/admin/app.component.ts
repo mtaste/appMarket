@@ -27,7 +27,7 @@ import {
 export class AppComponent {
 	//Tabs
 	private items: MenuItem[];
-	private activeItem: MenuItem;
+	private activeItem: MenuItem = {};
 	//控制是否显示菜单
 	private appCtrl = {
 		showTopNav: false,

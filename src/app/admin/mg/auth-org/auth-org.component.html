@@ -39,7 +39,7 @@
 		</p-fieldset>
 	</div>
 	<!--  新增加机构  -->
-	<p-dialog header="新增机构" [(visible)]="display" modal="modal" width="425" responsive="true">
+	<p-dialog header="新增机构" [(visible)]="display" modal="modal" width="360" responsive="true">
 		<form [formGroup]="orgForm" (ngSubmit)="onSubmit(orgForm.value)">
 			<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
 				<input pInputText type="hidden" formControlName="id" />

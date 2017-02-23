@@ -5542,3 +5542,7 @@ body .ui-widget-header {
 .is-hidden {
 	display: none!important
 }
+
+.sidenav-search {
+	text-align: center;
+}

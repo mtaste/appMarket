@@ -3,6 +3,9 @@ import {
 	OnInit
 } from '@angular/core';
 import {
+	ActivatedRoute
+} from '@angular/router';
+import {
 	TreeNode,
 	MenuItem,
 	ConfirmationService,
@@ -16,7 +19,9 @@ import {
 	FormGroup,
 	Validators,
 	FormControl,
-	OrgDefineService
+	OrgDefineService,
+	AuthService,
+	CrudService
 } from '../index';
 
 @Component({
@@ -25,8 +30,10 @@ import {
 	styleUrls: ['./org-define.component.css']
 })
 export class OrgDefineComponent implements OnInit {
+	//菜单功能临时变量
+	private t_menu = {};
 	private step = 1;
-	private depFuns: MenuItem[];
+	private depFuns: MenuItem[] = [];
 	private depTrees: TreeNode[];
 	private depNode: TreeNode;
 	//提示信息
@@ -34,7 +41,7 @@ export class OrgDefineComponent implements OnInit {
 	//部门信息
 	private orgForm: FormGroup;
 	//职务列表
-	private jobFuns: MenuItem[];
+	private jobFuns: MenuItem[] = [];
 	private jobTotal = 10;
 	private jobList = [];
 	private selectedJob = {};
@@ -58,24 +65,16 @@ export class OrgDefineComponent implements OnInit {
 		private utilService: UtilService,
 		private fb: FormBuilder,
 		private confirmationService: ConfirmationService,
-		private orgDefineService: OrgDefineService) {};
-	ngOnInit() {
-		//定义部门表单
-		this.orgForm = this.fb.group({
-			'id': new FormControl(''),
-			'name': new FormControl('', Validators.required),
-			'parentId': new FormControl(''),
-			'parentName': new FormControl({
-				value: "",
-				disabled: true
-			})
-		});
-		//定义部门菜单栏
-		this.depFuns = [{
-			label: '新增',
-			icon: 'fa-plus',
-			command: () => {
-				//TODO;
+		private orgDefineService: OrgDefineService,
+		private authService: AuthService,
+		private router: ActivatedRoute,
+		private crudService: CrudService
+	) {
+
+		//定义部门按钮功能
+		var menus = {
+			add: (auth) => {
+				this.t_menu = auth.item;
 				this.display = true;
 				var m = this.depNode;
 				if(!m) {
@@ -92,53 +91,49 @@ export class OrgDefineComponent implements OnInit {
 					summary: '提示',
 					detail: "plus"
 				});
-			}
-		}, {
-			label: '修改',
-			icon: 'fa-plus',
-			command: () => {
+			},
+			mod: (auth) => {
 				this.display = true;
+				this.t_menu = auth.item;
 				var m = this.utilService.CopyObj(this.orgForm.value, this.depNode);
 				var parent = this.depNode.parent;
 				parent && (m["parentName"] = parent["name"]) && (this.orgForm.setValue(m));
-			}
-		}, {
-			label: '删除',
-			icon: 'fa-remove',
-			command: () => {
+			},
+			remove: (auth) => {
+				this.t_menu = auth.item;
 				this.confirmationService.confirm({
 					header: '删除提示',
 					message: '您确定需要删除此记录?',
 					accept: () => {
-						console.log("Yes");
-						this.utilService.DeleteTree(this.depTrees, "children", "id", [this.depNode]);
+						var id = this.depNode["id"];
+						this.crudService.DeleteData(
+							auth.item.authUrl, id,
+							ret => {
+								this.msgs.push({
+									severity: 'success',
+									summary: '提示',
+									detail: "删除成功"
+								});
+								this.utilService.DeleteTree(this.depTrees, "children", "id", [this.depNode]);
+								this.jobList = [];
+							});
 					}
 				});
 			}
-		}];
-		//获取部门信息
-		this.orgDefineService.GetOrgDefine().subscribe((ret) => {
-			ret = ret.data;
-			var data = this.utilService.TransData(ret, "id", "parentId", "children");
-			this.depTrees = < TreeNode[] > data;
-		});
-		//定义部门按钮功能
-		//定义职务菜单栏
-		this.jobFuns = [{
-			label: '新增',
-			icon: 'fa-plus',
-			command: () => {
+		};
+		//定义职务功能
+		var jobMenu = {
+			addRole: (auth) => {
+				this.t_menu = auth.item;
 				this.step = 2;
 				//给职务赋值
 				var temp = this.depNode;
 				var tm = this.utilService.ClearObj(this.jobForm.value);
-				temp && (tm["orgId"] = temp["id"]) && (tm["orgName"] = temp["name"]);
+				temp && (tm["deptId"] = temp["id"]) && (tm["deptName"] = temp["name"]);
 				this.jobForm.setValue(tm);
-			}
-		}, {
-			label: '权限配置',
-			icon: 'fa-plus',
-			command: () => {
+			},
+			modRole: (auth) => {
+				this.t_menu = auth.item;
 				var m = this.selectedJob;
 				if(!m["id"]) return;
 				this.step = 2;
@@ -146,24 +141,69 @@ export class OrgDefineComponent implements OnInit {
 				var temp = this.depNode;
 				var tm = this.utilService.ClearObj(this.jobForm.value);
 				m && (tm["id"] = m["id"]) && (tm["name"] = m["name"]);
-				temp && (tm["orgId"] = temp["id"]) && (tm["orgName"] = temp["name"]);
+				temp && (tm["deptId"] = temp["id"]) && (tm["deptName"] = temp["name"]);
 				this.jobForm.setValue(tm);
-			}
-		}, {
-			label: '删除',
-			icon: 'fa-remove',
-			command: () => {
+			},
+			removeRole: (auth) => {
+				this.t_menu = auth.item;
 				this.confirmationService.confirm({
 					header: '删除提示',
 					message: '您确定需要删除此记录?',
 					accept: () => {
-						var m = this.selectedJob;
-						var index = this.utilService.GetArrayIndex(this.jobList, "id", m["id"]);
-						this.jobList.splice(index, 1);
+						var id = this.selectedJob["id"];
+						this.crudService.DeleteData(
+							auth.item.authUrl, id,
+							ret => {
+								this.msgs.push({
+									severity: 'success',
+									summary: '提示',
+									detail: "删除成功"
+								});
+								var index = this.utilService.GetArrayIndex(this.jobList, "id", id);
+								this.jobList.splice(index, 1);
+							});
 					}
 				});
 			}
-		}];
+		};
+		//菜单数据
+		this.router.queryParams.subscribe((params) => {
+			var id = params["id"];
+			this.authService.GetAuthFunc(id, (ret) => {
+				for(var k in menus) {
+					if(ret[k]) {
+						var m = ret[k];
+						m.command = menus[k];
+						this.depFuns.push(m);
+					}
+				}
+				for(var k in jobMenu) {
+					if(ret[k]) {
+						var m = ret[k];
+						m.command = jobMenu[k];
+						this.jobFuns.push(m);
+					}
+				}
+			});
+		});
+	};
+	ngOnInit() {
+		//定义部门表单
+		this.orgForm = this.fb.group({
+			'id': new FormControl(''),
+			'name': new FormControl('', Validators.required),
+			'parentId': new FormControl(''),
+			'parentName': new FormControl({
+				value: "",
+				disabled: true
+			})
+		});
+		//获取部门信息
+		this.orgDefineService.GetOrgDefine((ret) => {
+			ret = ret.data;
+			var data = this.utilService.TransData(ret, "id", "parentId", "children");
+			this.depTrees = < TreeNode[] > data;
+		});
 		//定义职务信息菜单
 		this.jobInfoFuns = [{
 			label: '返回',
@@ -176,8 +216,8 @@ export class OrgDefineComponent implements OnInit {
 		this.jobForm = this.fb.group({
 			'id': new FormControl(''),
 			'name': new FormControl('', Validators.required),
-			'orgId': new FormControl(''),
-			'orgName': new FormControl({
+			'deptId': new FormControl(''),
+			'deptName': new FormControl({
 				value: "",
 				disabled: true
 			})
@@ -219,29 +259,46 @@ export class OrgDefineComponent implements OnInit {
 	//选择部门======================
 	NodeSelect(e) {
 		//获取职务列表
-		this.LoadJobListData({});
+		this.LoadJobListData({
+			first: 0,
+			rows: 9
+		});
 		//获取用户列表
 		this.LoadUserData({});
 	};
 	//部门功能=====================
 	private display = false;
 	onSubmit(value) {
-		//TODO
-		this.display = false;
-		this.msgs.push({
-			severity: 'success',
-			summary: '提示',
-			detail: JSON.stringify(value)
+		//保存数据
+		this.crudService.SaveData(this.t_menu["authUrl"], value, (ret) => {
+			this.display = false;
+			this.msgs.push({
+				severity: 'success',
+				summary: '提示',
+				detail: "保存成功"
+			});
+			if(!value["id"]) {
+				value["id"] = ret.data;
+				var m = this.utilService.CopyObj(value, value);
+				!this.depNode.children && (this.depNode.children = []);
+				this.depNode.children.push(m);
+			} else {
+				for(var k in value) {
+					this.depNode[k] = value[k];
+				}
+			}
 		});
-		if(value["id"]) return;
-		var m = this.utilService.CopyObj(value, value);
-		!this.depNode.children && (this.depNode.children = []);
-		this.depNode.children.push(m);
+
 	};
 	//职务信息==========================
 	//获取机构信息
 	LoadJobListData(e) {
-		this.orgDefineService.GetJobList().subscribe((ret) => {
+		var param = {
+			page: e.first / e.rows + 1,
+			rows: e.rows
+		};
+		this.depNode && (param["deptId"] = this.depNode["id"]);
+		this.orgDefineService.GetJobList(param, (ret) => {
 			this.selectedJob = {};
 			ret = ret.data;
 			this.jobTotal = ret.total;
@@ -314,11 +371,22 @@ export class OrgDefineComponent implements OnInit {
 	};
 	//保存机构权限信息
 	SaveOrgAuth() {
-		this.msgs.push({
-			severity: 'success',
-			summary: '提示',
-			detail: "save"
+		var value = this.jobForm.value;
+		//保存数据
+		this.crudService.SaveData(this.t_menu["authUrl"], value, (ret) => {
+			this.msgs.push({
+				severity: 'success',
+				summary: '提示',
+				detail: "保存成功"
+			});
+			if(!value["id"]) {
+				value["id"] = ret.data;
+				this.jobList.unshift(value);
+			} else {
+				for(var k in value) {
+					this.selectedJob[k] = value[k];
+				}
+			}
 		});
-		console.log(this.jobForm.value);
 	};
 }

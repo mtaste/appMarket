@@ -143,6 +143,12 @@ export class OrgDefineComponent implements OnInit {
 				m && (tm["id"] = m["id"]) && (tm["name"] = m["name"]);
 				temp && (tm["deptId"] = temp["id"]) && (tm["deptName"] = temp["name"]);
 				this.jobForm.setValue(tm);
+				//获取职务权限信息
+				this.orgDefineService.GetDeptRoleAuth(m["id"], (ret) => {
+					ret = ret.data;
+					var t = this.utilService.GetArray(this.jobAuthTrees, "children", "id", ret);
+					this.selectedJobAuthNodes = t;
+				});
 			},
 			removeRole: (auth) => {
 				this.t_menu = auth.item;
@@ -223,7 +229,8 @@ export class OrgDefineComponent implements OnInit {
 			})
 		});
 		//获取权限列表
-		this.orgDefineService.GetOrgAuthList().subscribe((ret) => {
+		this.orgDefineService.GetOrgAuthAllList((ret) => {
+			ret = ret.data;
 			var data = this.utilService.TransData(ret, "id", "parentId", "children");
 			this.jobAuthTrees = < TreeNode[] > data;
 		});
@@ -308,11 +315,6 @@ export class OrgDefineComponent implements OnInit {
 	//获取机构的权限信息
 	JobClick(m) {
 		this.selectedJob = m;
-		//获取职务权限信息
-		this.orgDefineService.GetOrgJobAuth().subscribe((ret) => {
-			var t = this.utilService.GetArray(this.jobAuthTrees, "children", "id", ret);
-			this.selectedJobAuthNodes = t;
-		});
 	};
 	//搜索
 	private jobKeyword = "";
@@ -369,11 +371,13 @@ export class OrgDefineComponent implements OnInit {
 			this.userList.unshift(m);
 		};
 	};
-	//保存机构权限信息
-	SaveOrgAuth() {
-		var value = this.jobForm.value;
+	//保存权限信息
+	SaveDeptRoleAuth(value) {
+		var param = this.utilService.CopyObj(value, value);
+		var ids = this.utilService.GetIds(this.selectedJobAuthNodes, "id");
+		param["authIds"] = ids;
 		//保存数据
-		this.crudService.SaveData(this.t_menu["authUrl"], value, (ret) => {
+		this.crudService.SaveData(this.t_menu["authUrl"], param, (ret) => {
 			this.msgs.push({
 				severity: 'success',
 				summary: '提示',
@@ -384,7 +388,7 @@ export class OrgDefineComponent implements OnInit {
 				this.jobList.unshift(value);
 			} else {
 				for(var k in value) {
-					this.selectedJob[k] = value[k];
+					this.selectedJob[k] && (this.selectedJob[k] = value[k]);
 				}
 			}
 		});

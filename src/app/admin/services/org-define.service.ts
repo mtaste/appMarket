@@ -30,14 +30,14 @@ export class OrgDefineService {
 		this.requestService.Post('org/dept/role/list.json', param, bk);
 	};
 	//获取机构所有权限列表
-	GetOrgAuthList() {
-		return this.http.get(`${this.starwarUrl}/org/authList.json`)
-			.map(res => res.json());
+	GetOrgAuthAllList(bk) {
+		this.requestService.Post('org/dept/auth/list.json', {}, bk);
 	};
 	//获取职务权限
-	GetOrgJobAuth() {
-		return this.http.get(`${this.starwarUrl}/org/jobAuth.json`)
-			.map(res => res.json());
+	GetDeptRoleAuth(id, bk) {
+		this.requestService.Post('org/dept/role/auth/list.json', {
+			id: id
+		}, bk);
 	};
 	//获取用户列表信息
 	GetDepUserList() {

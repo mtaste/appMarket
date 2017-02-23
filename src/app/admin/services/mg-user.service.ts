@@ -5,7 +5,9 @@ import {
 import {
 	STARWARS_BASE_URL
 } from "../../shared/constance.service";
-
+import {
+	RequestService
+} from "../../shared/request.service";
 import {
 	Http
 } from "@angular/http";
@@ -16,11 +18,11 @@ import "rxjs/add/operator/switchMap";
 export class MgUserService {
 
 	constructor(@Inject(STARWARS_BASE_URL) private starwarUrl,
-		private http: Http
+		private http: Http,
+		private requestService: RequestService
 	) {};
 	//获取可以选择用户列表信息
-	GetUserList() {
-		return this.http.get(`${this.starwarUrl}/user/list.json`)
-			.map(res => res.json());
+	GetUserList(param, bk) {
+		this.requestService.Post('user/list.json', param, bk);
 	};
 }

@@ -3,6 +3,9 @@ import {
 	OnInit
 } from '@angular/core';
 import {
+	ActivatedRoute
+} from '@angular/router';
+import {
 	TreeNode,
 	MenuItem,
 	ConfirmationService,
@@ -10,13 +13,18 @@ import {
 	SelectItem
 } from 'primeng/primeng';
 import {
+	Md5
+} from "ts-md5/dist/md5";
+import {
 	AuthOrgService,
 	UtilService,
 	FormBuilder,
 	FormGroup,
 	Validators,
 	FormControl,
-	MgUserService
+	MgUserService,
+	AuthService,
+	CrudService
 } from '../index';
 @Component({
 	selector: 'admin-app-mg-user',
@@ -24,11 +32,13 @@ import {
 	styleUrls: ['./mg-user.component.css']
 })
 export class MgUserComponent implements OnInit {
+	//菜单功能临时变量
+	private t_menu = {};
 	//提示信息
 	private msgs: Message[] = [];
 	private step = 1;
 	//用户菜单
-	private userFuncs: MenuItem[];
+	private userFuncs: MenuItem[] = [];
 	private keyword = "";
 	//用户详情
 	private infoFuncs: MenuItem[];
@@ -42,8 +52,61 @@ export class MgUserComponent implements OnInit {
 		private confirmationService: ConfirmationService,
 		private mgUserService: MgUserService,
 		private utilService: UtilService,
-		private fb: FormBuilder
-	) {};
+		private router: ActivatedRoute,
+		private fb: FormBuilder,
+		private authService: AuthService,
+		private crudService: CrudService
+	) {
+		var menus = {
+			add: (auth) => {
+				this.t_menu = auth.item;
+				this.step = 2;
+				var m = this.utilService.ClearObj(this.userForm.value);
+				this.userForm.setValue(m);
+			},
+			mod: (auth) => {
+				this.t_menu = auth.item;
+				this.step = 2;
+				var t = this.utilService.ClearObj(this.userForm.value);
+				var m = this.utilService.CopyObj(t, this.selectedUser);
+				this.userForm.setValue(m);
+			},
+			remove: (auth) => {
+				this.t_menu = auth.item;
+				this.confirmationService.confirm({
+					header: '删除提示',
+					message: '您确定需要删除此记录?',
+					accept: () => {
+						var m = this.selectedUser;
+						this.crudService.DeleteData(
+							auth.item.authUrl, m["id"],
+							ret => {
+								this.msgs.push({
+									severity: 'success',
+									summary: '提示',
+									detail: "删除成功"
+								});
+								var index = this.utilService.GetArrayIndex(this.userList, "id", m["id"]);
+								this.userList.splice(index, 1);
+							});
+					}
+				});
+			}
+		};
+		//菜单数据
+		this.router.queryParams.subscribe((params) => {
+			var id = params["id"];
+			this.authService.GetAuthFunc(id, (ret) => {
+				for(var k in menus) {
+					if(ret[k]) {
+						var m = ret[k];
+						m.command = menus[k];
+						this.userFuncs.push(m);
+					}
+				}
+			});
+		});
+	};
 
 	ngOnInit() {
 		//定义用户表单
@@ -51,42 +114,11 @@ export class MgUserComponent implements OnInit {
 			'id': new FormControl(''),
 			'name': new FormControl('', Validators.required),
 			'userName': new FormControl('', Validators.required),
-			'passWord': new FormControl('', Validators.required)
+			'passWord': new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
+			'mobile': new FormControl('', Validators.required)
 		});
 		//定义用户操作菜单
-		this.userFuncs = [{
-			label: '新增',
-			icon: 'fa-plus',
-			command: () => {
-				this.step = 2;
-				var m = this.utilService.ClearObj(this.userForm.value);
-				this.userForm.setValue(m);
-			}
-		}, {
-			label: '修改',
-			icon: 'fa-plus',
-			command: () => {
-				this.step = 2;
-				var t = this.utilService.ClearObj(this.userForm.value);
-				var m = this.utilService.CopyObj(t, this.selectedUser);
-				this.userForm.setValue(m);
-			}
-		}, {
-			label: '删除',
-			icon: 'fa-remove',
-			command: () => {
-				this.confirmationService.confirm({
-					header: '删除提示',
-					message: '您确定需要删除此记录?',
-					accept: () => {
-						console.log("Yes");
-						var m = this.selectedUser;
-						var index = this.utilService.GetArrayIndex(this.userList, "id", m["id"]);
-						this.userList.splice(index, 1);
-					}
-				});
-			}
-		}];
+
 		//定义用户信息操作菜单
 		this.infoFuncs = [{
 			label: '返回',
@@ -98,16 +130,20 @@ export class MgUserComponent implements OnInit {
 	};
 	//搜索用户
 	SearchUser() {
-		//TODO
-		this.msgs.push({
-			severity: 'success',
-			summary: '提示',
-			detail: "search"
+		this.LoadUserData({
+			first: 0,
+			rows: 9,
+			keyword: this.keyword
 		});
 	};
 	//获取用户列表
 	LoadUserData(e) {
-		this.mgUserService.GetUserList().subscribe((ret) => {
+		var param = {
+			page: e.first / e.rows + 1,
+			rows: e.rows
+		};
+		e.keyword && (param["keyword"] = e.keyword);
+		this.mgUserService.GetUserList(param, (ret) => {
 			ret = ret.data;
 			this.userList = ret.rows;
 			this.userTotals = ret.total;
@@ -115,14 +151,33 @@ export class MgUserComponent implements OnInit {
 	};
 	//保存用户信息
 	onSubmit(value) {
-		this.msgs.push({
-			severity: 'success',
-			summary: '提示',
-			detail: JSON.stringify(value)
+		var param = this.utilService.CopyObj(value, value);
+		var pw = this.selectedUser["passWord"];
+		if(param["passWord"] != pw) {
+			pw = param["passWord"];
+			pw = Md5.hashStr(pw).toString();
+			param["passWord"] = pw
+			value["passWord"] = pw;
+		}
+		//保存数据
+		this.crudService.SaveData(this.t_menu["authUrl"], param, (ret) => {
+			this.msgs.push({
+				severity: 'success',
+				summary: '提示',
+				detail: JSON.stringify(value)
+			});
+			this.step = 1;
+			if(!value["id"]) {
+				value["id"] = ret.data;
+				var m = this.utilService.CopyObj(value, value);
+				this.userList.unshift(m);
+			} else {
+				for(var k in value) {
+					this.selectedUser[k] && (this.selectedUser[k] = value[k]);
+				}
+			}
 		});
-		this.step = 1;
-		var m = this.utilService.CopyObj(value, value);
-		this.userList.push(m);
+
 	};
 
 }

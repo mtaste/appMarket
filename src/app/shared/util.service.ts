@@ -6,6 +6,13 @@ import {
 @Injectable()
 export class UtilService {
 	constructor() {};
+	//获取分布参数
+	GetPageInfo() {
+		return {
+			first: 0,
+			rows: 9
+		}
+	};
 	//删除节点
 	DeleteTree(data, chindrenStr, name, values) {
 		var ret = [];

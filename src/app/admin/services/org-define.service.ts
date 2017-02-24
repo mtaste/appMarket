@@ -40,13 +40,15 @@ export class OrgDefineService {
 		}, bk);
 	};
 	//获取用户列表信息
-	GetDepUserList() {
-		return this.http.get(`${this.starwarUrl}/org/orgUser.json`)
-			.map(res => res.json());
+	GetDepUserList(param, bk) {
+		this.requestService.Post('org/dept/user/list.json', param, bk);
 	};
 	//获取可以选择用户列表信息
-	GetUserList() {
-		return this.http.get(`${this.starwarUrl}/org/userList.json`)
-			.map(res => res.json());
+	GetRoleUserSelect(param, bk) {
+		this.requestService.Post('org/dept/role/user/select.json', param, bk);
+	};
+	//删除职务用户
+	DeleteRoleUser(ul, param, bk) {
+		this.requestService.Post(ul, param, bk);
 	};
 }

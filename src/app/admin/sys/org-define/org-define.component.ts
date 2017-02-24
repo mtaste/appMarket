@@ -52,7 +52,7 @@ export class OrgDefineComponent implements OnInit {
 	private jobAuthTrees: TreeNode[];
 	private selectedJobAuthNodes: TreeNode[];
 	//用户信息
-	private userFuns: MenuItem[];
+	private userFuns: MenuItem[] = [];
 	private selectedUsers = [];
 	private userDisplay = false;
 	//可选择用户信息
@@ -116,6 +116,7 @@ export class OrgDefineComponent implements OnInit {
 								});
 								this.utilService.DeleteTree(this.depTrees, "children", "id", [this.depNode]);
 								this.jobList = [];
+								this.userList = [];
 							});
 					}
 				});
@@ -131,6 +132,7 @@ export class OrgDefineComponent implements OnInit {
 				var tm = this.utilService.ClearObj(this.jobForm.value);
 				temp && (tm["deptId"] = temp["id"]) && (tm["deptName"] = temp["name"]);
 				this.jobForm.setValue(tm);
+				this.selectedJobAuthNodes = [];
 			},
 			modRole: (auth) => {
 				this.t_menu = auth.item;
@@ -167,9 +169,46 @@ export class OrgDefineComponent implements OnInit {
 								});
 								var index = this.utilService.GetArrayIndex(this.jobList, "id", id);
 								this.jobList.splice(index, 1);
+								this.userList = [];
 							});
 					}
 				});
+			}
+		};
+		//定义人员按钮
+		var userMenus = {
+			addUser: (auth) => {
+				this.t_menu = auth.item;
+				this.userDisplay = true;
+				this.SearchChooseUser();
+			},
+			removeUser: (auth) => {
+				this.t_menu = auth.item;
+				var d = {};
+				for(var i in this.selectedUsers) {
+					var m = this.selectedUsers[i];
+					d[m["id"]] = "Y";
+				};
+				var temp = [];
+				for(var k in this.userList) {
+					var m = this.userList[k];
+					if(d[m["id"]] == "Y") {
+						continue;
+					};
+					temp.push(m);
+				};
+				var ids = this.utilService.GetIds(this.selectedUsers, "id");
+				if(!ids) return;
+				var param = {
+					roleId: this.selectedJob["id"],
+					userIds: ids
+				};
+				this.orgDefineService.DeleteRoleUser(
+					auth.item.authUrl, param,
+					ret => {
+						this.userList = temp;
+						this.selectedUsers = [];
+					});
 			}
 		};
 		//菜单数据
@@ -182,14 +221,21 @@ export class OrgDefineComponent implements OnInit {
 						m.command = menus[k];
 						this.depFuns.push(m);
 					}
-				}
+				};
 				for(var k in jobMenu) {
 					if(ret[k]) {
 						var m = ret[k];
 						m.command = jobMenu[k];
 						this.jobFuns.push(m);
 					}
-				}
+				};
+				for(var k in userMenus) {
+					if(ret[k]) {
+						var m = ret[k];
+						m.command = userMenus[k];
+						this.userFuns.push(m);
+					}
+				};
 			});
 		});
 	};
@@ -234,34 +280,6 @@ export class OrgDefineComponent implements OnInit {
 			var data = this.utilService.TransData(ret, "id", "parentId", "children");
 			this.jobAuthTrees = < TreeNode[] > data;
 		});
-		//定义用户菜单功能
-		this.userFuns = [{
-			label: '新增',
-			icon: 'fa-plus',
-			command: () => {
-				this.userDisplay = true;
-			}
-		}, {
-			label: '删除',
-			icon: 'fa-remove',
-			command: () => {
-				var d = {};
-				for(var i in this.selectedUsers) {
-					var m = this.selectedUsers[i];
-					d[m["id"]] = "Y";
-				};
-				var temp = [];
-				for(var k in this.userList) {
-					var m = this.userList[k];
-					if(d[m["id"]] == "Y") {
-						continue;
-					};
-					temp.push(m);
-				};
-				this.userList = temp;
-				this.selectedUsers = [];
-			}
-		}];
 	};
 	//选择部门======================
 	NodeSelect(e) {
@@ -271,7 +289,11 @@ export class OrgDefineComponent implements OnInit {
 			rows: 9
 		});
 		//获取用户列表
-		this.LoadUserData({});
+		this.LoadUserData({
+			first: 0,
+			rows: 9
+		});
+
 	};
 	//部门功能=====================
 	private display = false;
@@ -300,13 +322,13 @@ export class OrgDefineComponent implements OnInit {
 	//职务信息==========================
 	//获取机构信息
 	LoadJobListData(e) {
+		this.selectedJob = {};
 		var param = {
 			page: e.first / e.rows + 1,
 			rows: e.rows
 		};
 		this.depNode && (param["deptId"] = this.depNode["id"]);
 		this.orgDefineService.GetJobList(param, (ret) => {
-			this.selectedJob = {};
 			ret = ret.data;
 			this.jobTotal = ret.total;
 			this.jobList = ret.rows;
@@ -315,6 +337,8 @@ export class OrgDefineComponent implements OnInit {
 	//获取机构的权限信息
 	JobClick(m) {
 		this.selectedJob = m;
+		var page = this.utilService.GetPageInfo();
+		this.LoadUserData(page);
 	};
 	//搜索
 	private jobKeyword = "";
@@ -329,10 +353,16 @@ export class OrgDefineComponent implements OnInit {
 	//===============================
 	//用户列表信息====================
 	private userList = [];
-	private userTotals = 20;
+	private userTotals = 10;
 	LoadUserData(e) {
+		var param = {
+			page: e.first / e.rows + 1,
+			rows: e.rows
+		};
 		if(!this.depNode) return;
-		this.orgDefineService.GetDepUserList().subscribe((ret) => {
+		this.depNode && (param["deptId"] = this.depNode["id"]);
+		this.selectedJob && (param["roleId"] = this.selectedJob["id"]);
+		this.orgDefineService.GetDepUserList(param, (ret) => {
 			ret = ret.data;
 			this.userList = ret.rows;
 			this.userTotals = ret.total;
@@ -341,7 +371,13 @@ export class OrgDefineComponent implements OnInit {
 	};
 	//获取可选择用户列表信息
 	LoadChooseUserData(e) {
-		this.orgDefineService.GetUserList().subscribe((ret) => {
+		var param = {
+			page: e.first / e.rows + 1,
+			rows: e.rows
+		};
+		this.selectedJob && (param["roleId"] = this.selectedJob["id"]);
+		e.keyword && (param["keyword"] = e.keyword);
+		this.orgDefineService.GetRoleUserSelect(param, (ret) => {
 			ret = ret.data;
 			this.chooseUserList = ret.rows;
 			this.chooseUserTotal = ret.total;
@@ -350,26 +386,32 @@ export class OrgDefineComponent implements OnInit {
 	//搜索可选择用户信息
 	private userKeyword = "";
 	SearchChooseUser() {
-		//TODO
-		this.msgs.push({
-			severity: 'success',
-			summary: '提示',
-			detail: this.userKeyword
-		});
+		var page = this.utilService.GetPageInfo();
+		page["keyword"] = this.userKeyword;
+		this.LoadChooseUserData(page);
 	};
 	//选择用户后确定按钮 
 	ChooseUser() {
-		//TODO
 		this.userDisplay = false;
-		this.msgs.push({
-			severity: 'success',
-			summary: '提示',
-			detail: "ChooseUser"
-		});
-		for(var k in this.chooseUsers) {
-			var m = this.chooseUsers[k];
-			this.userList.unshift(m);
+		var ids = this.utilService.GetIds(this.chooseUsers, "id");
+		if(!ids) return;
+		var param = {
+			roleId: this.selectedJob["id"],
+			userIds: ids
 		};
+		this.crudService.SaveData(this.t_menu["authUrl"], param, (ret) => {
+			this.msgs.push({
+				severity: 'success',
+				summary: '提示',
+				detail: "ChooseUser"
+			});
+			for(var k in this.chooseUsers) {
+				var m = this.chooseUsers[k];
+				this.userList.unshift(m);
+			};
+			this.chooseUsers = [];
+		});
+
 	};
 	//保存权限信息
 	SaveDeptRoleAuth(value) {
@@ -383,6 +425,7 @@ export class OrgDefineComponent implements OnInit {
 				summary: '提示',
 				detail: "保存成功"
 			});
+			this.step = 1;
 			if(!value["id"]) {
 				value["id"] = ret.data;
 				this.jobList.unshift(value);

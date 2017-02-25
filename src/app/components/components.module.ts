@@ -4,13 +4,42 @@ import {
 	CommonModule
 } from '../shared/index';
 import {
+	PNGModule
+} from '../shared/png.module';
+import {
 	MenuComponentComponent
-} from "./menu-component/menu-component.component"
-
+} from "./menu-component/menu-component.component";
+import {
+	FormComponentComponent
+} from "./form-component/form-component.component"
+import {
+	MenubarModule,
+	GrowlModule,
+	ConfirmDialogModule,
+	FieldsetModule,
+	InputTextModule,
+	ButtonModule,
+	DataTableModule
+} from 'primeng/primeng';
 @NgModule({
-	imports: [CommonModule],
-	declarations: [MenuComponentComponent],
-	exports: [MenuComponentComponent]
+	imports: [
+		CommonModule,
+		PNGModule.forRoot(),
+		MenubarModule,
+		GrowlModule,
+		FieldsetModule,
+		InputTextModule,
+		ButtonModule,
+		DataTableModule
+	],
+	declarations: [
+		MenuComponentComponent,
+		FormComponentComponent
+	],
+	exports: [
+		MenuComponentComponent,
+		FormComponentComponent
+	]
 })
 
 export class ComponentsModule {

@@ -10,7 +10,7 @@ export class UtilService {
 	GetPageInfo() {
 		return {
 			first: 0,
-			rows: 9
+			rows: 10
 		}
 	};
 	//删除节点

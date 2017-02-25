@@ -32,4 +32,8 @@ export class CrudService {
 			id: id
 		}, bk);
 	};
+	//获取数据
+	GetData(url, param, bk) {
+		this.requestService.Post(url, param, bk);
+	};
 }

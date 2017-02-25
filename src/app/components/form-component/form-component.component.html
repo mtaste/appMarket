@@ -1,0 +1,63 @@
+<p-growl [value]="msgs" [life]="1000"></p-growl>
+<!--列表-->
+<div class="ui-g" [ngClass]="{'is-hidden':step!=1}">
+	<!--列表-->
+	<div class="ui-g-12 ui-md-12 ui-lg-12">
+		<p-fieldset legend="{{title}}">
+			<p-menubar [model]="funcs"></p-menubar>
+			<!--搜索-->
+			<div class="ui-listbox-filter-container">
+				<input pInputText type="text" [(ngModel)]="keyword" placeholder="关键字" />
+				<button pButton type="button" (click)="Search()" icon="fa-search"></button>
+			</div>
+			<!--列表-->
+			<!--列表-->
+			<p-dataTable [value]="listData" [(selection)]="selectedObj" selectionMode="single" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="totals" (onLazyLoad)="LoadData($event)">
+				<p-column *ngFor="let el of list.model" field="{{el.field}}" header="{{el.header}}"></p-column>
+			</p-dataTable>
+		</p-fieldset>
+	</div>
+</div>
+
+<!--单据信息-->
+<div class="ui-g" [ngClass]="{'is-hidden':step!=2}">
+	<div class="ui-g-12 ui-md-12 ui-lg-12">
+		<p-fieldset legend="信息">
+			<!-- 功能-->
+			<p-menubar [model]="infoFuncs"></p-menubar>
+			<!--表单-->
+			<form [formGroup]="formModel" (ngSubmit)="onSubmit(formModel.value)">
+				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+
+					<!--名称-->
+					<span *ngFor="let el of form">
+						<div class="ui-grid-row" *ngIf="el.name">
+								<div class="ui-grid-col-2">
+									{{el.name}}:
+								</div>
+								<div class="ui-grid-col-6">
+									<input pInputText type="text" formControlName="{{el.model}}" />
+								</div>
+								<div class="ui-grid-col-4">
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formModel.controls[el.model].valid&&formModel.controls[el.model].dirty">
+										<i class="fa fa-close"></i>{{el.msg}}
+									</div>
+								</div>
+						</div>
+						<input *ngIf="!el.name" pInputText type="hidden" formControlName="{{el.model}}" />
+					</span>
+
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-2"></div>
+						<div class="ui-grid-col-6">
+							<button pButton type="submit" label="提交" [disabled]="!formModel.valid"></button>
+						</div>
+						<div class="ui-grid-col-4"></div>
+					</div>
+
+				</div>
+			</form>
+
+		</p-fieldset>
+	</div>
+</div>

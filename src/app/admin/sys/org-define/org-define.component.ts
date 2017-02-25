@@ -284,15 +284,10 @@ export class OrgDefineComponent implements OnInit {
 	//选择部门======================
 	NodeSelect(e) {
 		//获取职务列表
-		this.LoadJobListData({
-			first: 0,
-			rows: 9
-		});
+		var page = this.utilService.GetPageInfo();
+		this.LoadJobListData(page);
 		//获取用户列表
-		this.LoadUserData({
-			first: 0,
-			rows: 9
-		});
+		this.LoadUserData(page);
 
 	};
 	//部门功能=====================

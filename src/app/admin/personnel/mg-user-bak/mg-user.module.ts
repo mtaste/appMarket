@@ -2,22 +2,15 @@ import {
 	NgModule
 } from "@angular/core";
 import {
-	PNGModule,
-	ComponentsModule
+	PNGModule
 } from '../index';
 import {
 	CommonModule
 } from "@angular/common";
 import {
-	OrgRegisterComponent
-} from "./register/org-register.component";
-import {
-	OrgAuthComponent
-} from "./auth/org-auth.component";
-import {
-	OrgListComponent
-} from "./list/org-list.component";
-import routes from './org.routes';
+	MgUserComponent
+} from "./mg-user.component";
+import routes from './mg-user.routes';
 import {
 	FieldsetModule,
 	TreeModule,
@@ -46,13 +39,8 @@ import {
 		DataListModule,
 		DialogModule,
 		DataTableModule,
-		SharedModule,
-		ComponentsModule
+		SharedModule
 	],
-	declarations: [
-		OrgRegisterComponent,
-		OrgAuthComponent,
-		OrgListComponent
-	]
+	declarations: [MgUserComponent]
 })
-export default class OrgRegisterModule {}
+export default class MgUserModule {}

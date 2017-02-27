@@ -122,4 +122,14 @@ export class UtilService {
 		}
 		return rets.join(",");
 	};
+	//获取状态文字
+	GetStatus(k) {
+		var s = {
+			'0': '新建',
+			'1': '已提交',
+			'2': '已审核',
+			'99': '已否决'
+		};
+		return s[k];
+	};
 }

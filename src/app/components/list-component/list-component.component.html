@@ -1,0 +1,14 @@
+<!--列表-->
+<p-fieldset legend="{{title}}">
+	<p-menubar [model]="funcs"></p-menubar>
+	<!--搜索-->
+	<div class="ui-listbox-filter-container">
+		<input pInputText type="text" [(ngModel)]="keyword" placeholder="关键字" />
+		<button pButton type="button" (click)="Search()" icon="fa-search"></button>
+	</div>
+	<!--列表-->
+	<!--列表-->
+	<p-dataTable [value]="listData" [(selection)]="selectedObj" selectionMode="single" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="totals" (onLazyLoad)="LoadData($event)">
+		<p-column *ngFor="let el of list.model" field="{{el.field}}" header="{{el.header}}"></p-column>
+	</p-dataTable>
+</p-fieldset>

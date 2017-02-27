@@ -34,7 +34,7 @@ export class RequestService {
 				headers: headers
 			})
 			.map(res => res.json()).subscribe(ret => {
-				if(ret && ret.code && ret.code <= -401) {
+				if(ret && ret.code && ret.code == -401) {
 					this.router.navigateByUrl('/user/login');
 				};
 				bk && bk(ret);
@@ -56,7 +56,7 @@ export class RequestService {
 			.subscribe(
 				ret => {
 					if(ret) {
-						if(ret.code && ret.code <= -401) {
+						if(ret.code && ret.code == -401) {
 							this.router.navigateByUrl('/user/login');
 						} else if(ret.code < 0) {
 							alert(ret.msg);

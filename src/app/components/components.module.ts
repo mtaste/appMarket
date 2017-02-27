@@ -11,7 +11,13 @@ import {
 } from "./menu-component/menu-component.component";
 import {
 	FormComponentComponent
-} from "./form-component/form-component.component"
+} from "./form-component/form-component.component";
+import {
+	ListComponentComponent
+} from "./list-component/list-component.component";
+import {
+	ListFormComponentComponent
+} from "./list-form-component/list-form-component.component"
 import {
 	MenubarModule,
 	GrowlModule,
@@ -34,11 +40,15 @@ import {
 	],
 	declarations: [
 		MenuComponentComponent,
-		FormComponentComponent
+		FormComponentComponent,
+		ListComponentComponent,
+		ListFormComponentComponent
 	],
 	exports: [
 		MenuComponentComponent,
-		FormComponentComponent
+		FormComponentComponent,
+		ListComponentComponent,
+		ListFormComponentComponent
 	]
 })
 

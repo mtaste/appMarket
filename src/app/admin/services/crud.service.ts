@@ -36,4 +36,8 @@ export class CrudService {
 	GetData(url, param, bk) {
 		this.requestService.Post(url, param, bk);
 	};
+	//提交表单
+	AppData(ul, param, bk) {
+		this.requestService.Post(ul, param, bk);
+	};
 }

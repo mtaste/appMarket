@@ -1,5 +1,12 @@
 <p-confirmDialog icon="fa fa-question-circle" width="360"></p-confirmDialog>
-<app-list-form-component [menus]="menus" [title]="'机构列表'" [list]="listModel" [form]="form"></app-list-form-component>
+<app-list-form-component 
+	[menus]="menus" 
+	[title]="'机构列表'" 
+	[list]="listModel" 
+	[form]="form" 
+	(initEvent)="InitListForm($event)"
+	(rowSeleted)='RowSeleted($event)'>
+</app-list-form-component>
 <!--  否决提示 -->
 <p-dialog header="否决提示" [(visible)]="display" modal="modal" width="360" responsive="true">
 	<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">

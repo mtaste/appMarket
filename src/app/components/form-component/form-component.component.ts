@@ -32,7 +32,6 @@ export class FormComponentComponent implements OnInit {
 	};
 
 	ngOnInit() {
-		this.initEvent.emit(this);
 		//初始化Form
 		var f = {};
 		for(var k in this.form) {
@@ -45,6 +44,7 @@ export class FormComponentComponent implements OnInit {
 			}
 		};
 		this.formModel = this.fb.group(f);
+		this.initEvent.emit(this);
 	};
 
 	onSubmitEvent(value) {

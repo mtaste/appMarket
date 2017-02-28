@@ -29,6 +29,8 @@ import {
 	styleUrls: ['./org-register.component.css']
 })
 export class OrgRegisterComponent implements OnInit {
+	private obj = {};
+	private RestFuns;
 	//列表
 	private menus = {};
 	//列表
@@ -48,15 +50,31 @@ export class OrgRegisterComponent implements OnInit {
 		this.menus = this.getMenus();
 	};
 
-	ngOnInit() {
-
-	};
+	ngOnInit() {};
 	private display = false;
 	private remark = "";
 	private tempFunc;
 	Reject() {
 		this.tempFunc && this.tempFunc();
 		this.display = false;
+	};
+	InitListForm(e) {
+		this.obj = e;
+		e.listObj.funcObj.RestFuncs(['add']);
+	};
+	RowSeleted(data) {
+		if(!data && data.id) {
+			f.RestFuncs(['add', 'mod']);
+			return;
+		};
+		var f = this.obj['listObj']['funcObj'];
+		if(data.status == this.utilService.GetStatus('0')) {
+			f.RestFuncs(['add', 'mod', 'app', 'remove']);
+		} else if(data.status == this.utilService.GetStatus('1')) {
+			f.RestFuncs(['add', 'mod', 'auth', 'reject']);
+		} else {
+			f.RestFuncs(['add', 'mod']);
+		}
 	};
 	private getMenus() {
 		return {
@@ -109,6 +127,7 @@ export class OrgRegisterComponent implements OnInit {
 								var index = this.utilService.GetArrayIndex(ft.listObj.listData, "id", m["id"]);
 								ft.listObj.listData.splice(index, 1);
 								ft.listObj.selectedObj = {};
+								this.RowSeleted({});
 							});
 					}
 				});
@@ -160,6 +179,7 @@ export class OrgRegisterComponent implements OnInit {
 				});
 				if(ret.data >= 1) {
 					ft.listObj.selectedObj.status = this.utilService.GetStatus(status);
+					this.RowSeleted(ft.listObj.selectedObj);
 				}
 			});
 	};

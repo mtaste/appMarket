@@ -34,12 +34,13 @@ export class ListComponentComponent implements OnInit {
 	private listData = [];
 	private selectedObj = {};
 	private totals = 0;
-	private t_funcs = {};
+	private funcObj = {};
 	@Input() title = "";
 	@Input() list = {};
 	@Input() menus = {};
 	@Input() obj = {};
 	@Output() initEvent: EventEmitter < any > = new EventEmitter();
+	@Output() selectEvent: EventEmitter < any > = new EventEmitter();
 	constructor(
 		private router: ActivatedRoute,
 		private authService: AuthService,
@@ -49,27 +50,7 @@ export class ListComponentComponent implements OnInit {
 
 	};
 
-	ngOnInit() {
-		this.initEvent.emit(this);
-		//菜单数据
-		this.router.queryParams.subscribe((params) => {
-			var id = params["id"];
-			this.authService.GetAuthFunc(id, (ret) => {
-				for(var k in ret) {
-					if(this.menus[k]) {
-						var m = ret[k];
-						m.command = (auth) => {
-							this.t_menu = auth.item;
-							var t = this.menus[this.t_menu["authValue"]];
-							t && (t(auth, this.obj));
-						}
-						this.t_funcs[k] = m;
-						this.funcs.push(m);
-					}
-				}
-			});
-		});
-	};
+	ngOnInit() {};
 
 	Search() {
 		var page = this.utilService.GetPageInfo();
@@ -88,5 +69,11 @@ export class ListComponentComponent implements OnInit {
 			this.totals = ret.total;
 		});
 	};
-
+	InitFuncs(e) {
+		this.funcObj = e;
+		this.initEvent.emit(this);
+	};
+	RowSelect(e) {
+		this.selectEvent.emit(e.data);
+	};
 }

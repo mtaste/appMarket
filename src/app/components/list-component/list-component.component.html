@@ -1,6 +1,6 @@
 <!--列表-->
 <p-fieldset legend="{{title}}">
-	<p-menubar [model]="funcs"></p-menubar>
+	<app-auth-funcs [menus]='menus' [obj]='obj' (initEvent)='InitFuncs($event)'></app-auth-funcs>
 	<!--搜索-->
 	<div class="ui-listbox-filter-container">
 		<input pInputText type="text" [(ngModel)]="keyword" placeholder="关键字" />
@@ -8,7 +8,7 @@
 	</div>
 	<!--列表-->
 	<!--列表-->
-	<p-dataTable [value]="listData" [(selection)]="selectedObj" selectionMode="single" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="totals" (onLazyLoad)="LoadData($event)">
+	<p-dataTable [value]="listData" (onRowSelect)='RowSelect($event)' [(selection)]="selectedObj" selectionMode="single" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="totals" (onLazyLoad)="LoadData($event)">
 		<p-column *ngFor="let el of list.model" field="{{el.field}}" header="{{el.header}}"></p-column>
 	</p-dataTable>
 </p-fieldset>

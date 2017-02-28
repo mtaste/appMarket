@@ -17,7 +17,10 @@ import {
 } from "./list-component/list-component.component";
 import {
 	ListFormComponentComponent
-} from "./list-form-component/list-form-component.component"
+} from "./list-form-component/list-form-component.component";
+import {
+	AuthFuncsComponent
+} from "./auth-funcs/auth-funcs.component";
 import {
 	MenubarModule,
 	GrowlModule,
@@ -42,13 +45,15 @@ import {
 		MenuComponentComponent,
 		FormComponentComponent,
 		ListComponentComponent,
-		ListFormComponentComponent
+		ListFormComponentComponent,
+		AuthFuncsComponent
 	],
 	exports: [
 		MenuComponentComponent,
 		FormComponentComponent,
 		ListComponentComponent,
-		ListFormComponentComponent
+		ListFormComponentComponent,
+		AuthFuncsComponent
 	]
 })
 

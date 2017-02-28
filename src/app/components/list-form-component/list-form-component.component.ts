@@ -42,7 +42,8 @@ export class ListFormComponentComponent implements OnInit {
 	@Input() title = "";
 	@Input() list = {};
 	@Input() form = [];
-
+	@Output() initEvent: EventEmitter < any > = new EventEmitter();
+	@Output() rowSeleted: EventEmitter < any > = new EventEmitter();
 	constructor(
 		private router: ActivatedRoute,
 		private authService: AuthService,
@@ -66,7 +67,7 @@ export class ListFormComponentComponent implements OnInit {
 
 	onSubmit(param) {
 		//保存数据
-		var menu = this.listObj['t_menu'];
+		var menu = this.listObj['funcObj']['t_menu'];
 		this.crudService.SaveData(menu["authUrl"], param, (ret) => {
 			this.msgs.push({
 				severity: 'success',
@@ -90,9 +91,12 @@ export class ListFormComponentComponent implements OnInit {
 	};
 	ListInit(e) {
 		this.listObj = e;
+		this.initEvent.emit(this);
 	};
 	FormInit(e) {
 		this.formObj = e;
 	};
-
+	SelectedRow(e) {
+		this.rowSeleted.emit(e);
+	};
 }

@@ -13,7 +13,7 @@
 			<p-dataList [value]="orgList" [paginator]="true" [rows]="9" [lazy]="true" (onLazyLoad)="LoadOrgListData($event)" [totalRecords]="totalRecords">
 				<template let-e pTemplate="item">
 					<div class="ui-grid ui-grid-responsive ui-fluid orgList" (click)="OrgClick(e)" [ngClass]="{'selected':e.id==selectedOrg.id}">
-						{{e.name}}
+						{{e.name}}({{e.flag}})
 					</div>
 				</template>
 			</p-dataList>

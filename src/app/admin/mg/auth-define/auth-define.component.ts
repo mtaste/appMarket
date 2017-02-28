@@ -33,6 +33,7 @@ export class AuthDefineComponent implements OnInit {
 	private items: MenuItem[] = [];
 	private msgs: Message[] = [];
 	private authTypes = [];
+	private mgTypes = [];
 	constructor(
 		private authDefineService: AuthDefineService,
 		private utilService: UtilService,
@@ -90,6 +91,7 @@ export class AuthDefineComponent implements OnInit {
 			}),
 			'name': new FormControl('', Validators.required),
 			'authType': new FormControl('', Validators.required),
+			'mgType': new FormControl('', Validators.required),
 			'authUrl': new FormControl(''),
 			'authValue': new FormControl(''),
 			'authIcon': new FormControl(''),
@@ -113,6 +115,19 @@ export class AuthDefineComponent implements OnInit {
 		this.authTypes.push({
 			label: '功能',
 			value: '2'
+		});
+		//下拉2
+		this.mgTypes.push({
+			label: '请选择',
+			value: ''
+		});
+		this.mgTypes.push({
+			label: '是',
+			value: '1'
+		});
+		this.mgTypes.push({
+			label: '否',
+			value: '-1'
 		});
 	};
 	//select tree

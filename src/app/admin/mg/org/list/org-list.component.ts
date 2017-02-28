@@ -44,7 +44,13 @@ export class OrgListComponent implements OnInit {
 	};
 	//获取机构信息
 	LoadOrgListData(e) {
-		this.mgOrgService.GetOrgList().subscribe((ret) => {
+		var page = {
+			page: e.first / e.rows + 1,
+			rows: e.rows
+		};
+		this.keyword && (page['keyword'] = this.keyword);
+		this.mgOrgService.GetOrgList(page, (ret) => {
+			ret = ret.data;
 			this.totalRecords = ret.total;
 			this.orgList = ret.rows;
 		});
@@ -52,7 +58,8 @@ export class OrgListComponent implements OnInit {
 	//获取机构的权限信息
 	OrgClick(m) {
 		this.selectedOrg = m;
-		this.mgOrgService.GetOrgAuth().subscribe((ret) => {
+		this.mgOrgService.GetOrgAuth(m.id, (ret) => {
+			ret = ret.data;
 			var data = this.utilService.TransData(ret, "id", "parentId", "children");
 			this.trees = < TreeNode[] > data;
 		});
@@ -60,10 +67,7 @@ export class OrgListComponent implements OnInit {
 	//搜索
 	private keyword = "";
 	SearchOrg() {
-		this.msgs.push({
-			severity: 'success',
-			summary: '提示',
-			detail: this.keyword
-		});
+		var page = this.utilService.GetPageInfo();
+		this.LoadOrgListData(page);
 	};
 }

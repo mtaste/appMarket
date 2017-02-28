@@ -4,21 +4,8 @@
 <div class="ui-g" [ngClass]="{'is-hidden':step!=1}">
 	<!--单据列表-->
 	<div class="ui-g-12 ui-md-12 ui-lg-12">
-		<p-fieldset legend="单据列表">
-			<!-- 功能-->
-			<p-menubar [model]="billFuncs"></p-menubar>
-			<div class="ui-listbox-filter-container">
-				<input pInputText type="text" [(ngModel)]="keyword" placeholder="关键字" />
-				<button pButton type="button" (click)="SearchBill()" icon="fa-search"></button>
-			</div>
-			<!--列表-->
-			<p-dataTable [value]="billList" [(selection)]="selectedBill" selectionMode="single" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="billTotals" (onLazyLoad)="LoadBillData($event)">
-				<p-column field="name" header="机构名称"></p-column>
-				<p-column field="orgFlag" header="标示"></p-column>
-				<p-column field="createUser" header="申请人"></p-column>
-				<p-column field="authUser" header="审核人"></p-column>
-			</p-dataTable>
-		</p-fieldset>
+		<app-list-component [title]="'授权单'" [menus]='menus' [list]='listModel' [obj]='this' (initEvent)='ListInit($event)' (selectEvent)='SelectedRow($event)'>
+		</app-list-component>
 	</div>
 </div>
 
@@ -33,7 +20,23 @@
 				<div class="ui-g-12 ui-md-6 ui-lg-6">
 					<form [formGroup]="billForm" (ngSubmit)="onSubmit(billForm.value)">
 						<input pInputText type="hidden" formControlName="id" />
+						<input pInputText type="hidden" formControlName="orgId" />
 						<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-2">
+									授权类别*:
+								</div>
+								<div class="ui-grid-col-6">
+									<p-dropdown [options]="authTypes" formControlName="authType" [autoWidth]="false"></p-dropdown>
+								</div>
+								<div class="ui-grid-col-4">
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!billForm.controls['authType'].valid&&billForm.controls['authType'].dirty">
+										<i class="fa fa-close"></i>授权类别不能为空
+									</div>
+								</div>
+							</div>
+
 							<!--名称-->
 							<div class="ui-grid-row">
 								<div class="ui-grid-col-2">
@@ -43,9 +46,6 @@
 									<input pInputText type="text" formControlName="name" placeholder="Required" />
 								</div>
 								<div class="ui-grid-col-4">
-									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!billForm.controls['name'].valid&&billForm.controls['name'].dirty">
-										<i class="fa fa-close"></i> Name is required
-									</div>
 								</div>
 							</div>
 
@@ -55,14 +55,22 @@
 									标示*:
 								</div>
 								<div class="ui-grid-col-6">
-									<input pInputText type="text" formControlName="orgFlag" placeholder="Required" />
+									<input pInputText type="text" formControlName="flag" placeholder="Required" />
 								</div>
 								<div class="ui-grid-col-4">
-									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!billForm.controls['orgFlag'].valid&&billForm.controls['orgFlag'].dirty">
-										<i class="fa fa-close"></i> OrgFlag is required
-									</div>
 								</div>
 							</div>
+
+							<div class="ui-grid-row" [ngClass]="{'is-hidden':!canSave}">
+								<div class="ui-grid-col-2">
+								</div>
+								<div class="ui-grid-col-6">
+									<button pButton type="button" label="选择机构" (click)="orgDisplay=true"></button>
+								</div>
+								<div class="ui-grid-col-4">
+								</div>
+							</div>
+
 						</div>
 					</form>
 				</div>
@@ -75,10 +83,55 @@
 						</p-tree>
 					</p-fieldset>
 				</div>
-				<div class="ui-grid-row">
+				<div class="ui-grid-row" [ngClass]="{'is-hidden':!canSave}">
 					<button pButton type="button" label="保存" (click)="SaveOrgAuth()"></button>
 				</div>
 			</div>
 		</p-fieldset>
+		<span [ngClass]="{'is-hidden':authData.length<=0}">
+			<p-fieldset legend="审核信息">
+				<p-dataTable [value]="authData">
+					<p-column field="userName" header="用户名"></p-column>
+					<p-column field="name" header="姓名"></p-column>
+					<p-column field="status" header="状态"></p-column>
+					<p-column field="createTime" header="审核时间"></p-column>
+					<p-column field="remark" header="备注"></p-column>
+				</p-dataTable>
+			</p-fieldset>
+		</span>
 	</div>
+
 </div>
+<!--选择机构-->
+<p-dialog header="选择机构" [(visible)]="orgDisplay" modal="modal" width="360" responsive="true">
+	<div class="ui-listbox-filter-container">
+		<input pInputText type="text" [(ngModel)]="orgKeyword" placeholder="关键字" />
+		<button pButton type="button" (click)="SearchChooseOrg()" icon="fa-search"></button>
+	</div>
+	<p-dataTable [value]="chooseOrgList" selectionMode="single" [(selection)]="chooseOrg" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="chooseOrgTotal" (onLazyLoad)="LoadChooseOrgData($event)">
+		<p-column field="name" header="名称"></p-column>
+		<p-column field="flag" header="标示"></p-column>
+	</p-dataTable>
+	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+		<button (click)="orgDisplay=false" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left"><span class="ui-button-icon-left ui-c fa fa-fw fa-close"></span><span class="ui-button-text ui-c">No</span></button>
+		<button (click)="ChooseOrg()" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left"><span class="ui-button-icon-left ui-c fa fa-fw fa-check"></span><span class="ui-button-text ui-c">Yes</span></button>
+	</div>
+</p-dialog>
+
+<!--  否决提示 -->
+<p-dialog header="否决提示" [(visible)]="display" modal="modal" width="360" responsive="true">
+	<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+		<div class="ui-grid-row">
+			<div class="ui-grid-col-4">
+				否决原因*:
+			</div>
+			<div class="ui-grid-col-8">
+				<input pInputText type="text" [(ngModel)]="remark" />
+			</div>
+		</div>
+	</div>
+	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+		<button (click)="display=false" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left"><span class="ui-button-icon-left ui-c fa fa-fw fa-close"></span><span class="ui-button-text ui-c">No</span></button>
+		<button (click)="Reject()" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left"><span class="ui-button-icon-left ui-c fa fa-fw fa-check"></span><span class="ui-button-text ui-c">Yes</span></button>
+	</div>
+</p-dialog>

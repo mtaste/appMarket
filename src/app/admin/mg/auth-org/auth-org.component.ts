@@ -135,6 +135,7 @@ export class AuthOrgComponent implements OnInit {
 			page: e.first / e.rows + 1,
 			rows: e.rows
 		};
+		this.keyword && (page['keyword'] = this.keyword);
 		this.authOrgService.GetOrgList(page, (ret) => {
 			ret = ret.data;
 			this.totalRecords = ret.total;
@@ -153,11 +154,8 @@ export class AuthOrgComponent implements OnInit {
 	//搜索
 	private keyword = "";
 	SearchOrg() {
-		this.msgs.push({
-			severity: 'success',
-			summary: '提示',
-			detail: this.keyword
-		});
+		var page = this.utilService.GetPageInfo();
+		this.LoadOrgListData(page);
 	};
 	//新增
 	private display = false;

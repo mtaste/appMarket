@@ -63,7 +63,7 @@ export class AuthFuncsComponent implements OnInit {
 		for(var k in keys) {
 			var kk = keys[k];
 			var m = this.t_funcs[kk];
-			this.funcs.push(m);
+			m && this.funcs.push(m);
 		}
 	}
 

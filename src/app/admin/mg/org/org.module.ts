@@ -29,7 +29,8 @@ import {
 	DataListModule,
 	DialogModule,
 	DataTableModule,
-	SharedModule
+	SharedModule,
+	DropdownModule
 } from 'primeng/primeng';
 @NgModule({
 	imports: [
@@ -47,7 +48,8 @@ import {
 		DialogModule,
 		DataTableModule,
 		SharedModule,
-		ComponentsModule
+		ComponentsModule,
+		DropdownModule 
 	],
 	declarations: [
 		OrgRegisterComponent,

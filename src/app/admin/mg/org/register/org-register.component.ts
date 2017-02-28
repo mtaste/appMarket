@@ -63,11 +63,11 @@ export class OrgRegisterComponent implements OnInit {
 		e.listObj.funcObj.RestFuncs(['add']);
 	};
 	RowSeleted(data) {
+		var f = this.obj['listObj']['funcObj'];
 		if(!data && data.id) {
 			f.RestFuncs(['add', 'mod']);
 			return;
 		};
-		var f = this.obj['listObj']['funcObj'];
 		if(data.status == this.utilService.GetStatus('0')) {
 			f.RestFuncs(['add', 'mod', 'app', 'remove']);
 		} else if(data.status == this.utilService.GetStatus('1')) {

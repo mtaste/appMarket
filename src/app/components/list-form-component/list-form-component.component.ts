@@ -87,6 +87,7 @@ export class ListFormComponentComponent implements OnInit {
 				}
 				this.listObj['selectedObj']['status'] = this.utilService.GetStatus('0');
 			}
+			this.SelectedRow(this.listObj['selectedObj']);
 		});
 	};
 	ListInit(e) {

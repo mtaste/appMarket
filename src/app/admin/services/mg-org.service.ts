@@ -9,6 +9,9 @@ import {
 import {
 	Http
 } from "@angular/http";
+import {
+	RequestService
+} from "../../shared/request.service";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/switchMap";
 
@@ -16,31 +19,31 @@ import "rxjs/add/operator/switchMap";
 export class MgOrgService {
 
 	constructor(@Inject(STARWARS_BASE_URL) private starwarUrl,
-		private http: Http
+		private http: Http,
+		private requestService: RequestService
 	) {};
 	//获取列表信息
-	GetBillList() {
-		return this.http.get(`${this.starwarUrl}/org/bill/list.json`)
-			.map(res => res.json());
+	GetChooseOrgList(param, bk) {
+		this.requestService.Post('mg/org/authBill/orgList.json', param, bk);
 	};
 	//获取机构权限列表
-	GetAuthList() {
-		return this.http.get(`${this.starwarUrl}/org/auth/list.json`)
-			.map(res => res.json());
+	GetCanAuthList(bk) {
+		this.requestService.Post('mg/org/authBill/authList.json', {}, bk);
 	};
 	//获取机构选择权限
-	GetBillOrgAuth() {
-		return this.http.get(`${this.starwarUrl}/org/bill/auth.json`)
-			.map(res => res.json());
+	GetBillDetail(id, bk) {
+		this.requestService.Post('mg/org/authBill/detail.json', {
+			id: id
+		}, bk);
 	};
 	//获取机构权限
-	GetOrgAuth() {
-		return this.http.get(`${this.starwarUrl}/org/authList.json`)
-			.map(res => res.json());
+	GetOrgAuth(id, bk) {
+		this.requestService.Post('mg/org/auths.json', {
+			orgId: id
+		}, bk);
 	};
-	//获取机构权限
-	GetOrgList() {
-		return this.http.get(`${this.starwarUrl}/org/list.json`)
-			.map(res => res.json());
+	//获取机构列表
+	GetOrgList(param, bk) {
+		this.requestService.Post('org/list.json', param, bk);
 	};
 }

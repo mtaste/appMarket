@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-03-01 11:37:20
+Date: 2017-03-01 17:37:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,6 +24,7 @@ CREATE TABLE `crm_cus_info` (
   `name` varchar(200) DEFAULT NULL,
   `address` varchar(200) DEFAULT NULL,
   `contact` varchar(200) DEFAULT NULL,
+  `remark` varchar(500) DEFAULT NULL,
   `mobile` varchar(50) DEFAULT NULL,
   `org_id` varchar(36) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -32,8 +33,49 @@ CREATE TABLE `crm_cus_info` (
 -- ----------------------------
 -- Records of crm_cus_info
 -- ----------------------------
-INSERT INTO `crm_cus_info` VALUES ('ce59966a60a049ea8ac3fe3c96d5726f', 'f', 'f', 'fa', 'fa', 'e2ff5e22cfe94054932ffca05e145934');
-INSERT INTO `crm_cus_info` VALUES ('e876bdcfc6394ec8b4007e6585ed1832', 'bdxfv', 'ab', 'ab', 'ab', 'e2ff5e22cfe94054932ffca05e145934');
+INSERT INTO `crm_cus_info` VALUES ('ce59966a60a049ea8ac3fe3c96d5726f', 'f', 'f', 'fa', 'Te', 'fa', 'e2ff5e22cfe94054932ffca05e145934');
+INSERT INTO `crm_cus_info` VALUES ('e876bdcfc6394ec8b4007e6585ed1832', 'bdxfv', 'ab', 'ab', 'a', 'ab', 'e2ff5e22cfe94054932ffca05e145934');
+
+-- ----------------------------
+-- Table structure for `crm_sup_info`
+-- ----------------------------
+DROP TABLE IF EXISTS `crm_sup_info`;
+CREATE TABLE `crm_sup_info` (
+  `id` varchar(36) NOT NULL,
+  `name` varchar(200) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `contact` varchar(200) DEFAULT NULL,
+  `remark` varchar(500) DEFAULT NULL,
+  `mobile` varchar(50) DEFAULT NULL,
+  `org_id` varchar(36) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of crm_sup_info
+-- ----------------------------
+INSERT INTO `crm_sup_info` VALUES ('a187c76fcf7c4dda868773c4ce32c3be', 'tet', 'etes', 'testfsd', 'Testafdsafsdfafsafdsfds', 'fdsafdsa', 'e2ff5e22cfe94054932ffca05e145934');
+
+-- ----------------------------
+-- Table structure for `im_product_info`
+-- ----------------------------
+DROP TABLE IF EXISTS `im_product_info`;
+CREATE TABLE `im_product_info` (
+  `id` varchar(36) NOT NULL,
+  `name` varchar(200) DEFAULT NULL,
+  `serial_num` varchar(200) DEFAULT NULL,
+  `self_num` varchar(200) DEFAULT NULL,
+  `depict` varchar(500) DEFAULT NULL,
+  `remark` varchar(500) DEFAULT NULL,
+  `status` varchar(10) DEFAULT NULL,
+  `org_id` varchar(36) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of im_product_info
+-- ----------------------------
+INSERT INTO `im_product_info` VALUES ('7ec302194e7244839df7e95f39eae685', 'aa', null, 'BB', 'BB', 'BB', null, 'e2ff5e22cfe94054932ffca05e145934');
 
 -- ----------------------------
 -- Table structure for `mg_org_auth`
@@ -50,6 +92,7 @@ CREATE TABLE `mg_org_auth` (
 -- ----------------------------
 -- Records of mg_org_auth
 -- ----------------------------
+INSERT INTO `mg_org_auth` VALUES ('405997fb523a4a79b9dc83e919164e44', 'f92ac73813eb4545bc29bde7e5f86e41', '1', '0');
 INSERT INTO `mg_org_auth` VALUES ('58a7a53ae4c84b20b320bbafbdd56f19', '86b26d4b86ca409c9a726a2d9c0dec79', '1', '2');
 INSERT INTO `mg_org_auth` VALUES ('85433893d097453dbac55f45da3ebc94', '86b26d4b86ca409c9a726a2d9c0dec79', '1', '2');
 INSERT INTO `mg_org_auth` VALUES ('cc72d0bd1ac84cdabecdb1804c2ca07a', '86b26d4b86ca409c9a726a2d9c0dec79', '-1', '2');
@@ -70,6 +113,10 @@ CREATE TABLE `mg_org_auth_detail` (
 -- ----------------------------
 -- Records of mg_org_auth_detail
 -- ----------------------------
+INSERT INTO `mg_org_auth_detail` VALUES ('4cf5d314-fe5d-11e6-a606-00163e028d22', '405997fb523a4a79b9dc83e919164e44', '6cf1391a9e3c4ac5af95534de51d7bd6');
+INSERT INTO `mg_org_auth_detail` VALUES ('4cf5d777-fe5d-11e6-a606-00163e028d22', '405997fb523a4a79b9dc83e919164e44', 'ba7aa68555d5474ca6a6e3a12ccd1afe');
+INSERT INTO `mg_org_auth_detail` VALUES ('4cf5d87b-fe5d-11e6-a606-00163e028d22', '405997fb523a4a79b9dc83e919164e44', 'c3524525c489444aac421df515c63873');
+INSERT INTO `mg_org_auth_detail` VALUES ('4cf5da14-fe5d-11e6-a606-00163e028d22', '405997fb523a4a79b9dc83e919164e44', 'da8bf91990b44726bfa4ea7a05a4499f');
 INSERT INTO `mg_org_auth_detail` VALUES ('aa3185e3-fd98-11e6-a606-00163e028d22', '58a7a53ae4c84b20b320bbafbdd56f19', '8fb8b57f988a49c39e7398f7e4a88f31');
 INSERT INTO `mg_org_auth_detail` VALUES ('c0328e3b-fd93-11e6-a606-00163e028d22', 'e031579252e94ec5b6a23804aadd7eed', '1096978102094137b78bebc1de645e65');
 INSERT INTO `mg_org_auth_detail` VALUES ('c032927f-fd93-11e6-a606-00163e028d22', 'e031579252e94ec5b6a23804aadd7eed', '4ac1d4f894704f45b779de16b723ec04');
@@ -117,6 +164,7 @@ CREATE TABLE `mg_org_register` (
 -- Records of mg_org_register
 -- ----------------------------
 INSERT INTO `mg_org_register` VALUES ('4d902e707a3d458fba4b3b66d040829f', 'a', 'a', 'a', 'a', 'a', 'admin', 'admin', '2', null);
+INSERT INTO `mg_org_register` VALUES ('7a3422890ab547e78de73c4c375b3018', 'fsd', 'fds', 'fsdfds', 'fds', 'fds', 'admin', 'admin', '2', null);
 INSERT INTO `mg_org_register` VALUES ('ea13706be922472c9bcf779b9822a1f6', 'b', 'b', 'b', 'b', 'b', 'admin', 'admin', '2', null);
 
 -- ----------------------------
@@ -167,10 +215,12 @@ INSERT INTO `sys_approval_list` VALUES ('1cceeaeb23964f35a4071da044a92975', '642
 INSERT INTO `sys_approval_list` VALUES ('1ecfd3483625429f96d57c71b61e7810', '348cc8382cb6401bb86d3612a9b1528e', 'MgOrgRegisterDTO', 'admin', '2017-02-28 10:00:18', '99', 'Test');
 INSERT INTO `sys_approval_list` VALUES ('2a59aced4007466c9ab92c51e7b75535', '6427944f86d040f8bd9feaf99412d611', 'MgOrgRegisterDTO', 'admin', '2017-02-27 17:07:28', '2', '');
 INSERT INTO `sys_approval_list` VALUES ('2dc9b6d6f8364934b6b66bbfa5c79591', 'a64f306d77d8486d87f237aca19a99a0', 'MgOrgAuthDTO', 'admin', '2017-02-28 16:16:58', '1', '');
+INSERT INTO `sys_approval_list` VALUES ('2f8aa0d00ef64b02949d29e7eb73615c', '7a3422890ab547e78de73c4c375b3018', 'MgOrgRegisterDTO', 'admin', '2017-03-01 15:55:29', '1', '');
 INSERT INTO `sys_approval_list` VALUES ('2fae0d837d0a4f07a2b07c3e9220c10a', 'a64f306d77d8486d87f237aca19a99a0', 'MgOrgAuthDTO', 'admin', '2017-02-28 16:11:38', '1', '');
 INSERT INTO `sys_approval_list` VALUES ('319f7b8ff6c44670ae2a88271df95c24', '843d4f023ec0455490ab9e1e9670ff94', 'MgOrgRegisterDTO', 'admin', '2017-02-27 15:33:57', '2', '');
 INSERT INTO `sys_approval_list` VALUES ('382ac611dc794dbf83682734cfeb9061', 'a64f306d77d8486d87f237aca19a99a0', 'MgOrgAuth', '', '2017-02-28 16:11:44', '2', '');
 INSERT INTO `sys_approval_list` VALUES ('3aa5e0582b4e40d5861fcc449765a046', 'ea13706be922472c9bcf779b9822a1f6', 'MgOrgRegisterDTO', 'admin', '2017-02-28 19:11:02', '1', '');
+INSERT INTO `sys_approval_list` VALUES ('3ce23b15bc224872994106f598ecc39f', '7a3422890ab547e78de73c4c375b3018', 'MgOrgRegisterDTO', 'admin', '2017-03-01 15:55:14', '1', '');
 INSERT INTO `sys_approval_list` VALUES ('3e10fb8578f84462ad12da1cafde1313', '13483c98a7104318bee76e18eb1c77dc', 'MgOrgRegister', 'admin', '2017-02-28 11:09:20', '2', '');
 INSERT INTO `sys_approval_list` VALUES ('4110e7ccbac947269134e81ca0ae288b', '83075a6faa8f4cc3b0e7f7bd34d58fe6', 'MgOrgRegisterDTO', 'admin', '2017-02-28 10:08:49', '1', '');
 INSERT INTO `sys_approval_list` VALUES ('440eb3bc6d344e2caa7d51c331c107f0', '38b18de2453041c4ad46b86b18cd642a', 'MgOrgAuthDTO', 'admin', '2017-02-28 16:27:18', '1', '');
@@ -198,6 +248,7 @@ INSERT INTO `sys_approval_list` VALUES ('9646fb557cd84eaabbff86632e4a70a0', 'e03
 INSERT INTO `sys_approval_list` VALUES ('9a0b8a7f6c454bd399ade43ebb75b9a0', '4d902e707a3d458fba4b3b66d040829f', 'MgOrgRegisterDTO', 'admin', '2017-02-28 11:31:16', '1', '');
 INSERT INTO `sys_approval_list` VALUES ('9b6d52b51c204329b8fde7666e1d8d83', '38b18de2453041c4ad46b86b18cd642a', 'MgOrgAuthDTO', 'admin', '2017-02-28 16:16:30', '2', '');
 INSERT INTO `sys_approval_list` VALUES ('9f204e2aa5344d10abf190b0e498667b', '6427944f86d040f8bd9feaf99412d611', 'MgOrgRegisterDTO', 'admin', '2017-02-27 17:07:25', '1', '');
+INSERT INTO `sys_approval_list` VALUES ('a0d6a1334f80421a916c335bc29000fc', '7a3422890ab547e78de73c4c375b3018', 'MgOrgRegisterDTO', 'admin', '2017-03-01 15:55:19', '99', 'afdsa');
 INSERT INTO `sys_approval_list` VALUES ('a15ec1f928e5476596a8dce758729d09', 'e031579252e94ec5b6a23804aadd7eed', 'MgOrgAuthDTO', 'admin', '2017-02-28 16:32:18', '1', '');
 INSERT INTO `sys_approval_list` VALUES ('a3d5f1c6bfc14f85894d45c4b67133ba', 'cc72d0bd1ac84cdabecdb1804c2ca07a', 'MgOrgAuthDTO', 'admin', '2017-02-28 17:32:05', '1', '');
 INSERT INTO `sys_approval_list` VALUES ('a661443be8cc45a0b6a6d0d665ca9d3b', '0e48876593c24508bf6ede0adea89c3b', 'MgOrgRegisterDTO', 'admin', '2017-02-28 11:10:44', '1', '');
@@ -218,6 +269,7 @@ INSERT INTO `sys_approval_list` VALUES ('d415597bd71249789de12b7d406e2de3', '815
 INSERT INTO `sys_approval_list` VALUES ('d5ce7f2eb6ee4298bd14b7679ec4c77c', 'a64f306d77d8486d87f237aca19a99a0', 'MgOrgAuthDTO', 'admin', '2017-02-28 16:11:20', '1', '');
 INSERT INTO `sys_approval_list` VALUES ('d7d2d2bc28d94fdf9cffbf875f2286d9', '4d902e707a3d458fba4b3b66d040829f', 'MgOrgRegisterDTO', 'admin', '2017-02-28 11:33:06', '1', '');
 INSERT INTO `sys_approval_list` VALUES ('dab32d727ff74d2eb7b320163909a21e', 'a64f306d77d8486d87f237aca19a99a0', 'MgOrgAuthDTO', 'admin', '2017-02-28 16:18:56', '99', 'gge');
+INSERT INTO `sys_approval_list` VALUES ('e016a6653a5e45088509356ae8e6ae73', '7a3422890ab547e78de73c4c375b3018', 'MgOrgRegisterDTO', 'admin', '2017-03-01 15:55:33', '2', '');
 INSERT INTO `sys_approval_list` VALUES ('e02c80cd0a9842c893486ba6ae01ed7f', '348cc8382cb6401bb86d3612a9b1528e', 'MgOrgRegisterDTO', 'admin', '2017-02-28 09:59:54', '1', '');
 INSERT INTO `sys_approval_list` VALUES ('e3f419b2e84d4fd0a6b4e63803b2e269', '38b18de2453041c4ad46b86b18cd642a', 'MgOrgAuthDTO', 'admin', '2017-02-28 16:06:16', '99', '');
 INSERT INTO `sys_approval_list` VALUES ('f0495fe931034996903f48352cbddaf9', '837e9db99ae545c3965883713646d745', 'MgOrgRegisterDTO', 'admin', '2017-02-28 11:06:20', '2', '');
@@ -251,6 +303,8 @@ CREATE TABLE `sys_auth` (
 -- Records of sys_auth
 -- ----------------------------
 INSERT INTO `sys_auth` VALUES ('02a18777e6774e5482488297fcf26653', '2', '新增', '2', 'auth/define/save.do', 'fa-plus', 'add', null, null, null, null, '1');
+INSERT INTO `sys_auth` VALUES ('0575c843bad7482ba7eb9ecd6269d1f5', 'c3524525c489444aac421df515c63873', '库存变更', '1', '/admin/im/stock-change', '', '', '1', null, null, null, '2');
+INSERT INTO `sys_auth` VALUES ('0694283e392b42a2869cdf8093cbeb90', '0575c843bad7482ba7eb9ecd6269d1f5', '删除', '2', '', 'fa-remove', 'remove', '1', null, null, null, '6');
 INSERT INTO `sys_auth` VALUES ('1', '0', '平台管理', '1', '', '', '', null, null, null, null, '1');
 INSERT INTO `sys_auth` VALUES ('1096978102094137b78bebc1de645e65', '479852e16c834956b8b6c3b801ffd11c', '新增人员', '2', 'org/dept/role/user/save.do', 'fa-plus', 'addUser', '1', null, null, null, '7');
 INSERT INTO `sys_auth` VALUES ('13439fc34d4b41c2b3f84a6770073692', '0', '客户管理', '1', '', '', '', '1', null, null, null, '5');
@@ -266,14 +320,20 @@ INSERT INTO `sys_auth` VALUES ('4ac1d4f894704f45b779de16b723ec04', '479852e16c83
 INSERT INTO `sys_auth` VALUES ('4b8d8cd29a634d2ba2e44ba1e9b7cf47', '76737c29c36a4d449b50a58137504355', '否决', '2', 'mg/org/register/reject.do', 'fa-remove', 'reject', null, null, null, null, '5');
 INSERT INTO `sys_auth` VALUES ('50c1cb37d53e4ea39da31b039b656364', 'e666e48e9d8b44a0a34ff136bcf2ad14', '客户模组', '1', '/admin/mg/org/list', '', '', null, null, null, null, '3');
 INSERT INTO `sys_auth` VALUES ('58ab8612b36642c4a0fd96970a878180', 'd3ecb27d914d427d95d4d8194b00d4ad', '审核', '2', 'mg/org/authBill/auth.do', 'fa-check', 'auth', null, null, null, null, '4');
-INSERT INTO `sys_auth` VALUES ('617d42f9c2244e21a906baaddee38b69', '0', '供应商管理', '1', '', '', '', '1', null, null, null, '6');
 INSERT INTO `sys_auth` VALUES ('6374c1e4f3ac40da80b8f86b42d855a2', '13439fc34d4b41c2b3f84a6770073692', '客户信息', '1', '/admin/crm/cus', '', '', '1', null, null, null, '1');
+INSERT INTO `sys_auth` VALUES ('664354eb5aea4a00853ddb18dc68ebbd', '0575c843bad7482ba7eb9ecd6269d1f5', '查看', '2', '', 'fa-edit', 'mod', '1', null, null, null, '2');
 INSERT INTO `sys_auth` VALUES ('672bf70518114cbfa03e809489f3ec43', 'f70012acb9f940bbb583fcd63e9af5ab', '基本资料', '1', '/admin/sys/orgDefine/info', '', '', '1', '1', null, null, '1');
 INSERT INTO `sys_auth` VALUES ('67340c3f1b634546950bdb255e5982ac', 'a15ae14869f04822849571fb6ada622b', '用户管理', '1', '/admin/personnel/mgUser', '', '', '1', '1', null, null, null);
 INSERT INTO `sys_auth` VALUES ('67d5e55ab8cb4d5b93220645e6e85c99', '39b352a998a3499183295152e7e7e541', '权限保存', '2', 'org/auth/save', 'fa-save', 'save', null, null, null, null, '4');
+INSERT INTO `sys_auth` VALUES ('6cf1391a9e3c4ac5af95534de51d7bd6', 'ba7aa68555d5474ca6a6e3a12ccd1afe', '新增', '2', 'im/product/book-in/save.do', 'fa-plus', 'add', '1', null, null, null, '1');
 INSERT INTO `sys_auth` VALUES ('6db97da52d0d494fa8cc81c59329b179', '2', '删除', '2', 'auth/define/remove.do', 'fa-remove', 'remove', null, null, null, null, '3');
 INSERT INTO `sys_auth` VALUES ('6f55a605da78479db8d53489b02b56f8', '67340c3f1b634546950bdb255e5982ac', '删除', '2', 'user/remove.do', 'fa-remove', 'remove', '1', null, null, null, '3');
+INSERT INTO `sys_auth` VALUES ('7030524f08a742649a9c5255199f797d', '0575c843bad7482ba7eb9ecd6269d1f5', '新增', '2', '', 'fa-plus', 'add', '1', null, null, null, '1');
+INSERT INTO `sys_auth` VALUES ('7118e0b350e14f7aa9715831e9cf16d3', '13439fc34d4b41c2b3f84a6770073692', '供应商信息', '1', '/admin/crm/sup', '', '', '1', null, null, null, '2');
 INSERT INTO `sys_auth` VALUES ('76737c29c36a4d449b50a58137504355', 'e666e48e9d8b44a0a34ff136bcf2ad14', '机构登记', '1', '/admin/mg/org/register', '', '', null, null, null, null, '1');
+INSERT INTO `sys_auth` VALUES ('77885a6895b543059b135354d5f62fce', '0575c843bad7482ba7eb9ecd6269d1f5', '审核', '2', '', 'fa-check', 'auth', '1', null, null, null, '4');
+INSERT INTO `sys_auth` VALUES ('7d5f7d02ccc74bbf9ccd8fdef0c94a3a', '0575c843bad7482ba7eb9ecd6269d1f5', '提交', '2', '', 'fa-check', 'app', '1', null, null, null, '3');
+INSERT INTO `sys_auth` VALUES ('7e9a289b3597483a84c08bbe71077558', '7118e0b350e14f7aa9715831e9cf16d3', '查看', '2', 'crm/sup/save.do', 'fa-edit', 'mod', '1', null, null, null, '2');
 INSERT INTO `sys_auth` VALUES ('81064737ff3f4f0da71141ec42f366ce', '479852e16c834956b8b6c3b801ffd11c', '删除人员', '2', 'org/dept/role/user/remove.do', 'fa-remove', 'removeUser', '1', null, null, null, '8');
 INSERT INTO `sys_auth` VALUES ('8f8a71e10f5c46c695e8f1c2303a3b2f', '76737c29c36a4d449b50a58137504355', '提交', '2', 'mg/org/register/app.do', 'fa-check', 'app', null, null, null, null, '3');
 INSERT INTO `sys_auth` VALUES ('8fb8b57f988a49c39e7398f7e4a88f31', '479852e16c834956b8b6c3b801ffd11c', '新增', '2', 'org/dept/save.do', 'fa-plus', 'add', '1', null, null, null, '1');
@@ -283,17 +343,21 @@ INSERT INTO `sys_auth` VALUES ('a4ca0b3ac0a54e23a3e295380c4e1c79', '76737c29c36a
 INSERT INTO `sys_auth` VALUES ('aaf82f26159f426581e59355c7b610b1', '39b352a998a3499183295152e7e7e541', '删除', '2', 'org/remove.do', 'fa-remove', 'remove', null, null, null, null, '3');
 INSERT INTO `sys_auth` VALUES ('ad9d8b44b586456180a751fb87db8db2', '2', '保存', '2', 'auth/define/save.do', 'fa-mod', 'mod', null, null, null, null, '2');
 INSERT INTO `sys_auth` VALUES ('b8e10a35c90e4b5596a5eed52397373d', '67340c3f1b634546950bdb255e5982ac', '新增', '2', 'user/save.do', 'fa-plus', 'add', '1', null, null, null, '1');
+INSERT INTO `sys_auth` VALUES ('ba7aa68555d5474ca6a6e3a12ccd1afe', 'c3524525c489444aac421df515c63873', '产品信息', '1', '/admin/im/book-in', '', '', '1', null, null, null, '1');
 INSERT INTO `sys_auth` VALUES ('bbf82dfc30d54277a32d50189ce66030', '479852e16c834956b8b6c3b801ffd11c', '新增职务', '2', 'org/dept/role/save.do', 'fa-plus', 'addRole', '1', null, null, null, '4');
-INSERT INTO `sys_auth` VALUES ('c4dae5fe1acc46e8945c1f415258fddd', '617d42f9c2244e21a906baaddee38b69', '供应商信息', '1', '', '', '', '1', null, null, null, '1');
+INSERT INTO `sys_auth` VALUES ('c3524525c489444aac421df515c63873', '0', '库存管理', '1', '', '', '', '1', null, null, null, '6');
 INSERT INTO `sys_auth` VALUES ('c9228a9899dc4f98b576a1f0e049e175', '39b352a998a3499183295152e7e7e541', '新增', '2', 'org/save.do', 'fa-plus', 'add', null, null, null, null, '1');
+INSERT INTO `sys_auth` VALUES ('ce09b46ede8946f0bc5003c19987b363', '0575c843bad7482ba7eb9ecd6269d1f5', '否决', '2', '', 'fa-remove', 'reject', '1', null, null, null, '5');
 INSERT INTO `sys_auth` VALUES ('d03715b26c894a59a99fc64351b2013a', '479852e16c834956b8b6c3b801ffd11c', '权限配置', '2', 'org/dept/role/save.do', 'fa-edit', 'modRole', '1', null, null, null, '5');
 INSERT INTO `sys_auth` VALUES ('d3ecb27d914d427d95d4d8194b00d4ad', 'e666e48e9d8b44a0a34ff136bcf2ad14', '模组授权', '1', '/admin/mg/org/auth', '', '', null, null, null, null, '2');
-INSERT INTO `sys_auth` VALUES ('d7ac735162954c9382936183dd2eb465', '6374c1e4f3ac40da80b8f86b42d855a2', '修改', '2', 'crm/cus/save.do', 'fa-edit', 'mod', '1', null, null, null, '2');
+INSERT INTO `sys_auth` VALUES ('d7ac735162954c9382936183dd2eb465', '6374c1e4f3ac40da80b8f86b42d855a2', '查看', '2', 'crm/cus/save.do', 'fa-edit', 'mod', '1', null, null, null, '2');
 INSERT INTO `sys_auth` VALUES ('d7ea92ab47cb41b98cde8c0f31a1b004', 'd3ecb27d914d427d95d4d8194b00d4ad', '提交', '2', 'mg/org/authBill/app.do', 'fa-check', 'app', null, null, null, null, '3');
+INSERT INTO `sys_auth` VALUES ('da8bf91990b44726bfa4ea7a05a4499f', 'ba7aa68555d5474ca6a6e3a12ccd1afe', '查看', '2', 'im/product/book-in/save.do', 'fa-edit', 'mod', '1', null, null, null, '2');
 INSERT INTO `sys_auth` VALUES ('dc920fce1934448fad21bc5f15cc2e37', 'd3ecb27d914d427d95d4d8194b00d4ad', '查看', '2', 'mg/org/authBill/save.do', 'fa-edit', 'mod', null, null, null, null, '2');
 INSERT INTO `sys_auth` VALUES ('e50a1c4f4fcd48a89d2428933741426a', '76737c29c36a4d449b50a58137504355', '审核', '2', 'mg/org/register/auth.do', 'fa-check', 'auth', null, null, null, null, '4');
 INSERT INTO `sys_auth` VALUES ('e666e48e9d8b44a0a34ff136bcf2ad14', '0', '机构授权', '1', '', '', '', null, null, null, null, '4');
 INSERT INTO `sys_auth` VALUES ('e9d19c4e1a6342e88a74f669a5da8328', 'd3ecb27d914d427d95d4d8194b00d4ad', '新增', '2', 'mg/org/authBill/save.do', 'fa-plus', 'add', null, null, null, null, '1');
+INSERT INTO `sys_auth` VALUES ('f1bc8030d1484e6bb212e5d45a9ce450', '7118e0b350e14f7aa9715831e9cf16d3', '新增', '2', 'crm/sup/save.do', 'fa-plus', 'add', '1', null, null, null, '1');
 INSERT INTO `sys_auth` VALUES ('f70012acb9f940bbb583fcd63e9af5ab', '0', '系统管理', '1', '', '', '', '1', null, null, null, '2');
 INSERT INTO `sys_auth` VALUES ('f7adb4149aa0406d891fec5be6e151e3', '479852e16c834956b8b6c3b801ffd11c', '删除职务', '2', 'org/dept/role/remove.do', 'fa-remove', 'removeRole', '1', null, null, null, '6');
 INSERT INTO `sys_auth` VALUES ('fafa0ee12ddf4e6598e816935c6ee168', '76737c29c36a4d449b50a58137504355', '新增', '2', 'mg/org/register/save.do', 'fa-plus', 'add', null, null, null, null, '1');
@@ -370,6 +434,7 @@ CREATE TABLE `sys_org` (
 -- ----------------------------
 -- Records of sys_org
 -- ----------------------------
+INSERT INTO `sys_org` VALUES ('ddb5dbae8f7241a59d78a109baaf4f6c', 'fsd', 'fds', 'fds', 'fsdfds', 'fds', '2');
 INSERT INTO `sys_org` VALUES ('e2ff5e22cfe94054932ffca05e145934', '开发公司', 'dev', null, null, null, null);
 INSERT INTO `sys_org` VALUES ('f92ac73813eb4545bc29bde7e5f86e41', 'b', 'b', null, null, null, null);
 
@@ -387,52 +452,6 @@ CREATE TABLE `sys_org_auth` (
 -- ----------------------------
 -- Records of sys_org_auth
 -- ----------------------------
-INSERT INTO `sys_org_auth` VALUES ('36aa79f6-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '02a18777e6774e5482488297fcf26653');
-INSERT INTO `sys_org_auth` VALUES ('36aa7c12-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '1');
-INSERT INTO `sys_org_auth` VALUES ('36aa7d65-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '1096978102094137b78bebc1de645e65');
-INSERT INTO `sys_org_auth` VALUES ('36aa7f24-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '13439fc34d4b41c2b3f84a6770073692');
-INSERT INTO `sys_org_auth` VALUES ('36aa8014-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '2');
-INSERT INTO `sys_org_auth` VALUES ('36aa81cd-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '258ecf13eecc49f18bea208dd6b9f00c');
-INSERT INTO `sys_org_auth` VALUES ('36aa8341-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '28d0694acd354be7ad1264cad548ce2e');
-INSERT INTO `sys_org_auth` VALUES ('36aa840b-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '39b352a998a3499183295152e7e7e541');
-INSERT INTO `sys_org_auth` VALUES ('36aa850f-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '3a5d809b46484cce85a7a18fb0445df5');
-INSERT INTO `sys_org_auth` VALUES ('36aa85ee-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '3c856ca262be4c09afd1aa66f372039d');
-INSERT INTO `sys_org_auth` VALUES ('36aa87a4-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '479852e16c834956b8b6c3b801ffd11c');
-INSERT INTO `sys_org_auth` VALUES ('36aa8957-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '498089d953894079b07205488df94d9d');
-INSERT INTO `sys_org_auth` VALUES ('36aa8a5a-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '4ac1d4f894704f45b779de16b723ec04');
-INSERT INTO `sys_org_auth` VALUES ('36aa8bca-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '4b8d8cd29a634d2ba2e44ba1e9b7cf47');
-INSERT INTO `sys_org_auth` VALUES ('36aa8d67-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '50c1cb37d53e4ea39da31b039b656364');
-INSERT INTO `sys_org_auth` VALUES ('36aa8ef2-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '58ab8612b36642c4a0fd96970a878180');
-INSERT INTO `sys_org_auth` VALUES ('36aa91c3-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '6374c1e4f3ac40da80b8f86b42d855a2');
-INSERT INTO `sys_org_auth` VALUES ('36aa92bc-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '672bf70518114cbfa03e809489f3ec43');
-INSERT INTO `sys_org_auth` VALUES ('36aa93ef-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '67340c3f1b634546950bdb255e5982ac');
-INSERT INTO `sys_org_auth` VALUES ('36aa94d2-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '67d5e55ab8cb4d5b93220645e6e85c99');
-INSERT INTO `sys_org_auth` VALUES ('36aa9595-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '6db97da52d0d494fa8cc81c59329b179');
-INSERT INTO `sys_org_auth` VALUES ('36aa9707-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '6f55a605da78479db8d53489b02b56f8');
-INSERT INTO `sys_org_auth` VALUES ('36aa990e-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '76737c29c36a4d449b50a58137504355');
-INSERT INTO `sys_org_auth` VALUES ('36aa9a6c-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '81064737ff3f4f0da71141ec42f366ce');
-INSERT INTO `sys_org_auth` VALUES ('36aa9bcc-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '8f8a71e10f5c46c695e8f1c2303a3b2f');
-INSERT INTO `sys_org_auth` VALUES ('36aa9ccd-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '8fb8b57f988a49c39e7398f7e4a88f31');
-INSERT INTO `sys_org_auth` VALUES ('36aa9df4-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'a15ae14869f04822849571fb6ada622b');
-INSERT INTO `sys_org_auth` VALUES ('36aa9f29-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'a406460ce4ef4fa1a7743c724613feda');
-INSERT INTO `sys_org_auth` VALUES ('36aaa080-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'a4ca0b3ac0a54e23a3e295380c4e1c79');
-INSERT INTO `sys_org_auth` VALUES ('36aaa15f-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'aaf82f26159f426581e59355c7b610b1');
-INSERT INTO `sys_org_auth` VALUES ('36aaa21c-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'ad9d8b44b586456180a751fb87db8db2');
-INSERT INTO `sys_org_auth` VALUES ('36aaa353-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'b8e10a35c90e4b5596a5eed52397373d');
-INSERT INTO `sys_org_auth` VALUES ('36aaa45b-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'bbf82dfc30d54277a32d50189ce66030');
-INSERT INTO `sys_org_auth` VALUES ('36aaa63b-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'c9228a9899dc4f98b576a1f0e049e175');
-INSERT INTO `sys_org_auth` VALUES ('36aaa74f-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'd03715b26c894a59a99fc64351b2013a');
-INSERT INTO `sys_org_auth` VALUES ('36aaa8c2-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'd3ecb27d914d427d95d4d8194b00d4ad');
-INSERT INTO `sys_org_auth` VALUES ('36aaaa78-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'd7ac735162954c9382936183dd2eb465');
-INSERT INTO `sys_org_auth` VALUES ('36aaabfc-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'd7ea92ab47cb41b98cde8c0f31a1b004');
-INSERT INTO `sys_org_auth` VALUES ('36aab255-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'dc920fce1934448fad21bc5f15cc2e37');
-INSERT INTO `sys_org_auth` VALUES ('36aab420-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'e50a1c4f4fcd48a89d2428933741426a');
-INSERT INTO `sys_org_auth` VALUES ('36aab56e-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'e666e48e9d8b44a0a34ff136bcf2ad14');
-INSERT INTO `sys_org_auth` VALUES ('36aab6e8-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'e9d19c4e1a6342e88a74f669a5da8328');
-INSERT INTO `sys_org_auth` VALUES ('36aab7d6-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'f70012acb9f940bbb583fcd63e9af5ab');
-INSERT INTO `sys_org_auth` VALUES ('36aab8ef-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'f7adb4149aa0406d891fec5be6e151e3');
-INSERT INTO `sys_org_auth` VALUES ('36aaba3e-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'fafa0ee12ddf4e6598e816935c6ee168');
-INSERT INTO `sys_org_auth` VALUES ('36aabbef-fe26-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'fec3e2fc717541c2ab24f05e37aacae3');
 INSERT INTO `sys_org_auth` VALUES ('39497e0c-fda7-11e6-a606-00163e028d22', 'f92ac73813eb4545bc29bde7e5f86e41', '1096978102094137b78bebc1de645e65');
 INSERT INTO `sys_org_auth` VALUES ('394b4c1d-fda7-11e6-a606-00163e028d22', 'f92ac73813eb4545bc29bde7e5f86e41', '3a5d809b46484cce85a7a18fb0445df5');
 INSERT INTO `sys_org_auth` VALUES ('394bd49d-fda7-11e6-a606-00163e028d22', 'f92ac73813eb4545bc29bde7e5f86e41', '479852e16c834956b8b6c3b801ffd11c');
@@ -448,6 +467,22 @@ INSERT INTO `sys_org_auth` VALUES ('3953157a-fda7-11e6-a606-00163e028d22', 'f92a
 INSERT INTO `sys_org_auth` VALUES ('3953b6e8-fda7-11e6-a606-00163e028d22', 'f92ac73813eb4545bc29bde7e5f86e41', 'd03715b26c894a59a99fc64351b2013a');
 INSERT INTO `sys_org_auth` VALUES ('39565347-fda7-11e6-a606-00163e028d22', 'f92ac73813eb4545bc29bde7e5f86e41', 'f70012acb9f940bbb583fcd63e9af5ab');
 INSERT INTO `sys_org_auth` VALUES ('39568a7e-fda7-11e6-a606-00163e028d22', 'f92ac73813eb4545bc29bde7e5f86e41', 'f7adb4149aa0406d891fec5be6e151e3');
+INSERT INTO `sys_org_auth` VALUES ('71d144c3-fe54-11e6-a606-00163e028d22', 'ddb5dbae8f7241a59d78a109baaf4f6c', '1096978102094137b78bebc1de645e65');
+INSERT INTO `sys_org_auth` VALUES ('71d34ed8-fe54-11e6-a606-00163e028d22', 'ddb5dbae8f7241a59d78a109baaf4f6c', '3a5d809b46484cce85a7a18fb0445df5');
+INSERT INTO `sys_org_auth` VALUES ('71d3c174-fe54-11e6-a606-00163e028d22', 'ddb5dbae8f7241a59d78a109baaf4f6c', '479852e16c834956b8b6c3b801ffd11c');
+INSERT INTO `sys_org_auth` VALUES ('71d44295-fe54-11e6-a606-00163e028d22', 'ddb5dbae8f7241a59d78a109baaf4f6c', '4ac1d4f894704f45b779de16b723ec04');
+INSERT INTO `sys_org_auth` VALUES ('71d5f91e-fe54-11e6-a606-00163e028d22', 'ddb5dbae8f7241a59d78a109baaf4f6c', '672bf70518114cbfa03e809489f3ec43');
+INSERT INTO `sys_org_auth` VALUES ('71d64d0c-fe54-11e6-a606-00163e028d22', 'ddb5dbae8f7241a59d78a109baaf4f6c', '67340c3f1b634546950bdb255e5982ac');
+INSERT INTO `sys_org_auth` VALUES ('71d7e0dc-fe54-11e6-a606-00163e028d22', 'ddb5dbae8f7241a59d78a109baaf4f6c', '6f55a605da78479db8d53489b02b56f8');
+INSERT INTO `sys_org_auth` VALUES ('71d93b53-fe54-11e6-a606-00163e028d22', 'ddb5dbae8f7241a59d78a109baaf4f6c', '81064737ff3f4f0da71141ec42f366ce');
+INSERT INTO `sys_org_auth` VALUES ('71d9c324-fe54-11e6-a606-00163e028d22', 'ddb5dbae8f7241a59d78a109baaf4f6c', '8fb8b57f988a49c39e7398f7e4a88f31');
+INSERT INTO `sys_org_auth` VALUES ('71da1c66-fe54-11e6-a606-00163e028d22', 'ddb5dbae8f7241a59d78a109baaf4f6c', 'a15ae14869f04822849571fb6ada622b');
+INSERT INTO `sys_org_auth` VALUES ('71da98a1-fe54-11e6-a606-00163e028d22', 'ddb5dbae8f7241a59d78a109baaf4f6c', 'a406460ce4ef4fa1a7743c724613feda');
+INSERT INTO `sys_org_auth` VALUES ('71dc950a-fe54-11e6-a606-00163e028d22', 'ddb5dbae8f7241a59d78a109baaf4f6c', 'b8e10a35c90e4b5596a5eed52397373d');
+INSERT INTO `sys_org_auth` VALUES ('71dd20a4-fe54-11e6-a606-00163e028d22', 'ddb5dbae8f7241a59d78a109baaf4f6c', 'bbf82dfc30d54277a32d50189ce66030');
+INSERT INTO `sys_org_auth` VALUES ('71de11b4-fe54-11e6-a606-00163e028d22', 'ddb5dbae8f7241a59d78a109baaf4f6c', 'd03715b26c894a59a99fc64351b2013a');
+INSERT INTO `sys_org_auth` VALUES ('71e14d3d-fe54-11e6-a606-00163e028d22', 'ddb5dbae8f7241a59d78a109baaf4f6c', 'f70012acb9f940bbb583fcd63e9af5ab');
+INSERT INTO `sys_org_auth` VALUES ('71e17617-fe54-11e6-a606-00163e028d22', 'ddb5dbae8f7241a59d78a109baaf4f6c', 'f7adb4149aa0406d891fec5be6e151e3');
 INSERT INTO `sys_org_auth` VALUES ('db3b276d-fd98-11e6-a606-00163e028d22', '86b26d4b86ca409c9a726a2d9c0dec79', '1096978102094137b78bebc1de645e65');
 INSERT INTO `sys_org_auth` VALUES ('db3b2ff8-fd98-11e6-a606-00163e028d22', '86b26d4b86ca409c9a726a2d9c0dec79', '3a5d809b46484cce85a7a18fb0445df5');
 INSERT INTO `sys_org_auth` VALUES ('db3b311a-fd98-11e6-a606-00163e028d22', '86b26d4b86ca409c9a726a2d9c0dec79', '479852e16c834956b8b6c3b801ffd11c');
@@ -458,6 +493,66 @@ INSERT INTO `sys_org_auth` VALUES ('db3b34c6-fd98-11e6-a606-00163e028d22', '86b2
 INSERT INTO `sys_org_auth` VALUES ('db3b354f-fd98-11e6-a606-00163e028d22', '86b26d4b86ca409c9a726a2d9c0dec79', 'd03715b26c894a59a99fc64351b2013a');
 INSERT INTO `sys_org_auth` VALUES ('db3b35cc-fd98-11e6-a606-00163e028d22', '86b26d4b86ca409c9a726a2d9c0dec79', 'f70012acb9f940bbb583fcd63e9af5ab');
 INSERT INTO `sys_org_auth` VALUES ('db3b3646-fd98-11e6-a606-00163e028d22', '86b26d4b86ca409c9a726a2d9c0dec79', 'f7adb4149aa0406d891fec5be6e151e3');
+INSERT INTO `sys_org_auth` VALUES ('ec016297-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '02a18777e6774e5482488297fcf26653');
+INSERT INTO `sys_org_auth` VALUES ('ec01664d-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '0575c843bad7482ba7eb9ecd6269d1f5');
+INSERT INTO `sys_org_auth` VALUES ('ec01688f-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '0694283e392b42a2869cdf8093cbeb90');
+INSERT INTO `sys_org_auth` VALUES ('ec01694f-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '1');
+INSERT INTO `sys_org_auth` VALUES ('ec016a75-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '1096978102094137b78bebc1de645e65');
+INSERT INTO `sys_org_auth` VALUES ('ec016c20-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '13439fc34d4b41c2b3f84a6770073692');
+INSERT INTO `sys_org_auth` VALUES ('ec016f02-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '2');
+INSERT INTO `sys_org_auth` VALUES ('ec0170c5-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '258ecf13eecc49f18bea208dd6b9f00c');
+INSERT INTO `sys_org_auth` VALUES ('ec017233-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '28d0694acd354be7ad1264cad548ce2e');
+INSERT INTO `sys_org_auth` VALUES ('ec0172f2-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '39b352a998a3499183295152e7e7e541');
+INSERT INTO `sys_org_auth` VALUES ('ec0173f8-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '3a5d809b46484cce85a7a18fb0445df5');
+INSERT INTO `sys_org_auth` VALUES ('ec0174cc-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '3c856ca262be4c09afd1aa66f372039d');
+INSERT INTO `sys_org_auth` VALUES ('ec0175b5-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '479852e16c834956b8b6c3b801ffd11c');
+INSERT INTO `sys_org_auth` VALUES ('ec017744-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '498089d953894079b07205488df94d9d');
+INSERT INTO `sys_org_auth` VALUES ('ec01783e-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '4ac1d4f894704f45b779de16b723ec04');
+INSERT INTO `sys_org_auth` VALUES ('ec017997-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '4b8d8cd29a634d2ba2e44ba1e9b7cf47');
+INSERT INTO `sys_org_auth` VALUES ('ec017b27-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '50c1cb37d53e4ea39da31b039b656364');
+INSERT INTO `sys_org_auth` VALUES ('ec017ca2-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '58ab8612b36642c4a0fd96970a878180');
+INSERT INTO `sys_org_auth` VALUES ('ec017e58-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '6374c1e4f3ac40da80b8f86b42d855a2');
+INSERT INTO `sys_org_auth` VALUES ('ec01810c-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '664354eb5aea4a00853ddb18dc68ebbd');
+INSERT INTO `sys_org_auth` VALUES ('ec018280-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '672bf70518114cbfa03e809489f3ec43');
+INSERT INTO `sys_org_auth` VALUES ('ec01848e-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '67340c3f1b634546950bdb255e5982ac');
+INSERT INTO `sys_org_auth` VALUES ('ec018586-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '67d5e55ab8cb4d5b93220645e6e85c99');
+INSERT INTO `sys_org_auth` VALUES ('ec01875a-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '6cf1391a9e3c4ac5af95534de51d7bd6');
+INSERT INTO `sys_org_auth` VALUES ('ec018817-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '6db97da52d0d494fa8cc81c59329b179');
+INSERT INTO `sys_org_auth` VALUES ('ec01894b-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '6f55a605da78479db8d53489b02b56f8');
+INSERT INTO `sys_org_auth` VALUES ('ec018b20-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '7030524f08a742649a9c5255199f797d');
+INSERT INTO `sys_org_auth` VALUES ('ec018ccd-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '7118e0b350e14f7aa9715831e9cf16d3');
+INSERT INTO `sys_org_auth` VALUES ('ec018e10-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '76737c29c36a4d449b50a58137504355');
+INSERT INTO `sys_org_auth` VALUES ('ec019125-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '77885a6895b543059b135354d5f62fce');
+INSERT INTO `sys_org_auth` VALUES ('ec019478-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '7d5f7d02ccc74bbf9ccd8fdef0c94a3a');
+INSERT INTO `sys_org_auth` VALUES ('ec0196b4-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '7e9a289b3597483a84c08bbe71077558');
+INSERT INTO `sys_org_auth` VALUES ('ec0197d3-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '81064737ff3f4f0da71141ec42f366ce');
+INSERT INTO `sys_org_auth` VALUES ('ec01992b-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '8f8a71e10f5c46c695e8f1c2303a3b2f');
+INSERT INTO `sys_org_auth` VALUES ('ec019a23-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', '8fb8b57f988a49c39e7398f7e4a88f31');
+INSERT INTO `sys_org_auth` VALUES ('ec019b42-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'a15ae14869f04822849571fb6ada622b');
+INSERT INTO `sys_org_auth` VALUES ('ec019c71-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'a406460ce4ef4fa1a7743c724613feda');
+INSERT INTO `sys_org_auth` VALUES ('ec019dc2-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'a4ca0b3ac0a54e23a3e295380c4e1c79');
+INSERT INTO `sys_org_auth` VALUES ('ec019e9b-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'aaf82f26159f426581e59355c7b610b1');
+INSERT INTO `sys_org_auth` VALUES ('ec019f52-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'ad9d8b44b586456180a751fb87db8db2');
+INSERT INTO `sys_org_auth` VALUES ('ec01a080-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'b8e10a35c90e4b5596a5eed52397373d');
+INSERT INTO `sys_org_auth` VALUES ('ec01a245-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'ba7aa68555d5474ca6a6e3a12ccd1afe');
+INSERT INTO `sys_org_auth` VALUES ('ec01a34a-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'bbf82dfc30d54277a32d50189ce66030');
+INSERT INTO `sys_org_auth` VALUES ('ec01a78c-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'c3524525c489444aac421df515c63873');
+INSERT INTO `sys_org_auth` VALUES ('ec01a885-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'c9228a9899dc4f98b576a1f0e049e175');
+INSERT INTO `sys_org_auth` VALUES ('ec01ab0c-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'ce09b46ede8946f0bc5003c19987b363');
+INSERT INTO `sys_org_auth` VALUES ('ec01ac49-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'd03715b26c894a59a99fc64351b2013a');
+INSERT INTO `sys_org_auth` VALUES ('ec01adc4-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'd3ecb27d914d427d95d4d8194b00d4ad');
+INSERT INTO `sys_org_auth` VALUES ('ec01af71-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'd7ac735162954c9382936183dd2eb465');
+INSERT INTO `sys_org_auth` VALUES ('ec01b0eb-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'd7ea92ab47cb41b98cde8c0f31a1b004');
+INSERT INTO `sys_org_auth` VALUES ('ec01b2be-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'da8bf91990b44726bfa4ea7a05a4499f');
+INSERT INTO `sys_org_auth` VALUES ('ec01b432-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'dc920fce1934448fad21bc5f15cc2e37');
+INSERT INTO `sys_org_auth` VALUES ('ec01b58f-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'e50a1c4f4fcd48a89d2428933741426a');
+INSERT INTO `sys_org_auth` VALUES ('ec01b6c5-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'e666e48e9d8b44a0a34ff136bcf2ad14');
+INSERT INTO `sys_org_auth` VALUES ('ec01b82d-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'e9d19c4e1a6342e88a74f669a5da8328');
+INSERT INTO `sys_org_auth` VALUES ('ec01b9e3-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'f1bc8030d1484e6bb212e5d45a9ce450');
+INSERT INTO `sys_org_auth` VALUES ('ec01bac1-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'f70012acb9f940bbb583fcd63e9af5ab');
+INSERT INTO `sys_org_auth` VALUES ('ec01bbca-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'f7adb4149aa0406d891fec5be6e151e3');
+INSERT INTO `sys_org_auth` VALUES ('ec01bd1b-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'fafa0ee12ddf4e6598e816935c6ee168');
+INSERT INTO `sys_org_auth` VALUES ('ec01bec0-fe60-11e6-a606-00163e028d22', 'e2ff5e22cfe94054932ffca05e145934', 'fec3e2fc717541c2ab24f05e37aacae3');
 
 -- ----------------------------
 -- Table structure for `sys_role`
@@ -474,6 +569,7 @@ CREATE TABLE `sys_role` (
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('2c5e728bf9c345ba848fa71d3446cd8d', '主管', '8f0e49cf3d784bfba92df5790d520741');
+INSERT INTO `sys_role` VALUES ('71be76be-fe54-11e6-a606-00163e028d22', 'admin', 'ddb5dbae8f7241a59d78a109baaf4f6c');
 INSERT INTO `sys_role` VALUES ('95dc04c7215c41b19a6fb739e51b2082', 'TETes', 'a0a90d21cf3145769e4ac34f8044a17c');
 INSERT INTO `sys_role` VALUES ('986d3c51-fda6-11e6-a606-00163e028d22', 'admin', 'f92ac73813eb4545bc29bde7e5f86e41');
 INSERT INTO `sys_role` VALUES ('a5af2cc9a5244fd3a50728b24b513451', 'admin', 'e2ff5e22cfe94054932ffca05e145934');
@@ -493,52 +589,82 @@ CREATE TABLE `sys_role_auth` (
 -- ----------------------------
 -- Records of sys_role_auth
 -- ----------------------------
-INSERT INTO `sys_role_auth` VALUES ('3d4e5bf6-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '02a18777e6774e5482488297fcf26653');
-INSERT INTO `sys_role_auth` VALUES ('3d4e5e6e-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '1');
-INSERT INTO `sys_role_auth` VALUES ('3d4e5fbc-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '1096978102094137b78bebc1de645e65');
-INSERT INTO `sys_role_auth` VALUES ('3d4e6187-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '13439fc34d4b41c2b3f84a6770073692');
-INSERT INTO `sys_role_auth` VALUES ('3d4e6281-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '2');
-INSERT INTO `sys_role_auth` VALUES ('3d4e647e-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '258ecf13eecc49f18bea208dd6b9f00c');
-INSERT INTO `sys_role_auth` VALUES ('3d4e65fd-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '28d0694acd354be7ad1264cad548ce2e');
-INSERT INTO `sys_role_auth` VALUES ('3d4e66cc-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '39b352a998a3499183295152e7e7e541');
-INSERT INTO `sys_role_auth` VALUES ('3d4e67d9-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '3a5d809b46484cce85a7a18fb0445df5');
-INSERT INTO `sys_role_auth` VALUES ('3d4e68b2-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '3c856ca262be4c09afd1aa66f372039d');
-INSERT INTO `sys_role_auth` VALUES ('3d4e69a7-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '479852e16c834956b8b6c3b801ffd11c');
-INSERT INTO `sys_role_auth` VALUES ('3d4e6b43-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '498089d953894079b07205488df94d9d');
-INSERT INTO `sys_role_auth` VALUES ('3d4e6e54-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '4ac1d4f894704f45b779de16b723ec04');
-INSERT INTO `sys_role_auth` VALUES ('3d4e6fed-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '4b8d8cd29a634d2ba2e44ba1e9b7cf47');
-INSERT INTO `sys_role_auth` VALUES ('3d4e7198-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '50c1cb37d53e4ea39da31b039b656364');
-INSERT INTO `sys_role_auth` VALUES ('3d4e732f-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '58ab8612b36642c4a0fd96970a878180');
-INSERT INTO `sys_role_auth` VALUES ('3d4e760e-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '6374c1e4f3ac40da80b8f86b42d855a2');
-INSERT INTO `sys_role_auth` VALUES ('3d4e7702-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '672bf70518114cbfa03e809489f3ec43');
-INSERT INTO `sys_role_auth` VALUES ('3d4e782d-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '67340c3f1b634546950bdb255e5982ac');
-INSERT INTO `sys_role_auth` VALUES ('3d4e7907-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '67d5e55ab8cb4d5b93220645e6e85c99');
-INSERT INTO `sys_role_auth` VALUES ('3d4e79cb-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '6db97da52d0d494fa8cc81c59329b179');
-INSERT INTO `sys_role_auth` VALUES ('3d4e7b0a-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '6f55a605da78479db8d53489b02b56f8');
-INSERT INTO `sys_role_auth` VALUES ('3d4e8b2a-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '76737c29c36a4d449b50a58137504355');
-INSERT INTO `sys_role_auth` VALUES ('3d4e8cd1-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '81064737ff3f4f0da71141ec42f366ce');
-INSERT INTO `sys_role_auth` VALUES ('3d4e8e3b-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '8f8a71e10f5c46c695e8f1c2303a3b2f');
-INSERT INTO `sys_role_auth` VALUES ('3d4e8f38-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '8fb8b57f988a49c39e7398f7e4a88f31');
-INSERT INTO `sys_role_auth` VALUES ('3d4e9067-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'a15ae14869f04822849571fb6ada622b');
-INSERT INTO `sys_role_auth` VALUES ('3d4e91b2-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'a406460ce4ef4fa1a7743c724613feda');
-INSERT INTO `sys_role_auth` VALUES ('3d4e930d-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'a4ca0b3ac0a54e23a3e295380c4e1c79');
-INSERT INTO `sys_role_auth` VALUES ('3d4e93e5-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'aaf82f26159f426581e59355c7b610b1');
-INSERT INTO `sys_role_auth` VALUES ('3d4e94a6-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'ad9d8b44b586456180a751fb87db8db2');
-INSERT INTO `sys_role_auth` VALUES ('3d4e9668-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'b8e10a35c90e4b5596a5eed52397373d');
-INSERT INTO `sys_role_auth` VALUES ('3d4e981a-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'bbf82dfc30d54277a32d50189ce66030');
-INSERT INTO `sys_role_auth` VALUES ('3d4e9ac4-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'c9228a9899dc4f98b576a1f0e049e175');
-INSERT INTO `sys_role_auth` VALUES ('3d4e9c94-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'd03715b26c894a59a99fc64351b2013a');
-INSERT INTO `sys_role_auth` VALUES ('3d4e9ef2-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'd3ecb27d914d427d95d4d8194b00d4ad');
-INSERT INTO `sys_role_auth` VALUES ('3d4ea1b7-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'd7ac735162954c9382936183dd2eb465');
-INSERT INTO `sys_role_auth` VALUES ('3d4ea3bb-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'd7ea92ab47cb41b98cde8c0f31a1b004');
-INSERT INTO `sys_role_auth` VALUES ('3d4ea5f8-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'dc920fce1934448fad21bc5f15cc2e37');
-INSERT INTO `sys_role_auth` VALUES ('3d4ea842-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'e50a1c4f4fcd48a89d2428933741426a');
-INSERT INTO `sys_role_auth` VALUES ('3d4eaaf7-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'e666e48e9d8b44a0a34ff136bcf2ad14');
-INSERT INTO `sys_role_auth` VALUES ('3d4eacbf-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'e9d19c4e1a6342e88a74f669a5da8328');
-INSERT INTO `sys_role_auth` VALUES ('3d4eadb3-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'f70012acb9f940bbb583fcd63e9af5ab');
-INSERT INTO `sys_role_auth` VALUES ('3d4eaf20-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'f7adb4149aa0406d891fec5be6e151e3');
-INSERT INTO `sys_role_auth` VALUES ('3d4eb0d1-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'fafa0ee12ddf4e6598e816935c6ee168');
-INSERT INTO `sys_role_auth` VALUES ('3d4eb282-fe26-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'fec3e2fc717541c2ab24f05e37aacae3');
+INSERT INTO `sys_role_auth` VALUES ('71bf731b-fe54-11e6-a606-00163e028d22', '71be76be-fe54-11e6-a606-00163e028d22', '1096978102094137b78bebc1de645e65');
+INSERT INTO `sys_role_auth` VALUES ('71c188d6-fe54-11e6-a606-00163e028d22', '71be76be-fe54-11e6-a606-00163e028d22', '3a5d809b46484cce85a7a18fb0445df5');
+INSERT INTO `sys_role_auth` VALUES ('71c1fde0-fe54-11e6-a606-00163e028d22', '71be76be-fe54-11e6-a606-00163e028d22', '479852e16c834956b8b6c3b801ffd11c');
+INSERT INTO `sys_role_auth` VALUES ('71c28277-fe54-11e6-a606-00163e028d22', '71be76be-fe54-11e6-a606-00163e028d22', '4ac1d4f894704f45b779de16b723ec04');
+INSERT INTO `sys_role_auth` VALUES ('71c461f3-fe54-11e6-a606-00163e028d22', '71be76be-fe54-11e6-a606-00163e028d22', '672bf70518114cbfa03e809489f3ec43');
+INSERT INTO `sys_role_auth` VALUES ('71c4b5a1-fe54-11e6-a606-00163e028d22', '71be76be-fe54-11e6-a606-00163e028d22', '67340c3f1b634546950bdb255e5982ac');
+INSERT INTO `sys_role_auth` VALUES ('71c64dc2-fe54-11e6-a606-00163e028d22', '71be76be-fe54-11e6-a606-00163e028d22', '6f55a605da78479db8d53489b02b56f8');
+INSERT INTO `sys_role_auth` VALUES ('71c7b138-fe54-11e6-a606-00163e028d22', '71be76be-fe54-11e6-a606-00163e028d22', '81064737ff3f4f0da71141ec42f366ce');
+INSERT INTO `sys_role_auth` VALUES ('71c841a6-fe54-11e6-a606-00163e028d22', '71be76be-fe54-11e6-a606-00163e028d22', '8fb8b57f988a49c39e7398f7e4a88f31');
+INSERT INTO `sys_role_auth` VALUES ('71c89a87-fe54-11e6-a606-00163e028d22', '71be76be-fe54-11e6-a606-00163e028d22', 'a15ae14869f04822849571fb6ada622b');
+INSERT INTO `sys_role_auth` VALUES ('71c8f997-fe54-11e6-a606-00163e028d22', '71be76be-fe54-11e6-a606-00163e028d22', 'a406460ce4ef4fa1a7743c724613feda');
+INSERT INTO `sys_role_auth` VALUES ('71ca7b80-fe54-11e6-a606-00163e028d22', '71be76be-fe54-11e6-a606-00163e028d22', 'b8e10a35c90e4b5596a5eed52397373d');
+INSERT INTO `sys_role_auth` VALUES ('71cb0728-fe54-11e6-a606-00163e028d22', '71be76be-fe54-11e6-a606-00163e028d22', 'bbf82dfc30d54277a32d50189ce66030');
+INSERT INTO `sys_role_auth` VALUES ('71cc0e2f-fe54-11e6-a606-00163e028d22', '71be76be-fe54-11e6-a606-00163e028d22', 'd03715b26c894a59a99fc64351b2013a');
+INSERT INTO `sys_role_auth` VALUES ('71cf246a-fe54-11e6-a606-00163e028d22', '71be76be-fe54-11e6-a606-00163e028d22', 'f70012acb9f940bbb583fcd63e9af5ab');
+INSERT INTO `sys_role_auth` VALUES ('71cf4d9e-fe54-11e6-a606-00163e028d22', '71be76be-fe54-11e6-a606-00163e028d22', 'f7adb4149aa0406d891fec5be6e151e3');
+INSERT INTO `sys_role_auth` VALUES ('9502f758-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '02a18777e6774e5482488297fcf26653');
+INSERT INTO `sys_role_auth` VALUES ('9502fa9d-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '0575c843bad7482ba7eb9ecd6269d1f5');
+INSERT INTO `sys_role_auth` VALUES ('9503031d-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '0694283e392b42a2869cdf8093cbeb90');
+INSERT INTO `sys_role_auth` VALUES ('9503042b-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '1');
+INSERT INTO `sys_role_auth` VALUES ('95030561-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '1096978102094137b78bebc1de645e65');
+INSERT INTO `sys_role_auth` VALUES ('95030719-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '13439fc34d4b41c2b3f84a6770073692');
+INSERT INTO `sys_role_auth` VALUES ('950307e1-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '2');
+INSERT INTO `sys_role_auth` VALUES ('95030975-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '258ecf13eecc49f18bea208dd6b9f00c');
+INSERT INTO `sys_role_auth` VALUES ('95030ae6-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '28d0694acd354be7ad1264cad548ce2e');
+INSERT INTO `sys_role_auth` VALUES ('95030c6a-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '39b352a998a3499183295152e7e7e541');
+INSERT INTO `sys_role_auth` VALUES ('95030da4-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '3a5d809b46484cce85a7a18fb0445df5');
+INSERT INTO `sys_role_auth` VALUES ('95030e89-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '3c856ca262be4c09afd1aa66f372039d');
+INSERT INTO `sys_role_auth` VALUES ('95030f7e-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '479852e16c834956b8b6c3b801ffd11c');
+INSERT INTO `sys_role_auth` VALUES ('95031112-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '498089d953894079b07205488df94d9d');
+INSERT INTO `sys_role_auth` VALUES ('95031216-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '4ac1d4f894704f45b779de16b723ec04');
+INSERT INTO `sys_role_auth` VALUES ('95031381-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '4b8d8cd29a634d2ba2e44ba1e9b7cf47');
+INSERT INTO `sys_role_auth` VALUES ('95031520-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '50c1cb37d53e4ea39da31b039b656364');
+INSERT INTO `sys_role_auth` VALUES ('950316a4-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '58ab8612b36642c4a0fd96970a878180');
+INSERT INTO `sys_role_auth` VALUES ('9503184c-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '6374c1e4f3ac40da80b8f86b42d855a2');
+INSERT INTO `sys_role_auth` VALUES ('95031bad-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '664354eb5aea4a00853ddb18dc68ebbd');
+INSERT INTO `sys_role_auth` VALUES ('95031cc8-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '672bf70518114cbfa03e809489f3ec43');
+INSERT INTO `sys_role_auth` VALUES ('95031e0a-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '67340c3f1b634546950bdb255e5982ac');
+INSERT INTO `sys_role_auth` VALUES ('95031f08-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '67d5e55ab8cb4d5b93220645e6e85c99');
+INSERT INTO `sys_role_auth` VALUES ('950320fd-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '6cf1391a9e3c4ac5af95534de51d7bd6');
+INSERT INTO `sys_role_auth` VALUES ('950321c0-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '6db97da52d0d494fa8cc81c59329b179');
+INSERT INTO `sys_role_auth` VALUES ('95032302-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '6f55a605da78479db8d53489b02b56f8');
+INSERT INTO `sys_role_auth` VALUES ('950324e2-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '7030524f08a742649a9c5255199f797d');
+INSERT INTO `sys_role_auth` VALUES ('95032697-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '7118e0b350e14f7aa9715831e9cf16d3');
+INSERT INTO `sys_role_auth` VALUES ('950327e1-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '76737c29c36a4d449b50a58137504355');
+INSERT INTO `sys_role_auth` VALUES ('95032a56-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '77885a6895b543059b135354d5f62fce');
+INSERT INTO `sys_role_auth` VALUES ('95032d29-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '7d5f7d02ccc74bbf9ccd8fdef0c94a3a');
+INSERT INTO `sys_role_auth` VALUES ('95032fc2-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '7e9a289b3597483a84c08bbe71077558');
+INSERT INTO `sys_role_auth` VALUES ('9503313a-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '81064737ff3f4f0da71141ec42f366ce');
+INSERT INTO `sys_role_auth` VALUES ('95033582-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '8f8a71e10f5c46c695e8f1c2303a3b2f');
+INSERT INTO `sys_role_auth` VALUES ('95033745-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', '8fb8b57f988a49c39e7398f7e4a88f31');
+INSERT INTO `sys_role_auth` VALUES ('9503392e-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'a15ae14869f04822849571fb6ada622b');
+INSERT INTO `sys_role_auth` VALUES ('95033aae-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'a406460ce4ef4fa1a7743c724613feda');
+INSERT INTO `sys_role_auth` VALUES ('95033caa-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'a4ca0b3ac0a54e23a3e295380c4e1c79');
+INSERT INTO `sys_role_auth` VALUES ('95033e42-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'aaf82f26159f426581e59355c7b610b1');
+INSERT INTO `sys_role_auth` VALUES ('95033fd4-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'ad9d8b44b586456180a751fb87db8db2');
+INSERT INTO `sys_role_auth` VALUES ('95034176-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'b8e10a35c90e4b5596a5eed52397373d');
+INSERT INTO `sys_role_auth` VALUES ('9503434f-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'ba7aa68555d5474ca6a6e3a12ccd1afe');
+INSERT INTO `sys_role_auth` VALUES ('950344f3-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'bbf82dfc30d54277a32d50189ce66030');
+INSERT INTO `sys_role_auth` VALUES ('95034719-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'c3524525c489444aac421df515c63873');
+INSERT INTO `sys_role_auth` VALUES ('95034811-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'c9228a9899dc4f98b576a1f0e049e175');
+INSERT INTO `sys_role_auth` VALUES ('95034b42-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'ce09b46ede8946f0bc5003c19987b363');
+INSERT INTO `sys_role_auth` VALUES ('95034d2d-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'd03715b26c894a59a99fc64351b2013a');
+INSERT INTO `sys_role_auth` VALUES ('95034f46-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'd3ecb27d914d427d95d4d8194b00d4ad');
+INSERT INTO `sys_role_auth` VALUES ('95035201-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'd7ac735162954c9382936183dd2eb465');
+INSERT INTO `sys_role_auth` VALUES ('950353f3-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'd7ea92ab47cb41b98cde8c0f31a1b004');
+INSERT INTO `sys_role_auth` VALUES ('950356ab-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'da8bf91990b44726bfa4ea7a05a4499f');
+INSERT INTO `sys_role_auth` VALUES ('950358bd-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'dc920fce1934448fad21bc5f15cc2e37');
+INSERT INTO `sys_role_auth` VALUES ('95035b49-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'e50a1c4f4fcd48a89d2428933741426a');
+INSERT INTO `sys_role_auth` VALUES ('95035cf8-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'e666e48e9d8b44a0a34ff136bcf2ad14');
+INSERT INTO `sys_role_auth` VALUES ('95035f8f-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'e9d19c4e1a6342e88a74f669a5da8328');
+INSERT INTO `sys_role_auth` VALUES ('950361c1-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'f1bc8030d1484e6bb212e5d45a9ce450');
+INSERT INTO `sys_role_auth` VALUES ('950362ba-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'f70012acb9f940bbb583fcd63e9af5ab');
+INSERT INTO `sys_role_auth` VALUES ('95036408-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'f7adb4149aa0406d891fec5be6e151e3');
+INSERT INTO `sys_role_auth` VALUES ('95036615-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'fafa0ee12ddf4e6598e816935c6ee168');
+INSERT INTO `sys_role_auth` VALUES ('9503681f-fe61-11e6-a606-00163e028d22', 'a5af2cc9a5244fd3a50728b24b513451', 'fec3e2fc717541c2ab24f05e37aacae3');
 INSERT INTO `sys_role_auth` VALUES ('986e6754-fda6-11e6-a606-00163e028d22', '986d3c51-fda6-11e6-a606-00163e028d22', '1096978102094137b78bebc1de645e65');
 INSERT INTO `sys_role_auth` VALUES ('986fe5ce-fda6-11e6-a606-00163e028d22', '986d3c51-fda6-11e6-a606-00163e028d22', '3a5d809b46484cce85a7a18fb0445df5');
 INSERT INTO `sys_role_auth` VALUES ('98703788-fda6-11e6-a606-00163e028d22', '986d3c51-fda6-11e6-a606-00163e028d22', '479852e16c834956b8b6c3b801ffd11c');
@@ -610,12 +736,15 @@ CREATE TABLE `sys_time_list` (
 -- ----------------------------
 -- Records of sys_time_list
 -- ----------------------------
+INSERT INTO `sys_time_list` VALUES ('0575c843bad7482ba7eb9ecd6269d1f5', '', '2017-03-01 17:15:13', '', '2017-03-01 17:27:01');
+INSERT INTO `sys_time_list` VALUES ('0694283e392b42a2869cdf8093cbeb90', '', '2017-03-01 17:24:34', null, null);
 INSERT INTO `sys_time_list` VALUES ('13439fc34d4b41c2b3f84a6770073692', '', '2017-03-01 10:04:35', '', '2017-03-01 10:13:48');
 INSERT INTO `sys_time_list` VALUES ('1b87309787a64678a95b7183e41cf272', '', '2017-02-28 18:17:59', null, null);
 INSERT INTO `sys_time_list` VALUES ('258ecf13eecc49f18bea208dd6b9f00c', '', '2017-02-28 12:38:47', null, null);
 INSERT INTO `sys_time_list` VALUES ('2a69c62de73c454787d5a343cf2ad5f5', 'admin', '2017-03-01 11:28:06', 'admin', '2017-03-01 11:28:12');
 INSERT INTO `sys_time_list` VALUES ('38b18de2453041c4ad46b86b18cd642a', 'admin', '2017-02-28 15:06:44', 'admin', '2017-02-28 16:27:22');
 INSERT INTO `sys_time_list` VALUES ('3910908ed766422c97b94dd9139e6460', 'admin', '2017-02-28 15:11:37', 'admin', '2017-02-28 15:53:33');
+INSERT INTO `sys_time_list` VALUES ('405997fb523a4a79b9dc83e919164e44', 'admin', '2017-03-01 16:58:57', null, null);
 INSERT INTO `sys_time_list` VALUES ('40d4a7209bba4276a30266eb9db11ad0', '', '2017-02-28 19:12:40', null, null);
 INSERT INTO `sys_time_list` VALUES ('498089d953894079b07205488df94d9d', '', '2017-02-28 12:39:09', null, null);
 INSERT INTO `sys_time_list` VALUES ('4d902e707a3d458fba4b3b66d040829f', 'admin', '2017-02-28 11:27:35', 'admin', '2017-02-28 11:33:21');
@@ -624,21 +753,36 @@ INSERT INTO `sys_time_list` VALUES ('58a7a53ae4c84b20b320bbafbdd56f19', 'admin',
 INSERT INTO `sys_time_list` VALUES ('58ab8612b36642c4a0fd96970a878180', '', '2017-02-28 12:38:19', null, null);
 INSERT INTO `sys_time_list` VALUES ('617d42f9c2244e21a906baaddee38b69', '', '2017-03-01 10:04:52', '', '2017-03-01 10:13:52');
 INSERT INTO `sys_time_list` VALUES ('6374c1e4f3ac40da80b8f86b42d855a2', '', '2017-03-01 10:13:23', '', '2017-03-01 10:25:37');
+INSERT INTO `sys_time_list` VALUES ('664354eb5aea4a00853ddb18dc68ebbd', '', '2017-03-01 17:23:13', null, null);
 INSERT INTO `sys_time_list` VALUES ('672bf70518114cbfa03e809489f3ec43', '', '2017-03-01 09:19:55', '', '2017-03-01 09:43:46');
+INSERT INTO `sys_time_list` VALUES ('6cf1391a9e3c4ac5af95534de51d7bd6', '', '2017-03-01 15:42:39', '', '2017-03-01 16:32:31');
+INSERT INTO `sys_time_list` VALUES ('7030524f08a742649a9c5255199f797d', '', '2017-03-01 17:22:51', null, null);
+INSERT INTO `sys_time_list` VALUES ('7118e0b350e14f7aa9715831e9cf16d3', '', '2017-03-01 15:09:21', '', '2017-03-01 15:10:55');
+INSERT INTO `sys_time_list` VALUES ('77885a6895b543059b135354d5f62fce', '', '2017-03-01 17:23:54', null, null);
+INSERT INTO `sys_time_list` VALUES ('7a3422890ab547e78de73c4c375b3018', 'admin', '2017-03-01 15:55:10', 'admin', '2017-03-01 15:55:33');
+INSERT INTO `sys_time_list` VALUES ('7d5f7d02ccc74bbf9ccd8fdef0c94a3a', '', '2017-03-01 17:23:29', null, null);
+INSERT INTO `sys_time_list` VALUES ('7e9a289b3597483a84c08bbe71077558', '', '2017-03-01 15:10:04', '', '2017-03-01 15:11:11');
+INSERT INTO `sys_time_list` VALUES ('7ec302194e7244839df7e95f39eae685', 'admin', '2017-03-01 17:11:39', 'admin', '2017-03-01 17:12:59');
 INSERT INTO `sys_time_list` VALUES ('85433893d097453dbac55f45da3ebc94', 'admin', '2017-02-28 17:32:38', 'admin', '2017-02-28 17:32:44');
 INSERT INTO `sys_time_list` VALUES ('95dc04c7215c41b19a6fb739e51b2082', '', '2017-03-01 09:16:55', null, null);
 INSERT INTO `sys_time_list` VALUES ('a0a90d21cf3145769e4ac34f8044a17c', '', '2017-03-01 09:16:47', null, null);
+INSERT INTO `sys_time_list` VALUES ('a187c76fcf7c4dda868773c4ce32c3be', 'admin', '2017-03-01 15:29:29', 'admin', '2017-03-01 16:52:50');
 INSERT INTO `sys_time_list` VALUES ('a64f306d77d8486d87f237aca19a99a0', 'admin', '2017-02-28 15:04:55', 'admin', '2017-02-28 16:25:38');
+INSERT INTO `sys_time_list` VALUES ('ba7aa68555d5474ca6a6e3a12ccd1afe', '', '2017-03-01 15:41:16', '', '2017-03-01 17:30:36');
 INSERT INTO `sys_time_list` VALUES ('c1834167f54a4e8bbcd60e5985d9b914', '', '2017-02-28 19:26:59', null, null);
+INSERT INTO `sys_time_list` VALUES ('c3524525c489444aac421df515c63873', '', '2017-03-01 15:39:58', null, null);
 INSERT INTO `sys_time_list` VALUES ('c4dae5fe1acc46e8945c1f415258fddd', '', '2017-03-01 10:13:43', null, null);
 INSERT INTO `sys_time_list` VALUES ('cc72d0bd1ac84cdabecdb1804c2ca07a', 'admin', '2017-02-28 17:32:01', 'admin', '2017-02-28 17:32:07');
-INSERT INTO `sys_time_list` VALUES ('ce59966a60a049ea8ac3fe3c96d5726f', 'admin', '2017-03-01 11:35:46', null, null);
-INSERT INTO `sys_time_list` VALUES ('d7ac735162954c9382936183dd2eb465', '', '2017-03-01 10:15:00', '', '2017-03-01 11:27:45');
+INSERT INTO `sys_time_list` VALUES ('ce09b46ede8946f0bc5003c19987b363', '', '2017-03-01 17:24:15', null, null);
+INSERT INTO `sys_time_list` VALUES ('ce59966a60a049ea8ac3fe3c96d5726f', 'admin', '2017-03-01 11:35:46', 'admin', '2017-03-01 15:38:58');
+INSERT INTO `sys_time_list` VALUES ('d7ac735162954c9382936183dd2eb465', '', '2017-03-01 10:15:00', '', '2017-03-01 15:08:30');
 INSERT INTO `sys_time_list` VALUES ('d7ea92ab47cb41b98cde8c0f31a1b004', '', '2017-02-28 12:37:53', null, null);
 INSERT INTO `sys_time_list` VALUES ('da7fc8cdc660492ea972f65f93689955', 'admin', '2017-02-28 16:56:31', 'admin', '2017-02-28 16:58:26');
+INSERT INTO `sys_time_list` VALUES ('da8bf91990b44726bfa4ea7a05a4499f', '', '2017-03-01 15:56:55', '', '2017-03-01 16:32:37');
 INSERT INTO `sys_time_list` VALUES ('e031579252e94ec5b6a23804aadd7eed', 'admin', '2017-02-28 16:31:55', 'admin', '2017-02-28 16:56:11');
-INSERT INTO `sys_time_list` VALUES ('e876bdcfc6394ec8b4007e6585ed1832', 'admin', '2017-03-01 11:29:26', 'admin', '2017-03-01 11:30:45');
+INSERT INTO `sys_time_list` VALUES ('e876bdcfc6394ec8b4007e6585ed1832', 'admin', '2017-03-01 11:29:26', 'admin', '2017-03-01 15:39:01');
 INSERT INTO `sys_time_list` VALUES ('ea13706be922472c9bcf779b9822a1f6', 'admin', '2017-02-28 19:10:56', 'admin', '2017-02-28 19:11:05');
+INSERT INTO `sys_time_list` VALUES ('f1bc8030d1484e6bb212e5d45a9ce450', '', '2017-03-01 15:09:48', '', '2017-03-01 15:11:08');
 INSERT INTO `sys_time_list` VALUES ('f4e033e2e6a341e586684cdd0b7d80eb', 'admin', '2017-03-01 11:27:57', null, null);
 INSERT INTO `sys_time_list` VALUES ('fec3e2fc717541c2ab24f05e37aacae3', '', '2017-03-01 10:14:31', '', '2017-03-01 11:27:42');
 
@@ -662,6 +806,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1b87309787a64678a95b7183e41cf272', '123', 'e10adc3949ba59abbe56e057f20f883e', '123', '123', 'e2ff5e22cfe94054932ffca05e145934', null);
 INSERT INTO `sys_user` VALUES ('57a74c3d10bc47e58ff24c986ef77f69', 'a', 'e10adc3949ba59abbe56e057f20f883e', 'a', '13', 'f92ac73813eb4545bc29bde7e5f86e41', null);
+INSERT INTO `sys_user` VALUES ('71be76f7-fe54-11e6-a606-00163e028d22', 'admin', 'e10adc3949ba59abbe56e057f20f883e', null, null, 'ddb5dbae8f7241a59d78a109baaf4f6c', '1');
 INSERT INTO `sys_user` VALUES ('986d3c89-fda6-11e6-a606-00163e028d22', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'aa', 'aa', 'f92ac73813eb4545bc29bde7e5f86e41', '1');
 INSERT INTO `sys_user` VALUES ('admin', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'admin', 'admin', 'e2ff5e22cfe94054932ffca05e145934', null);
 
@@ -680,6 +825,7 @@ CREATE TABLE `sys_user_role` (
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES ('343a2ec3-fd9f-11e6-a606-00163e028d22', '1b87309787a64678a95b7183e41cf272', '2c5e728bf9c345ba848fa71d3446cd8d');
+INSERT INTO `sys_user_role` VALUES ('71e25349-fe54-11e6-a606-00163e028d22', '71be76f7-fe54-11e6-a606-00163e028d22', '71be76be-fe54-11e6-a606-00163e028d22');
 INSERT INTO `sys_user_role` VALUES ('98779a80-fda6-11e6-a606-00163e028d22', '986d3c89-fda6-11e6-a606-00163e028d22', '986d3c51-fda6-11e6-a606-00163e028d22');
 INSERT INTO `sys_user_role` VALUES ('a22fd0cd-fa71-11e6-a606-00163e028d22', 'admin', 'a5af2cc9a5244fd3a50728b24b513451');
 INSERT INTO `sys_user_role` VALUES ('c9bd9852-fe1c-11e6-a606-00163e028d22', 'admin', '95dc04c7215c41b19a6fb739e51b2082');

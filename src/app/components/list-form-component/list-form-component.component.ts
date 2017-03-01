@@ -6,14 +6,9 @@ import {
 	EventEmitter
 } from '@angular/core';
 import {
-	ActivatedRoute
-} from '@angular/router';
-import {
-	TreeNode,
 	MenuItem,
 	ConfirmationService,
-	Message,
-	SelectItem
+	Message
 } from 'primeng/primeng';
 import {
 	FormBuilder,
@@ -45,7 +40,6 @@ export class ListFormComponentComponent implements OnInit {
 	@Output() initEvent: EventEmitter < any > = new EventEmitter();
 	@Output() rowSeleted: EventEmitter < any > = new EventEmitter();
 	constructor(
-		private router: ActivatedRoute,
 		private authService: AuthService,
 		private fb: FormBuilder,
 		private utilService: UtilService,

@@ -3,35 +3,22 @@ import {
 	OnInit
 } from '@angular/core';
 import {
-	ActivatedRoute
-} from '@angular/router';
-import {
-	TreeNode,
-	MenuItem,
-	ConfirmationService,
-	Message,
-	SelectItem
-} from 'primeng/primeng';
-import {
 	UtilService,
 	Validators
-} from '../../index';
-
+} from '../index';
 @Component({
-	selector: 'app-org-register',
-	templateUrl: './org-register.component.html',
-	styleUrls: ['./org-register.component.css']
+	selector: 'app-stock-change',
+	templateUrl: './stock-change.component.html',
+	styleUrls: ['./stock-change.component.css']
 })
-export class OrgRegisterComponent implements OnInit {
+export class StockChangeComponent implements OnInit {
 	private obj = {};
 	private RestFuns;
 	//列表
 	private listModel = {};
 	//填写信息
 	private form = [];
-	constructor(
-		private utilService: UtilService
-	) {
+	constructor(private utilService: UtilService) {
 		this.form = this.getFormModel();
 		//list model
 		this.listModel = this.getListModel();
@@ -114,4 +101,5 @@ export class OrgRegisterComponent implements OnInit {
 			}]
 		};
 	}
+
 }

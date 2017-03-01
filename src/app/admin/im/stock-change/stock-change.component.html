@@ -1,0 +1,7 @@
+<app-list-form-component 
+	[menus]="menus" 
+	[title]="'机构列表'" 
+	[list]="listModel" 
+	[form]="form" 
+	(initEvent)="InitListForm($event)"
+	(rowSeleted)='RowSeleted($event)'></app-list-form-component>

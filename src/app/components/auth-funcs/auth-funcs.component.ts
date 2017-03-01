@@ -9,8 +9,7 @@ import {
 	ActivatedRoute
 } from '@angular/router';
 import {
-	MenuItem,
-	SelectItem
+	MenuItem
 } from 'primeng/primeng';
 import {
 	AuthService,

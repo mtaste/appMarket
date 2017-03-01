@@ -19,6 +19,9 @@ import {
 	ListFormComponentComponent
 } from "./list-form-component/list-form-component.component";
 import {
+	EasyFormComponentComponent
+} from "./easy-form-component/easy-form-component.component";
+import {
 	AuthFuncsComponent
 } from "./auth-funcs/auth-funcs.component";
 import {
@@ -51,6 +54,7 @@ import {
 		FormComponentComponent,
 		ListComponentComponent,
 		ListFormComponentComponent,
+		EasyFormComponentComponent,
 		AuthFuncsComponent
 	],
 	exports: [
@@ -58,6 +62,7 @@ import {
 		FormComponentComponent,
 		ListComponentComponent,
 		ListFormComponentComponent,
+		EasyFormComponentComponent,
 		AuthFuncsComponent
 	]
 })

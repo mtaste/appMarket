@@ -15,38 +15,13 @@ import {
 	SupComponent
 } from "./sup/sup.component";
 import routes from './crm.routes';
-import {
-	FieldsetModule,
-	TreeModule,
-	InputTextModule,
-	ButtonModule,
-	MenubarModule,
-	ConfirmDialogModule,
-	GrowlModule,
-	DataListModule,
-	DialogModule,
-	DataTableModule,
-	SharedModule,
-	DropdownModule
-} from 'primeng/primeng';
+
 @NgModule({
 	imports: [
 		CommonModule,
 		routes,
 		PNGModule.forRoot(),
-		FieldsetModule,
-		TreeModule,
-		InputTextModule,
-		ButtonModule,
-		MenubarModule,
-		ConfirmDialogModule,
-		GrowlModule,
-		DataListModule,
-		DialogModule,
-		DataTableModule,
-		SharedModule,
-		ComponentsModule,
-		DropdownModule
+		ComponentsModule
 	],
 	declarations: [
 		CusComponent,

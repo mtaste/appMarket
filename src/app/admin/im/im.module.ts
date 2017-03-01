@@ -11,42 +11,20 @@ import {
 import {
 	BookInComponent
 } from "./book-in/book-in.component";
-import routes from './im.routes';
 import {
-	FieldsetModule,
-	TreeModule,
-	InputTextModule,
-	ButtonModule,
-	MenubarModule,
-	ConfirmDialogModule,
-	GrowlModule,
-	DataListModule,
-	DialogModule,
-	DataTableModule,
-	SharedModule,
-	DropdownModule
-} from 'primeng/primeng';
+	StockChangeComponent
+} from "./stock-change/stock-change.component";
+import routes from './im.routes';
 @NgModule({
 	imports: [
 		CommonModule,
 		routes,
 		PNGModule.forRoot(),
-		FieldsetModule,
-		TreeModule,
-		InputTextModule,
-		ButtonModule,
-		MenubarModule,
-		ConfirmDialogModule,
-		GrowlModule,
-		DataListModule,
-		DialogModule,
-		DataTableModule,
-		SharedModule,
-		ComponentsModule,
-		DropdownModule
+		ComponentsModule
 	],
 	declarations: [
-		BookInComponent
+		BookInComponent,
+		StockChangeComponent
 	]
 })
 export default class OrgRegisterModule {}

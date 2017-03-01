@@ -47,9 +47,9 @@ import {
 		DataListModule,
 		DialogModule,
 		DataTableModule,
+		DropdownModule,
 		SharedModule,
-		ComponentsModule,
-		DropdownModule 
+		ComponentsModule
 	],
 	declarations: [
 		OrgRegisterComponent,

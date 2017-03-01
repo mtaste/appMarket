@@ -10,9 +10,6 @@ import {
 } from '@angular/router';
 import {
 	MenuItem,
-	ConfirmationService,
-	Message,
-	SelectItem
 } from 'primeng/primeng';
 import {
 	AuthService,

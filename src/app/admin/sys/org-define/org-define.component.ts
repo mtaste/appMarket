@@ -93,6 +93,8 @@ export class OrgDefineComponent implements OnInit {
 				});
 			},
 			mod: (auth) => {
+				if(!this.depNode) return;
+				if(!this.depNode.parent) return;
 				this.display = true;
 				this.t_menu = auth.item;
 				var m = this.utilService.CopyObj(this.orgForm.value, this.depNode);
@@ -100,6 +102,7 @@ export class OrgDefineComponent implements OnInit {
 				parent && (m["parentName"] = parent["name"]) && (this.orgForm.setValue(m));
 			},
 			remove: (auth) => {
+				if(!this.depNode) return;
 				this.t_menu = auth.item;
 				this.confirmationService.confirm({
 					header: '删除提示',
@@ -153,6 +156,7 @@ export class OrgDefineComponent implements OnInit {
 				});
 			},
 			removeRole: (auth) => {
+				if(!this.selectedJob["id"]) return;
 				this.t_menu = auth.item;
 				this.confirmationService.confirm({
 					header: '删除提示',
@@ -183,6 +187,8 @@ export class OrgDefineComponent implements OnInit {
 				this.SearchChooseUser();
 			},
 			removeUser: (auth) => {
+				var ids = this.utilService.GetIds(this.selectedUsers, "id");
+				if(!ids) return;
 				this.t_menu = auth.item;
 				var d = {};
 				for(var i in this.selectedUsers) {
@@ -197,8 +203,6 @@ export class OrgDefineComponent implements OnInit {
 					};
 					temp.push(m);
 				};
-				var ids = this.utilService.GetIds(this.selectedUsers, "id");
-				if(!ids) return;
 				var param = {
 					roleId: this.selectedJob["id"],
 					userIds: ids

@@ -65,6 +65,9 @@ export class MgUserComponent implements OnInit {
 				this.userForm.setValue(m);
 			},
 			mod: (auth) => {
+				if(!this.selectedUser['id']) {
+					return;
+				}
 				this.t_menu = auth.item;
 				this.step = 2;
 				var t = this.utilService.ClearObj(this.userForm.value);
@@ -72,6 +75,9 @@ export class MgUserComponent implements OnInit {
 				this.userForm.setValue(m);
 			},
 			remove: (auth) => {
+				if(!this.selectedUser['id']) {
+					return;
+				}
 				this.t_menu = auth.item;
 				this.confirmationService.confirm({
 					header: '删除提示',

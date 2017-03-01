@@ -10,6 +10,9 @@ import {
 import {
 	OrgDefineComponent
 } from "./org-define.component";
+import {
+	OrgInfoComponent
+} from "./org-info/org-info.component";
 import routes from './org-define.routes';
 import {
 	FieldsetModule,
@@ -41,6 +44,9 @@ import {
 		DataTableModule,
 		SharedModule
 	],
-	declarations: [OrgDefineComponent]
+	declarations: [
+		OrgDefineComponent,
+		OrgInfoComponent
+	]
 })
 export default class OrgDefineModule {}

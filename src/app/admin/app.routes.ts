@@ -33,6 +33,10 @@ const routes = [{
 		path: 'mg/org',
 		loadChildren: 'app/admin/mg/org/org.module',
 		name: 'MgOrg'
+	}, {
+		path: 'crm',
+		loadChildren: 'app/admin/crm/crm.module',
+		name: 'CRM'
 	}]
 }];
 export default RouterModule.forChild(routes);

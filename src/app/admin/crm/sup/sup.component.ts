@@ -19,16 +19,14 @@ import {
 	FormGroup,
 	Validators,
 	FormControl,
-	MgOrgService,
 	CrudService
-} from '../../index';
-
+} from '../index';
 @Component({
-	selector: 'app-org-register',
-	templateUrl: './org-register.component.html',
-	styleUrls: ['./org-register.component.css']
+	selector: 'app-sup',
+	templateUrl: './sup.component.html',
+	styleUrls: ['./sup.component.css']
 })
-export class OrgRegisterComponent implements OnInit {
+export class SupComponent implements OnInit {
 	private obj = {};
 	private RestFuns;
 	//列表
@@ -39,7 +37,6 @@ export class OrgRegisterComponent implements OnInit {
 	private form = [];
 	constructor(
 		private confirmationService: ConfirmationService,
-		private mgOrgService: MgOrgService,
 		private utilService: UtilService,
 		private crudService: CrudService
 	) {
@@ -47,7 +44,7 @@ export class OrgRegisterComponent implements OnInit {
 		//list model
 		this.listModel = this.getListModel();
 		//菜单
-		//this.menus = this.getMenus();
+		this.menus = this.getMenus();
 	};
 
 	ngOnInit() {};
@@ -59,21 +56,34 @@ export class OrgRegisterComponent implements OnInit {
 	RowSeleted(data) {
 		var f = this.obj['listObj']['funcObj'];
 		if(!data && data.id) {
-			f.RestFuncs(['add', 'mod']);
 			return;
 		};
-		if(data.status == this.utilService.GetStatus('0')) {
-			f.RestFuncs(['add', 'mod', 'app', 'remove']);
-		} else if(data.status == this.utilService.GetStatus('1')) {
-			f.RestFuncs(['add', 'mod', 'auth', 'reject']);
-		} else {
-			f.RestFuncs(['add', 'mod']);
-		}
+		f.RestFuncs(['add', 'mod']);
 	};
-	
+	private getMenus() {
+		return {
+			add: (auth, ft) => {
+				//新增
+				ft.step = 2;
+				var m = this.utilService.ClearObj(ft.formObj.formModel.value);
+				ft.formObj.formModel.setValue(m);
+				ft.formObj.canSave = true;
+				ft.authData = [];
+			},
+			mod: (auth, ft) => {
+				//修改
+				var id = ft.listObj.selectedObj.id;
+				if(!id) return;
+				ft.step = 2;
+				ft.formObj.canSave = true;
+				var t = this.utilService.ClearObj(ft.formObj.formModel.value);
+				var m = this.utilService.CopyObj(t, ft.listObj.selectedObj);
+				ft.formObj.formModel.setValue(m);
+			}
+		};
+	};
 
 	private getFormModel() {
-		var str = '//^\-?[0-9]+(\.[0-9]+)?$//';
 		return [{
 			model: 'id'
 		}, {
@@ -97,16 +107,15 @@ export class OrgRegisterComponent implements OnInit {
 			vali: [Validators.required],
 			msg: "电话号码有误"
 		}, {
-			name: '标示*',
-			model: 'flag',
-			vali: Validators.required,
-			msg: "联系人不能为空"
+			name: '备注',
+			model: 'remark',
+			type: 'textarea'
 		}];
 	};
 
 	private getListModel() {
 		return {
-			url: 'mg/org/register/list.json',
+			url: 'crm/sup/list.json',
 			model: [{
 				field: 'name',
 				header: '名称'
@@ -119,13 +128,8 @@ export class OrgRegisterComponent implements OnInit {
 			}, {
 				field: 'mobile',
 				header: '电话'
-			}, {
-				field: 'flag',
-				header: '标示'
-			}, {
-				field: 'status',
-				header: '状态'
 			}]
 		};
 	}
+
 }

@@ -28,7 +28,9 @@ import {
 	FieldsetModule,
 	InputTextModule,
 	ButtonModule,
-	DataTableModule
+	DataTableModule,
+	InputTextareaModule,
+	DialogModule
 } from 'primeng/primeng';
 @NgModule({
 	imports: [
@@ -39,7 +41,10 @@ import {
 		FieldsetModule,
 		InputTextModule,
 		ButtonModule,
-		DataTableModule
+		DataTableModule,
+		InputTextareaModule,
+		DialogModule,
+		ConfirmDialogModule
 	],
 	declarations: [
 		MenuComponentComponent,

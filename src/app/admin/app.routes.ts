@@ -37,6 +37,10 @@ const routes = [{
 		path: 'crm',
 		loadChildren: 'app/admin/crm/crm.module',
 		name: 'CRM'
+	}, {
+		path: 'im',
+		loadChildren: 'app/admin/im/im.module',
+		name: 'IM'
 	}]
 }];
 export default RouterModule.forChild(routes);

@@ -8,8 +8,11 @@
 				<div class="ui-grid-col-2">
 					{{el.name}}:
 				</div>
-				<div class="ui-grid-col-6" [ngClass]="{'is-hidden':!canSave}">
+				<div *ngIf="!el.type" class="ui-grid-col-6" [ngClass]="{'is-hidden':!canSave}">
 					<input pInputText type="text" formControlName="{{el.model}}" />
+				</div>
+				<div *ngIf="el.type=='textarea'" class="ui-grid-col-6" [ngClass]="{'is-hidden':!canSave}">
+					<textarea pInputTextarea rows="5" cols="30"  formControlName="{{el.model}}"></textarea>
 				</div>
 				<div class="ui-grid-col-6" [ngClass]="{'is-hidden':canSave}">
 					 {{formModel.controls[el.model].value}}

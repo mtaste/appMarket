@@ -9,12 +9,9 @@ import {
 	CommonModule
 } from "@angular/common";
 import {
-	CusComponent
-} from "./cus/cus.component";
-import {
-	SupComponent
-} from "./sup/sup.component";
-import routes from './crm.routes';
+	BookInComponent
+} from "./book-in/book-in.component";
+import routes from './im.routes';
 import {
 	FieldsetModule,
 	TreeModule,
@@ -49,8 +46,7 @@ import {
 		DropdownModule
 	],
 	declarations: [
-		CusComponent,
-		SupComponent
+		BookInComponent
 	]
 })
 export default class OrgRegisterModule {}

@@ -106,6 +106,10 @@ export class CusComponent implements OnInit {
 			model: 'mobile',
 			vali: [Validators.required],
 			msg: "电话号码有误"
+		}, {
+			name: '备注',
+			model: 'remark',
+			type: 'textarea'
 		}];
 	};
 

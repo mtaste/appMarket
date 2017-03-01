@@ -49,7 +49,8 @@ export class ListFormComponentComponent implements OnInit {
 		private authService: AuthService,
 		private fb: FormBuilder,
 		private utilService: UtilService,
-		private crudService: CrudService
+		private crudService: CrudService,
+		private confirmationService: ConfirmationService
 	) {
 
 	};
@@ -63,6 +64,13 @@ export class ListFormComponentComponent implements OnInit {
 				this.step = 1;
 			}
 		}];
+		var i = 0;
+		for(var k in this.menus) {
+			i++;
+		};
+		if(i <= 0) {
+			this.menus = this.getMenus();
+		};
 	};
 
 	onSubmit(param) {
@@ -99,5 +107,119 @@ export class ListFormComponentComponent implements OnInit {
 	};
 	SelectedRow(e) {
 		this.rowSeleted.emit(e);
+	};
+	private display = false;
+	private remark = "";
+	private tempFunc;
+	Reject() {
+		this.tempFunc && this.tempFunc();
+		this.display = false;
+	};
+	private getMenus() {
+		return {
+			add: (auth, ft) => {
+				//新增
+				ft.step = 2;
+				var m = this.utilService.ClearObj(ft.formObj.formModel.value);
+				ft.formObj.formModel.setValue(m);
+				ft.formObj.canSave = true;
+				ft.authData = [];
+			},
+			mod: (auth, ft) => {
+				//修改
+				var id = ft.listObj.selectedObj.id;
+				if(!id) return;
+				ft.step = 2;
+				if(ft.listObj.selectedObj.status != this.utilService.GetStatus('0') &&
+					ft.listObj.selectedObj.status != this.utilService.GetStatus('99')) {
+					ft.formObj.canSave = false;
+				} else {
+					ft.formObj.canSave = true;
+				}
+				var t = this.utilService.ClearObj(ft.formObj.formModel.value);
+				var m = this.utilService.CopyObj(t, ft.listObj.selectedObj);
+				ft.formObj.formModel.setValue(m);
+				//获取审核记录
+				this.crudService.GetData('auth/bill/list.do', {
+					id: id
+				}, ret => {
+					ret = ret.data;
+					ft.authData = ret;
+				});
+
+			},
+			remove: (auth, ft) => {
+				//删除
+				this.confirmationService.confirm({
+					header: '删除提示',
+					message: '您确定需要删除此记录?',
+					accept: () => {
+						var m = ft.listObj.selectedObj;
+						this.crudService.DeleteData(
+							auth.item.authUrl, m["id"],
+							ret => {
+								ft.msgs.push({
+									severity: 'success',
+									summary: '提示',
+									detail: "删除成功"
+								});
+								var index = this.utilService.GetArrayIndex(ft.listObj.listData, "id", m["id"]);
+								ft.listObj.listData.splice(index, 1);
+								ft.listObj.selectedObj = {};
+								this.SelectedRow({});
+							});
+					}
+				});
+			},
+			app: (auth, ft) => {
+				//提交
+				this.handerData('提交', auth, ft, '提交成功', '1');
+			},
+			auth: (auth, ft) => {
+				//审核
+				this.handerData('审核', auth, ft, '审核通过', '2');
+			},
+			reject: (auth, ft) => {
+				//否决
+				this.remark = "";
+				this.display = true;
+				this.tempFunc = () => {
+					var param = {
+						id: ft.listObj.selectedObj.id,
+						remark: this.remark
+					}
+					this.sucessBack(auth, ft, '否决成功', '99', param);
+				};
+			}
+		};
+	};
+
+	private handerData(handler, auth, ft, msg, status) {
+		this.confirmationService.confirm({
+			header: handler + '提示',
+			message: '您确定' + handler + '此表单?',
+			accept: () => {
+				var id = ft.listObj.selectedObj.id;
+				var param = {
+					id: id
+				};
+				this.sucessBack(auth, ft, msg, status, param);
+			}
+		});
+	};
+	private sucessBack(auth, ft, msg, status, param) {
+		this.crudService.AppData(
+			auth.item.authUrl, param,
+			ret => {
+				ft.msgs.push({
+					severity: 'success',
+					summary: '提示',
+					detail: msg
+				});
+				if(ret.data >= 1) {
+					ft.listObj.selectedObj.status = this.utilService.GetStatus(status);
+					this.SelectedRow(ft.listObj.selectedObj);
+				}
+			});
 	};
 }

@@ -1,7 +1,18 @@
 <app-list-form-component 
-	[menus]="menus" 
-	[title]="'机构列表'" 
+	[title]="'库存变更列表'" 
 	[list]="listModel" 
 	[form]="form" 
+	[saveStep]='false'
 	(initEvent)="InitListForm($event)"
-	(rowSeleted)='RowSeleted($event)'></app-list-form-component>
+	(rowSeleted)='RowSeleted($event)'
+	(addEvent)='AddEvent($event)'>
+	
+	<app-select-list 
+		[title]="'选择产品'"
+		[listModel]='productModel'
+		(initEvent)='InitSelectListEvent($event)'
+		(removeEvent)='RemoveEvent($event)'
+		(chooseEvent)='ChooseEvent($event)'
+		>
+	</app-select-list>
+</app-list-form-component>

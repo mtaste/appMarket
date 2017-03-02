@@ -37,8 +37,10 @@ export class ListFormComponentComponent implements OnInit {
 	@Input() title = "";
 	@Input() list = {};
 	@Input() form = [];
+	@Input() saveStep = true;
 	@Output() initEvent: EventEmitter < any > = new EventEmitter();
 	@Output() rowSeleted: EventEmitter < any > = new EventEmitter();
+	@Output() addEvent: EventEmitter < any > = new EventEmitter();
 	constructor(
 		private authService: AuthService,
 		private fb: FormBuilder,
@@ -76,7 +78,7 @@ export class ListFormComponentComponent implements OnInit {
 				summary: '提示',
 				detail: '保存成功'
 			});
-			this.step = 1;
+			this.saveStep && (this.step = 1);
 			var value = this.formObj['formModel']['value'];
 			if(!value["id"]) {
 				value["id"] = ret.data;
@@ -118,6 +120,7 @@ export class ListFormComponentComponent implements OnInit {
 				ft.formObj.formModel.setValue(m);
 				ft.formObj.canSave = true;
 				ft.authData = [];
+				this.addEvent.emit();
 			},
 			mod: (auth, ft) => {
 				//修改
@@ -140,7 +143,7 @@ export class ListFormComponentComponent implements OnInit {
 					ret = ret.data;
 					ft.authData = ret;
 				});
-
+				this.addEvent.emit();
 			},
 			remove: (auth, ft) => {
 				//删除

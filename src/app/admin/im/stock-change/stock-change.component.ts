@@ -4,7 +4,8 @@ import {
 } from '@angular/core';
 import {
 	UtilService,
-	Validators
+	Validators,
+	CrudService
 } from '../index';
 @Component({
 	selector: 'app-stock-change',
@@ -18,13 +19,22 @@ export class StockChangeComponent implements OnInit {
 	private listModel = {};
 	//填写信息
 	private form = [];
-	constructor(private utilService: UtilService) {
+	//产品列表
+	private productModel = {};
+	constructor(
+		private utilService: UtilService,
+		private crudService: CrudService
+	) {
 		this.form = this.getFormModel();
 		//list model
 		this.listModel = this.getListModel();
+		//product model
+		this.productModel = this.getProductModel();
 	};
 
-	ngOnInit() {};
+	ngOnInit() {
+
+	};
 
 	InitListForm(e) {
 		this.obj = e;
@@ -44,62 +54,106 @@ export class StockChangeComponent implements OnInit {
 			f.RestFuncs(['add', 'mod']);
 		}
 	};
+	AddEvent(e) {
+		this.selectListObj['showFuns'] = this.obj['formObj']['canSave'];
+		var f = this.obj['formObj'];
+		var value = f.formModel.value;
+		this.selectListObj['Id'](value.id);
+	};
 
 	private getFormModel() {
-		var str = '//^\-?[0-9]+(\.[0-9]+)?$//';
 		return [{
 			model: 'id'
 		}, {
-			name: '名称*',
-			model: 'name',
+			name: '标题',
+			model: 'title',
 			vali: Validators.required,
-			msg: "名称不能为空"
+			msg: "标题不能为空"
 		}, {
-			name: '地址*',
-			model: 'address',
-			vali: Validators.required,
-			msg: "地址不能为空"
-		}, {
-			name: '联系人*',
-			model: 'contact',
-			vali: Validators.required,
-			msg: "联系人不能为空"
-		}, {
-			name: '电话*',
-			model: 'mobile',
-			vali: [Validators.required],
-			msg: "电话号码有误"
-		}, {
-			name: '标示*',
-			model: 'flag',
-			vali: Validators.required,
-			msg: "联系人不能为空"
+			name: '备注',
+			model: 'remark',
+			type: 'textarea'
 		}];
 	};
 
 	private getListModel() {
 		return {
-			url: 'mg/org/register/list.json',
+			url: 'im/product/change/list.json',
 			model: [{
-				field: 'name',
-				header: '名称'
-			}, {
-				field: 'address',
-				header: '地址'
-			}, {
-				field: 'contact',
-				header: '联系人'
-			}, {
-				field: 'mobile',
-				header: '电话'
-			}, {
-				field: 'flag',
-				header: '标示'
+				field: 'title',
+				header: '标题'
 			}, {
 				field: 'status',
 				header: '状态'
 			}]
 		};
 	}
+
+	private getProductModel() {
+		return {
+			listUrl: 'im/product/change/detail.do',
+			listModel: [{
+				field: 'name',
+				header: '产品名称'
+			}, {
+				field: 'selfNum',
+				header: '自定编号'
+			}, {
+				field: 'qty',
+				header: '数量'
+			}],
+			chooseUrl: "im/product/change/productList.do",
+			chooseModel: [{
+				field: 'name',
+				header: '产品名称'
+			}, {
+				field: 'selfNum',
+				header: '自定编号'
+			}],
+			editUrl: 'im/product/change/detailQty.do',
+			editForm: [{
+				model: 'id'
+			}, {
+				name: '数量',
+				model: 'qty',
+				type: 'number'
+			}, {
+				model: 'name',
+				name: "名称",
+				display: true
+			}]
+		};
+	};
+	private selectListObj = {};
+	InitSelectListEvent(e) {
+		this.selectListObj = e;
+	};
+	getParam(e) {
+		var f = this.obj['formObj'];
+		var value = f.formModel.value;
+		if(!value.id) {
+			alert('请先保存再操作.');
+			return;
+		};
+		var param = {
+			id: value.id,
+			productIds: e.ids
+		}
+		return param;
+	};
+	detailHandler(url, e) {
+		var p = this.getParam(e);
+		if(!p) return;
+		this.crudService.SaveData(url, p, (ret) => {
+			e && e.bk && e.bk();
+		});
+	}
+	RemoveEvent(e) {
+		this.detailHandler('im/product/change/removeDetail.do', e);
+	};
+
+	ChooseEvent(e) {
+		this.detailHandler('im/product/change/addDetail.do', e);
+	};
 
 }

@@ -22,6 +22,9 @@ import {
 	EasyFormComponentComponent
 } from "./easy-form-component/easy-form-component.component";
 import {
+	SelectListComponent
+} from "./select-list/select-list.component";
+import {
 	AuthFuncsComponent
 } from "./auth-funcs/auth-funcs.component";
 import {
@@ -55,7 +58,8 @@ import {
 		ListComponentComponent,
 		ListFormComponentComponent,
 		EasyFormComponentComponent,
-		AuthFuncsComponent
+		AuthFuncsComponent,
+		SelectListComponent
 	],
 	exports: [
 		MenuComponentComponent,
@@ -63,7 +67,8 @@ import {
 		ListComponentComponent,
 		ListFormComponentComponent,
 		EasyFormComponentComponent,
-		AuthFuncsComponent
+		AuthFuncsComponent,
+		SelectListComponent
 	]
 })
 

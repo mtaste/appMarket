@@ -8,21 +8,27 @@
 				<div class="ui-grid-col-2">
 					{{el.name}}:
 				</div>
-				<div *ngIf="!el.type" class="ui-grid-col-6" [ngClass]="{'is-hidden':!canSave}">
-					<input pInputText type="text" formControlName="{{el.model}}" />
+				<div *ngIf="!el.type&&!el.display" class="ui-grid-col-6" [ngClass]="{'is-hidden':!canSave}">
+						<input pInputText type="text" formControlName="{{el.model}}" />
 				</div>
-				<div *ngIf="el.type=='textarea'" class="ui-grid-col-6" [ngClass]="{'is-hidden':!canSave}">
-					<textarea pInputTextarea rows="5" cols="30"  formControlName="{{el.model}}"></textarea>
+				<div *ngIf="el.type=='textarea'&&!el.display" class="ui-grid-col-6" [ngClass]="{'is-hidden':!canSave}">
+						<textarea pInputTextarea rows="5" cols="30"  formControlName="{{el.model}}"></textarea>
 				</div>
-				<div class="ui-grid-col-6" [ngClass]="{'is-hidden':canSave}">
-					 {{formModel.controls[el.model].value}}
+				<div *ngIf="el.type=='number'&&!el.display" class="ui-grid-col-6" [ngClass]="{'is-hidden':!canSave}">
+						<input pInputText type="number" formControlName="{{el.model}}" />
 				</div>
-				<div class="ui-grid-col-4">
-					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formModel.controls[el.model].valid&&formModel.controls[el.model].dirty">
-						<i class="fa fa-close"></i>{{el.msg}}
-					</div>
+				<div *ngIf="!el.display" class="ui-grid-col-6" [ngClass]="{'is-hidden':canSave}">
+						{{formModel.controls[el.model].value}}
 				</div>
+				<div *ngIf="el.display" class="ui-grid-col-6">
+					{{formModel.controls[el.model].value}}
+				</div>
+		<div class="ui-grid-col-4">
+			<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formModel.controls[el.model].valid&&formModel.controls[el.model].dirty">
+				<i class="fa fa-close"></i>{{el.msg}}
 			</div>
+		</div>
+	</div>
 	</span>
 		<div class="ui-grid-row" [ngClass]="{'is-hidden':!canSave}">
 			<div class="ui-grid-col-2"></div>

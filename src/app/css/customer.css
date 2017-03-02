@@ -5546,3 +5546,8 @@ body .ui-widget-header {
 .sidenav-search {
 	text-align: center;
 }
+
+.col-button {
+	width: 10%;
+	text-align: center;
+}

@@ -4,13 +4,7 @@
 <div class="ui-g" [ngClass]="{'is-hidden':step!=1}">
 
 	<div class="ui-g-12 ui-md-12 ui-lg-12">
-		<app-list-component 
-			[title]='title' 
-			[menus]='menus' 
-			[list]='list' 
-			[obj]='this' 
-			(initEvent)='ListInit($event)'
-			(selectEvent)='SelectedRow($event)'></app-list-component>
+		<app-list-component [title]='title' [menus]='menus' [list]='list' [obj]='this' (initEvent)='ListInit($event)' (selectEvent)='SelectedRow($event)'></app-list-component>
 	</div>
 </div>
 
@@ -22,6 +16,7 @@
 			<p-menubar [model]="infoFuncs"></p-menubar>
 			<app-form-component [form]='form' (save)='onSubmit($event)' (initEvent)='FormInit($event)'></app-form-component>
 		</p-fieldset>
+		<ng-content></ng-content>
 		<span [ngClass]="{'is-hidden':authData.length<=0}">
 			<p-fieldset legend="审核信息">
 				<p-dataTable [value]="authData">

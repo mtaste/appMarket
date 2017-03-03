@@ -1,45 +1,52 @@
-<p-panel header="{{'login'| i18n}}">
-	<form [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)">
-		<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
-			<div class="ui-grid-row">
-				<div class="ui-grid-col-2">
-					{{'UserName'| i18n}} *:
-				</div>
-				<div class="ui-grid-col-6">
-					<input pInputText type="text" formControlName="userName" placeholder="Required" />
-				</div>
-				<div class="ui-grid-col-4">
-					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['userName'].valid&&userform.controls['userName'].dirty">
-						<i class="fa fa-close"></i> UserName is required
+<div class="col-md-12 text-right navicon">
+	<div style="font-weight: bold;font-size: 36px;">
+		欢迎使用S平台系统
+	</div>
+	<p-panel header="后台登录">
+		<form [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)">
+			<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px;color: black;">
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-2">
+					</div>
+					<div class="ui-grid-col-2">
+						{{'UserName'| i18n}} *:
+					</div>
+					<div class="ui-grid-col-4">
+						<input pInputText type="text" formControlName="userName" placeholder="Required" />
+					</div>
+					<div class="ui-grid-col-4">
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['userName'].valid&&userform.controls['userName'].dirty">
+							<i class="fa fa-close"></i> 用户名不能为空
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="ui-grid-row">
-				<div class="ui-grid-col-2">
-					PassWord *:
-				</div>
-				<div class="ui-grid-col-6">
-					<input pInputText type="password" formControlName="passWord" placeholder="Required - Min(6)" />
-				</div>
-				<div class="ui-grid-col-4">
-					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['passWord'].valid&&userform.controls['passWord'].dirty">
-						<i class="fa fa-close"></i>
-						<span *ngIf="userform.controls['passWord'].errors['required']">Password is required</span>
-						<span *ngIf="userform.controls['passWord'].errors['minlength']">Must be longer than 6 characters</span>
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-2">
+					</div>
+					<div class="ui-grid-col-2">
+						密码 *:
+					</div>
+					<div class="ui-grid-col-4">
+						<input pInputText type="password" formControlName="passWord" placeholder="Required - Min(6)" />
+					</div>
+					<div class="ui-grid-col-4">
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['passWord'].valid&&userform.controls['passWord'].dirty">
+							<i class="fa fa-close"></i>
+							<span *ngIf="userform.controls['passWord'].errors['required']">密码不能为空</span>
+							<span *ngIf="userform.controls['passWord'].errors['minlength']">密码必须大于等于6位</span>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="ui-grid-row">
-				<div class="ui-grid-col-2"></div>
-				<div class="ui-grid-col-6">
-					<button pButton type="submit" label="Login" [disabled]="!userform.valid"></button>
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-2">
+					</div>
+					<div class="ui-grid-col-2"></div>
+					<div class="ui-grid-col-4">
+						<button pButton type="submit" label="登录" [disabled]="!userform.valid"></button>
+					</div>
+					<div class="ui-grid-col-4"></div>
 				</div>
-				<div class="ui-grid-col-4"></div>
 			</div>
-			<div style="text-align:center;margin-top:20px" *ngIf="submitted">
-				Form Submitted
-				<br> {{diagnostic}}
-			</div>
-		</div>
-	</form>
-</p-panel>
+		</form>
+	</p-panel>
+</div>

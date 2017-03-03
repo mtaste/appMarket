@@ -5565,3 +5565,6 @@ body .ui-widget-header {
 	right: 10px;
 	margin-bottom: 5px;
 }
+.home {
+	background: url("/resources/images/bg-yellow.png") repeat;
+}

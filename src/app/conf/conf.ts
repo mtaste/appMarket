@@ -2,7 +2,7 @@ var lang = {
 	availableLangs: {
 		en: 'English'
 	},
-	defaultLang: 'en',
+	defaultLang: 'cn',
 	lang: {
 		"welcome": {
 			en: "Welcome User",

@@ -28,6 +28,7 @@ export class AppComponent {
 	//Tabs
 	private items: MenuItem[];
 	private activeItem: MenuItem = {};
+	private userInfo = {};
 	//控制是否显示菜单
 	private appCtrl = {
 		showTopNav: false,
@@ -47,6 +48,10 @@ export class AppComponent {
 			this.menus = data;
 		});
 		this.items = [];
+		this.userService.GetUserInfo((ret) => {
+			ret = ret.data;
+			this.userInfo = ret;
+		});
 	};
 	//点击按钮 
 	ToggleMenu(e, t) {
@@ -105,5 +110,9 @@ export class AppComponent {
 	GoRouter(m) {
 		var u = m.authUrl + "?id=" + m.id;
 		this.router.navigateByUrl(u);
+	};
+	//退出
+	LoginOut() {
+		this.router.navigateByUrl('/user/login');
 	};
 }

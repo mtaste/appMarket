@@ -33,6 +33,7 @@ export class ListFormComponentComponent implements OnInit {
 	private listObj = {};
 	private formObj = {};
 	private authData = [];
+	@Input() status = [];
 	@Input() menus = {};
 	@Input() title = "";
 	@Input() list = {};

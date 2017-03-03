@@ -23,6 +23,7 @@ import {
 	styleUrls: ['./org-register.component.css']
 })
 export class OrgRegisterComponent implements OnInit {
+	private status = [];
 	private obj = {};
 	private RestFuns;
 	//列表
@@ -35,6 +36,8 @@ export class OrgRegisterComponent implements OnInit {
 		this.form = this.getFormModel();
 		//list model
 		this.listModel = this.getListModel();
+		//status 
+		this.status = this.utilService.GetStatusTab(['0', '1', '2', '99']);
 	};
 
 	ngOnInit() {};

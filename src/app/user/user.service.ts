@@ -32,4 +32,7 @@ export class UserService {
 	LoginUser(data, bk) {
 		this.requestService.Post('user/login.json', data, bk);
 	}
+	GetUserInfo(bk) {
+		this.requestService.Get('user/userInfo.json', bk);
+	}
 }

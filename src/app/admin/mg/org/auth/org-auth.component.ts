@@ -25,6 +25,7 @@ import {
 	styleUrls: ['./org-auth.component.css']
 })
 export class OrgAuthComponent implements OnInit {
+	private status = [];
 	//提示信息
 	private authData = [];
 	private msgs: Message[] = [];
@@ -43,7 +44,10 @@ export class OrgAuthComponent implements OnInit {
 		private utilService: UtilService,
 		private fb: FormBuilder,
 		private crudService: CrudService
-	) {};
+	) {
+		//status 
+		this.status = this.utilService.GetStatusTab(['0', '1', '2', '99']);
+	};
 
 	ngOnInit() { //定义表单
 		this.billForm = this.fb.group({

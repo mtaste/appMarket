@@ -3,6 +3,7 @@
 	<app-auth-funcs [menus]='menus' [obj]='obj' (initEvent)='InitFuncs($event)'></app-auth-funcs>
 	<!--搜索-->
 	<div class="ui-listbox-filter-container">
+		<p-selectButton [options]="status" *ngIf='status.length>0' [(ngModel)]="selectedStatus" (click)="StatusClick()"></p-selectButton>
 		<input pInputText type="text" [(ngModel)]="keyword" placeholder="关键字" />
 		<button pButton type="button" (click)="Search()" icon="fa-search"></button>
 	</div>

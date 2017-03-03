@@ -123,13 +123,29 @@ export class UtilService {
 		return rets.join(",");
 	};
 	//获取状态文字
+	private status = {
+		'0': '新建',
+		'1': '已提交',
+		'2': '已审核',
+		'99': '已否决'
+	};
 	GetStatus(k) {
-		var s = {
-			'0': '新建',
-			'1': '已提交',
-			'2': '已审核',
-			'99': '已否决'
-		};
+		var s = this.status;
 		return s[k];
+	};
+	GetStatusTab(ks) {
+		var a = this.status;
+		var ret = [];
+		ret.push({
+			label: '所有',
+			value: ''
+		});
+		for(var k in ks) {
+			a[k] && (ret.push({
+				label: a[k],
+				value: k
+			}));
+		};
+		return ret;
 	};
 }

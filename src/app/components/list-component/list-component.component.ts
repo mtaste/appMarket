@@ -10,6 +10,7 @@ import {
 } from '@angular/router';
 import {
 	MenuItem,
+	SelectItem
 } from 'primeng/primeng';
 import {
 	AuthService,
@@ -60,6 +61,7 @@ export class ListComponentComponent implements OnInit {
 			rows: e.rows
 		};
 		this.keyword && (param["keyword"] = this.keyword);
+		this.selectedStatus && (param["status"] = this.selectedStatus);
 		this.crudService.GetData(this.list['url'], param, (ret) => {
 			ret = ret.data;
 			this.listData = ret.rows;
@@ -73,4 +75,10 @@ export class ListComponentComponent implements OnInit {
 	RowSelect(e) {
 		this.selectEvent.emit(e.data);
 	};
+	//状态列表
+	@Input() status = [];
+	private selectedStatus = "";
+	StatusClick() {
+		this.Search();
+	}
 }

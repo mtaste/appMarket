@@ -3,10 +3,19 @@
 
 	<nav class="main-nav l-pinned-top l-layer-5">
 		<h1>
-			<a class="md-button md-ink-ripple">Angular <sup class="ng-scope">by Google</sup></a>
+			<a class="md-button md-ink-ripple">S平台 <sup class="ng-scope">by ken-li</sup></a>
 		</h1>
-		<button (click)="ToggleMenu($event,'showTopNav')" class="main-nav-button main-nav-mobile-trigger l-right md-button md-ink-ripple" type="button">
-			Site<span class="icon icon-arrow-drop-down ng-scope"></span>
+		<button (click)="LoginOut()" class="main-nav-button main-nav-mobile-trigger l-right md-button md-ink-ripple" type="button">
+			退出<span class="icon icon-arrow-drop-down ng-scope"></span>
+		</button>
+		<ul>
+			<li class="l-right">
+				<a (click)="LoginOut()" class="main-nav-button md-button md-ink-ripple">退出</a>
+			</li>
+		</ul>
+		<!--
+			<button (click)="ToggleMenu($event,'showTopNav')" class="main-nav-button main-nav-mobile-trigger l-right md-button md-ink-ripple" type="button">
+			菜单<span class="icon icon-arrow-drop-down ng-scope"></span>
 		</button>
 		<ul [ngClass]="{ 'is-visible' : appCtrl.showTopNav}">
 			<li class="l-left">
@@ -24,9 +33,10 @@
 				<a class="main-nav-button md-button md-ink-ripple">News</a>
 			</li>
 			<li class="l-right">
-				<a class="main-nav-button md-button md-ink-ripple">Get Started</a>
+				<a class="main-nav-button md-button md-ink-ripple">退出</a>
 			</li>
 		</ul>
+		-->
 	</nav>
 	<!--Menus-->
 	<nav [ngClass]="{'is-visible' : appCtrl.showMenuNav}" class="sidenav l-pinned-left l-layer-4 l-offset-nav">
@@ -34,14 +44,18 @@
 		<header class="sidenav-search st-input-wrapper">
 			{{activeItem.label}}
 			<button (click)="ToggleMenu($event,'showMenuNav')" class="mobile-trigger button md-button md-ink-ripple" type="button">
-				Menu<span class="icon icon-arrow-drop-down ng-scope"></span>
+				功能<span class="icon icon-arrow-drop-down ng-scope"></span>
 			</button>
 		</header>
 		<!--menus-->
 		<app-menu-component [menus]="menus" (onSelected)="MenusClick($event)" [menuId]="menuId"></app-menu-component>
+
 	</nav>
 	<!--content 
 	<p-tabMenu [model]="items" [activeItem]="activeItem">
 	</p-tabMenu>-->
 	<router-outlet></router-outlet>
+</div>
+<div class="ffooter">
+	{{userInfo.orgName}} {{userInfo.orgFlag+"_"+userInfo.userName}}
 </div>

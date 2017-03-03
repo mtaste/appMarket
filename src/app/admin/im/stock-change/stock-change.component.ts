@@ -13,6 +13,7 @@ import {
 	styleUrls: ['./stock-change.component.css']
 })
 export class StockChangeComponent implements OnInit {
+	private status = [];
 	private obj = {};
 	private RestFuns;
 	//列表
@@ -30,6 +31,8 @@ export class StockChangeComponent implements OnInit {
 		this.listModel = this.getListModel();
 		//product model
 		this.productModel = this.getProductModel();
+		//status 
+		this.status = this.utilService.GetStatusTab(['0', '1', '2', '99']);
 	};
 
 	ngOnInit() {

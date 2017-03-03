@@ -4,7 +4,7 @@
 <div class="ui-g" [ngClass]="{'is-hidden':step!=1}">
 	<!--单据列表-->
 	<div class="ui-g-12 ui-md-12 ui-lg-12">
-		<app-list-component [title]="'授权单'" [menus]='menus' [list]='listModel' [obj]='this' (initEvent)='ListInit($event)' (selectEvent)='SelectedRow($event)'>
+		<app-list-component [status]='status' [title]="'授权单'" [menus]='menus' [list]='listModel' [obj]='this' (initEvent)='ListInit($event)' (selectEvent)='SelectedRow($event)'>
 		</app-list-component>
 	</div>
 </div>

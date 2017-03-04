@@ -47,6 +47,9 @@ export class MgUserComponent implements OnInit {
 	private userList = [];
 	private selectedUser = {};
 	private userTotals = 10;
+	private statusList = [];
+	private selectedStatus = "";
+	private status = [];
 
 	constructor(
 		private confirmationService: ConfirmationService,
@@ -120,6 +123,7 @@ export class MgUserComponent implements OnInit {
 			'id': new FormControl(''),
 			'name': new FormControl('', Validators.required),
 			'userName': new FormControl('', Validators.required),
+			'status': new FormControl('', Validators.required),
 			'passWord': new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
 			'mobile': new FormControl('', Validators.required)
 		});
@@ -133,13 +137,26 @@ export class MgUserComponent implements OnInit {
 				this.step = 1;
 			}
 		}];
+
+		this.statusList = this.utilService.GetValidSelect();
+		this.statusList.unshift({
+			label: '请选择',
+			value: ''
+		});
+		this.status = this.utilService.GetValidSelect();
+		this.status.unshift({
+			label: '所有',
+			value: ''
+		});
+	};
+	StatusClick() {
+		this.SearchUser();
 	};
 	//搜索用户
 	SearchUser() {
 		this.LoadUserData({
 			first: 0,
-			rows: 9,
-			keyword: this.keyword
+			rows: 9
 		});
 	};
 	//获取用户列表
@@ -148,7 +165,8 @@ export class MgUserComponent implements OnInit {
 			page: e.first / e.rows + 1,
 			rows: e.rows
 		};
-		e.keyword && (param["keyword"] = e.keyword);
+		this.keyword && (param["keyword"] = this.keyword);
+		this.selectedStatus && (param["status"] = this.selectedStatus);
 		this.mgUserService.GetUserList(param, (ret) => {
 			ret = ret.data;
 			this.userList = ret.rows;
@@ -170,17 +188,19 @@ export class MgUserComponent implements OnInit {
 			this.msgs.push({
 				severity: 'success',
 				summary: '提示',
-				detail: JSON.stringify(value)
+				detail: '保存成功'
 			});
 			this.step = 1;
 			if(!value["id"]) {
 				value["id"] = ret.data;
 				var m = this.utilService.CopyObj(value, value);
+				m['statusText'] = this.utilService.validStatus[value['status']];
 				this.userList.unshift(m);
 			} else {
 				for(var k in value) {
 					this.selectedUser[k] && (this.selectedUser[k] = value[k]);
-				}
+				};
+				this.selectedUser['statusText'] = this.utilService.validStatus[value['status']];
 			}
 		});
 

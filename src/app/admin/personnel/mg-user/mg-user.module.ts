@@ -2,7 +2,8 @@ import {
 	NgModule
 } from "@angular/core";
 import {
-	PNGModule
+	PNGModule,
+	ComponentsModule
 } from '../index';
 import {
 	CommonModule
@@ -22,7 +23,9 @@ import {
 	DataListModule,
 	DialogModule,
 	DataTableModule,
-	SharedModule
+	SharedModule,
+	DropdownModule,
+	SelectButtonModule
 } from 'primeng/primeng';
 @NgModule({
 	imports: [
@@ -39,7 +42,9 @@ import {
 		DataListModule,
 		DialogModule,
 		DataTableModule,
-		SharedModule
+		SharedModule,
+		DropdownModule,
+		SelectButtonModule
 	],
 	declarations: [MgUserComponent]
 })

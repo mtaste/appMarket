@@ -37,7 +37,8 @@ import {
 	DataTableModule,
 	InputTextareaModule,
 	DialogModule,
-	SelectButtonModule
+	SelectButtonModule,
+	DropdownModule
 } from 'primeng/primeng';
 @NgModule({
 	imports: [
@@ -52,7 +53,8 @@ import {
 		InputTextareaModule,
 		DialogModule,
 		ConfirmDialogModule,
-		SelectButtonModule
+		SelectButtonModule,
+		DropdownModule
 	],
 	declarations: [
 		MenuComponentComponent,

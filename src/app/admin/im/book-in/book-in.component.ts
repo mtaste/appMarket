@@ -59,6 +59,9 @@ export class BookInComponent implements OnInit {
 			}, {
 				field: 'depict',
 				header: '产品描述'
+			}, {
+				field: 'qty',
+				header: '库存'
 			}]
 		};
 	}

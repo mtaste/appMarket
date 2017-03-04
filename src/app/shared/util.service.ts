@@ -148,4 +148,19 @@ export class UtilService {
 		};
 		return ret;
 	};
+	public validStatus = {
+		'-1': '无效',
+		'1': '有效'
+	};
+	GetValidSelect() {
+		var ret = [];
+		var ks = this.validStatus;
+		for(var k in ks) {
+			ks[k] && (ret.push({
+				label: ks[k],
+				value: k
+			}));
+		};
+		return ret;
+	};
 }

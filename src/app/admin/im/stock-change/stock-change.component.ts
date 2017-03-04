@@ -59,9 +59,7 @@ export class StockChangeComponent implements OnInit {
 	};
 	AddEvent(e) {
 		this.selectListObj['showFuns'] = this.obj['formObj']['canSave'];
-		var f = this.obj['formObj'];
-		var value = f.formModel.value;
-		this.selectListObj['Id'](value.id);
+		this.ChangeBillId();
 	};
 
 	private getFormModel() {
@@ -131,7 +129,13 @@ export class StockChangeComponent implements OnInit {
 	InitSelectListEvent(e) {
 		this.selectListObj = e;
 	};
+	private ChangeBillId() {
+		var f = this.obj['formObj'];
+		var value = f.formModel.value;
+		this.selectListObj['Id'](value.id);
+	};
 	getParam(e) {
+		this.ChangeBillId();
 		var f = this.obj['formObj'];
 		var value = f.formModel.value;
 		if(!value.id) {

@@ -1,0 +1,15 @@
+.auth-main {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	position: absolute
+}
+
+.auth-block {
+	width: 540px;
+	margin: 0 auto;
+	border-radius: 5px;
+	color: #fff;
+	padding: 32px
+}

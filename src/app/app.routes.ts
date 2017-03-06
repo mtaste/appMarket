@@ -1,6 +1,9 @@
 import {
 	RouterModule
 } from "@angular/router";
+import {
+	AppRouterActivate
+} from "./app.routers.service";
 const routes = [{
 	path: '',
 	loadChildren: 'app/home/home.module'
@@ -23,7 +26,8 @@ const routes = [{
 }, {
 	path: 'admin',
 	loadChildren: 'app/admin/app.module',
-	name: 'Admin'
+	name: 'Admin',
+	canActivate: [AppRouterActivate]
 }];
 
 function GetRoters() {

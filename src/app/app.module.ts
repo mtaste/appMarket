@@ -21,6 +21,10 @@ import {
 import {
 	RequestService
 } from "./shared/request.service";
+import {
+	AppRouterActivate,
+	AppRouterService
+} from "./app.routers.service";
 @NgModule({
 	declarations: [
 		AppComponent
@@ -38,7 +42,9 @@ import {
 			useValue: `app/json`
 		},
 		UtilService,
-		RequestService
+		RequestService,
+		AppRouterService,
+		AppRouterActivate,
 	],
 	bootstrap: [AppComponent]
 })

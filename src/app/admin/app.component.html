@@ -48,7 +48,9 @@
 			</button>
 		</header>
 		<!--menus-->
-		<app-menu-component [menus]="menus" (onSelected)="MenusClick($event)" [menuId]="menuId"></app-menu-component>
+		<app-menu-component [menus]="menus" (onSelected)="MenusClick($event)" [menuId]="menuId">
+			loading....
+		</app-menu-component>
 
 	</nav>
 	<!--content 

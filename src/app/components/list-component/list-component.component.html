@@ -8,8 +8,9 @@
 		<button pButton type="button" (click)="Search()" icon="fa-search"></button>
 	</div>
 	<!--列表-->
-	<!--列表-->
-	<p-dataTable [value]="listData" (onRowSelect)='RowSelect($event)' [(selection)]="selectedObj" selectionMode="single" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="totals" (onLazyLoad)="LoadData($event)">
-		<p-column *ngFor="let el of list.model" field="{{el.field}}" header="{{el.header}}"></p-column>
-	</p-dataTable>
+	<div class="card card-w-title">
+		<p-dataTable [responsive]="true" [value]="listData" (onRowSelect)='RowSelect($event)' [(selection)]="selectedObj" selectionMode="single" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="totals" (onLazyLoad)="LoadData($event)">
+			<p-column *ngFor="let el of list.model" field="{{el.field}}" header="{{el.header}}"></p-column>
+		</p-dataTable>
+	</div>
 </p-fieldset>

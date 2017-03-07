@@ -13,13 +13,15 @@
 				<button pButton type="button" (click)="SearchUser()" icon="fa-search"></button>
 			</div>
 			<!--列表-->
-			<p-dataTable [value]="userList" [(selection)]="selectedUser" selectionMode="single" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="userTotals" (onLazyLoad)="LoadUserData($event)">
-				<p-column field="userName" header="用户名"></p-column>
-				<p-column field="name" header="姓名"></p-column>
-				<p-column field="mobile" header="电话"></p-column>
-				<p-column field="roleName" header="职务"></p-column>
-				<p-column field="statusText" header="状态"></p-column>
-			</p-dataTable>
+			<div class="card card-w-title">
+				<p-dataTable [responsive]="true" [value]="userList" [(selection)]="selectedUser" selectionMode="single" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="userTotals" (onLazyLoad)="LoadUserData($event)">
+					<p-column field="userName" header="用户名"></p-column>
+					<p-column field="name" header="姓名"></p-column>
+					<p-column field="mobile" header="电话"></p-column>
+					<p-column field="roleName" header="职务"></p-column>
+					<p-column field="statusText" header="状态"></p-column>
+				</p-dataTable>
+			</div>
 		</p-fieldset>
 	</div>
 </div>

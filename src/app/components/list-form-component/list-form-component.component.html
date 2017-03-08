@@ -12,13 +12,16 @@
 <div class="ui-g" [ngClass]="{'is-hidden':step!=2}">
 	<div class="ui-g-12 ui-md-12 ui-lg-12">
 		<p-fieldset legend="表单信息">
-			<!-- 功能-->
-			<p-menubar [model]="infoFuncs"></p-menubar>
-			<app-form-component [form]='form' (save)='onSubmit($event)' (initEvent)='FormInit($event)'></app-form-component>
+			<div class="card card-w-title">
+				<!-- 功能-->
+				<p-menubar [model]="infoFuncs"></p-menubar>
+				<app-form-component [form]='form' (save)='onSubmit($event)' (initEvent)='FormInit($event)'></app-form-component>
+			</div>
 		</p-fieldset>
 		<ng-content></ng-content>
 		<span [ngClass]="{'is-hidden':authData.length<=0}">
 			<p-fieldset legend="审核信息">
+				<div class="card card-w-title">
 				<p-dataTable [value]="authData">
 					<p-column field="userName" header="用户名"></p-column>
 					<p-column field="name" header="姓名"></p-column>
@@ -26,6 +29,7 @@
 					<p-column field="createTime" header="审核时间"></p-column>
 					<p-column field="remark" header="备注"></p-column>
 				</p-dataTable>
+				</div>
 			</p-fieldset>
 		</span>
 	</div>

@@ -1,5 +1,5 @@
 <!--列表-->
-<p-fieldset legend="{{title}}">
+<div class="card card-w-title">
 	<app-auth-funcs [menus]='menus' [obj]='obj' (initEvent)='InitFuncs($event)'></app-auth-funcs>
 	<!--搜索-->
 	<div class="ui-listbox-filter-container">
@@ -13,4 +13,4 @@
 			<p-column *ngFor="let el of list.model" field="{{el.field}}" header="{{el.header}}"></p-column>
 		</p-dataTable>
 	</div>
-</p-fieldset>
+</div>

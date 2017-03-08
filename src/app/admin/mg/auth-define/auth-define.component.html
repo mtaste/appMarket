@@ -2,17 +2,17 @@
 	<p-growl [value]="msgs" [life]="1000"></p-growl>
 	<p-confirmDialog icon="fa fa-question-circle" width="425"></p-confirmDialog>
 	<div class="ui-g-12 ui-md-6 ui-lg-6">
-		<p-fieldset legend="权限列表">
+		<div class="card card-w-title">
 			<p-menubar [model]="items"></p-menubar>
 			<p-tree [value]="trees" selectionMode="single" [(selection)]="selectedNode" (onNodeSelect)="NodeSelect($event)">
 				<template let-node pTemplate="default">
 					<span>{{node.name}}</span>
 				</template>
 			</p-tree>
-		</p-fieldset>
+		</div>
 	</div>
 	<div class="ui-g-12 ui-md-6 ui-lg-6">
-		<p-fieldset legend="权限信息">
+		<div class="card card-w-title">
 			<form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">
 				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
 					<input pInputText type="hidden" formControlName="id" />
@@ -126,6 +126,6 @@
 					<div style="text-align: center;font-weight:inherit;">{{display}}</div>
 				</div>
 			</form>
-		</p-fieldset>
+		</div>
 	</div>
 </div>

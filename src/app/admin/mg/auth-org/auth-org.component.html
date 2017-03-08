@@ -3,12 +3,12 @@
 	<p-confirmDialog icon="fa fa-question-circle" width="360"></p-confirmDialog>
 	<!--机构列表-->
 	<div class="ui-g-12 ui-md-6 ui-lg-6">
-		<p-fieldset legend="机构列表">
+		<div class="card card-w-title">
 			<!--function-->
 			<p-menubar [model]="orgItems"></p-menubar>
 			<!--end-->
 			<div class="ui-listbox-filter-container">
-				<input pInputText type="text" [(ngModel)]="keyword" placeholder="关键字" />
+				<input pInputText type="text" [(ngModel)]="keyword" placeholder="关键字" class="ui-inputtext ui-widget ui-state-default ui-corner-all" />
 				<button pButton type="button" (click)="SearchOrg()" icon="fa-search"></button>
 			</div>
 			<p-dataList [value]="orgList" [paginator]="true" [rows]="9" [lazy]="true" (onLazyLoad)="LoadOrgListData($event)" [totalRecords]="totalRecords">
@@ -18,11 +18,11 @@
 					</div>
 				</template>
 			</p-dataList>
-		</p-fieldset>
+		</div>
 	</div>
 	<!--权限信息-->
 	<div class="ui-g-12 ui-md-6 ui-lg-6">
-		<p-fieldset legend="权限列表">
+		<div class="card card-w-title">
 			<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
 				<!--function-->
 				<!--end-->
@@ -36,7 +36,7 @@
 					<button pButton type="button" label="{{saveFunc.name}}" (click)="SaveAuth()"></button>
 				</div>
 			</div>
-		</p-fieldset>
+		</div>
 	</div>
 	<!--  新增加机构  -->
 	<p-dialog header="新增机构" [(visible)]="display" modal="modal" width="360" responsive="true">

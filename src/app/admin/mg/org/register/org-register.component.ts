@@ -33,6 +33,7 @@ export class OrgRegisterComponent implements OnInit {
 	constructor(
 		private utilService: UtilService
 	) {
+		this.utilService.loadingCompont = false;
 		this.form = this.getFormModel();
 		//list model
 		this.listModel = this.getListModel();

@@ -1,6 +1,5 @@
 <!--列表-->
 <div class="card card-w-title">
-	<app-auth-funcs [menus]='menus' [obj]='obj' (initEvent)='InitFuncs($event)'></app-auth-funcs>
 	<!--搜索-->
 	<div class="ui-listbox-filter-container ui-g">
 		<div class="ui-g-12 ui-md-6 ui-lg-6" *ngIf='status.length>0'>
@@ -11,6 +10,7 @@
 			<button pButton type="button" (click)="Search()" icon="fa-search"></button>
 		</div>
 	</div>
+	<app-auth-funcs [menus]='menus' [obj]='obj' (initEvent)='InitFuncs($event)'></app-auth-funcs>
 	<!--列表-->
 	<div class="card card-w-title">
 		<p-dataTable [responsive]="true" [value]="listData" (onRowSelect)='RowSelect($event)' [(selection)]="selectedObj" selectionMode="single" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="totals" (onLazyLoad)="LoadData($event)">

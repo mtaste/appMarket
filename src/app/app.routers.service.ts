@@ -36,7 +36,6 @@ export class AppRouterActivate implements CanActivate {
 		private appRouterService: AppRouterService
 	) {}
 	canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-		console.log(1);
 		var ret = this.appRouterService.RunApp(state);
 		return ret;
 	}

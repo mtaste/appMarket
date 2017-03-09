@@ -3,7 +3,8 @@ import {
 	OnInit
 } from '@angular/core';
 import {
-	CrudService
+	CrudService,
+	UtilService
 } from '../../index';
 @Component({
 	selector: 'app-org-info',
@@ -12,7 +13,11 @@ import {
 })
 export class OrgInfoComponent implements OnInit {
 	private info = [];
-	constructor(private crudService: CrudService) {}
+	constructor(
+		private crudService: CrudService,
+		private utilService: UtilService) {
+		this.utilService.loadingCompont = false;
+	};
 
 	ngOnInit() {
 		this.crudService.GetData('org/info', {}, (ret) => {

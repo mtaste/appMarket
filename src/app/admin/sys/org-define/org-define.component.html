@@ -54,8 +54,6 @@
 		<p-fieldset legend="职务列表">
 			<div class="card card-w-title">
 				<div [ngClass]="{'is-hidden':!depNode}">
-					<!--function-->
-					<p-menubar [model]="jobFuns"></p-menubar>
 					<!--end-->
 					<div class="ui-listbox-filter-container ui-g">
 						<div class="ui-g-12 ui-md-6 ui-lg-6">
@@ -63,6 +61,8 @@
 							<button pButton type="button" (click)="SearchJob()" icon="fa-search"></button>
 						</div>
 					</div>
+					<!--function-->
+					<p-menubar [model]="jobFuns"></p-menubar>
 					<p-dataList [value]="jobList" [paginator]="true" [rows]="5" [lazy]="true" (onLazyLoad)="LoadJobListData($event)" [totalRecords]="jobTotal">
 						<template let-e pTemplate="item">
 							<div class="ui-grid ui-grid-responsive ui-fluid jobList" (click)="JobClick(e)" [ngClass]="{'selected':e.id==selectedJob.id}">

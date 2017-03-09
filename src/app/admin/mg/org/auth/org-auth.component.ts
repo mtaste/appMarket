@@ -45,6 +45,7 @@ export class OrgAuthComponent implements OnInit {
 		private fb: FormBuilder,
 		private crudService: CrudService
 	) {
+		this.utilService.loadingCompont = false;
 		//status 
 		this.status = this.utilService.GetStatusTab(['0', '1', '2', '99']);
 	};

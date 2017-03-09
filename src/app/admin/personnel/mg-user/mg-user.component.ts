@@ -60,6 +60,7 @@ export class MgUserComponent implements OnInit {
 		private authService: AuthService,
 		private crudService: CrudService
 	) {
+		this.utilService.loadingCompont = false;
 		var menus = {
 			add: (auth) => {
 				this.t_menu = auth.item;

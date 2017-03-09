@@ -5,6 +5,8 @@ import {
 
 @Injectable()
 export class UtilService {
+	public loadingCompont = false;
+	public loadingRequest = false;
 	constructor() {};
 	//获取分布参数
 	GetPageInfo() {

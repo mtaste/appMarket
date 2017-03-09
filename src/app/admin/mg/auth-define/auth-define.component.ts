@@ -42,6 +42,7 @@ export class AuthDefineComponent implements OnInit {
 		private router: ActivatedRoute,
 		private authService: AuthService
 	) {
+		this.utilService.loadingCompont = false;
 		var menus = {
 			add: (auth) => {
 				var m = this.selectedNode;

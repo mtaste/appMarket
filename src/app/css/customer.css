@@ -164,7 +164,7 @@ screen and (max-width:800px) {
 }
 
 .main-nav {
-	background: #1976D2;
+	background: #0080FF;
 	height: 56px;
 	min-height: 56px;
 	padding: 0;
@@ -179,7 +179,7 @@ screen and (max-width:800px) {
 	margin: 0 72px 0 0;
 	padding: 0;
 	height: 56px;
-	width: 168px;
+	width: 242px;
 	float: left
 }
 
@@ -566,7 +566,6 @@ screen and (max-width:800px) {
 	position: relative;
 	text-decoration: none;
 	display: block;
-	text-transform: uppercase
 }
 
 .sidenav-links>li .sidenav-icon {
@@ -613,10 +612,6 @@ screen and (max-width:800px) {
 
 body .ui-widget-header {
 	border: 0px solid;
-}
-
-.is-hidden {
-	display: none!important
 }
 
 .sidenav-search {

@@ -16,6 +16,7 @@ import {
 } from "../components/components.module";
 import {
 	TabMenuModule,
+	BreadcrumbModule,
 	ConfirmationService
 } from 'primeng/primeng';
 import appsRoutes from './app.routes';
@@ -42,7 +43,8 @@ import {
 		CommonModule,
 		ComponentsModule,
 		appsRoutes,
-		TabMenuModule
+		TabMenuModule,
+		BreadcrumbModule
 	],
 	declarations: [
 		AppComponent

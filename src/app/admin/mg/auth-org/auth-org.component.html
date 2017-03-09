@@ -4,8 +4,6 @@
 	<!--机构列表-->
 	<div class="ui-g-12 ui-md-6 ui-lg-6">
 		<div class="card card-w-title">
-			<!--function-->
-			<p-menubar [model]="orgItems"></p-menubar>
 			<!--end-->
 			<div class="ui-listbox-filter-container ui-g">
 				<div class="ui-g-12 ui-md-6 ui-lg-6">
@@ -13,6 +11,8 @@
 					<button pButton type="button" (click)="SearchOrg()" icon="fa-search"></button>
 				</div>
 			</div>
+			<!--function-->
+			<p-menubar [model]="orgItems"></p-menubar>
 			<p-dataList [value]="orgList" [paginator]="true" [rows]="9" [lazy]="true" (onLazyLoad)="LoadOrgListData($event)" [totalRecords]="totalRecords">
 				<template let-e pTemplate="item">
 					<div class="ui-grid ui-grid-responsive ui-fluid orgList" (click)="OrgClick(e)" [ngClass]="{'selected':e.id==selectedOrg.id}">

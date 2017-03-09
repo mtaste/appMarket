@@ -25,6 +25,9 @@ import {
 	AppRouterActivate,
 	AppRouterService
 } from "./app.routers.service";
+import {
+	AppOverService
+} from "./shared/app.over.service";
 @NgModule({
 	declarations: [
 		AppComponent
@@ -45,6 +48,7 @@ import {
 		RequestService,
 		AppRouterService,
 		AppRouterActivate,
+		AppOverService
 	],
 	bootstrap: [AppComponent]
 })

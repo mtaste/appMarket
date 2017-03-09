@@ -5,7 +5,8 @@ import {
 	FormBuilder,
 	FormGroup,
 	Validators,
-	FormControl
+	FormControl,
+	UtilService
 } from '../../shared/index';
 import {
 	Md5
@@ -32,7 +33,8 @@ export class UserLoginComponent implements OnInit {
 	constructor(
 		private fb: FormBuilder,
 		private router: Router,
-		private userService: UserService
+		private userService: UserService,
+		private utilService: UtilService
 	) {}
 	ngOnInit() {
 		this.userform = this.fb.group({
@@ -51,6 +53,7 @@ export class UserLoginComponent implements OnInit {
 		};
 		this.userService.LoginUser(param, ret => {
 			window.localStorage["token"] = ret.data;
+			this.utilService.loadingCompont = true;
 			this.router.navigateByUrl('/admin');
 		});
 	}

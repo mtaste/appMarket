@@ -26,6 +26,7 @@ export class StockChangeComponent implements OnInit {
 		private utilService: UtilService,
 		private crudService: CrudService
 	) {
+		this.utilService.loadingCompont = false;
 		this.form = this.getFormModel();
 		//list model
 		this.listModel = this.getListModel();

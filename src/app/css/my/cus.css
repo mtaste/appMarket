@@ -8106,7 +8106,7 @@ body .ui-terminal .ui-terminal-input {
 	font-weight: 400;
 	src: url("../fonts/MaterialIcons-Regular.eot");
 	/* For IE6-8 */
-	src: local("Material Icons"), local("MaterialIcons-Regular"), url("../fonts/MaterialIcons-Regular.woff2") format("woff2"), url("../fonts/MaterialIcons-Regular.woff") format("woff"), url("../fonts/MaterialIcons-Regular.ttf") format("truetype");
+	src: local("Material Icons"), local("MaterialIcons-Regular"), url("../fonts/MaterialIcons-Regular.woff") format("woff2"), url("../fonts/MaterialIcons-Regular.woff") format("woff"), url("../fonts/MaterialIcons-Regular.ttf") format("truetype");
 }
 
 
@@ -8349,7 +8349,7 @@ body .ui-terminal .ui-terminal-input {
 	vertical-align: middle;
 	width: 200px;
 	height: 30px;
-	background: url("../images/logo2x.png") top left no-repeat;
+	/*	background: url("../images/logo2x.png") top left no-repeat;*/
 	background-size: 200px 30px;
 }
 
@@ -8703,57 +8703,73 @@ body .ui-terminal .ui-terminal-input {
 }
 
 .login-body {
-	background-size: 100% auto;
+	background-color: #f5f5f5;
+	padding-top: 150px;
 	height: auto;
+	background-position: 0 -100px;
 }
 
-.login-panel {
-	text-align: center;
-	width: 350px;
-	min-height: 440px;
-	padding: 50px 20px;
-	margin: 100px auto 0 auto;
+.login-body .login-panel {
+	background-color: #ffffff;
+	width: 400px;
+	margin: 0 auto;
+	padding-bottom: 20px;
+	-webkit-box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+	-moz-box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+	box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
-.login-panel .ui-g .ui-g-12 {
-	padding: 25px 40px;
+.login-body .login-panel .login-header {
+	margin-bottom: 30px;
+	background-color: #1976d2;
+	color: #BBDEFB;
+	position: relative;
 }
 
-.login-panel .ui-g .ui-g-12 .ui-button {
-	margin-bottom: 20px;
+.login-body .login-panel .login-header h1 {
+	font-size: 18px;
+	font-weight: 700;
+	color: white;
 }
 
-.login-panel .ui-button:hover {
-	background-color: #00838f;
+.login-body .login-panel .login-header h2 {
+	font-size: 14px;
+	font-weight: normal;
+	margin-top: 0;
+	color: white;
 }
 
-.login-panel .ui-button:focus {
-	outline: 0 none;
-	background-color: #08e3ff;
-}
-
-.login-panel .ui-button.secondary:hover {
-	background-color: #ff8f00;
-}
-
-.login-panel .ui-button.secondary:focus {
-	outline: 0 none;
-	background-color: #ffce3a;
-}
-
-.login-panel .ui-inputtext:focus {
-	border-width: 0 0 2px 0;
-	border-color: #00bcd4;
-	padding-bottom: 0px;
-}
-
-.login-footer {
+.login-body .login-panel .login-header img {
+	width: 64px;
 	position: absolute;
-	bottom: 10px;
-	font-size: 16px;
-	width: 100%;
-	text-align: center;
-	color: #757575;
+	top: 24px;
+	right: 30px;
+}
+
+.login-body .login-panel .login-header.ui-g-12 {
+	padding: 20px 30px;
+}
+
+.login-body .login-panel .ui-g-12 {
+	padding: 20px 70px;
+}
+
+@media (min-width: 1441px) {
+	.login-body {
+		background-size: contain;
+	}
+}
+
+@media (max-width: 640px) {
+	.login-body {
+		padding-top: 150px;
+	}
+	.login-body .login-panel {
+		width: 300px;
+	}
+	.login-body .login-panel .ui-g-12 {
+		padding: 20px 35px;
+	}
 }
 
 @media (-webkit-min-device-pixel-ratio: 2),
@@ -8766,7 +8782,6 @@ body .ui-terminal .ui-terminal-input {
 
 @media (max-width: 1024px) {
 	.login-panel {
-		text-align: center;
 		min-height: 440px;
 		margin: 100px auto 0 auto;
 	}
@@ -8774,7 +8789,6 @@ body .ui-terminal .ui-terminal-input {
 
 @media (max-width: 640px) {
 	.login-panel {
-		text-align: center;
 		width: 300px;
 		min-height: 440px;
 		padding: 40px 20px;

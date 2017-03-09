@@ -27,6 +27,7 @@ import {
 export class AppComponent {
 	//Tabs
 	private items: MenuItem[];
+	private crumbs: MenuItem[] = [];
 	private activeItem: MenuItem = {};
 	private userInfo = {};
 	//控制是否显示菜单
@@ -41,20 +42,22 @@ export class AppComponent {
 		private i18n: I18nService,
 		private userService: UserService,
 		private utilService: UtilService) {
+		this.utilService.loadingCompont = false;
 		this.i18n.init(lang);
-		this.userService.GetUserMenu((ret) => {
-			ret = ret.data;
-			var data = utilService.TransData(ret, "id", "parentId", "subtree");
-			data.push({
-				name: "退出",
-				id: "loginOut"
-			});
-			this.menus = data;
-		});
 		this.items = [];
 		this.userService.GetUserInfo((ret) => {
 			ret = ret.data;
 			this.userInfo = ret;
+			var t = "退出:" + ret.orgFlag + "_" + ret.userName;
+			this.userService.GetUserMenu((ret2) => {
+				ret2 = ret2.data;
+				var data = utilService.TransData(ret2, "id", "parentId", "subtree");
+				data.push({
+					name: t,
+					id: "loginOut"
+				});
+				this.menus = data;
+			});
 		});
 	};
 	//点击按钮 
@@ -91,6 +94,7 @@ export class AppComponent {
 				this.SeleteLastTab();
 			} else {
 				//触发点击
+				this.CrumbsList(m);
 				var index = this.utilService.GetArrayIndex(this.items, "id", m.id);
 				var tm = this.items[index];
 				this.activeItem = tm;
@@ -99,6 +103,10 @@ export class AppComponent {
 				this.GoRouter(tm);
 			}
 		}
+	};
+	CrumbsList(m) {
+		this.crumbs = [];
+		this.crumbs.push(m);
 	};
 	//移除Tab中的一个
 	RemoveTab(m) {
@@ -115,7 +123,12 @@ export class AppComponent {
 	};
 	//调转到对应的路由
 	GoRouter(m) {
+		//this.utilService.loadingCompont = true;
 		var u = m.authUrl + "?id=" + m.id;
+		if(this.router.isActive(u, true)) {
+			return;
+		}
+		this.utilService.loadingCompont = true;
 		this.router.navigateByUrl(u);
 	};
 	//退出

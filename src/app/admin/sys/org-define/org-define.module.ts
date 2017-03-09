@@ -49,4 +49,6 @@ import {
 		OrgInfoComponent
 	]
 })
-export default class OrgDefineModule {}
+export default class OrgDefineModule {
+	
+}

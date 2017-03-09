@@ -1,6 +1,5 @@
 <!-- TOP BAR-->
 <div class="l-offset-nav l-offset-side-nav ng-scope">
-
 	<nav class="main-nav l-pinned-top l-layer-5">
 		<h1>
 			<a class="md-button md-ink-ripple">S平台 <sup class="ng-scope">by ken-li</sup></a>
@@ -8,6 +7,7 @@
 		<button (click)="ToggleMenu($event,'showMenuNav')" class="main-nav-button main-nav-mobile-trigger l-right md-button md-ink-ripple" type="button">
 			功能<span class="icon icon-arrow-drop-down ng-scope"></span>
 		</button>
+
 		<!--
 			<button (click)="ToggleMenu($event,'showTopNav')" class="main-nav-button main-nav-mobile-trigger l-right md-button md-ink-ripple" type="button">
 			菜单<span class="icon icon-arrow-drop-down ng-scope"></span>
@@ -48,8 +48,10 @@
 	<!--content 
 	<p-tabMenu [model]="items" [activeItem]="activeItem">
 	</p-tabMenu>-->
-	<router-outlet></router-outlet>
+	<p-breadcrumb [model]="crumbs"></p-breadcrumb>
+	<router-outlet>
+	</router-outlet>
 </div>
 <div class="ffooter">
-	{{userInfo.orgName}} {{userInfo.orgFlag+"_"+userInfo.userName}}
+	{{userInfo.orgName}}
 </div>

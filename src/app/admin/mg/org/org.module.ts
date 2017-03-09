@@ -57,4 +57,6 @@ import {
 		OrgListComponent
 	]
 })
-export default class OrgRegisterModule {}
+export default class OrgRegisterModule {
+	constructor() {};
+}

@@ -9,6 +9,9 @@ import {
 	STARWARS_BASE_URL
 } from "./constance.service";
 import {
+	UtilService
+} from "./util.service";
+import {
 	Http,
 	Headers,
 	URLSearchParams
@@ -19,7 +22,8 @@ import "rxjs/add/operator/switchMap";
 export class RequestService {
 	constructor(@Inject(STARWARS_BASE_URL) private starwarUrl,
 		private http: Http,
-		private router: Router
+		private router: Router,
+		private utilService: UtilService
 	) {}
 	private back(ret) {};
 	Ask(t, url, bk) {
@@ -27,6 +31,7 @@ export class RequestService {
 	};
 	//Get请求API数据
 	Get(url, bk) {
+		this.utilService.loadingRequest = true;
 		let headers = new Headers();
 		var token = window.localStorage["token"];
 		token && (headers.append('token', token));
@@ -40,10 +45,13 @@ export class RequestService {
 				bk && bk(ret);
 			}, err => {
 				alert("请求错误.");
-			}, () => {});;
+			}, () => {
+				this.utilService.loadingRequest = false;
+			});
 	};
 	//POST数据
 	Post(url, data, bk) {
+		this.utilService.loadingRequest = true;
 		let param = new URLSearchParams();
 		param.append('param', JSON.stringify(data));
 		let t_url = `${this.starwarUrl}/` + url;
@@ -68,7 +76,9 @@ export class RequestService {
 					}
 				}, err => {
 					alert("请求错误.");
-				}, () => {}
+				}, () => {
+					this.utilService.loadingRequest = false;
+				}
 			);
 	}
 

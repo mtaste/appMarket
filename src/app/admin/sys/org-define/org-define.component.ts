@@ -70,7 +70,7 @@ export class OrgDefineComponent implements OnInit {
 		private router: ActivatedRoute,
 		private crudService: CrudService
 	) {
-
+		this.utilService.loadingCompont = false;
 		//定义部门按钮功能
 		var menus = {
 			add: (auth) => {

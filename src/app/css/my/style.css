@@ -3365,10 +3365,10 @@ button.ui-button::-moz-focus-inner {
 .ui-fluid .fc .ui-button {
 	width: auto
 }
-
+/*
 .ui-selectbutton {
 	display: inline-block
-}
+}*/
 
 .ui-selectbutton.ui-state-error {
 	padding: 0

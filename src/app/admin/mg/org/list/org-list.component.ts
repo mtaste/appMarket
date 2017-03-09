@@ -38,7 +38,9 @@ export class OrgListComponent implements OnInit {
 		private utilService: UtilService,
 		private fb: FormBuilder,
 		private confirmationService: ConfirmationService
-	) {};
+	) {
+		this.utilService.loadingCompont = false;
+	};
 	ngOnInit() {
 
 	};

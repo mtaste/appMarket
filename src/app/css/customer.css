@@ -120,7 +120,6 @@ screen and (max-device-width:480px),
 screen and (max-width:800px) {
 	.l-offset-side-nav {
 		padding-left: 0;
-		padding-top: 104px
 	}
 }
 
@@ -529,9 +528,8 @@ screen and (max-width:800px) {
 
 .sidenav-links .sidenav-section li a {
 	color: #607D8B;
-	font-size: 12px;
+	font-size: 14px;
 	display: block;
-	line-height: 32px;
 	padding: 0 16px;
 	-webkit-transition: all .2s;
 	transition: all .2s
@@ -644,19 +642,6 @@ body .ui-widget-header {
 	margin-bottom: 5px;
 }
 
-.home {
-	background: url("/resources/images/bg-yellow.png") repeat;
-}
-
 body .ui-fieldset {
 	border-color: #7B96F3;
-}
-
-body .ui-menu.ui-menubar {
-	background-color: #FFF;
-	border-color: #FFF;
-}
-
-.ui-widget * {
-	box-sizing: inherit;
 }

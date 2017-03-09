@@ -7,9 +7,11 @@
 		<p-fieldset legend="机构列表">
 			<div class="card card-w-title">
 				<!--end-->
-				<div class="ui-listbox-filter-container">
-					<input pInputText type="text" [(ngModel)]="keyword" placeholder="关键字" />
-					<button pButton type="button" (click)="SearchOrg()" icon="fa-search"></button>
+				<div class="ui-listbox-filter-container ui-g">
+					<div class="ui-g-12 ui-md-6 ui-lg-6">
+						<input pInputText type="text" [(ngModel)]="keyword" placeholder="关键字" />
+						<button pButton type="button" (click)="SearchOrg()" icon="fa-search"></button>
+					</div>
 				</div>
 				<p-dataList [value]="orgList" [paginator]="true" [rows]="9" [lazy]="true" (onLazyLoad)="LoadOrgListData($event)" [totalRecords]="totalRecords">
 					<template let-e pTemplate="item">

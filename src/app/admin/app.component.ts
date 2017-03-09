@@ -45,6 +45,10 @@ export class AppComponent {
 		this.userService.GetUserMenu((ret) => {
 			ret = ret.data;
 			var data = utilService.TransData(ret, "id", "parentId", "subtree");
+			data.push({
+				name: "退出",
+				id: "loginOut"
+			});
 			this.menus = data;
 		});
 		this.items = [];
@@ -61,6 +65,9 @@ export class AppComponent {
 	//当前打开的菜单
 	tabsIds = {};
 	MenusClick(m) {
+		if(m.id == 'loginOut') {
+			this.LoginOut();
+		};
 		this.menuId = m.id;
 		//打开页面
 		if(m.authUrl) {

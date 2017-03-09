@@ -6,25 +6,29 @@
 			<p-menubar [model]="funs"></p-menubar>
 		</div>
 		<!--end-->
-		<p-dataTable [value]="listData" [(selection)]="selectedObjs" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="totals" (onLazyLoad)="LoadData($event)" [editable]="true">
-			<p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-			<p-column *ngFor="let el of listModel.listModel" field="{{el.field}}" header="{{el.header}}" [editable]='el.editable'></p-column>
-			<p-column styleClass="col-button" *ngIf='listModel.editUrl'>
-				<template pTemplate="header">
-					操作
-				</template>
-				<template let-data="rowIndex" pTemplate="body">
-					<button [ngClass]="{'is-hidden':!showFuns}" type="button" pButton (click)="EditData(data)" icon="fa-edit"></button>
-				</template>
-			</p-column>
-		</p-dataTable>
+		<div class="card card-w-title">
+			<p-dataTable [value]="listData" [(selection)]="selectedObjs" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="totals" (onLazyLoad)="LoadData($event)" [editable]="true">
+				<p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+				<p-column *ngFor="let el of listModel.listModel" field="{{el.field}}" header="{{el.header}}" [editable]='el.editable'></p-column>
+				<p-column styleClass="col-button" *ngIf='listModel.editUrl'>
+					<template pTemplate="header">
+						操作
+					</template>
+					<template let-data="rowIndex" pTemplate="body">
+						<button [ngClass]="{'is-hidden':!showFuns}" type="button" pButton (click)="EditData(data)" icon="fa-edit"></button>
+					</template>
+				</p-column>
+			</p-dataTable>
+		</div>
 	</p-fieldset>
 </div>
 <!--选择用户-->
 <p-dialog header="选择" [(visible)]="display" modal="modal" width="360" responsive="true">
-	<div class="ui-listbox-filter-container">
-		<input pInputText type="text" [(ngModel)]="keyword" placeholder="关键字" />
-		<button pButton type="button" (click)="SearchChooseList()" icon="fa-search"></button>
+	<div class="ui-listbox-filter-container ui-g">
+		<div class="ui-g-12 ui-md-12 ui-lg-12">
+			<input pInputText type="text" [(ngModel)]="keyword" placeholder="关键字" />
+			<button pButton type="button" (click)="SearchChooseList()" icon="fa-search"></button>
+		</div>
 	</div>
 	<p-dataTable [value]="chooseList" [(selection)]="chooseObjs" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="chooseTotal" (onLazyLoad)="LoadChooseData($event)">
 		<p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>

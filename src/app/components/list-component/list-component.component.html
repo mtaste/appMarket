@@ -2,10 +2,14 @@
 <div class="card card-w-title">
 	<app-auth-funcs [menus]='menus' [obj]='obj' (initEvent)='InitFuncs($event)'></app-auth-funcs>
 	<!--搜索-->
-	<div class="ui-listbox-filter-container">
-		<p-selectButton [options]="status" *ngIf='status.length>0' [(ngModel)]="selectedStatus" (click)="StatusClick()"></p-selectButton>
-		<input pInputText type="text" [(ngModel)]="keyword" placeholder="关键字" />
-		<button pButton type="button" (click)="Search()" icon="fa-search"></button>
+	<div class="ui-listbox-filter-container ui-g">
+		<div class="ui-g-12 ui-md-6 ui-lg-6" *ngIf='status.length>0'>
+			<p-selectButton [options]="status" [(ngModel)]="selectedStatus" (click)="StatusClick()"></p-selectButton>
+		</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-6">
+			<input pInputText type="text" [(ngModel)]="keyword" placeholder="关键字" />
+			<button pButton type="button" (click)="Search()" icon="fa-search"></button>
+		</div>
 	</div>
 	<!--列表-->
 	<div class="card card-w-title">

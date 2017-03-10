@@ -5,16 +5,14 @@
 	<!--部们信息-->
 	<div class="ui-g-12 ui-md-6 ui-lg-6">
 		<p-fieldset legend="部们信息">
-			<div class="card card-w-title">
-				<!-- 功能-->
-				<p-menubar [model]="depFuns"></p-menubar>
-				<!--部们-->
-				<p-tree [value]="depTrees" selectionMode="single" [(selection)]="depNode" (onNodeSelect)="NodeSelect($event)">
-					<template let-node pTemplate="default">
-						<span>{{node.name}}</span>
-					</template>
-				</p-tree>
-			</div>
+			<!-- 功能-->
+			<p-menubar [model]="depFuns"></p-menubar>
+			<!--部们-->
+			<p-tree [value]="depTrees" selectionMode="single" [(selection)]="depNode" (onNodeSelect)="NodeSelect($event)">
+				<template let-node pTemplate="default">
+					<span>{{node.name}}</span>
+				</template>
+			</p-tree>
 		</p-fieldset>
 	</div>
 	<!--  新增加部门 -->
@@ -52,45 +50,41 @@
 	<!--职务信息-->
 	<div class="ui-g-12 ui-md-6 ui-lg-6">
 		<p-fieldset legend="职务列表">
-			<div class="card card-w-title">
-				<div [ngClass]="{'is-hidden':!depNode}">
-					<!--end-->
-					<div class="ui-listbox-filter-container ui-g">
-						<div class="ui-g-12 ui-md-6 ui-lg-6">
-							<input pInputText type="text" [(ngModel)]="jobKeyword" placeholder="关键字" />
-							<button pButton type="button" (click)="SearchJob()" icon="fa-search"></button>
-						</div>
+			<div [ngClass]="{'is-hidden':!depNode}">
+				<!--end-->
+				<div class="ui-listbox-filter-container ui-g">
+					<div class="ui-g-12 ui-md-6 ui-lg-6">
+						<input pInputText type="text" [(ngModel)]="jobKeyword" placeholder="关键字" />
+						<button pButton type="button" (click)="SearchJob()" icon="fa-search"></button>
 					</div>
-					<!--function-->
-					<p-menubar [model]="jobFuns"></p-menubar>
-					<p-dataList [value]="jobList" [paginator]="true" [rows]="5" [lazy]="true" (onLazyLoad)="LoadJobListData($event)" [totalRecords]="jobTotal">
-						<template let-e pTemplate="item">
-							<div class="ui-grid ui-grid-responsive ui-fluid jobList" (click)="JobClick(e)" [ngClass]="{'selected':e.id==selectedJob.id}">
-								{{e.name}}
-							</div>
-						</template>
-					</p-dataList>
 				</div>
+				<!--function-->
+				<p-menubar [model]="jobFuns"></p-menubar>
+				<p-dataList [value]="jobList" [paginator]="true" [rows]="5" [lazy]="true" (onLazyLoad)="LoadJobListData($event)" [totalRecords]="jobTotal">
+					<template let-e pTemplate="item">
+						<div class="ui-grid ui-grid-responsive ui-fluid jobList" (click)="JobClick(e)" [ngClass]="{'selected':e.id==selectedJob.id}">
+							{{e.name}}
+						</div>
+					</template>
+				</p-dataList>
 			</div>
 		</p-fieldset>
 	</div>
 	<!--用户信息-->
 	<div class="ui-g-12 ui-md-12 ui-lg-12">
 		<p-fieldset legend="职务人员">
-			<div class="card card-w-title">
-				<!--function-->
-				<div [ngClass]="{'is-hidden':!selectedJob.id}">
-					<p-menubar [model]="userFuns"></p-menubar>
-				</div>
-				<!--end-->
-				<p-dataTable [value]="userList" [(selection)]="selectedUsers" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="userTotals" (onLazyLoad)="LoadUserData($event)">
-					<p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-					<p-column field="userName" header="用户名"></p-column>
-					<p-column field="name" header="姓名"></p-column>
-					<p-column field="mobile" header="电话"></p-column>
-					<p-column field="roleName" header="职务"></p-column>
-				</p-dataTable>
+			<!--function-->
+			<div [ngClass]="{'is-hidden':!selectedJob.id}">
+				<p-menubar [model]="userFuns"></p-menubar>
 			</div>
+			<!--end-->
+			<p-dataTable [value]="userList" [(selection)]="selectedUsers" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="userTotals" (onLazyLoad)="LoadUserData($event)">
+				<p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+				<p-column field="userName" header="用户名"></p-column>
+				<p-column field="name" header="姓名"></p-column>
+				<p-column field="mobile" header="电话"></p-column>
+				<p-column field="roleName" header="职务"></p-column>
+			</p-dataTable>
 		</p-fieldset>
 	</div>
 	<!--选择用户-->

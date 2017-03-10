@@ -7,6 +7,9 @@
 			<div class="ui-grid-row" *ngIf="el.name">
 				<div class="ui-grid-col-2">
 					{{el.name}}:
+					<span *ngIf="el.display ||(!el.display&&!canSave)">
+						{{formModel.controls[el.model].value}}
+					</span>
 				</div>
 				<div *ngIf="!el.type&&!el.display" class="ui-grid-col-6" [ngClass]="{'is-hidden':!canSave}">
 						<input pInputText type="text" formControlName="{{el.model}}" />
@@ -19,12 +22,6 @@
 				</div>
 				<div *ngIf="el.type=='select'&&!el.display" class="ui-grid-col-6" [ngClass]="{'is-hidden':!canSave}">
 						<p-dropdown [options]="el.ele" formControlName="{{el.model}}" [autoWidth]="false"></p-dropdown>
-				</div>
-				<div *ngIf="!el.display" class="ui-grid-col-6" [ngClass]="{'is-hidden':canSave}">
-						{{formModel.controls[el.model].value}}
-				</div>
-				<div *ngIf="el.display" class="ui-grid-col-6">
-					{{formModel.controls[el.model].value}}
 				</div>
 		<div class="ui-grid-col-4">
 			<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formModel.controls[el.model].valid&&formModel.controls[el.model].dirty">

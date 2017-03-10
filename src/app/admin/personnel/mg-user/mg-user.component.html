@@ -4,28 +4,26 @@
 <div class="ui-g" [ngClass]="{'is-hidden':step!=1}">
 	<!--用户列表-->
 	<div class="ui-g-12 ui-md-12 ui-lg-12">
+		<div class="ui-listbox-filter-container ui-g">
+			<div class="ui-g-12 ui-md-6 ui-lg-6">
+				<p-selectButton [options]="status" *ngIf='status.length>0' [(ngModel)]="selectedStatus" (click)="StatusClick()"></p-selectButton>
+			</div>
+			<div class="ui-g-12 ui-md-6 ui-lg-6">
+				<input pInputText type="text" [(ngModel)]="keyword" placeholder="关键字" />
+				<button pButton type="button" (click)="SearchUser()" icon="fa-search"></button>
+			</div>
+		</div>
+		<!-- 功能-->
+		<p-menubar [model]="userFuncs"></p-menubar>
+		<!--列表-->
 		<div class="card card-w-title">
-			<div class="ui-listbox-filter-container ui-g">
-				<div class="ui-g-12 ui-md-6 ui-lg-6">
-					<p-selectButton [options]="status" *ngIf='status.length>0' [(ngModel)]="selectedStatus" (click)="StatusClick()"></p-selectButton>
-				</div>
-				<div class="ui-g-12 ui-md-6 ui-lg-6">
-					<input pInputText type="text" [(ngModel)]="keyword" placeholder="关键字" />
-					<button pButton type="button" (click)="SearchUser()" icon="fa-search"></button>
-				</div>
-			</div>
-			<!-- 功能-->
-			<p-menubar [model]="userFuncs"></p-menubar>
-			<!--列表-->
-			<div class="card card-w-title">
-				<p-dataTable [responsive]="true" [value]="userList" [(selection)]="selectedUser" selectionMode="single" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="userTotals" (onLazyLoad)="LoadUserData($event)">
-					<p-column field="userName" header="用户名"></p-column>
-					<p-column field="name" header="姓名"></p-column>
-					<p-column field="mobile" header="电话"></p-column>
-					<p-column field="roleName" header="职务"></p-column>
-					<p-column field="statusText" header="状态"></p-column>
-				</p-dataTable>
-			</div>
+			<p-dataTable [responsive]="true" [value]="userList" [(selection)]="selectedUser" selectionMode="single" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="userTotals" (onLazyLoad)="LoadUserData($event)">
+				<p-column field="userName" header="用户名"></p-column>
+				<p-column field="name" header="姓名"></p-column>
+				<p-column field="mobile" header="电话"></p-column>
+				<p-column field="roleName" header="职务"></p-column>
+				<p-column field="statusText" header="状态"></p-column>
+			</p-dataTable>
 		</div>
 	</div>
 </div>

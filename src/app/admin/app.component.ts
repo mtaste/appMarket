@@ -30,6 +30,7 @@ export class AppComponent {
 	private crumbs: MenuItem[] = [];
 	private activeItem: MenuItem = {};
 	private userInfo = {};
+	private ct;
 	//控制是否显示菜单
 	private appCtrl = {
 		showTopNav: false,
@@ -42,6 +43,7 @@ export class AppComponent {
 		private i18n: I18nService,
 		private userService: UserService,
 		private utilService: UtilService) {
+		this.ct = this.utilService;
 		this.utilService.loadingCompont = false;
 		this.i18n.init(lang);
 		this.items = [];

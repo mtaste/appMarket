@@ -20,6 +20,7 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/switchMap";
 @Injectable()
 export class RequestService {
+	public i = 0;
 	constructor(@Inject(STARWARS_BASE_URL) private starwarUrl,
 		private http: Http,
 		private router: Router,
@@ -32,6 +33,7 @@ export class RequestService {
 	//Get请求API数据
 	Get(url, bk) {
 		this.utilService.loadingRequest = true;
+		this.i++;
 		let headers = new Headers();
 		var token = window.localStorage["token"];
 		token && (headers.append('token', token));
@@ -46,12 +48,17 @@ export class RequestService {
 			}, err => {
 				alert("请求错误.");
 			}, () => {
-				this.utilService.loadingRequest = false;
+				this.i--;
+				if(this.i <= 0) {
+					this.i = 0;
+					this.utilService.loadingRequest = false;
+				}
 			});
 	};
 	//POST数据
 	Post(url, data, bk) {
 		this.utilService.loadingRequest = true;
+		this.i++;
 		let param = new URLSearchParams();
 		param.append('param', JSON.stringify(data));
 		let t_url = `${this.starwarUrl}/` + url;
@@ -77,7 +84,11 @@ export class RequestService {
 				}, err => {
 					alert("请求错误.");
 				}, () => {
-					this.utilService.loadingRequest = false;
+					this.i--;
+					if(this.i <= 0) {
+						this.i = 0;
+						this.utilService.loadingRequest = false;
+					}
 				}
 			);
 	}

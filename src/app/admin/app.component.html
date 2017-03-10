@@ -33,6 +33,9 @@
 		</ul>
 		-->
 	</nav>
+	<div class="loading l-pinned-top" [ngClass]="{'is-hidden':!ct.loadingRequest}">
+		<span></span>
+	</div>
 	<!--Menus-->
 	<nav [ngClass]="{'is-visible' : appCtrl.showMenuNav}" class="sidenav l-pinned-left l-layer-4 l-offset-nav">
 		<!-- SEARCH BAR

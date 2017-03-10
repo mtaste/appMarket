@@ -47,7 +47,7 @@ export class OrgAuthComponent implements OnInit {
 	) {
 		this.utilService.loadingCompont = false;
 		//status 
-		this.status = this.utilService.GetStatusTab(['0', '1', '2', '99']);
+		this.status = this.utilService.GetStatusTab(['0', '1', '2', '99'],false);
 	};
 
 	ngOnInit() { //定义表单

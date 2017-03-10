@@ -2,7 +2,7 @@
 <div>
 	<!--搜索-->
 	<div class="ui-listbox-filter-container ui-g">
-		<div class="ui-g-12 ui-md-6 ui-lg-6" *ngIf='status.length>0'>
+		<div class="ui-g-12 ui-md-6 ui-lg-6" *ngIf='status&&status.length>0'>
 			<p-selectButton [options]="status" [(ngModel)]="selectedStatus" (click)="StatusClick()"></p-selectButton>
 		</div>
 		<div class="ui-g-12 ui-md-6 ui-lg-6">

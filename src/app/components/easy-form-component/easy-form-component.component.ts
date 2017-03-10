@@ -25,6 +25,7 @@ export class EasyFormComponentComponent implements OnInit {
 	//填写信息
 	@Input() form = [];
 	@Input() title;
+	@Input() status;
 	constructor(
 		private utilService: UtilService,
 		private crudService: CrudService

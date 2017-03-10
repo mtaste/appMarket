@@ -9,12 +9,12 @@ import {
 	CommonModule
 } from "@angular/common";
 import {
-	CusComponent
-} from "./cus/cus.component";
+	InfoComponent
+} from "./info/info.component";
 import {
-	SupComponent
-} from "./sup/sup.component";
-import routes from './crm.routes';
+	PointsChangeComponent
+} from "./points-change/points-change.component";
+import routes from './mms.routes';
 
 @NgModule({
 	imports: [
@@ -24,8 +24,8 @@ import routes from './crm.routes';
 		ComponentsModule
 	],
 	declarations: [
-		CusComponent,
-		SupComponent
+		InfoComponent,
+		PointsChangeComponent
 	]
 })
-export default class CRMModule {}
+export default class MMSModule {}

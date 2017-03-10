@@ -3,15 +3,15 @@ import {
 	OnInit
 } from '@angular/core';
 import {
-	UtilService,
-	Validators
+	Validators,
+	UtilService
 } from '../index';
 @Component({
-	selector: 'app-stock-change',
-	templateUrl: './stock-change.component.html',
-	styleUrls: ['./stock-change.component.css']
+	selector: 'app-points-change',
+	templateUrl: './points-change.component.html',
+	styleUrls: ['./points-change.component.css']
 })
-export class StockChangeComponent implements OnInit {
+export class PointsChangeComponent implements OnInit {
 	private status = [];
 	private obj = {};
 	//列表
@@ -21,8 +21,8 @@ export class StockChangeComponent implements OnInit {
 	//产品列表
 	private productModel = {};
 	private selectUrls = {
-		add: 'im/product/change/addDetail.do',
-		remove: 'im/product/change/removeDetail.do'
+		add: 'mms/info/points-change/addDetail.do',
+		remove: 'mms/info/points-change/removeDetail.do'
 	};
 	constructor(
 		private utilService: UtilService
@@ -32,7 +32,7 @@ export class StockChangeComponent implements OnInit {
 		//list model
 		this.listModel = this.getListModel();
 		//product model
-		this.productModel = this.getProductModel();
+		this.productModel = this.getSelectModel();
 		//status 
 		this.status = this.utilService.GetStatusTab(['0', '1', '2', '99'], false);
 	};
@@ -58,7 +58,7 @@ export class StockChangeComponent implements OnInit {
 
 	private getListModel() {
 		return {
-			url: 'im/product/change/list.json',
+			url: 'mms/info/points-change/list.json',
 			model: [{
 				field: 'title',
 				header: '标题'
@@ -69,39 +69,44 @@ export class StockChangeComponent implements OnInit {
 		};
 	}
 
-	private getProductModel() {
+	private getSelectModel() {
 		return {
-			listUrl: 'im/product/change/detail.do',
+			listUrl: 'mms/info/points-change/detail.do',
 			listModel: [{
+				field: 'userName',
+				header: '会员账户'
+			}, {
 				field: 'name',
-				header: '产品名称'
+				header: '姓名'
 			}, {
-				field: 'selfNum',
-				header: '自定编号'
-			}, {
-				field: 'qty',
-				header: '数量'
+				field: 'points',
+				header: '积分'
 			}],
-			chooseUrl: "im/product/change/productList.do",
+			chooseUrl: "mms/info/points-change/memberList.do",
 			chooseModel: [{
-				field: 'name',
-				header: '产品名称'
+				field: 'userName',
+				header: '会员账户'
 			}, {
-				field: 'selfNum',
-				header: '自定编号'
+				field: 'name',
+				header: '姓名'
 			}],
-			editUrl: 'im/product/change/detailQty.do',
+			editUrl: 'mms/info/points-change/detailPoints.do',
 			editForm: [{
 				model: 'id'
 			}, {
-				name: '数量',
-				model: 'qty',
+				name: '积分',
+				model: 'points',
 				type: 'number'
 			}, {
+				model: 'userName',
+				name: "会员账户",
+				display: true
+			}, {
 				model: 'name',
-				name: "名称",
+				name: "姓名",
 				display: true
 			}]
 		};
 	};
+
 }

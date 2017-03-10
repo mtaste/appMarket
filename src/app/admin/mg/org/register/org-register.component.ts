@@ -38,7 +38,7 @@ export class OrgRegisterComponent implements OnInit {
 		//list model
 		this.listModel = this.getListModel();
 		//status 
-		this.status = this.utilService.GetStatusTab(['0', '1', '2', '99']);
+		this.status = this.utilService.GetStatusTab(['0', '1', '2', '99'], false);
 	};
 
 	ngOnInit() {};

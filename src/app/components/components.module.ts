@@ -25,6 +25,9 @@ import {
 	SelectListComponent
 } from "./select-list/select-list.component";
 import {
+	SelectChangeComponent
+} from "./select-change/select-change.component";
+import {
 	AuthFuncsComponent
 } from "./auth-funcs/auth-funcs.component";
 import {
@@ -63,7 +66,8 @@ import {
 		ListFormComponentComponent,
 		EasyFormComponentComponent,
 		AuthFuncsComponent,
-		SelectListComponent
+		SelectListComponent,
+		SelectChangeComponent
 	],
 	exports: [
 		MenuComponentComponent,
@@ -72,7 +76,8 @@ import {
 		ListFormComponentComponent,
 		EasyFormComponentComponent,
 		AuthFuncsComponent,
-		SelectListComponent
+		SelectListComponent,
+		SelectChangeComponent
 	]
 })
 

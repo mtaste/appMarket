@@ -47,6 +47,7 @@ export class RequestService {
 				bk && bk(ret);
 			}, err => {
 				alert("请求错误.");
+				this.i--;
 			}, () => {
 				this.i--;
 				if(this.i <= 0) {
@@ -83,6 +84,7 @@ export class RequestService {
 					}
 				}, err => {
 					alert("请求错误.");
+					this.i--;
 				}, () => {
 					this.i--;
 					if(this.i <= 0) {

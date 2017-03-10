@@ -126,6 +126,9 @@ export class UtilService {
 	};
 	//获取状态文字
 	private status = {
+		'-1': '无效',
+		'10': '有效',
+		'11': '挂失',
 		'0': '新建',
 		'1': '已提交',
 		'2': '已审核',
@@ -135,17 +138,25 @@ export class UtilService {
 		var s = this.status;
 		return s[k];
 	};
-	GetStatusTab(ks) {
+	GetStatusTab(ks, c) {
 		var a = this.status;
 		var ret = [];
-		ret.push({
-			label: '所有',
-			value: ''
-		});
+		if(!c) {
+			ret.push({
+				label: '所有',
+				value: ''
+			});
+		} else {
+			ret.push({
+				label: '请选择',
+				value: ''
+			});
+		}
 		for(var k in ks) {
-			a[k] && (ret.push({
-				label: a[k],
-				value: k
+			var l = ks[k];
+			a[l] && (ret.push({
+				label: a[l],
+				value: l
 			}));
 		};
 		return ret;

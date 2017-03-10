@@ -7,7 +7,7 @@ import {
 	UtilService
 } from '../index';
 @Component({
-	selector: 'app-sup',
+	selector: 'crm-app-sup',
 	templateUrl: './sup.component.html',
 	styleUrls: ['./sup.component.css']
 })

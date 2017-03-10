@@ -41,6 +41,10 @@ const routes = [{
 		path: 'im',
 		loadChildren: 'app/admin/im/im.module',
 		name: 'IM'
+	}, {
+		path: 'mms',
+		loadChildren: 'app/admin/mms/mms.module',
+		name: 'MMS'
 	}]
 }];
 export default RouterModule.forChild(routes);

@@ -95,7 +95,7 @@
 				<button pButton type="button" (click)="SearchChooseUser()" icon="fa-search"></button>
 			</div>
 		</div>
-		<p-dataTable [responsive]="true" [value]="chooseUserList" [(selection)]="chooseUsers" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="chooseUserTotal" (onLazyLoad)="LoadChooseUserData($event)">
+		<p-dataTable [value]="chooseUserList" [(selection)]="chooseUsers" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="chooseUserTotal" (onLazyLoad)="LoadChooseUserData($event)">
 			<p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
 			<p-column field="userName" header="用户名"></p-column>
 			<p-column field="name" header="姓名"></p-column>

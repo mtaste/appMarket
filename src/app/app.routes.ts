@@ -33,4 +33,6 @@ const routes = [{
 function GetRoters() {
 	return routes;
 }
-export default RouterModule.forRoot(GetRoters());
+export default RouterModule.forRoot(GetRoters(), {
+	useHash: true
+});

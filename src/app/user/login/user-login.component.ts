@@ -35,7 +35,10 @@ export class UserLoginComponent implements OnInit {
 		private router: Router,
 		private userService: UserService,
 		private utilService: UtilService
-	) {}
+	) {
+		this.utilService.loadingCompont = false;
+	}
+
 	ngOnInit() {
 		this.userform = this.fb.group({
 			'userName': new FormControl('', Validators.required),

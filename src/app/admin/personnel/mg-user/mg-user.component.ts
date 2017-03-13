@@ -50,6 +50,7 @@ export class MgUserComponent implements OnInit {
 	private statusList = [];
 	private selectedStatus = "";
 	private status = [];
+	private userTypeList = [];
 
 	constructor(
 		private confirmationService: ConfirmationService,
@@ -116,6 +117,18 @@ export class MgUserComponent implements OnInit {
 				}
 			});
 		});
+		this.userTypeList.push({
+			label: '请选择',
+			value: ''
+		});
+		this.userTypeList.push({
+			label: '员工',
+			value: '1'
+		});
+		this.userTypeList.push({
+			label: '代理商',
+			value: '2'
+		});
 	};
 
 	ngOnInit() {
@@ -123,6 +136,7 @@ export class MgUserComponent implements OnInit {
 		this.userForm = this.fb.group({
 			'id': new FormControl(''),
 			'name': new FormControl('', Validators.required),
+			'userType': new FormControl('', Validators.required),
 			'userName': new FormControl('', Validators.required),
 			'status': new FormControl('', Validators.required),
 			'passWord': new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),

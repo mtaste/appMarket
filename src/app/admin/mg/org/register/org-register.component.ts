@@ -67,27 +67,27 @@ export class OrgRegisterComponent implements OnInit {
 		return [{
 			model: 'id'
 		}, {
-			name: '名称*',
+			name: '名称',
 			model: 'name',
 			vali: Validators.required,
 			msg: "名称不能为空"
 		}, {
-			name: '地址*',
+			name: '地址',
 			model: 'address',
 			vali: Validators.required,
 			msg: "地址不能为空"
 		}, {
-			name: '联系人*',
+			name: '联系人',
 			model: 'contact',
 			vali: Validators.required,
 			msg: "联系人不能为空"
 		}, {
-			name: '电话*',
+			name: '电话',
 			model: 'mobile',
 			vali: [Validators.required],
 			msg: "电话号码有误"
 		}, {
-			name: '标示*',
+			name: '标示',
 			model: 'flag',
 			vali: Validators.required,
 			msg: "联系人不能为空"

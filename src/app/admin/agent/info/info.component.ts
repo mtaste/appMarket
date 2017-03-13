@@ -6,8 +6,11 @@ import {
 	Validators,
 	UtilService
 } from '../index';
+import {
+	Md5
+} from "ts-md5/dist/md5";
 @Component({
-	selector: 'mms-app-info',
+	selector: 'admin-agent-info',
 	templateUrl: './info.component.html',
 	styleUrls: ['./info.component.css']
 })
@@ -19,7 +22,7 @@ export class InfoComponent implements OnInit {
 	private form = [];
 	constructor(private utilService: UtilService) {
 		this.utilService.loadingCompont = false;
-		this.status = this.utilService.GetStatusTab(['10', '-1', '11'], false);
+		this.status = this.utilService.GetStatusTab(['10', '-1'], false);
 		this.form = this.getFormModel();
 		//list model
 		this.listModel = this.getListModel();
@@ -27,14 +30,18 @@ export class InfoComponent implements OnInit {
 	ngOnInit() {};
 
 	private getFormModel() {
-		var s = this.utilService.GetStatusTab(['10', '-1', '11'], true);
+		var s = this.utilService.GetStatusTab(['10', '-1'], true);
 		return [{
 			model: 'id'
 		}, {
-			name: '会员账户',
+			name: '用户账户',
 			model: 'userName',
 			vali: Validators.required,
-			msg: "用户名不能为空"
+			msg: "用户账户不能为空"
+		}, {
+			name: '密码',
+			model: 'passWord',
+			type: 'password'
 		}, {
 			name: '姓名',
 			model: 'name',
@@ -61,10 +68,10 @@ export class InfoComponent implements OnInit {
 
 	private getListModel() {
 		return {
-			url: 'mms/info/list.json',
+			url: 'agent/info/list.json',
 			model: [{
 				field: 'userName',
-				header: '会员账户'
+				header: '用户账户'
 			}, {
 				field: 'name',
 				header: '姓名'
@@ -82,5 +89,11 @@ export class InfoComponent implements OnInit {
 				header: '状态'
 			}]
 		};
+	}
+
+	ParamFunc(p) {
+		p.passWord && (p.passWord = Md5.hashStr(p.passWord).toString());
+		!p.passWord && (delete p.passWord);
+		return p;
 	}
 }

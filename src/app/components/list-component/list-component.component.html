@@ -10,7 +10,9 @@
 			<button pButton type="button" (click)="Search()" icon="fa-search"></button>
 		</div>
 	</div>
-	<app-auth-funcs [menus]='menus' [obj]='obj' (initEvent)='InitFuncs($event)'></app-auth-funcs>
+	<div class="card">
+		<app-auth-funcs [menus]='menus' [obj]='obj' (initEvent)='InitFuncs($event)'></app-auth-funcs>
+	</div>
 	<!--列表-->
 	<div class="card card-w-title">
 		<p-dataTable [responsive]="true" [value]="listData" (onRowSelect)='RowSelect($event)' [(selection)]="selectedObj" selectionMode="single" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="totals" (onLazyLoad)="LoadData($event)">

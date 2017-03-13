@@ -29,7 +29,7 @@ export class BookInComponent implements OnInit {
 		return [{
 			model: 'id'
 		}, {
-			name: '产品名称*',
+			name: '产品名称',
 			model: 'name',
 			vali: Validators.required,
 			msg: "名称不能为空"
@@ -37,7 +37,7 @@ export class BookInComponent implements OnInit {
 			name: '自定编号',
 			model: 'selfNum'
 		}, {
-			name: '产品描述*',
+			name: '产品描述',
 			model: 'depict',
 			vali: Validators.required,
 			msg: "产品描述不能为空",

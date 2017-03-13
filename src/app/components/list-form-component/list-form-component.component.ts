@@ -33,6 +33,7 @@ export class ListFormComponentComponent implements OnInit {
 	private listObj = {};
 	private formObj = {};
 	private authData = [];
+	@Input() paramFunc;
 	@Input() status = [];
 	@Input() menus = {};
 	@Input() title = "";
@@ -73,6 +74,7 @@ export class ListFormComponentComponent implements OnInit {
 	onSubmit(param) {
 		//保存数据
 		var menu = this.listObj['funcObj']['t_menu'];
+		this.paramFunc && (param = this.paramFunc(param));
 		this.crudService.SaveData(menu["authUrl"], param, (ret) => {
 			this.msgs.push({
 				severity: 'success',
@@ -84,13 +86,11 @@ export class ListFormComponentComponent implements OnInit {
 			if(!value["id"]) {
 				value["id"] = ret.data;
 				var m = this.utilService.CopyObj(value, value);
-				m['status'] = this.utilService.GetStatus('0');
 				this.listObj['listData'].unshift(m);
 			} else {
 				for(var k in value) {
 					this.listObj['selectedObj'][k] && (this.listObj['selectedObj'][k] = value[k]);
 				}
-				this.listObj['selectedObj']['status'] = this.utilService.GetStatus('0');
 			}
 			this.SelectedRow(this.listObj['selectedObj']);
 		});

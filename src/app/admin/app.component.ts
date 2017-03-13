@@ -28,6 +28,7 @@ export class AppComponent {
 	//Tabs
 	private items: MenuItem[];
 	private crumbs: MenuItem[] = [];
+	private homeMenu: MenuItem;
 	private activeItem: MenuItem = {};
 	private userInfo = {};
 	private ct;
@@ -61,11 +62,18 @@ export class AppComponent {
 				this.menus = data;
 			});
 		});
+		this.homeMenu = {
+			label: 'home',
+			icon: 'fa fa-bars',
+			command: (a) => {
+				this.ToggleMenu(a, 'showMenuNav');
+			}
+		};
 	};
 	//点击按钮 
 	ToggleMenu(e, t) {
 		this.appCtrl[t] = !this.appCtrl[t];
-		e.preventDefault();
+		e.preventDefault && e.preventDefault();
 	};
 	//当前打开的菜单
 	tabsIds = {};
@@ -135,6 +143,8 @@ export class AppComponent {
 	};
 	//退出
 	LoginOut() {
-		this.router.navigateByUrl('/user/login');
+		if(confirm('确认要退出系统?')) {
+			this.router.navigateByUrl('/user/login');
+		}
 	};
 }

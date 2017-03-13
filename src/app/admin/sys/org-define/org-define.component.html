@@ -6,7 +6,9 @@
 	<div class="ui-g-12 ui-md-6 ui-lg-6">
 		<p-fieldset legend="部们信息">
 			<!-- 功能-->
-			<p-menubar [model]="depFuns"></p-menubar>
+			<div class="card">
+				<p-menubar [model]="depFuns"></p-menubar>
+			</div>
 			<!--部们-->
 			<p-tree [value]="depTrees" selectionMode="single" [(selection)]="depNode" (onNodeSelect)="NodeSelect($event)">
 				<template let-node pTemplate="default">
@@ -23,7 +25,7 @@
 				<input pInputText type="hidden" formControlName="parentId" />
 				<div class="ui-grid-row">
 					<div class="ui-grid-col-4">
-						上级部门 *:
+						上级部门 <span style="color: red;">*</span>
 					</div>
 					<div class="ui-grid-col-8">
 						<input pInputText type="text" formControlName="parentName" />
@@ -31,7 +33,7 @@
 				</div>
 				<div class="ui-grid-row">
 					<div class="ui-grid-col-4">
-						部门名称 *:
+						部门名称 <span style="color: red;">*</span>
 					</div>
 					<div class="ui-grid-col-8">
 						<input pInputText type="text" formControlName="name" placeholder="Required" />
@@ -59,7 +61,9 @@
 					</div>
 				</div>
 				<!--function-->
-				<p-menubar [model]="jobFuns"></p-menubar>
+				<div class="card">
+					<p-menubar [model]="jobFuns"></p-menubar>
+				</div>
 				<p-dataList [value]="jobList" [paginator]="true" [rows]="5" [lazy]="true" (onLazyLoad)="LoadJobListData($event)" [totalRecords]="jobTotal">
 					<template let-e pTemplate="item">
 						<div class="ui-grid ui-grid-responsive ui-fluid jobList" (click)="JobClick(e)" [ngClass]="{'selected':e.id==selectedJob.id}">
@@ -74,11 +78,11 @@
 	<div class="ui-g-12 ui-md-12 ui-lg-12">
 		<p-fieldset legend="职务人员">
 			<!--function-->
-			<div [ngClass]="{'is-hidden':!selectedJob.id}">
+			<div class="card" [ngClass]="{'is-hidden':!selectedJob.id}">
 				<p-menubar [model]="userFuns"></p-menubar>
 			</div>
 			<!--end-->
-			<p-dataTable [responsive]="true"  [value]="userList" [(selection)]="selectedUsers" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="userTotals" (onLazyLoad)="LoadUserData($event)">
+			<p-dataTable [responsive]="true" [value]="userList" [(selection)]="selectedUsers" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="userTotals" (onLazyLoad)="LoadUserData($event)">
 				<p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
 				<p-column field="userName" header="用户名"></p-column>
 				<p-column field="name" header="姓名"></p-column>
@@ -111,7 +115,9 @@
 	<div class="ui-g-12 ui-md-12 ui-lg-12">
 		<p-fieldset legend="职务信息">
 			<!--function-->
-			<p-menubar [model]="jobInfoFuns"></p-menubar>
+			<div class="card">
+				<p-menubar [model]="jobInfoFuns"></p-menubar>
+			</div>
 			<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
 				<!--end-->
 				<div class="ui-g-12 ui-md-6 ui-lg-6">
@@ -121,7 +127,7 @@
 							<input pInputText type="hidden" formControlName="deptId" />
 							<div class="ui-grid-row">
 								<div class="ui-grid-col-4">
-									上级部门 *:
+									上级部门<span style="color: red;">*</span>
 								</div>
 								<div class="ui-grid-col-8">
 									<input pInputText type="text" formControlName="deptName" />
@@ -129,7 +135,7 @@
 							</div>
 							<div class="ui-grid-row">
 								<div class="ui-grid-col-4">
-									部门名称 *:
+									部门名称<span style="color: red;">*</span>
 								</div>
 								<div class="ui-grid-col-8">
 									<input pInputText type="text" formControlName="name" placeholder="Required" />

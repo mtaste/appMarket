@@ -163,7 +163,7 @@ export class UtilService {
 	};
 	public validStatus = {
 		'-1': '无效',
-		'1': '有效'
+		'10': '有效'
 	};
 	GetValidSelect() {
 		var ret = [];

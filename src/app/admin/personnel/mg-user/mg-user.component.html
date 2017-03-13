@@ -14,7 +14,9 @@
 			</div>
 		</div>
 		<!-- 功能-->
-		<p-menubar [model]="userFuncs"></p-menubar>
+		<div class="card">
+			<p-menubar [model]="userFuncs"></p-menubar>
+		</div>
 		<!--列表-->
 		<div class="card card-w-title">
 			<p-dataTable [responsive]="true" [value]="userList" [(selection)]="selectedUser" selectionMode="single" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="userTotals" (onLazyLoad)="LoadUserData($event)">
@@ -39,7 +41,7 @@
 					<div class="ui-grid-row">
 						<!--用户名-->
 						<div class="ui-grid-col-2">
-							用户名*:
+							用户名<span style="color: red;">*</span>
 						</div>
 						<div class="ui-grid-col-6">
 							<input pInputText type="text" formControlName="userName" placeholder="Required" />
@@ -53,7 +55,7 @@
 					<!--密码-->
 					<div class="ui-grid-row">
 						<div class="ui-grid-col-2">
-							密码 *:
+							密码<span style="color: red;">*</span>
 						</div>
 						<div class="ui-grid-col-6">
 							<input pInputText type="password" formControlName="passWord" placeholder="Required - Min(6)" />
@@ -70,7 +72,7 @@
 					<!--密码-->
 					<div class="ui-grid-row">
 						<div class="ui-grid-col-2">
-							姓名*:
+							姓名<span style="color: red;">*</span>
 						</div>
 						<div class="ui-grid-col-6">
 							<input pInputText type="text" formControlName="name" placeholder="Required" />
@@ -84,7 +86,7 @@
 
 					<div class="ui-grid-row">
 						<div class="ui-grid-col-2">
-							电话*:
+							电话<span style="color: red;">*</span>
 						</div>
 						<div class="ui-grid-col-6">
 							<input pInputText type="text" formControlName="mobile" placeholder="Required" />
@@ -98,7 +100,7 @@
 
 					<div class="ui-grid-row">
 						<div class="ui-grid-col-2">
-							状态*:
+							状态<span style="color: red;">*</span>
 						</div>
 						<div class="ui-grid-col-6">
 							<p-dropdown [options]="statusList" formControlName="status" [autoWidth]="false"></p-dropdown>
@@ -106,6 +108,20 @@
 						<div class="ui-grid-col-4">
 							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userForm.controls['status'].valid&&userForm.controls['status'].dirty">
 								<i class="fa fa-close"></i> 状态不能为空
+							</div>
+						</div>
+					</div>
+
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-2">
+							用户类型<span style="color: red;">*</span>
+						</div>
+						<div class="ui-grid-col-6">
+							<p-dropdown [options]="userTypeList" formControlName="userType" [autoWidth]="false"></p-dropdown>
+						</div>
+						<div class="ui-grid-col-4">
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userForm.controls['userType'].valid&&userForm.controls['userType'].dirty">
+								<i class="fa fa-close"></i> 用户类型不能为空
 							</div>
 						</div>
 					</div>

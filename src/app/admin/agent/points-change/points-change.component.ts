@@ -7,7 +7,7 @@ import {
 	UtilService
 } from '../index';
 @Component({
-	selector: 'app-points-change',
+	selector: 'agent-points-change',
 	templateUrl: './points-change.component.html',
 	styleUrls: ['./points-change.component.css']
 })
@@ -21,8 +21,8 @@ export class PointsChangeComponent implements OnInit {
 	//产品列表
 	private productModel = {};
 	private selectUrls = {
-		add: 'mms/info/points-change/addDetail.do',
-		remove: 'mms/info/points-change/removeDetail.do'
+		add: 'agent/info/points-change/addDetail.do',
+		remove: 'agent/info/points-change/removeDetail.do'
 	};
 	constructor(
 		private utilService: UtilService
@@ -58,7 +58,7 @@ export class PointsChangeComponent implements OnInit {
 
 	private getListModel() {
 		return {
-			url: 'mms/info/points-change/list.json',
+			url: 'agent/info/points-change/list.json',
 			model: [{
 				field: 'title',
 				header: '标题'
@@ -74,10 +74,10 @@ export class PointsChangeComponent implements OnInit {
 
 	private getSelectModel() {
 		return {
-			listUrl: 'mms/info/points-change/detail.do',
+			listUrl: 'agent/info/points-change/detail.do',
 			listModel: [{
 				field: 'userName',
-				header: '会员账户'
+				header: '代理账户'
 			}, {
 				field: 'name',
 				header: '姓名'
@@ -85,15 +85,15 @@ export class PointsChangeComponent implements OnInit {
 				field: 'points',
 				header: '积分'
 			}],
-			chooseUrl: "mms/info/points-change/memberList.do",
+			chooseUrl: "agent/info/points-change/memberList.do",
 			chooseModel: [{
 				field: 'userName',
-				header: '会员账户'
+				header: '代理账户'
 			}, {
 				field: 'name',
 				header: '姓名'
 			}],
-			editUrl: 'mms/info/points-change/detailPoints.do',
+			editUrl: 'agent/info/points-change/detailPoints.do',
 			editForm: [{
 				model: 'id'
 			}, {
@@ -102,7 +102,7 @@ export class PointsChangeComponent implements OnInit {
 				type: 'number'
 			}, {
 				model: 'userName',
-				name: "会员账户",
+				name: "代理账户",
 				display: true
 			}, {
 				model: 'name',

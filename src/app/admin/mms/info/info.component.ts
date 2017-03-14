@@ -78,6 +78,12 @@ export class InfoComponent implements OnInit {
 				field: 'points',
 				header: '积分'
 			}, {
+				field: 'createUser',
+				header: '创建人'
+			}, {
+				field: 'createTime',
+				header: '创建时间'
+			}, {
 				field: 'statusText',
 				header: '状态'
 			}]

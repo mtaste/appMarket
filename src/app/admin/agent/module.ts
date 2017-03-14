@@ -5,13 +5,16 @@ import {
 	PNGModule,
 	ComponentsModule
 } from './index';
+import routes from './routes';
 import {
 	CommonModule
 } from "@angular/common";
 import {
 	InfoComponent
 } from "./info/info.component";
-import routes from './routes';
+import {
+	PointsChangeComponent
+} from "./points-change/points-change.component";
 
 @NgModule({
 	imports: [
@@ -21,7 +24,8 @@ import routes from './routes';
 		ComponentsModule
 	],
 	declarations: [
-		InfoComponent
+		InfoComponent,
+		PointsChangeComponent
 	]
 })
 export default class Module {}

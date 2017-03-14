@@ -33,6 +33,7 @@ export class ListFormComponentComponent implements OnInit {
 	private listObj = {};
 	private formObj = {};
 	private authData = [];
+	@Input() statusText;
 	@Input() paramFunc;
 	@Input() status = [];
 	@Input() menus = {};
@@ -86,6 +87,8 @@ export class ListFormComponentComponent implements OnInit {
 			if(!value["id"]) {
 				value["id"] = ret.data;
 				var m = this.utilService.CopyObj(value, value);
+				this.formObj['formModel']['setValue'](m);
+				m["status"] = this.statusText || this.utilService.GetStatus("0");
 				this.listObj['listData'].unshift(m);
 			} else {
 				for(var k in value) {

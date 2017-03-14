@@ -1,11 +1,11 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async } from '@angular/core/testing';
-import { MgUserComponent } from './mg-user.component';
+import { PointsChangeComponent } from './points-change.component';
 
-describe('Component: MgUser', () => {
+describe('Component: PointsChange', () => {
   it('should create an instance', () => {
-    let component = new MgUserComponent();
+    let component = new PointsChangeComponent();
     expect(component).toBeTruthy();
   });
 });

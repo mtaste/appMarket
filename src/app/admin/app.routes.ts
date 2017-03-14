@@ -26,8 +26,8 @@ const routes = [{
 		loadChildren: 'app/admin/sys/org-define/org-define.module',
 		name: 'OrgDefine'
 	}, {
-		path: 'personnel/mgUser',
-		loadChildren: 'app/admin/personnel/mg-user/mg-user.module',
+		path: 'personnel',
+		loadChildren: 'app/admin/personnel/module',
 		name: 'MgUser'
 	}, {
 		path: 'mg/org',

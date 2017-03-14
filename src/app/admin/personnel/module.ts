@@ -1,16 +1,21 @@
 import {
 	NgModule
 } from "@angular/core";
+import routes from './routes';
 import {
-	PNGModule
-} from '../index';
+	PNGModule,
+	ComponentsModule
+} from './index';
+
 import {
 	CommonModule
 } from "@angular/common";
 import {
 	MgUserComponent
-} from "./mg-user.component";
-import routes from './mg-user.routes';
+} from "./mg-user/mg-user.component";
+import {
+	InfoComponent
+} from "./info/info.component";
 import {
 	FieldsetModule,
 	TreeModule,
@@ -22,7 +27,9 @@ import {
 	DataListModule,
 	DialogModule,
 	DataTableModule,
-	SharedModule
+	SharedModule,
+	DropdownModule,
+	SelectButtonModule
 } from 'primeng/primeng';
 @NgModule({
 	imports: [
@@ -39,8 +46,14 @@ import {
 		DataListModule,
 		DialogModule,
 		DataTableModule,
-		SharedModule
+		SharedModule,
+		DropdownModule,
+		SelectButtonModule,
+		ComponentsModule
 	],
-	declarations: [MgUserComponent]
+	declarations: [
+		MgUserComponent,
+		InfoComponent
+	]
 })
 export default class MgUserModule {}

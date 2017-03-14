@@ -34,10 +34,10 @@ export class InfoComponent implements OnInit {
 		return [{
 			model: 'id'
 		}, {
-			name: '用户账户',
+			name: '用户名',
 			model: 'userName',
 			vali: Validators.required,
-			msg: "用户账户不能为空"
+			msg: "用户名不能为空"
 		}, {
 			name: '密码',
 			model: 'passWord',
@@ -71,7 +71,7 @@ export class InfoComponent implements OnInit {
 			url: 'agent/info/list.json',
 			model: [{
 				field: 'userName',
-				header: '用户账户'
+				header: '用户名'
 			}, {
 				field: 'name',
 				header: '姓名'
@@ -84,6 +84,12 @@ export class InfoComponent implements OnInit {
 			}, {
 				field: 'points',
 				header: '积分'
+			}, {
+				field: 'createUser',
+				header: '创建人'
+			}, {
+				field: 'createTime',
+				header: '创建时间'
 			}, {
 				field: 'statusText',
 				header: '状态'

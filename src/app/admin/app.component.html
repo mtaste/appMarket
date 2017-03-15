@@ -35,10 +35,10 @@
 		</div>
 	</div>
 	<div class="main">
+		<div class="loading l-pinned-top" [ngClass]="{'is-hidden':!ct.loadingRequest}">
+			<span></span>
+		</div>
 		<p-breadcrumb [model]="crumbs" [home]='homeMenu'></p-breadcrumb>
 		<router-outlet></router-outlet>
-	</div>
-	<div class="loading l-pinned-top" [ngClass]="{'is-hidden':!ct.loadingRequest}">
-		<span></span>
 	</div>
 </div>

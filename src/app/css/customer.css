@@ -109,7 +109,7 @@ body .ui-fieldset {
 	left: 250px;
 	height: 50px;
 	background-color: #0388e5;
-	padding: .7em 1.5em 0;
+	padding: .7em .7em 0;
 	box-sizing: border-box;
 	color: #fff;
 	z-index: 101
@@ -569,5 +569,8 @@ body .ui-fieldset {
 		top: 9px;
 		right: 10px;
 		color: #ccc
+	}
+	.wrapper .topbar .topbar-title {
+		font-size: 14px;
 	}
 }

@@ -32,10 +32,12 @@
 			<i class="fa fa-close"></i>{{el.msg}}
 		</div>
 	</div>
+	<div class="ui-grid-col-4" *ngIf='!el.msg'>
+	</div>
 	</div>
 	</span>
 	<div class="ui-grid-row" [ngClass]="{'is-hidden':!canSave}">
-		<div class="ui-grid-col-2"></div>
+		<div class="ui-grid-col-4"></div>
 		<div class="ui-grid-col-6">
 			<button pButton type="submit" label="保存" [disabled]="!formModel.valid"></button>
 		</div>

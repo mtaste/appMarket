@@ -35,7 +35,8 @@ export class AppComponent {
 	//控制是否显示菜单
 	private appCtrl = {
 		showTopNav: false,
-		showMenuNav: false
+		showMenuNav: false,
+		showAccountSetting: false
 	};
 	private menus = [];
 	private menuId = {};
@@ -51,14 +52,9 @@ export class AppComponent {
 		this.userService.GetUserInfo((ret) => {
 			ret = ret.data;
 			this.userInfo = ret;
-			var t = "退出:" + ret.orgFlag + "_" + ret.userName;
 			this.userService.GetUserMenu((ret2) => {
 				ret2 = ret2.data;
 				var data = utilService.TransData(ret2, "id", "parentId", "subtree");
-				data.push({
-					name: t,
-					id: "loginOut"
-				});
 				this.menus = data;
 			});
 		});
@@ -78,6 +74,7 @@ export class AppComponent {
 	//当前打开的菜单
 	tabsIds = {};
 	MenusClick(m) {
+		this.appCtrl.showAccountSetting = false;
 		if(m.id == 'loginOut') {
 			this.LoginOut();
 		};

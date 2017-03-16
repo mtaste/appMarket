@@ -49,6 +49,10 @@ const routes = [{
 		path: 'agent',
 		loadChildren: 'app/admin/agent/module',
 		name: 'Agent'
+	}, {
+		path: 'report',
+		loadChildren: 'app/admin/report/module',
+		name: 'Report'
 	}]
 }];
 export default RouterModule.forChild(routes);

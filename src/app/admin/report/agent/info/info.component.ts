@@ -9,7 +9,7 @@ import {
 	CrudService
 } from '../index';
 @Component({
-	selector: 'report-mms-info',
+	selector: 'report-agent-info',
 	templateUrl: './info.component.html',
 	styleUrls: ['./info.component.css']
 })
@@ -79,7 +79,7 @@ export class InfoComponent implements OnInit {
 		var param = this.utilService.CopyObj(this.model, this.model);
 		param['beginTime'] = this.utilService.TimeForam(param['beginTime'], 'yyyy-MM-dd');
 		param['endTime'] = this.utilService.TimeForam(param['endTime'], 'yyyy-MM-dd');
-		this.crudService.GetData('report/mms/info', param, (ret) => {
+		this.crudService.GetData('report/agent/info', param, (ret) => {
 			ret = ret.data;
 			this.chart.data = this.TransData(ret);
 			this.chart.refresh();

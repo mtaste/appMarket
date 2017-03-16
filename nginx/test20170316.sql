@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-03-16 10:15:41
+Date: 2017-03-16 14:20:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,6 +40,7 @@ INSERT INTO `agent_points_change` VALUES ('8a7e4ce7720d44a1a7cfed7976a5beb7', 'r
 INSERT INTO `agent_points_change` VALUES ('91e3d3d49f1a4325b6a0d92105e62a40', 'a', 'a', '1', 'e2ff5e22cfe94054932ffca05e145934');
 INSERT INTO `agent_points_change` VALUES ('954a866487c249d4bac49782b707a39c', 'aa', 'aa', '1', 'e2ff5e22cfe94054932ffca05e145934');
 INSERT INTO `agent_points_change` VALUES ('9da357e6c7e24cab95711739622f39c2', 'a', 'a', '1', 'e2ff5e22cfe94054932ffca05e145934');
+INSERT INTO `agent_points_change` VALUES ('a9bd7c948e6c43f5ac074c41e000af65', 'Test', 'Test Report', '1', 'e2ff5e22cfe94054932ffca05e145934');
 INSERT INTO `agent_points_change` VALUES ('ca847b3e54284b679a639cdb7281936a', 'a', 'a', '1', 'e2ff5e22cfe94054932ffca05e145934');
 INSERT INTO `agent_points_change` VALUES ('d2e4bd29b8c945b1bd3187670e52d0d1', '充值', '111', '1', 'e2ff5e22cfe94054932ffca05e145934');
 INSERT INTO `agent_points_change` VALUES ('dfd78ac322c84668861273770e1c6dc5', 'b', 'b', '1', 'e2ff5e22cfe94054932ffca05e145934');
@@ -60,6 +61,7 @@ CREATE TABLE `agent_points_change_detail` (
 -- ----------------------------
 -- Records of agent_points_change_detail
 -- ----------------------------
+INSERT INTO `agent_points_change_detail` VALUES ('1cc66a94-0a10-11e7-a606-00163e028d22', 'a9bd7c948e6c43f5ac074c41e000af65', '19fd8e0982f9424b981c15b180b3acdc', '200');
 INSERT INTO `agent_points_change_detail` VALUES ('2498fdb3-08a2-11e7-a606-00163e028d22', '80e77407cc934a1a8049cf187d1ff294', '5cc05cea50c24f489edca10d62812c86', '1000000');
 INSERT INTO `agent_points_change_detail` VALUES ('2c1ad6a3-0854-11e7-a606-00163e028d22', 'ff2fba3f59f54dcba0a3fe5364952906', '19fd8e0982f9424b981c15b180b3acdc', '200');
 INSERT INTO `agent_points_change_detail` VALUES ('2fba601c-0860-11e7-a606-00163e028d22', '954a866487c249d4bac49782b707a39c', '511ed41401b74281b9ece89c42d0d668', '128');
@@ -384,10 +386,10 @@ CREATE TABLE `mms_info` (
 -- ----------------------------
 -- Records of mms_info
 -- ----------------------------
-INSERT INTO `mms_info` VALUES ('1530ad7ba0584d048e335581ce6d02b1', 'tes', 'test', 'test', null, 'test', '10', null, 'e2ff5e22cfe94054932ffca05e145934', 'admin', '2017-03-14 00:00:00');
-INSERT INTO `mms_info` VALUES ('1854e6517a15468fb7f53f2098855af5', '13902601727', '李剑风', '13902601727', null, '东莞', '10', '20', 'e2ff5e22cfe94054932ffca05e145934', null, null);
+INSERT INTO `mms_info` VALUES ('1530ad7ba0584d048e335581ce6d02b1', 'tes', 'test', 'test', null, 'test', '10', '600', 'e2ff5e22cfe94054932ffca05e145934', 'admin', '2017-03-14 00:00:00');
+INSERT INTO `mms_info` VALUES ('1854e6517a15468fb7f53f2098855af5', '13902601727', '李剑风', '13902601727', null, '东莞', '10', '720', 'e2ff5e22cfe94054932ffca05e145934', null, null);
 INSERT INTO `mms_info` VALUES ('1b205e059de0469282461402b444d2b9', '13902601828', '李剑风', '13902601727', null, '东莞大朗', '10', '1000', 'a30002db053a4b7baf1f37488b59a1c5', null, null);
-INSERT INTO `mms_info` VALUES ('b0714d87e91e4dafae7b7767e0ac6255', 'testfdsa', 'tt', 'testt', null, 'test', '10', '100', 'e2ff5e22cfe94054932ffca05e145934', '19fd8e0982f9424b981c15b180b3acdc', '2017-03-14 00:00:00');
+INSERT INTO `mms_info` VALUES ('b0714d87e91e4dafae7b7767e0ac6255', 'testfdsa', 'tt', 'testt', null, 'test', '10', '600', 'e2ff5e22cfe94054932ffca05e145934', '19fd8e0982f9424b981c15b180b3acdc', '2017-03-14 00:00:00');
 
 -- ----------------------------
 -- Table structure for `mms_points_change`
@@ -409,6 +411,7 @@ INSERT INTO `mms_points_change` VALUES ('169684531a4d4e788787b7863b18119d', '提
 INSERT INTO `mms_points_change` VALUES ('461e5070982b465cb0e1b5774372167d', '测试', 'Tet', '2', 'e2ff5e22cfe94054932ffca05e145934');
 INSERT INTO `mms_points_change` VALUES ('5bb2696231d84d25ab4eccd54863368c', 'Test', 'test', '2', 'e2ff5e22cfe94054932ffca05e145934');
 INSERT INTO `mms_points_change` VALUES ('852659bf3431402a8dc3cfee7dc99c3d', '充值', '1000', '2', 'a30002db053a4b7baf1f37488b59a1c5');
+INSERT INTO `mms_points_change` VALUES ('a29bc03913884200b36af5851bb97a24', 'Test Report', 'Report', '1', 'e2ff5e22cfe94054932ffca05e145934');
 INSERT INTO `mms_points_change` VALUES ('ac91fe2593fb41fcb390c0a35138a237', 'Test', 'Test', '0', 'e2ff5e22cfe94054932ffca05e145934');
 INSERT INTO `mms_points_change` VALUES ('bc02e728d9d546c384c21d8eb90aba87', 'Test', 'test', '1', 'e2ff5e22cfe94054932ffca05e145934');
 INSERT INTO `mms_points_change` VALUES ('f178a3b57fc54387ac2a87518afc3b49', '充值', '', '2', 'e2ff5e22cfe94054932ffca05e145934');
@@ -435,6 +438,9 @@ INSERT INTO `mms_points_change_detail` VALUES ('45d393ae-060f-11e7-a606-00163e02
 INSERT INTO `mms_points_change_detail` VALUES ('a6c1c9ca-0877-11e7-a606-00163e028d22', 'ac91fe2593fb41fcb390c0a35138a237', 'b0714d87e91e4dafae7b7767e0ac6255', '100');
 INSERT INTO `mms_points_change_detail` VALUES ('a95c55c6-0571-11e7-a606-00163e028d22', '169684531a4d4e788787b7863b18119d', '1854e6517a15468fb7f53f2098855af5', '-10');
 INSERT INTO `mms_points_change_detail` VALUES ('d3a883aa-056f-11e7-a606-00163e028d22', 'f178a3b57fc54387ac2a87518afc3b49', '1854e6517a15468fb7f53f2098855af5', '11');
+INSERT INTO `mms_points_change_detail` VALUES ('d4e4edf4-09f9-11e7-a606-00163e028d22', 'a29bc03913884200b36af5851bb97a24', '1854e6517a15468fb7f53f2098855af5', '700');
+INSERT INTO `mms_points_change_detail` VALUES ('d4e50d55-09f9-11e7-a606-00163e028d22', 'a29bc03913884200b36af5851bb97a24', '1530ad7ba0584d048e335581ce6d02b1', '600');
+INSERT INTO `mms_points_change_detail` VALUES ('d4e50e7c-09f9-11e7-a606-00163e028d22', 'a29bc03913884200b36af5851bb97a24', 'b0714d87e91e4dafae7b7767e0ac6255', '500');
 
 -- ----------------------------
 -- Table structure for `sys_approval_config`
@@ -539,8 +545,10 @@ INSERT INTO `sys_approval_list` VALUES ('5658a54a13bd4025a5c8598bf771f96a', '219
 INSERT INTO `sys_approval_list` VALUES ('57a87dfcada2456da120ba0dbba1d70c', '4d902e707a3d458fba4b3b66d040829f', 'MgOrgRegisterDTO', 'admin', '2017-02-28 11:31:23', '99', '');
 INSERT INTO `sys_approval_list` VALUES ('593ee8c97fa643f99f254a91dbf7f362', '461e5070982b465cb0e1b5774372167d', 'MmsPointsChangeDTO', 'admin', '2017-03-10 17:08:38', '2', 'Tet');
 INSERT INTO `sys_approval_list` VALUES ('5971c9e1756c4f1b979d8081112430fe', '91e3d3d49f1a4325b6a0d92105e62a40', 'AgentPointsChangeDTO', 'admin', '2017-03-14 09:43:55', '0', 'a');
+INSERT INTO `sys_approval_list` VALUES ('5b6fcd10f6ef4b1e9b7cd5121e08eba6', 'a9bd7c948e6c43f5ac074c41e000af65', 'AgentPointsChangeDTO', 'admin', '2017-03-16 11:36:40', '0', 'Test Report');
 INSERT INTO `sys_approval_list` VALUES ('5bd3ffce92c64ad2a8893f67d971abde', '852659bf3431402a8dc3cfee7dc99c3d', 'MmsPointsChangeDTO', 'e7e3466e-0247-11e7-a606-00163e028d22', '2017-03-11 12:00:53', '1', '');
 INSERT INTO `sys_approval_list` VALUES ('5bd439d03a1e4c3384394f48d06e8909', '4d902e707a3d458fba4b3b66d040829f', 'MgOrgRegisterDTO', 'admin', '2017-02-28 11:32:59', '1', '');
+INSERT INTO `sys_approval_list` VALUES ('5f44590fc7b6444aa5c4209c7b502870', 'a29bc03913884200b36af5851bb97a24', 'MmsPointsChangeDTO', 'admin', '2017-03-16 11:37:29', '1', '');
 INSERT INTO `sys_approval_list` VALUES ('6026e64d5bc14e5b82f64f49d566c23c', '8a7e4ce7720d44a1a7cfed7976a5beb7', 'AgentPointsChangeDTO', '19fd8e0982f9424b981c15b180b3acdc', '2017-03-14 10:11:11', '0', 'fdasfds');
 INSERT INTO `sys_approval_list` VALUES ('6133f7a2e47e4fd5b109ea5074ae4986', '823fd4c5d7d34f5fbd308a1d4d04a116', 'ImProductChangeDTO', '17f1469a23f14a2b8ea1a94d8feabefd', '2017-03-06 16:43:08', '1', '');
 INSERT INTO `sys_approval_list` VALUES ('617e9648a1ca47a9a9a9c2793c4ab838', 'ce2a16d0a97b4238976b8d6d2c13c56f', 'MgOrgRegisterDTO', 'admin', '2017-02-27 15:37:38', '1', '');
@@ -605,6 +613,7 @@ INSERT INTO `sys_approval_list` VALUES ('acc16ea2e80d42ddb89efdc9238dd3a7', '5b3
 INSERT INTO `sys_approval_list` VALUES ('ad2387f95b8e4d4892c9b1f5648ec960', '4d902e707a3d458fba4b3b66d040829f', 'MgOrgRegisterDTO', 'admin', '2017-02-28 11:30:49', '99', '');
 INSERT INTO `sys_approval_list` VALUES ('aedcc07edeb34852971e97579da310b6', '38b18de2453041c4ad46b86b18cd642a', 'MgOrgAuthDTO', 'admin', '2017-02-28 16:01:59', '1', '');
 INSERT INTO `sys_approval_list` VALUES ('af3d3ad94ece4d65aa1974063c324a50', '3013e1cf791a43f99835ae06ecd9a12b', 'AgentPointsChangeDTO', '19fd8e0982f9424b981c15b180b3acdc', '2017-03-14 10:10:41', '0', 'fffffff');
+INSERT INTO `sys_approval_list` VALUES ('b17e658f3e1046ee81eb8ff17e0175c8', 'a9bd7c948e6c43f5ac074c41e000af65', 'AgentPointsChangeDTO', 'admin', '2017-03-16 14:16:46', '1', '');
 INSERT INTO `sys_approval_list` VALUES ('b2dec92ad6a44c14b3cb0d75bb55079e', '13a85ceb41e24fe1b20f0b25b995b596', 'AgentPointsChangeDTO', '19fd8e0982f9424b981c15b180b3acdc', '2017-03-14 09:59:02', '0', 'fdsafdsa');
 INSERT INTO `sys_approval_list` VALUES ('b33e4e88160343ceaa4d0e3c0f89dcb2', 'e031579252e94ec5b6a23804aadd7eed', 'MgOrgAuthDTO', 'admin', '2017-02-28 16:32:44', '1', '');
 INSERT INTO `sys_approval_list` VALUES ('b387af91daf54e2ca8d10c2d68e7d53a', '38b18de2453041c4ad46b86b18cd642a', 'MgOrgAuthDTO', 'admin', '2017-02-28 16:27:21', '2', '');
@@ -628,6 +637,7 @@ INSERT INTO `sys_approval_list` VALUES ('cf904d4cd08b40db8b51333b44ad4c67', 'ce2
 INSERT INTO `sys_approval_list` VALUES ('cfb8ed4a6ff1457490338c4f52608d82', '08502051bdf346de8b06a71daa77a075', 'AgentPointsChangeDTO', '19fd8e0982f9424b981c15b180b3acdc', '2017-03-14 10:27:48', '0', 'fdsaf');
 INSERT INTO `sys_approval_list` VALUES ('d095f7b0f66c437db93bee89c77a571a', '6427944f86d040f8bd9feaf99412d611', 'MgOrgRegisterDTO', 'admin', '2017-02-27 17:07:02', '1', '');
 INSERT INTO `sys_approval_list` VALUES ('d1a31565d9294982a24dc73a47db4671', '69b615ffe91a4b86b991a2e141f3987f', 'AgentPointsChangeDTO', 'admin', '2017-03-14 10:42:16', '1', '');
+INSERT INTO `sys_approval_list` VALUES ('d379550504144545a35085e84820f035', 'a29bc03913884200b36af5851bb97a24', 'MmsPointsChangeDTO', 'admin', '2017-03-16 11:37:02', '0', 'Report');
 INSERT INTO `sys_approval_list` VALUES ('d40638a6e2bd40feb9c9c85c6001c173', '6c9f1c066a6c49aaa2c4cec375436a29', 'ImProductChangeDTO', 'admin', '2017-03-02 19:09:09', '2', 'testfdgsdfgfds');
 INSERT INTO `sys_approval_list` VALUES ('d413f3b1d3864ff6bdf8e11928cc8775', 'a64f306d77d8486d87f237aca19a99a0', 'MgOrgAuthDTO', 'admin', '2017-02-28 16:17:02', '99', '');
 INSERT INTO `sys_approval_list` VALUES ('d415597bd71249789de12b7d406e2de3', '815cba185d064207aae793f841ad5bc7', 'MgOrgRegisterDTO', 'admin', '2017-02-28 11:07:43', '1', '');
@@ -746,7 +756,7 @@ INSERT INTO `sys_auth` VALUES ('b5545655c63642338928bb9476832c29', 'acc32eaeb07f
 INSERT INTO `sys_auth` VALUES ('b8e10a35c90e4b5596a5eed52397373d', '67340c3f1b634546950bdb255e5982ac', '新增', '2', 'user/save.do', 'fa-plus', 'add', '1', null, null, null, '1');
 INSERT INTO `sys_auth` VALUES ('ba7aa68555d5474ca6a6e3a12ccd1afe', 'c3524525c489444aac421df515c63873', '产品信息', '1', '/admin/im/book-in', '', '', '1', null, null, null, '1');
 INSERT INTO `sys_auth` VALUES ('bbf82dfc30d54277a32d50189ce66030', '479852e16c834956b8b6c3b801ffd11c', '新增职务', '2', 'org/dept/role/save.do', 'fa-plus', 'addRole', '1', null, null, null, '4');
-INSERT INTO `sys_auth` VALUES ('c00e01f8a7c743149735ba65c7d014e9', '869d5a2392b44c6ca61d49f8223e9483', '代理商积分统计', '1', '', '', '', '1', null, null, null, '1');
+INSERT INTO `sys_auth` VALUES ('c00e01f8a7c743149735ba65c7d014e9', '869d5a2392b44c6ca61d49f8223e9483', '代理商积分统计', '1', '/admin/report/agent/info', '', '', '1', null, null, null, '1');
 INSERT INTO `sys_auth` VALUES ('c3524525c489444aac421df515c63873', '0', '库存管理', '1', '', '', '', '1', null, null, null, '15');
 INSERT INTO `sys_auth` VALUES ('c9228a9899dc4f98b576a1f0e049e175', '39b352a998a3499183295152e7e7e541', '新增', '2', 'org/save.do', 'fa-plus', 'add', null, null, null, null, '1');
 INSERT INTO `sys_auth` VALUES ('ce09b46ede8946f0bc5003c19987b363', '0575c843bad7482ba7eb9ecd6269d1f5', '否决', '2', 'im/product/change/reject.do', 'fa-remove', 'reject', '1', null, null, null, '5');
@@ -1645,10 +1655,12 @@ INSERT INTO `sys_time_list` VALUES ('9da357e6c7e24cab95711739622f39c2', 'admin',
 INSERT INTO `sys_time_list` VALUES ('a0a90d21cf3145769e4ac34f8044a17c', '', '2017-03-01 09:16:47', '', '2017-03-13 12:04:20');
 INSERT INTO `sys_time_list` VALUES ('a187c76fcf7c4dda868773c4ce32c3be', 'admin', '2017-03-01 15:29:29', 'admin', '2017-03-01 16:52:50');
 INSERT INTO `sys_time_list` VALUES ('a1fbb5f457c646a19d810404a7ab2efc', '', '2017-03-06 16:37:09', null, null);
+INSERT INTO `sys_time_list` VALUES ('a29bc03913884200b36af5851bb97a24', 'admin', '2017-03-16 11:37:02', 'admin', '2017-03-16 11:37:29');
 INSERT INTO `sys_time_list` VALUES ('a36b8767ceba40e7bb1af85bf77fd114', 'admin', '2017-03-11 10:31:00', 'admin', '2017-03-11 10:31:13');
 INSERT INTO `sys_time_list` VALUES ('a5be8f77954d41c5a347b2461946006a', 'admin', '2017-03-02 15:46:41', 'admin', '2017-03-10 14:35:13');
 INSERT INTO `sys_time_list` VALUES ('a64f306d77d8486d87f237aca19a99a0', 'admin', '2017-02-28 15:04:55', 'admin', '2017-02-28 16:25:38');
 INSERT INTO `sys_time_list` VALUES ('a83a382e77024cc595a7ccf13c98d089', '', '2017-03-10 14:49:31', '', '2017-03-10 16:56:10');
+INSERT INTO `sys_time_list` VALUES ('a9bd7c948e6c43f5ac074c41e000af65', 'admin', '2017-03-16 11:36:40', 'admin', '2017-03-16 14:16:46');
 INSERT INTO `sys_time_list` VALUES ('ac91fe2593fb41fcb390c0a35138a237', '19fd8e0982f9424b981c15b180b3acdc', '2017-03-14 13:30:06', null, null);
 INSERT INTO `sys_time_list` VALUES ('acc32eaeb07f41b3990b8ad6ebcb4148', '', '2017-03-10 11:54:10', '', '2017-03-10 11:56:27');
 INSERT INTO `sys_time_list` VALUES ('b0714d87e91e4dafae7b7767e0ac6255', '19fd8e0982f9424b981c15b180b3acdc', '2017-03-14 11:56:44', null, null);
@@ -1659,7 +1671,7 @@ INSERT INTO `sys_time_list` VALUES ('b61c8b70f0e74068af19ca707f995207', '19fd8e0
 INSERT INTO `sys_time_list` VALUES ('ba7aa68555d5474ca6a6e3a12ccd1afe', '', '2017-03-01 15:41:16', '', '2017-03-01 17:30:36');
 INSERT INTO `sys_time_list` VALUES ('bbc189ab200e46098a2d6feb4f85cbab', 'admin', '2017-03-14 09:11:23', null, null);
 INSERT INTO `sys_time_list` VALUES ('bc02e728d9d546c384c21d8eb90aba87', 'admin', '2017-03-14 13:35:15', 'admin', '2017-03-14 13:39:27');
-INSERT INTO `sys_time_list` VALUES ('c00e01f8a7c743149735ba65c7d014e9', 'admin', '2017-03-16 09:22:19', null, null);
+INSERT INTO `sys_time_list` VALUES ('c00e01f8a7c743149735ba65c7d014e9', 'admin', '2017-03-16 09:22:19', 'admin', '2017-03-16 14:05:50');
 INSERT INTO `sys_time_list` VALUES ('c02296a1711d40dd81852045024d71e5', 'admin', '2017-03-06 16:36:10', 'admin', '2017-03-06 16:36:18');
 INSERT INTO `sys_time_list` VALUES ('c1834167f54a4e8bbcd60e5985d9b914', '', '2017-02-28 19:26:59', null, null);
 INSERT INTO `sys_time_list` VALUES ('c3524525c489444aac421df515c63873', '', '2017-03-01 15:39:58', '', '2017-03-16 09:11:03');
@@ -1738,7 +1750,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('00355a20-ffbb-11e6-a606-00163e028d22', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'admin', 'admin', 'b6a7ee64bcc04255a3f348380e2df245', '10', null, null, null, '0', null, null);
 INSERT INTO `sys_user` VALUES ('17f1469a23f14a2b8ea1a94d8feabefd', 'qty001', 'e10adc3949ba59abbe56e057f20f883e', '库管专员', '13902601727', 'a30002db053a4b7baf1f37488b59a1c5', '10', null, null, '1', '0', null, null);
-INSERT INTO `sys_user` VALUES ('19fd8e0982f9424b981c15b180b3acdc', 'agent', 'e10adc3949ba59abbe56e057f20f883e', '总代', '13800138000', 'e2ff5e22cfe94054932ffca05e145934', '10', 'admin', '2017-03-13 13:50:03', '2', '0', '在这里', null);
+INSERT INTO `sys_user` VALUES ('19fd8e0982f9424b981c15b180b3acdc', 'agent', 'e10adc3949ba59abbe56e057f20f883e', '总代', '13800138000', 'e2ff5e22cfe94054932ffca05e145934', '10', 'admin', '2017-03-13 13:50:03', '2', '200', '在这里', null);
 INSERT INTO `sys_user` VALUES ('1b87309787a64678a95b7183e41cf272', '123', 'e10adc3949ba59abbe56e057f20f883e', '123', '123', 'e2ff5e22cfe94054932ffca05e145934', '10', null, null, null, '0', null, null);
 INSERT INTO `sys_user` VALUES ('1f798aa339924711aa1ed27daec3cb6c', 'agent1', 'e10adc3949ba59abbe56e057f20f883e', '代理商2', '111', 'a30002db053a4b7baf1f37488b59a1c5', '-1', 'e7e3466e-0247-11e7-a606-00163e028d22', '2017-03-14 17:50:39', '2', null, '在哪', null);
 INSERT INTO `sys_user` VALUES ('306231a33066474894bd618fc74ebcac', 'aa', 'e10adc3949ba59abbe56e057f20f883e', 'a', 'a', 'e2ff5e22cfe94054932ffca05e145934', '10', 'admin', '2017-03-14 09:50:39', '2', '50', 'aa', null);
@@ -1748,7 +1760,7 @@ INSERT INTO `sys_user` VALUES ('57a74c3d10bc47e58ff24c986ef77f69', 'a', 'e10adc3
 INSERT INTO `sys_user` VALUES ('5cc05cea50c24f489edca10d62812c86', 'agent', 'e10adc3949ba59abbe56e057f20f883e', '总代', '13902601727', 'a30002db053a4b7baf1f37488b59a1c5', '10', 'e7e3466e-0247-11e7-a606-00163e028d22', '2017-03-14 17:51:00', '2', '1000000', '总公司', null);
 INSERT INTO `sys_user` VALUES ('71be76f7-fe54-11e6-a606-00163e028d22', 'admin', 'e10adc3949ba59abbe56e057f20f883e', null, null, 'ddb5dbae8f7241a59d78a109baaf4f6c', '10', null, null, null, '0', null, null);
 INSERT INTO `sys_user` VALUES ('986d3c89-fda6-11e6-a606-00163e028d22', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'aa', 'aa', 'f92ac73813eb4545bc29bde7e5f86e41', '10', null, null, null, '0', null, null);
-INSERT INTO `sys_user` VALUES ('admin', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'admin', '13902601727', 'e2ff5e22cfe94054932ffca05e145934', '10', null, null, '1', '-251', 'Test', null);
+INSERT INTO `sys_user` VALUES ('admin', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'admin', '13902601727', 'e2ff5e22cfe94054932ffca05e145934', '10', null, null, '1', '-451', 'Test', null);
 INSERT INTO `sys_user` VALUES ('c743884dbf964cc3a1f0e5eed1b7be67', 'qty002', 'e10adc3949ba59abbe56e057f20f883e', '库管主管', '13902601727', 'a30002db053a4b7baf1f37488b59a1c5', '10', null, null, '1', '0', null, null);
 INSERT INTO `sys_user` VALUES ('e7e3466e-0247-11e7-a606-00163e028d22', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '管理员', '13902601727', 'a30002db053a4b7baf1f37488b59a1c5', '10', null, null, '1', '-1000000', null, null);
 INSERT INTO `sys_user` VALUES ('f34ae1508624442286c443918b5997dd', '11111', '96e79218965eb72c92a549dd5a330112', '11111', '1111', 'e2ff5e22cfe94054932ffca05e145934', '-1', null, null, null, '0', null, null);

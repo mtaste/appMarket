@@ -176,4 +176,10 @@ export class UtilService {
 		};
 		return ret;
 	};
+	GetRandomColor() {
+		return '#' + Math.floor(Math.random() * 16777215).toString(16);
+	};
+	TimeForam(val, fm) {
+		return new Date(val)['Format'](fm);
+	};
 }

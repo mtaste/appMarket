@@ -25,7 +25,6 @@ import {
 export class OrgRegisterComponent implements OnInit {
 	private status = [];
 	private obj = {};
-	private RestFuns;
 	//列表
 	private listModel = {};
 	//填写信息

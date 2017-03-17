@@ -53,6 +53,10 @@ const routes = [{
 		path: 'report',
 		loadChildren: 'app/admin/report/module',
 		name: 'Report'
+	}, {
+		path: 'oa',
+		loadChildren: 'app/admin/oa/module',
+		name: 'OA'
 	}]
 }];
 export default RouterModule.forChild(routes);

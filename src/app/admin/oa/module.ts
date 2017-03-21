@@ -18,13 +18,16 @@ import {
 import {
 	AttendanceComponent
 } from "./attendance/attendance.component";
-
+import {
+	ButtonModule
+} from 'primeng/primeng';
 @NgModule({
 	imports: [
 		CommonModule,
 		routes,
 		PNGModule.forRoot(),
-		ComponentsModule
+		ComponentsModule,
+		ButtonModule
 	],
 	declarations: [
 		TaskComponent,

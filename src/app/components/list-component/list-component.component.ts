@@ -45,7 +45,6 @@ export class ListComponentComponent implements OnInit {
 		private utilService: UtilService,
 		private crudService: CrudService
 	) {
-
 	};
 
 	ngOnInit() {};
@@ -80,5 +79,11 @@ export class ListComponentComponent implements OnInit {
 	private selectedStatus = "";
 	StatusClick() {
 		this.Search();
+	}
+	judge(obj) {
+		for(var i in obj) {
+			return true;
+		}
+		return false;
 	}
 }

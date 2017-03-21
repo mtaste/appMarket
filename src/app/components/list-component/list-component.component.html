@@ -10,7 +10,7 @@
 			<button pButton type="button" (click)="Search()" icon="fa-search"></button>
 		</div>
 	</div>
-	<div class="card">
+	<div class="card" [ngClass]="{'is-hidden':!judge(menus)}">
 		<app-auth-funcs [menus]='menus' [obj]='obj' (initEvent)='InitFuncs($event)'></app-auth-funcs>
 	</div>
 	<!--列表-->

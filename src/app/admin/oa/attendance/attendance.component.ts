@@ -8,7 +8,7 @@ import {
 	CrudService
 } from '../index';
 @Component({
-	selector: 'app-attendance',
+	selector: 'oa-app-attendance',
 	templateUrl: './attendance.component.html',
 	styleUrls: ['./attendance.component.css']
 })

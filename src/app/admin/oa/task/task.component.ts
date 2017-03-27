@@ -7,7 +7,7 @@ import {
 	UtilService
 } from '../index';
 @Component({
-	selector: 'app-task',
+	selector: 'oa-app-task',
 	templateUrl: './task.component.html',
 	styleUrls: ['./task.component.css']
 })

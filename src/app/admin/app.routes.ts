@@ -57,6 +57,10 @@ const routes = [{
 		path: 'oa',
 		loadChildren: 'app/admin/oa/module',
 		name: 'OA'
+	}, {
+		path: 'asset',
+		loadChildren: 'app/admin/asset/module',
+		name: 'Asset'
 	}]
 }];
 export default RouterModule.forChild(routes);

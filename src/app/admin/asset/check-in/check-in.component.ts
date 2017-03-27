@@ -7,11 +7,11 @@ import {
 	UtilService
 } from '../index';
 @Component({
-	selector: 'oa-app-notice',
-	templateUrl: './notice.component.html',
-	styleUrls: ['./notice.component.css']
+	selector: 'asset-app-check-in',
+	templateUrl: './check-in.component.html',
+	styleUrls: ['./check-in.component.css']
 })
-export class NoticeComponent implements OnInit {
+export class CheckInComponent implements OnInit {
 	private status = [];
 	private obj = {};
 	//列表
@@ -50,24 +50,39 @@ export class NoticeComponent implements OnInit {
 		return [{
 			model: 'id'
 		}, {
-			name: '标题',
-			model: 'title',
+			name: '资产编号',
+			model: 'assetNum',
 			vali: Validators.required,
-			msg: "标题不能为空"
+			msg: "资产编号不能为空"
 		}, {
-			name: '内客',
-			model: 'content',
-			type: 'textarea',
+			name: '资产名称',
+			model: 'name',
 			vali: Validators.required,
-			msg: "标题不能为空"
+			msg: "资产名称不能为空"
+		}, {
+			name: '资产数量',
+			model: 'qty',
+			type: 'number',
+			vali: Validators.required,
+			msg: "资产数量不能为空"
+		}, {
+			name: '备注',
+			model: 'remark',
+			type: 'textarea'
 		}];
 	};
 	getListModel() {
 		return {
-			url: 'oa/notice/list.json',
+			url: 'asset/check-in/list.json',
 			model: [{
-				field: 'title',
-				header: '标题'
+				field: 'assetNum',
+				header: '资产编号'
+			}, {
+				field: 'name',
+				header: '资产名称'
+			}, {
+				field: 'qty',
+				header: '资产数量'
 			}, {
 				field: 'status',
 				header: '状态'

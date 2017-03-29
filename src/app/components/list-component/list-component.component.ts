@@ -3,7 +3,8 @@ import {
 	OnInit,
 	Input,
 	Output,
-	EventEmitter
+	EventEmitter,
+	ViewChild
 } from '@angular/core';
 import {
 	ActivatedRoute
@@ -32,7 +33,7 @@ export class ListComponentComponent implements OnInit {
 	private listData = [];
 	private selectedObj = {};
 	private totals = 0;
-	private funcObj = {};
+	@ViewChild('funcObj') funcObj;
 	@Input() title = "";
 	@Input() list = {};
 	@Input() menus = {};
@@ -68,7 +69,6 @@ export class ListComponentComponent implements OnInit {
 		});
 	};
 	InitFuncs(e) {
-		this.funcObj = e;
 		this.initEvent.emit(this);
 	};
 	RowSelect(e) {
@@ -80,8 +80,8 @@ export class ListComponentComponent implements OnInit {
 	StatusClick() {
 		this.Search();
 	}
-	judge(obj) {
-		for(var i in obj) {
+	judge(objs) {
+		for(var i in objs) {
 			return true;
 		}
 		return false;

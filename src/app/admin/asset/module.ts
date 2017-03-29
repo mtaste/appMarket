@@ -17,7 +17,12 @@ import {
 } from "./manage/manage.component";
 
 import {
-	ButtonModule
+	ButtonModule,
+	MenubarModule,
+	FieldsetModule,
+	DataTableModule,
+	InputTextModule,
+	GrowlModule
 } from 'primeng/primeng';
 @NgModule({
 	imports: [
@@ -25,7 +30,12 @@ import {
 		routes,
 		PNGModule.forRoot(),
 		ComponentsModule,
-		ButtonModule
+		ButtonModule,
+		MenubarModule,
+		FieldsetModule,
+		DataTableModule,
+		InputTextModule,
+		GrowlModule
 	],
 	declarations: [
 		CheckInComponent,

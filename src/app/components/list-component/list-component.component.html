@@ -11,7 +11,7 @@
 		</div>
 	</div>
 	<div class="card" [ngClass]="{'is-hidden':!judge(menus)}">
-		<app-auth-funcs [menus]='menus' [obj]='obj' (initEvent)='InitFuncs($event)'></app-auth-funcs>
+		<app-auth-funcs #funcObj [menus]='menus' [obj]='obj' (initEvent)='InitFuncs($event)'></app-auth-funcs>
 	</div>
 	<!--列表-->
 	<div class="card card-w-title">

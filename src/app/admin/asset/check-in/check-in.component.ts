@@ -92,7 +92,7 @@ export class CheckInComponent implements OnInit {
 			}, {
 				field: 'createUser',
 				header: '创建人'
-			}, ]
+			}]
 		};
 	};
 

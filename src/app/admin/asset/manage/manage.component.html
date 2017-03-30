@@ -41,6 +41,7 @@
 				</div>
 			</div>
 			<div class="card card-w-title">
+				<!--查看-->
 				<div [ngClass]="{'is-hidden':step!=2}" class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 					<div class="ui-grid-row">
 						<p-dataTable [responsive]="true" [value]="loanData" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="loanTotals" (onLazyLoad)="LoadLoanData($event)">
@@ -53,6 +54,7 @@
 						</p-dataTable>
 					</div>
 				</div>
+				<!--借-->
 				<div [ngClass]="{'is-hidden':step!=3}" class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 					<div class="ui-grid-row">
 						<p-menubar [model]="funs"></p-menubar>
@@ -71,6 +73,24 @@
 					</div>
 					<div class="ui-grid-row">
 						<button pButton type="submit" label="确定借出" (click)="submitLoad()"></button>
+					</div>
+				</div>
+				<!--归还-->
+				<div [ngClass]="{'is-hidden':step!=4}" class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+					<div class="ui-grid-row">
+						<p-dataTable [responsive]="true" [value]="revertData" [lazy]="true" [rows]="10" [paginator]="true" [totalRecords]="revertTotals" (onLazyLoad)="LoadRevertData($event)">
+							<p-column field="userName" header="借入用户名"></p-column>
+							<p-column field="name" header="借入姓名"></p-column>
+							<p-column field="qty" header="借入数量"></p-column>
+							<p-column styleClass="col-button">
+								<template pTemplate="header">
+									归还操作
+								</template>
+								<template let-indx="rowIndex" pTemplate="body">
+									<button type="button" pButton (click)="RevertData(indx)" icon="fa-edit"></button>
+								</template>
+							</p-column>
+						</p-dataTable>
 					</div>
 				</div>
 			</div>

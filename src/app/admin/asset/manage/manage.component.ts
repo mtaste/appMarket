@@ -27,7 +27,7 @@ export class ManageComponent implements OnInit {
 	private selectedObjs = [];
 	private loanData = [];
 	private loanTotals;
-	private loanCan;
+	private canFlag;
 	//选择
 	private chooseModel = [];
 	private chooseURL = "asset/manage/user-choose.json";
@@ -52,7 +52,7 @@ export class ManageComponent implements OnInit {
 				if(!this.checkSelectObj(e.item)) return;
 				this.step = 2;
 				var page = this.utilService.GetPageInfo();
-				this.loanCan = "Y";
+				this.canFlag = "loan";
 				this.LoadLoanData(page);
 			},
 			loan: (e) => {
@@ -64,6 +64,9 @@ export class ManageComponent implements OnInit {
 			revert: (e) => {
 				if(!this.checkSelectObj(e.item)) return;
 				this.step = 4;
+				var page = this.utilService.GetPageInfo();
+				this.canFlag = "revert";
+				this.LoadRevertData(page);
 			},
 			bad: (e) => {
 				if(!this.checkSelectObj(e.item)) return;
@@ -112,14 +115,17 @@ export class ManageComponent implements OnInit {
 			}
 		}];
 	};
-	//查看
-	LoadLoanData(e) {
-		if(!this.loanCan) return;
-		var param = {
+	getParam(e) {
+		return {
 			page: e.first / e.rows + 1,
 			rows: e.rows,
 			id: this.listObj.selectedObj.id
 		};
+	};
+	//查看
+	LoadLoanData(e) {
+		if('loan' != this.canFlag) return;
+		var param = this.getParam(e);
 		this.crudService.GetData(this.authInfo.authUrl, param, (ret) => {
 			ret = ret.data;
 			this.loanData = ret.rows;
@@ -164,6 +170,37 @@ export class ManageComponent implements OnInit {
 	};
 	SelectedRow(e) {
 
+	};
+	//归还
+	private revertData = [];
+	private revertTotals;
+	private loanCan;
+	LoadRevertData(e) {
+		if('revert' != this.canFlag) return;
+		var param = this.getParam(e);
+		this.crudService.GetData("asset/manage/revert-detail", param, (ret) => {
+			ret = ret.data;
+			this.revertData = ret.rows;
+			this.revertTotals = ret.total;
+		});
+	};
+	//归还
+	RevertData(indx) {
+		if(confirm('确定归还此借出资产?')) {
+			var param = {
+				assetId: this.listObj.selectedObj.id,
+				id: this.revertData[indx]['id']
+			};
+			this.crudService.SaveData(this.authInfo.authUrl, param, (ret) => {
+				this.msgs.push({
+					severity: 'success',
+					summary: '提示',
+					detail: "归还成功"
+				});
+				var page = this.utilService.GetPageInfo();
+				this.LoadRevertData(page);
+			});
+		}
 	};
 
 	chooseEvent(m) {

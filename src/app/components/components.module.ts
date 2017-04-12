@@ -7,8 +7,8 @@ import {
 	PNGModule
 } from '../shared/png.module';
 import {
-	MenuComponentComponent
-} from "./menu-component/menu-component.component";
+	MenuModule
+} from "./menu-component/menu-module";
 import {
 	FormComponentComponent
 } from "./form-component/form-component.component";
@@ -60,10 +60,10 @@ import {
 		DialogModule,
 		ConfirmDialogModule,
 		SelectButtonModule,
-		DropdownModule
+		DropdownModule,
+		MenuModule
 	],
 	declarations: [
-		MenuComponentComponent,
 		FormComponentComponent,
 		ListComponentComponent,
 		ListFormComponentComponent,
@@ -74,7 +74,6 @@ import {
 		SelectDialogComponent
 	],
 	exports: [
-		MenuComponentComponent,
 		FormComponentComponent,
 		ListComponentComponent,
 		ListFormComponentComponent,

@@ -20,10 +20,6 @@ const routes = [{
 	loadChildren: 'app/apps/apps.module',
 	name: 'Apps'
 }, {
-	path: 'community',
-	loadChildren: 'app/apps/community/app.module',
-	name: 'Community'
-}, {
 	path: 'admin',
 	loadChildren: 'app/admin/app.module',
 	name: 'Admin',

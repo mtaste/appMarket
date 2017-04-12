@@ -5,21 +5,26 @@ import {
 	AppsComponent
 } from "./apps.component";
 import {
-	AppsMainComponent
-} from "./apps.main.component";
-import {
-	AppsRouterActivate
+	AppsRouterActivate,
+	AppsActivate
 } from "./apps.routers.service";
 
 const routes = [{
 	path: '',
 	component: AppsComponent,
 	children: [{
-		path: ""
+		path: "",
+		canActivate: [AppsActivate]
 	}, {
-		path: "main/:id",
-		component: AppsMainComponent,
-		canActivate: [AppsRouterActivate]
+		path: 'circle',
+		loadChildren: 'app/apps/circle/app.module',
+		canActivate: [AppsActivate],
+		name: 'Circle'
+	}, {
+		path: 'community',
+		loadChildren: 'app/apps/community/app.module',
+		canActivate: [AppsActivate],
+		name: 'Community'
 	}]
 }];
 

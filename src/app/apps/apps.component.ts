@@ -5,19 +5,20 @@ import {
 import {
 	AppsRouterService
 } from "./apps.routers.service";
+import {
+	Title
+} from '@angular/platform-browser';
 @Component({
 	selector: 'app-apps',
 	templateUrl: './apps.component.html',
 	styleUrls: ['./apps.component.css']
 })
 export class AppsComponent implements OnInit {
-	list: Object[] = [];
 	constructor(
-		private appsRouterService: AppsRouterService
+		private appsRouterService: AppsRouterService,
+		private titleService: Title
 	) {
-		this.appsRouterService.GetAppsList().subscribe((data) => {
-			this.list = data;
-		});
+		this.titleService.setTitle('应用商城');
 	}
 	ngOnInit() {}
 

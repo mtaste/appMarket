@@ -1,20 +1,19 @@
 import {
 	Router,
-	Inject
-} from '../shared/index';
-import {
+	Inject,
 	NgModule,
-	CommonModule
-} from '../shared/index';
+	CommonModule,
+	FormsModule,
+	ReactiveFormsModule,
+	HttpModule
+} from './index';
 import {
 	AppsComponent
 } from "./apps.component";
 import {
-	AppsMainComponent
-} from "./apps.main.component";
-import {
 	AppsRouterActivate,
-	AppsRouterService
+	AppsRouterService,
+	AppsActivate
 } from "./apps.routers.service";
 
 import appRoutes from './apps.routes';
@@ -22,21 +21,23 @@ import appRoutes from './apps.routes';
 @NgModule({
 	imports: [
 		appRoutes,
-		CommonModule
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		HttpModule
 	],
 	declarations: [
-		AppsComponent,
-		AppsMainComponent
+		AppsComponent
 	],
-	providers: [AppsRouterService, AppsRouterActivate]
+	providers: [
+		AppsRouterService,
+		AppsRouterActivate,
+		AppsActivate
+	]
 })
 export default class AppsModule {
 	constructor(
 		private router: Router,
 		private appsRouterService: AppsRouterService
-	) {
-		this.appsRouterService.GetAppsList().subscribe((data) => {
-			this.appsRouterService.RegisterRouter(data);
-		});;
-	}
+	) {}
 }

@@ -6,6 +6,9 @@ import {
 	CommonModule
 } from '../shared/index';
 import {
+	MenuModule
+} from "../components/menu-component/menu-module";
+import {
 	AppComponent
 } from "./app.component";
 import {
@@ -44,7 +47,8 @@ import {
 		ComponentsModule,
 		appsRoutes,
 		TabMenuModule,
-		BreadcrumbModule
+		BreadcrumbModule,
+		MenuModule
 	],
 	declarations: [
 		AppComponent

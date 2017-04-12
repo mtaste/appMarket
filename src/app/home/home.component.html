@@ -15,7 +15,7 @@
 
 			<h1 class="heading h-01">S应用工具商城</h1>
 			<p class="sub-header copy-02">
-				试用请登陆<br>账户密码:demo-admin/123456<br>
+				试用请登陆<br>账户密码:admin@demo/123456<br>
 				<a (click)="GoLogin()" style="color:yellow" [routerLink]="'user/login'" routerLinkActive="active">登录</a>
 			</p>
 			<a href="#" class="arrow-down">
@@ -82,13 +82,14 @@
 					<p class="copy-02">正在开发，如有需要请联系管理员。</p>
 				</aside>
 			</div>
-
 		</div>
 	</section>
 
 	<!-- FOOTER -->
 	<section id="page-footer">
 		<p class="copy-02">s-plat.pub by ken li . mobile:13902601727</p>
+
+		<a [routerLink]="'apps'" routerLinkActive="active">Apps</a>
 	</section>
 
 </section>

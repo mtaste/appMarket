@@ -17,6 +17,9 @@ import {
 import {
 	MenuItem
 } from 'primeng/primeng';
+import {
+	Title
+} from '@angular/platform-browser';
 
 @Component({
 	selector: 'admin-app',
@@ -44,7 +47,9 @@ export class AppComponent {
 		private router: Router,
 		private i18n: I18nService,
 		private userService: UserService,
-		private utilService: UtilService) {
+		private utilService: UtilService,
+		private titleService: Title) {
+		this.titleService.setTitle('应用工具后台');
 		this.ct = this.utilService;
 		this.utilService.loadingCompont = false;
 		this.i18n.init(lang);
